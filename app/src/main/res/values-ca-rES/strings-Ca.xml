@@ -1,14 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProyectoDamDaw</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Configuración</string>
+    <string name="action_settings">Configuració</string>
 
-    <string name="txvUserLogin">Nombre de usuario</string>
-    <string name="edtUserLogin">Usuario</string>
+    <string name="txvUserLogin">Nom d\'usuari</string>
+    <string name="edtUserLogin">Usuari</string>
 
     <string name="txvPasswLogin">Password</string>
     <string name="edtPasswLogin">Password</string>
-
 </resources>

@@ -3,6 +3,7 @@ package com.example.hector.proyectodamdaw;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -40,6 +41,13 @@ public class LoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Cambiar de fragment
+        Fragment fragment = new LoginFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentLogin, fragment)
+                .commit();
+
     }
 
     @Override
