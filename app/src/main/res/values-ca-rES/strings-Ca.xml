@@ -5,9 +5,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Configuració</string>
 
+    //LoginActivity---
     <string name="txvUserLogin">Nom d\'usuari</string>
     <string name="edtUserLogin">Usuari</string>
-
     <string name="txvPasswLogin">Password</string>
     <string name="edtPasswLogin">Password</string>
+    <string name="txvSingUpLogin">Registrar-se</string>
+    <string name="txvForgotPassw">Ha oblidat la contrasenya?</string>
+    <string name="btnAcceptLogin">Entrar</string>
+
+
 </resources>

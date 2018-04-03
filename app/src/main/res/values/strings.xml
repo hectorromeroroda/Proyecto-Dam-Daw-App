@@ -5,10 +5,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Configuración</string>
 
+    //LoginActivity---
     <string name="txvUserLogin">Nombre de usuario</string>
     <string name="edtUserLogin">Usuario</string>
-
     <string name="txvPasswLogin">Password</string>
     <string name="edtPasswLogin">Password</string>
+    <string name="txvSingUpLogin">Registrarse</string>
+    <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
+    <string name="btnAcceptLogin">Entrar</string>
 
 </resources>
