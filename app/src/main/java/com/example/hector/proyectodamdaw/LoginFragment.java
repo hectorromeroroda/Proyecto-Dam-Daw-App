@@ -1,9 +1,8 @@
 package com.example.hector.proyectodamdaw;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +54,10 @@ public class LoginFragment extends Fragment{
         singUpLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                //AQUI ACCION A REALIZAR AL PULSAR "SING-UP LOGIN"
-
+                //Caambiar de fragment
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.contentLogin, new SingUpFragment());
+                transaction.commit();
             }
 
         });

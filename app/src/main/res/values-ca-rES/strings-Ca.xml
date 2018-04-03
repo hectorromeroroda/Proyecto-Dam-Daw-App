@@ -14,5 +14,20 @@
     <string name="txvForgotPassw">Ha oblidat la contrasenya?</string>
     <string name="btnAcceptLogin">Entrar</string>
 
+    //LoginSingUp---
+    <string name="txvNameSingUp">Nom</string>
+    <string name="edtNameSingUp">Nom</string>
+    <string name="txvSurnameSingUp">Cognoms</string>
+    <string name="edtSurnameSingUp">Cognoms</string>
+    <string name="txvEmailSingUp">Correu electrònic</string>
+    <string name="edtEmailSingUp">Email</string>
+    <string name="txvRepeatEmailSingUp">Confirmi el correu electrònic</string>
+    <string name="edtRepeatEmailSingUp">Confirmació Email</string>
+    <string name="txvPasswSingUp">Password</string>
+    <string name="edtPasswSingUp">Password</string>
+    <string name="txvRepeatPasswSingUp">Confirmi el password</string>
+    <string name="edtRepeatPasswSingUp">Confirmació password</string>
+    <string name="btnAcceptSingUp">Aceptar</string>
+
 
 </resources>

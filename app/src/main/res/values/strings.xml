@@ -14,4 +14,20 @@
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
 
+    //LoginSingUp---
+    <string name="txvNameSingUp">Nombre</string>
+    <string name="edtNameSingUp">Nombre</string>
+    <string name="txvSurnameSingUp">Apellidos</string>
+    <string name="edtSurnameSingUp">Apellidos</string>
+    <string name="txvEmailSingUp">Correo electrónico</string>
+    <string name="edtEmailSingUp">Email</string>
+    <string name="txvRepeatEmailSingUp">Confirme el correo electrónico</string>
+    <string name="edtRepeatEmailSingUp">Confirmación Email</string>
+    <string name="txvPasswSingUp">Password</string>
+    <string name="edtPasswSingUp">Password</string>
+    <string name="txvRepeatPasswSingUp">Confirme el password</string>
+    <string name="edtRepeatPasswSingUp">Confirmación password</string>
+    <string name="btnAcceptSingUp">Aceptar</string>
+
+
 </resources>
