@@ -51,7 +51,7 @@ public class CommunitiesActivity extends AppCompatActivity
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //Hay que poner los fragments
+                //Hay que poner los fragments obviamente
             }
 
             @Override
