@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -52,8 +53,8 @@ public class CommunitiesActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("Tus comunidades"));
-        tabs.addTab(tabs.newTab().setText("Otras comunidades"));
+        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -97,6 +98,27 @@ public class CommunitiesActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.communities, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                //AQUI TIENEN QUE IR LAS BUSQUEDAS
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                //AQUI TIENEN QUE IR LAS BUSQUEDAS
+
+                return false;
+            }
+        });
+
         return true;
     }
 
