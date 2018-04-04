@@ -45,7 +45,7 @@ public class CommunitiesActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("TELÉFONOS"));
+        tabs.addTab(tabs.newTab().setText("PORTÁTILES"),1);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -63,6 +63,7 @@ public class CommunitiesActivity extends AppCompatActivity
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
         });
 
 
