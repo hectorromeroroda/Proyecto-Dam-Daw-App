@@ -30,5 +30,10 @@
     <string name="btnAcceptSingUp">Aceptar</string>
     <string name="title_activity_communities">CommunitiesActivity</string>
 
+    /CommunitiesActivity---
+    <string name="tabTusComunidades">Tus comunidades</string>
+    <string name="tabOtrasComunidades">Otras comunidades</string>
+
+
 
 </resources>

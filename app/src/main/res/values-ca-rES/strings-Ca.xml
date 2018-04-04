@@ -29,5 +29,8 @@
     <string name="edtRepeatPasswSingUp">Confirmació password</string>
     <string name="btnAcceptSingUp">Aceptar</string>
 
+    /CommunitiesActivity---
+    <string name="tabTusComunidades">Les teves comunitats</string>
+    <string name="tabOtrasComunidades">Altres comunitats</string>
 
 </resources>
