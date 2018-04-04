@@ -27,4 +27,9 @@
     <string name="txvRepeatPasswSingUp">Confirme el password</string>
     <string name="edtRepeatPasswSingUp">Confirmación password</string>
     <string name="btnAcceptSingUp">Aceptar</string>
+
+    /CommunitiesActivity---
+    <string name="tabTusComunidades">Tus comunidades</string>
+    <string name="tabOtrasComunidades">Otras comunidades</string>
+
 </resources>
