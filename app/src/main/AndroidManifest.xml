@@ -22,7 +22,8 @@
         <activity
             android:name=".CommunitiesActivity"
             android:label="@string/title_activity_communities"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RowCommunitie"></activity>
     </application>
 
 </manifest>
