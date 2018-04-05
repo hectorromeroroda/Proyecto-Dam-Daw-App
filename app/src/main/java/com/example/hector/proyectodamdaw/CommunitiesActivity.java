@@ -186,7 +186,7 @@ class TabAdapter extends FragmentStatePagerAdapter {
                 fragment = new YourCommunitiesFragment();
                 break;
             case 1:
-                fragment = new LoginFragment();
+                fragment = new OtherCommunitiesFragment();
                 break;
         }
         return fragment;

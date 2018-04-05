@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 
 public class OtherCommunitiesFragment extends Fragment{
 
+    protected RecyclerView.LayoutManager layoutManager;
+    protected RecyclerView recyclerViewOtherCommunities;
+    protected RecyclerView recyclerViewOtherYourInvitations;
+
     public OtherCommunitiesFragment() {
         // Required empty public constructor
     }
@@ -23,6 +27,8 @@ public class OtherCommunitiesFragment extends Fragment{
         View view = inflater.inflate(R.layout.other_communities_fragment, container, false);
 
 
+        recyclerViewOtherCommunities = (RecyclerView) view.findViewById(R.id.rcvOtherCommunities);
+        recyclerViewOtherYourInvitations = (RecyclerView) view.findViewById(R.id.rcvOtherYourinvitations);
 
         return view;
     }
