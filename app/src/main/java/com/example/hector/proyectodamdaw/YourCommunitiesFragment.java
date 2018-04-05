@@ -11,16 +11,16 @@ import android.view.ViewGroup;
  * Created by Hector on 03-Apr-18.
  */
 
-public class AllCommunitiesFragment extends Fragment{
+public class YourCommunitiesFragment extends Fragment{
 
-    public AllCommunitiesFragment() {
+    public YourCommunitiesFragment() {
         // Required empty public constructor
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.all_communities_fragment, container, false);
+        View view = inflater.inflate(R.layout.your_communities_fragment, container, false);
 
 
 

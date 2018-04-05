@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.SearchView;
-import android.widget.Toast;
 
 
 public class CommunitiesActivity extends AppCompatActivity
@@ -184,7 +183,7 @@ class TabAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new AllCommunitiesFragment();
+                fragment = new YourCommunitiesFragment();
                 break;
             case 1:
                 fragment = new LoginFragment();
