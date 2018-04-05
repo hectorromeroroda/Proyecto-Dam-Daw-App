@@ -4,7 +4,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +22,9 @@ import android.view.MenuItem;
 
 public class CommunitiesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ViewPager viewPager;
+    private TabLayout tabs;
 
 
     @Override
@@ -44,14 +52,20 @@ public class CommunitiesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("PORTÁTILES"),1);
+        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //Hay que poner los fragments obviamente
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -84,6 +98,27 @@ public class CommunitiesActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.communities, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                //AQUI TIENEN QUE IR LAS BUSQUEDAS
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                //AQUI TIENEN QUE IR LAS BUSQUEDAS
+
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -125,5 +160,40 @@ public class CommunitiesActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+}
+
+class TabAdapter extends FragmentStatePagerAdapter {
+
+    //integer to count number of tabs
+    int tabCount;
+
+    //Constructor to the class
+    public TabAdapter(FragmentManager fm, int tabCount) {
+        super(fm);
+        //Initializing tab count
+        this.tabCount= tabCount;
+    }
+
+    //Overriding method getItem
+    @Override
+    public Fragment getItem(int position) {
+        //Returning the current tabs
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new AllCommunitiesFragment();
+                break;
+            case 1:
+                fragment = new LoginFragment();
+                break;
+        }
+        return fragment;
+    }
+
+    //Overriden method getCount to get the number of tabs
+    @Override
+    public int getCount() {
+        return 2;
     }
 }
