@@ -21,7 +21,23 @@ public class AppHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String comunity =
                 "CREATE TABLE Comunity (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        ""
+                        "Name VARCHAR(45)," +
+                        "Max_Users INT," +
+                        "Media_ID";
+        String post =
+                "CREATE TABLE Post(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Title VARCHAR(45)," +
+                        "Text VARCHAR(500," +
+                        "Publication_Date DATE," +
+                        "UserId INT," +
+                        "ComunityId INT";
+        String poll =
+                "CREATE TABLE Poll(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Title VARCHAR(45)," +
+                        "Text VARCHAR(500," +
+                        "Start_Date DATE," +
+                        "Finish_Date DATE," +
+                        "TotalVotesDone INT";
     }
 
     @Override
