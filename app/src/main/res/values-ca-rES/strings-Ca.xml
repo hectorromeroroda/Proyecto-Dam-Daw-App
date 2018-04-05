@@ -34,7 +34,7 @@
     <string name="tabTusComunidades">Les teves comunitats</string>
     <string name="tabOtrasComunidades">Altres comunitats</string>
 
-    /YourCommunitiesFragment---
+    /YourCommunitiesFragment y OthercommunitiesFragment---
     <string name="txvInvitationCommunities">Tus invitaciones</string>
 
 </resources>

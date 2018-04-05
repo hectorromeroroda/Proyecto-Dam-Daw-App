@@ -33,7 +33,7 @@
     <string name="tabTusComunidades">Tus comunidades</string>
     <string name="tabOtrasComunidades">Otras comunidades</string>
 
-    /YourCommunitiesFragment---
+    /YourCommunitiesFragment y OthercommunitiesFragment---
     <string name="txvInvitationCommunities">Tus invitaciones</string>
 
 </resources>
