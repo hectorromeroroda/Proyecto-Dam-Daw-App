@@ -5,7 +5,7 @@
     <string name="action_settings">Configuración</string>
     <string name="search_menu">Buscar</string>
 
-    //LoginActivity---
+    //LoginFragment---
     <string name="txvUserLogin">Nombre de usuario</string>
     <string name="edtUserLogin">Usuario</string>
     <string name="txvPasswLogin">Password</string>
@@ -14,7 +14,7 @@
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
 
-    //LoginSingUp---
+    //LoginSingUpFragment---
     <string name="txvNameSingUp">Nombre</string>
     <string name="edtNameSingUp">Nombre</string>
     <string name="txvSurnameSingUp">Apellidos</string>
@@ -32,5 +32,8 @@
     /CommunitiesActivity---
     <string name="tabTusComunidades">Tus comunidades</string>
     <string name="tabOtrasComunidades">Otras comunidades</string>
+
+    /YourCommunitiesFragment---
+    <string name="txvInvitationCommunities">Tus invitaciones</string>
 
 </resources>
