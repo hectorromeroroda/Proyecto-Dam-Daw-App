@@ -37,5 +37,6 @@
 
     /YourCommunitiesFragment y OthercommunitiesFragment---
     <string name="txvInvitationCommunities">Tus invitaciones</string>
+    <string name="title_activity_single_communitie">SingleCommunitieActivity</string>
 
 </resources>
