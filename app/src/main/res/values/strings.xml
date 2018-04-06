@@ -39,4 +39,10 @@
     <string name="txvInvitationCommunities">Tus invitaciones</string>
     <string name="title_activity_single_communitie">SingleCommunitieActivity</string>
 
+    /SingleCommunityActivity---
+    <string name="tabVotaciones">Votaciones</string>
+    <string name="tabPost">Post</string>
+    <string name="tabPropuestas">Propuestas</string>
+    <string name="tabCalendario">Calendario</string>
+
 </resources>

@@ -52,8 +52,10 @@ public class SingleCommunitieActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
-        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
+        tabs.addTab(tabs.newTab().setText(R.string.tabPost));
+        tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
+        tabs.addTab(tabs.newTab().setText(R.string.tabCalendario));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);

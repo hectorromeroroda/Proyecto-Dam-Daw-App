@@ -37,4 +37,10 @@
     /YourCommunitiesFragment y OthercommunitiesFragment---
     <string name="txvInvitationCommunities">Tus invitaciones</string>
 
+    /SingleCommunityActivity---
+    <string name="tabVotaciones">Votacions</string>
+    <string name="tabPost">Post</string>
+    <string name="tabPropuestas">Propostes</string>
+    <string name="tabCalendario">Calendari</string>
+
 </resources>
