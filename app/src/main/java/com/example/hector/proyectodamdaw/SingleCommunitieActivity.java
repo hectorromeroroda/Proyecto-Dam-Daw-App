@@ -1,10 +1,8 @@
 package com.example.hector.proyectodamdaw;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,14 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
-public class LoginActivity extends AppCompatActivity
+public class SingleCommunitieActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_communities);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,13 +41,6 @@ public class LoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Cambiar de fragment
-        Fragment fragment = new LoginFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentLogin, fragment)
-                .commit();
-
     }
 
     @Override
@@ -64,7 +56,27 @@ public class LoginActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
+        getMenuInflater().inflate(R.menu.communities, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                //AQUI TIENEN QUE IR LAS BUSQUEDAS
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                //AQUI TIENEN QUE IR LAS BUSQUEDAS
+
+                return false;
+            }
+        });
         return true;
     }
 
@@ -90,13 +102,9 @@ public class LoginActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent intent = new Intent(this, CommunitiesActivity.class );
-
-            startActivityForResult(intent,123);
+            // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
-            startActivityForResult(intent,123);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
