@@ -183,7 +183,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
                     fragment = new AllVotacionesFragment();
                     break;
                 case 1:
-                    fragment = new OtherCommunitiesFragment();
+                    fragment = new AllPostFragment();
                     break;
                 case 2:
                     fragment = new OtherCommunitiesFragment();
