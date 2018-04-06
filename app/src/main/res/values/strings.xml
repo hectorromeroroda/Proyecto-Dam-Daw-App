@@ -45,4 +45,8 @@
     <string name="tabPropuestas">Propuestas</string>
     <string name="tabCalendario">Calendario</string>
 
+    //AllVotacionesUpFragment---
+    <string name="rdbVotacionInProgress">En curso</string>
+    <string name="rdbVotacionClosed">Terminadas</string>
+
 </resources>
