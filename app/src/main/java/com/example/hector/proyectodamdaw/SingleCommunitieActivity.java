@@ -180,7 +180,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = new YourCommunitiesFragment();
+                    fragment = new AllVotacionesFragment();
                     break;
                 case 1:
                     fragment = new OtherCommunitiesFragment();
