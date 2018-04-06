@@ -15,47 +15,41 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="30dp">
+            android:paddingTop="10dp">
 
             <ImageView
-                android:id="@+id/imgLogoCommunitie"
-                android:layout_width="85dp"
-                android:layout_height="85dp"
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:srcCompat="@mipmap/ic_launcher" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="209dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="10dp">
 
             <TextView
-                android:id="@+id/txvNameCommunitie"
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingTop="20dp"
-                android:text="TextView"
-                android:textSize="18sp" />
+                android:text="TextView" />
 
             <TextView
-                android:id="@+id/txvDescriptionCommunitie"
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="TextView"
-                android:textSize="18sp" />
+                android:text="TextView" />
 
             <TextView
-                android:id="@+id/txvNumUssersCommunitie"
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="TextView"
-                android:textSize="18sp" />
+                android:text="TextView" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,23 +60,23 @@
             android:paddingTop="10dp">
 
             <ImageButton
-                android:id="@+id/imgbPublications"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:id="@+id/imageButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <ImageButton
-                android:id="@+id/imgbCalendar"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:id="@+id/imageButton2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <ImageButton
-                android:id="@+id/imgchat"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:id="@+id/imageButton3"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@mipmap/ic_launcher" />
         </LinearLayout>
