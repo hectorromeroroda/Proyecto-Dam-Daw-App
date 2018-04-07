@@ -23,14 +23,14 @@ public class AppHelper extends SQLiteOpenHelper{
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "Name VARCHAR(45)," +
                         "Max_Users INT," +
-                        "Media_ID";
+                        "Media_ID)";
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "Title VARCHAR(45)," +
                         "Text VARCHAR(500," +
                         "Publication_Date DATE," +
                         "UserId INT," +
-                        "CommunityId INT";
+                        "CommunityId INT)";
         String poll =
                 "CREATE TABLE Poll(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "Title VARCHAR(45)," +
@@ -39,7 +39,21 @@ public class AppHelper extends SQLiteOpenHelper{
                         "Finish_Date DATE," +
                         "TotalVotesDone INT," +
                         "UserId INT," +
-                        "CommunityId INT";
+                        "CommunityId INT)";
+        String proposition =
+                "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "propositionTitle VARCHAR(45)," +
+                        "propositionText VARCHAR(500," +
+                        "propositionVoted INT," +
+                        "UserId INT," +
+                        "CommunityId INT)";
+        String user =
+                "CREATE TABLE User(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "UserName VARCHAR(45)," +
+                        "UserFirstSurname VARCHAR(45)," +
+                        "UserSecondSurname VARCHAR(45)," +
+                        ")";
+
     }
 
     @Override
