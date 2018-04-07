@@ -94,7 +94,9 @@ public class LoginActivity extends AppCompatActivity
 
             startActivityForResult(intent,123);
         } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
+            startActivityForResult(intent,123);
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

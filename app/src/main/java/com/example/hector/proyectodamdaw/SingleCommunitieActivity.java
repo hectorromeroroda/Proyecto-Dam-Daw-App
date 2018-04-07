@@ -17,17 +17,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.widget.SearchView;
 import android.widget.Toast;
 
-
-public class CommunitiesActivity extends AppCompatActivity
+public class SingleCommunitieActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private TabLayout tabs;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +52,15 @@ public class CommunitiesActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
-        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
+        tabs.addTab(tabs.newTab().setText(R.string.tabPost));
+        tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
+        tabs.addTab(tabs.newTab().setText(R.string.tabCalendario));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
+        TabAdapterSingle adapter = new TabAdapterSingle(getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -81,9 +80,6 @@ public class CommunitiesActivity extends AppCompatActivity
             }
 
         });
-
-
-
     }
 
     @Override
@@ -108,7 +104,7 @@ public class CommunitiesActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query) {
 
                 //AQUI TIENEN QUE IR LAS BUSQUEDAS
-                Toast toastAlerta = Toast.makeText(getApplicationContext(), "Para ver que funciona communities activity", Toast.LENGTH_SHORT);
+                Toast toastAlerta = Toast.makeText(getApplicationContext(), "Para ver que funciona Singlecommunities activity", Toast.LENGTH_SHORT);
                 toastAlerta.show();
 
                 return false;
@@ -122,7 +118,6 @@ public class CommunitiesActivity extends AppCompatActivity
                 return false;
             }
         });
-
         return true;
     }
 
@@ -165,39 +160,45 @@ public class CommunitiesActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
 
-class TabAdapter extends FragmentStatePagerAdapter {
+    class TabAdapterSingle extends FragmentStatePagerAdapter {
 
-    //integer to count number of tabs
-    int tabCount;
+        //integer to count number of tabs
+        int tabCount;
 
-    //Constructor to the class
-    public TabAdapter(FragmentManager fm, int tabCount) {
-        super(fm);
-        //Initializing tab count
-        this.tabCount= tabCount;
-    }
-
-    //Overriding method getItem
-    @Override
-    public Fragment getItem(int position) {
-        //Returning the current tabs
-        Fragment fragment = null;
-        switch (position) {
-            case 0:
-                fragment = new YourCommunitiesFragment();
-                break;
-            case 1:
-                fragment = new OtherCommunitiesFragment();
-                break;
+        //Constructor to the class
+        public TabAdapterSingle(FragmentManager fm, int tabCount) {
+            super(fm);
+            //Initializing tab count
+            this.tabCount= tabCount;
         }
-        return fragment;
-    }
 
-    //Overriden method getCount to get the number of tabs
-    @Override
-    public int getCount() {
-        return 2;
+        //Overriding method getItem
+        @Override
+        public Fragment getItem(int position) {
+            //Returning the current tabs
+            Fragment fragment = null;
+            switch (position) {
+                case 0:
+                    fragment = new AllVotacionesFragment();
+                    break;
+                case 1:
+                    fragment = new AllPostFragment();
+                    break;
+                case 2:
+                    fragment = new OtherCommunitiesFragment();
+                    break;
+                case 3:
+                    fragment = new OtherCommunitiesFragment();
+                    break;
+            }
+            return fragment;
+        }
+
+        //Overriden method getCount to get the number of tabs
+        @Override
+        public int getCount() {
+            return 4;
+        }
     }
 }
