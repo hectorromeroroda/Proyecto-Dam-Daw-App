@@ -47,4 +47,8 @@
     <string name="rdbVotacionInProgress">En proces</string>
     <string name="rdbVotacionClosed">Acabades</string>
 
+    //AllProposalsUpFragment---
+    <string name="rdbProposalInProgress">En proces</string>
+    <string name="rdbProposalClosed">Acabades</string>
+
 </resources>
