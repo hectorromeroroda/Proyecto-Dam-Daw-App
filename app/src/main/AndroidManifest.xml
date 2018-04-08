@@ -30,7 +30,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RowVotacionInProgress" />
         <activity android:name=".RowVotacionClosed" />
-        <activity android:name=".RowProposalInProgress"></activity>
+        <activity android:name=".RowProposalInProgress" />
+        <activity android:name=".RowProposalClosed"></activity>
     </application>
 
 </manifest>
