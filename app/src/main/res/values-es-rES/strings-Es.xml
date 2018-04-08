@@ -50,4 +50,8 @@
     <string name="rdbProposalInProgress">En curso</string>
     <string name="rdbProposalClosed">Terminadas</string>
 
+    //RowVotacionInProgress---
+    <string name="txvRowQuestionsVotacion">Número de preguntas:</string>
+    <string name="txvRowFechaFinVotacion">Fecha de finalización:</string>
+
 </resources>
