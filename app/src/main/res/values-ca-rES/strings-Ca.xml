@@ -55,4 +55,7 @@
     <string name="txvRowQuestionsVotacion">Numero de preguntes:</string>
     <string name="txvRowFechaFinVotacion">Data de finalització:</string>
 
+    //RowVotacionInClosed---
+    <string name="txvRowAprovedVotacionClosed">Estat final:</string>
+
 </resources>
