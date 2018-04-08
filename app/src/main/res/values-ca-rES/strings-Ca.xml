@@ -51,4 +51,18 @@
     <string name="rdbProposalInProgress">En proces</string>
     <string name="rdbProposalClosed">Acabades</string>
 
+    //RowVotacionInProgress---
+    <string name="txvRowQuestionsVotacion">Numero de preguntes:</string>
+    <string name="txvRowFechaFinVotacion">Data de finalització:</string>
+
+    //RowVotacionClosed---
+    <string name="txvRowAprovedVotacionClosed">Estat final:</string>
+
+    //RowProposalInProgress---
+    <string name="txvRowApoyoMinimo">% de recolzament mínim:</string>
+    <string name="txvRowApoyoActual">% de recolzament actual:</string>
+
+    //RowProposalClosed---
+    <string name="txvRowApoyoFinalClosed">% de recolzament final:</string>
+
 </resources>
