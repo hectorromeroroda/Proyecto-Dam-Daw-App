@@ -57,4 +57,8 @@
     //RowVotacionInClosed---
     <string name="txvRowAprovedVotacionClosed">Estado final:</string>
 
+    //RowProposalInProgress---
+    <string name="txvRowApoyoMinimo">% de apoyo mínimo:</string>
+    <string name="txvRowApoyoActual">% de apoyo actual:</string>
+
 </resources>
