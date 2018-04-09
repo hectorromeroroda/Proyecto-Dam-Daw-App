@@ -1,5 +1,6 @@
 package com.example.hector.proyectodamdaw;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,8 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -25,6 +31,7 @@ public class LoginFragment extends Fragment{
     EditText userLogin;
     EditText  passwLogin;
     Button acceptLogin;
+    ProgressDialog Dialog;
     private String strUserLogin;
     private  String strUserPassw;
     private Boolean userLoginVacio;
@@ -46,6 +53,9 @@ public class LoginFragment extends Fragment{
         userLogin = (EditText)view.findViewById(R.id.edtUserLogin);
         passwLogin = (EditText)view.findViewById(R.id.edtPasswLogin);
         acceptLogin = (Button) view.findViewById(R.id.btnAcceptLogin);
+
+        Dialog = new ProgressDialog(getContext());
+        Dialog.setCancelable(false);
 
         return view;
     }
@@ -87,6 +97,10 @@ public class LoginFragment extends Fragment{
                             jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
 
                             //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
+                            comprobarLoginCorrecto(jsonLogin);
+
+
+
                         }else{
                             Toast toastAlerta = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
                             toastAlerta.show();
@@ -124,6 +138,47 @@ public class LoginFragment extends Fragment{
         }
 
         return objJsonLogin;
+    }
+
+    private void comprobarLoginCorrecto(final JSONObject jsonLogin) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(0, 10000);
+
+        String Url = "";
+        client.get(getContext(), Url, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+                Dialog.setMessage("Descargando datos...");
+                Dialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                String mensajeError = new String(error.getMessage().toString());
+                String valor = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
+                Toast toastAlerta = Toast.makeText(getContext(), valor, Toast.LENGTH_LONG);
+                toastAlerta.show();
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+
+        });
+
     }
 
 
