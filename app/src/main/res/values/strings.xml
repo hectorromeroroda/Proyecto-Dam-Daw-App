@@ -20,7 +20,7 @@
     <string name="toastLenghtPassw">La contraseña deve tener un minimo de 8 carácteres</string>
 
     //LoginSingUpFragment---
-    <string name="txvNameSingUp">Nombre</string>
+    <string name="txvRegisterSingUp">Registro</string>
     <string name="edtNameSingUp">Nombre</string>
     <string name="txvSurnameSingUp">Apellidos</string>
     <string name="edtSurnameSingUp">Apellidos</string>
