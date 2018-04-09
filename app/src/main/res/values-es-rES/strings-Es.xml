@@ -69,4 +69,10 @@
     <string name="rdbDiscardProposal">No</string>
     <string name="btnSendProposal">Enviar</string>
 
+    //ProposalInProgressFragment---
+    <string name="title_activity_create_content">CreateContentActivity</string>
+    <string name="tab1">Votación</string>
+    <string name="tab2">Propuesta</string>
+    <string name="tab3">Post</string>
+
 </resources>
