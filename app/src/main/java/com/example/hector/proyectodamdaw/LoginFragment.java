@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -21,6 +22,10 @@ public class LoginFragment extends Fragment{
     EditText userLogin;
     EditText  passwLogin;
     Button acceptLogin;
+    private String strUserLogin;
+    private  String strUserPassw;
+    private Boolean userLoginVacio;
+    private Boolean userPasswVacio;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -66,9 +71,34 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                //AQUI ACCION A REALIZAR AL PULSAR boton "AcceptLogin"
+                strUserLogin=userLogin.getText().toString();
+                strUserPassw=passwLogin.getText().toString();
+
+                userLoginVacio=comprobarCamposNoVacios(strUserLogin);
+                if (userLoginVacio == false){
+                    userPasswVacio=comprobarCamposNoVacios(strUserPassw);
+                    if (userPasswVacio == false){
+
+                        //AQUI CONSTRUIR EL JSON
+                    }else{
+                        Toast toastAlerta = Toast.makeText(getContext(), R.string.toastPassw, Toast.LENGTH_SHORT);
+                        toastAlerta.show();
+                    }
+                }else{
+                    Toast toastAlerta = Toast.makeText(getContext(), R.string.toastUser, Toast.LENGTH_SHORT);
+                    toastAlerta.show();
+                }
             }
         });
 
+    }
+
+    private boolean comprobarCamposNoVacios(String texto) {
+        boolean vacio=false ;
+
+        if ( (texto == null) || (texto.equals(""))){
+            vacio=true;
+        }
+        return vacio;
     }
 }

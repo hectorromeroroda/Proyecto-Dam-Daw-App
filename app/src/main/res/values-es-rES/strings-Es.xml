@@ -13,6 +13,8 @@
     <string name="txvSingUpLogin">Registrarse</string>
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
+    <string name="toastUser">Deve completar el campo Nombre de usuario</string>
+    <string name="toastPassw">Deve completar el campo Contraseña</string>
 
     //LoginSingUpFragment---
     <string name="txvNameSingUp">Nombre</string>
