@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -17,10 +16,10 @@ import android.widget.TextView;
 public class ProposalInProgressFragment extends Fragment{
 
     TextView NameProposal;
-    TextView txvDescriptionProposal;
-    TextView txvQuestionProposal;
-    RadioButton rdbAcceptProposal;
-    RadioButton rdbDiscardProposal;
+    TextView DescriptionProposal;
+    TextView QuestionProposal;
+    RadioButton AcceptProposal;
+    RadioButton DiscardProposal;
     Button sendProposal;
 
 
@@ -34,11 +33,11 @@ public class ProposalInProgressFragment extends Fragment{
         View view = inflater.inflate(R.layout.proposal_in_progress_fragment, container, false);
 
         NameProposal =(TextView) view.findViewById(R.id.txvNameProposal);
-        txvDescriptionProposal =(TextView) view.findViewById(R.id.txvDescriptionProposal);
-        txvQuestionProposal =(TextView) view.findViewById(R.id.txvQuestionProposal);
+        DescriptionProposal =(TextView) view.findViewById(R.id.txvDescriptionProposal);
+        QuestionProposal =(TextView) view.findViewById(R.id.txvQuestionProposal);
         sendProposal = (Button) view.findViewById(R.id.btnSendProposal);
-        rdbAcceptProposal=(RadioButton)view.findViewById(R.id.rdbAcceptProposal);
-        rdbDiscardProposal=(RadioButton)view.findViewById(R.id.rdbDiscardProposal);
+        AcceptProposal =(RadioButton)view.findViewById(R.id.rdbAcceptProposal);
+        DiscardProposal =(RadioButton)view.findViewById(R.id.rdbDiscardProposal);
 
         return view;
     }

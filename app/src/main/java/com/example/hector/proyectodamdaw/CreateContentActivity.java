@@ -17,10 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
-import android.widget.Toast;
 
-public class SingleCommunitieActivity extends AppCompatActivity
+public class CreateContentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
@@ -43,15 +41,14 @@ public class SingleCommunitieActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
-        tabs.addTab(tabs.newTab().setText(R.string.tabPost));
-        tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
-        tabs.addTab(tabs.newTab().setText(R.string.tabCalendario));
+        tabs.addTab(tabs.newTab().setText(R.string.tab1));
+        tabs.addTab(tabs.newTab().setText(R.string.tab2));
+        tabs.addTab(tabs.newTab().setText(R.string.tab3));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        TabAdapterSingle adapter = new TabAdapterSingle(getSupportFragmentManager(), tabs.getTabCount());
+TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -87,28 +84,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.communities, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                //AQUI TIENEN QUE IR LAS BUSQUEDAS
-                Toast toastAlerta = Toast.makeText(getApplicationContext(), "Para ver que funciona Singlecommunities activity", Toast.LENGTH_SHORT);
-                toastAlerta.show();
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                //AQUI TIENEN QUE IR LAS BUSQUEDAS
-
-                return false;
-            }
-        });
         return true;
     }
 
@@ -152,13 +127,13 @@ public class SingleCommunitieActivity extends AppCompatActivity
         return true;
     }
 
-    class TabAdapterSingle extends FragmentStatePagerAdapter {
+    class TabAdapterCreate extends FragmentStatePagerAdapter {
 
         //integer to count number of tabs
         int tabCount;
 
         //Constructor to the class
-        public TabAdapterSingle(FragmentManager fm, int tabCount) {
+        public TabAdapterCreate(FragmentManager fm, int tabCount) {
             super(fm);
             //Initializing tab count
             this.tabCount= tabCount;
@@ -179,9 +154,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
                 case 2:
                     fragment = new AllProposalFragment();
                     break;
-                case 3:
-                    fragment = new AllCalendarFragment();
-                    break;
             }
             return fragment;
         }
@@ -189,7 +161,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         //Overriden method getCount to get the number of tabs
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
 }
