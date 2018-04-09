@@ -12,13 +12,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cz.msebera.android.httpclient.Header;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.client.ClientProtocolException;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -27,10 +35,10 @@ import cz.msebera.android.httpclient.Header;
 public class LoginFragment extends Fragment{
 
     TextView forgotPassw;
-    TextView singUpLogin;
     EditText userLogin;
     EditText  passwLogin;
     Button acceptLogin;
+    Button registerLogin;
     ProgressDialog Dialog;
     private String strUserLogin;
     private  String strUserPassw;
@@ -49,10 +57,10 @@ public class LoginFragment extends Fragment{
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
         forgotPassw =(TextView) view.findViewById(R.id.txvForgotPassw);
-        singUpLogin =(TextView) view.findViewById(R.id.txvSingUpLogin);
         userLogin = (EditText)view.findViewById(R.id.edtUserLogin);
         passwLogin = (EditText)view.findViewById(R.id.edtPasswLogin);
         acceptLogin = (Button) view.findViewById(R.id.btnAcceptLogin);
+        registerLogin = (Button) view.findViewById(R.id.btnRegisterLogin);
 
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
@@ -71,15 +79,16 @@ public class LoginFragment extends Fragment{
 
         });
 
-        singUpLogin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+
+        registerLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
                 //Caambiar de fragment
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.contentLogin, new SingUpFragment());
                 transaction.commit();
             }
-
         });
 
         acceptLogin.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +106,7 @@ public class LoginFragment extends Fragment{
                             jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
 
                             //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
-                            comprobarLoginCorrecto(jsonLogin);
-
+                            //comprobarLoginCorrecto();
 
 
                         }else{
@@ -140,44 +148,28 @@ public class LoginFragment extends Fragment{
         return objJsonLogin;
     }
 
-    private void comprobarLoginCorrecto(final JSONObject jsonLogin) {
+    private void comprobarLoginCorrecto(String email, String password) {
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setMaxRetriesAndTimeout(0, 10000);
-
-        String Url = "";
-        client.get(getContext(), Url, new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onStart() {
-                // called before request is started
-                Dialog.setMessage("Descargando datos...");
-                Dialog.show();
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://www.nuestradireccion");
 
 
-                Dialog.dismiss();
-            }
+        try {
+            // Add your data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("id", "12345"));
+            nameValuePairs.add(new BasicNameValuePair("stringdata", "Hi"));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                String mensajeError = new String(error.getMessage().toString());
-                String valor = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
-                Toast toastAlerta = Toast.makeText(getContext(), valor, Toast.LENGTH_LONG);
-                toastAlerta.show();
-                Dialog.dismiss();
-            }
 
-            @Override
-            public void onRetry(int retryNo) {
-                // called when request is retried
-            }
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
 
-        });
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }
 
     }
 

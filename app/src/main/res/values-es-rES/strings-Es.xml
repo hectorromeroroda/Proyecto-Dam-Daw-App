@@ -8,9 +8,10 @@
     //LoginFragment---
     <string name="txvUserLogin">Nombre de usuario</string>
     <string name="edtUserLogin">Usuario</string>
-    <string name="txvPasswLogin">Password</string>
+    <string name="txvLogin">Login</string>
     <string name="edtPasswLogin">Password</string>
-    <string name="txvSingUpLogin">Registrarse</string>
+    <string name="btnSingUpLogin">Registrarse</string>
+    <string name="txvSingUpLogin">¿Todavia no eres miembro?</string>
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
     <string name="toastUser">Deve completar el campo Nombre de usuario</string>

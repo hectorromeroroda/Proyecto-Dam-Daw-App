@@ -32,20 +32,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:paddingTop="30dp">
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
 
                 <TextView
-                    android:id="@+id/txvUserLogin"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txvLogin"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/txvUserLogin"
+                    android:text="@string/txvLogin"
                     android:textAlignment="center"
-                    android:textSize="20sp"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imgLogoUserLogin"
+                    android:layout_width="80dp"
+                    android:layout_height="53dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_partial_secure" />
 
                 <EditText
                     android:id="@+id/edtUserLogin"
@@ -53,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="@string/edtUserLogin"
+                    android:hint="@string/txvUserLogin"
                     android:inputType="textEmailAddress"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -61,22 +75,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:paddingTop="20dp">
 
-                <TextView
-                    android:id="@+id/txvPasswLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/imgLogoUserLogin2"
+                    android:layout_width="80dp"
+                    android:layout_height="53dp"
                     android:layout_weight="1"
-                    android:clickable="false"
-                    android:text="@string/txvPasswLogin"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    app:srcCompat="@android:drawable/ic_secure" />
 
                 <EditText
                     android:id="@+id/edtPasswLogin"
@@ -100,11 +110,14 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:id="@+id/txvSingUpLogin"
+                    android:id="@+id/txvForgotPassw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:autoLink="web"
-                    android:text="@string/txvSingUpLogin" />
+                    android:text="@string/txvForgotPassw"
+                    android:textAlignment="textStart" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -116,31 +129,61 @@
                 android:paddingRight="25dp"
                 android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/txvForgotPassw"
+                <Button
+                    android:id="@+id/btnAcceptLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:autoLink="web"
-                    android:text="@string/txvForgotPassw"
-                    android:textAlignment="textEnd" />
+                    android:text="@string/btnAcceptLogin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="15dp">
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dip"
+                    android:background="#000000" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/txvRegisterLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txvSingUpLogin"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:paddingTop="25dp">
+                android:paddingRight="25dp">
 
                 <Button
-                    android:id="@+id/btnAcceptLogin"
+                    android:id="@+id/btnRegisterLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/btnAcceptLogin" />
+                    android:layout_weight="1"
+                    android:text="@string/btnSingUpLogin" />
             </LinearLayout>
 
         </LinearLayout>
