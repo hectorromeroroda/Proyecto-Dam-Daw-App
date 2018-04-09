@@ -9,14 +9,18 @@
     //LoginFragment---
     <string name="txvUserLogin">Nombre de usuario</string>
     <string name="edtUserLogin">Usuario</string>
-    <string name="txvPasswLogin">Password</string>
+    <string name="txvLogin">Login</string>
     <string name="edtPasswLogin">Password</string>
-    <string name="txvSingUpLogin">Registrarse</string>
+    <string name="btnSingUpLogin">Registrarse</string>
+    <string name="txvSingUpLogin">¿Todavia no eres miembro?</string>
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
+    <string name="toastUser">Deve completar el campo Nombre de usuario</string>
+    <string name="toastPassw">Deve completar el campo Contraseña</string>
+    <string name="toastLenghtPassw">La contraseña deve tener un minimo de 8 carácteres</string>
 
     //LoginSingUpFragment---
-    <string name="txvNameSingUp">Nombre</string>
+    <string name="txvRegisterSingUp">Registro</string>
     <string name="edtNameSingUp">Nombre</string>
     <string name="txvSurnameSingUp">Apellidos</string>
     <string name="edtSurnameSingUp">Apellidos</string>
