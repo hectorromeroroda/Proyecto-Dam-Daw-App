@@ -16,6 +16,7 @@
     <string name="btnAcceptLogin">Entrar</string>
     <string name="toastUser">Te que omplir el Nom dusuari</string>
     <string name="toastPassw">Te que omplir la contrasenya</string>
+    <string name="toastLenghtPassw">La contraseña te que tenir un mínim de 8 caràcters</string>
 
     //LoginSingUpFragment---
     <string name="txvNameSingUp">Nom</string>

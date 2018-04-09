@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Hector on 31-Mar-18.
  */
@@ -26,6 +29,8 @@ public class LoginFragment extends Fragment{
     private  String strUserPassw;
     private Boolean userLoginVacio;
     private Boolean userPasswVacio;
+    private JSONObject jsonLogin;
+    public static final int longitudMinimaContraseña = 8;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -78,8 +83,14 @@ public class LoginFragment extends Fragment{
                 if (userLoginVacio == false){
                     userPasswVacio=comprobarCamposNoVacios(strUserPassw);
                     if (userPasswVacio == false){
+                        if (strUserPassw.length()>=longitudMinimaContraseña){
+                            jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
 
-                        //AQUI CONSTRUIR EL JSON
+                            //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
+                        }else{
+                            Toast toastAlerta = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
+                            toastAlerta.show();
+                        }
                     }else{
                         Toast toastAlerta = Toast.makeText(getContext(), R.string.toastPassw, Toast.LENGTH_SHORT);
                         toastAlerta.show();
@@ -101,4 +112,19 @@ public class LoginFragment extends Fragment{
         }
         return vacio;
     }
+
+    private JSONObject crearJsonLogin(String usuario, String passw) {
+
+        JSONObject objJsonLogin = new JSONObject();
+        try {
+            objJsonLogin.put("email",usuario);
+            objJsonLogin.put("password",passw);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return objJsonLogin;
+    }
+
+
 }
