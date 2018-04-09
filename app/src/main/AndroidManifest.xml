@@ -31,7 +31,11 @@
         <activity android:name=".RowVotacionInProgress" />
         <activity android:name=".RowVotacionClosed" />
         <activity android:name=".RowProposalInProgress" />
-        <activity android:name=".RowProposalClosed"></activity>
+        <activity android:name=".RowProposalClosed" />
+        <activity
+            android:name=".CreateContentActivity"
+            android:label="@string/title_activity_create_content"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

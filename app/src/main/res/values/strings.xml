@@ -71,4 +71,5 @@
     <string name="rdbAcceptProposal">Si</string>
     <string name="rdbDiscardProposal">No</string>
     <string name="btnSendProposal">Enviar</string>
+    <string name="title_activity_create_content">CreateContentActivity</string>
 </resources>
