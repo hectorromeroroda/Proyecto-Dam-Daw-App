@@ -15,10 +15,9 @@
             android:paddingRight="25dp">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rcvAllPost"
+                android:id="@+id/rcvAllCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
-
 </android.support.constraint.ConstraintLayout>

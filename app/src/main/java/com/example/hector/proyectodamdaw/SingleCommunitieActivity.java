@@ -186,10 +186,10 @@ public class SingleCommunitieActivity extends AppCompatActivity
                     fragment = new AllPostFragment();
                     break;
                 case 2:
-                    fragment = new OtherCommunitiesFragment();
+                    fragment = new AllProposalFragment();
                     break;
                 case 3:
-                    fragment = new OtherCommunitiesFragment();
+                    fragment = new AllCalendarFragment();
                     break;
             }
             return fragment;
