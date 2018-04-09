@@ -65,4 +65,9 @@
     //RowProposalClosed---
     <string name="txvRowApoyoFinalClosed">% de recolzament final:</string>
 
+    //ProposalInProgressFragment---
+    <string name="rdbAcceptProposal">Si</string>
+    <string name="rdbDiscardProposal">No</string>
+    <string name="btnSendProposal">Enviar</string>
+
 </resources>
