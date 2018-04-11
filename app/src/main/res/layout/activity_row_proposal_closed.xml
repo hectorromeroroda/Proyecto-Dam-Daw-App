@@ -60,7 +60,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txvRow%ApoyoMinimoClosed"
+                android:id="@+id/txvRowPorcentajeApoyoMinimoClosed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -84,7 +84,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txvRow%ApoyoFinalClosed"
+                android:id="@+id/txvRowPorcentajeApoyoFinalClosed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
