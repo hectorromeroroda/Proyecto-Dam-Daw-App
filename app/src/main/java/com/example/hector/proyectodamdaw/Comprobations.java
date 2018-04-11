@@ -6,7 +6,7 @@ package com.example.hector.proyectodamdaw;
 
 public class Comprobations {
 
-    protected boolean comprobarCamposNoVacios(String texto) {
+    protected boolean checkEmptyFields(String texto) {
         boolean vacio=false ;
 
         if ( (texto == null) || (texto.equals(""))){
