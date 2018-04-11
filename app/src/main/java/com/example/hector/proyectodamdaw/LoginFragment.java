@@ -3,6 +3,7 @@ package com.example.hector.proyectodamdaw;
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,7 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,7 @@ import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
-import cz.msebera.android.httpclient.protocol.HTTP;
+import cz.msebera.android.httpclient.util.EntityUtils;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -57,6 +61,9 @@ public class LoginFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.login_fragment, container, false);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         forgotPassw =(TextView) view.findViewById(R.id.txvForgotPassw);
         userLogin = (EditText)view.findViewById(R.id.edtUserLogin);
@@ -113,7 +120,7 @@ public class LoginFragment extends Fragment{
                             jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
 
                             //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
-                            //comprobarLoginCorrecto();
+                            comprobarLoginCorrecto(jsonLogin);
 
 
                         }else{
@@ -136,36 +143,61 @@ public class LoginFragment extends Fragment{
     private String crearJsonLogin(String usuario, String passw) {
         String strJsonLogin;
 
-        strJsonLogin=  ("{\"email\":\"" + usuario + ",\"password\":\"" + passw +"\"}");
-        Toast toastAlerta = Toast.makeText(getContext(), strJsonLogin, Toast.LENGTH_SHORT);
-        toastAlerta.show();
+        strJsonLogin=  ("{\"email\": \"" + usuario + "\", \"password\": \"" + passw +"\"}");
         return strJsonLogin;
     }
 
-    private void comprobarLoginCorrecto(String JsonLogin) {
+    private String comprobarLoginCorrecto(String JsonLogin) {
+        String result="";
+        InputStream inputStream = null;
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://www.nuestradireccion");
+        HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/login");
 
 
         try {
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("JsonLogin", JsonLogin));
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("jsonLogin",JsonLogin));
 
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            //Hace la petición
-            HttpResponse response = httpclient.execute(httppost);
+            httppost.setEntity(new UrlEncodedFormEntity(params));
+
+            // 7. Set some headers to inform server about the type of the content
+            //httppost.setHeader("Accept", "application/json");
+            //httppost.setHeader("Content-type", "application/json");
+
+            /*Finalmente ejecutamos enviando la info al server*/
+            HttpResponse resp = httpclient.execute(httppost);
+            HttpEntity ent = resp.getEntity();/*y obtenemos una respuesta*/
 
 
-            // Execute HTTP Post Request
-            HttpResponse response = httpclient.execute(httppost);
+            String text = EntityUtils.toString(ent);
+            Toast toastAlerta = Toast.makeText(getContext(),text, Toast.LENGTH_SHORT);
+            toastAlerta.show();
 
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
+            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
+            toastError.show();
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
+            toastError.show();
         }
+
+        return result;
+
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
 
     }
 
