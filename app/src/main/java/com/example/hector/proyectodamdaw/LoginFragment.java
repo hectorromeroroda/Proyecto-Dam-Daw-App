@@ -1,7 +1,10 @@
 package com.example.hector.proyectodamdaw;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,13 +15,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
@@ -27,6 +31,7 @@ import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.util.EntityUtils;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -44,8 +49,9 @@ public class LoginFragment extends Fragment{
     private  String strUserPassw;
     private Boolean userLoginVacio;
     private Boolean userPasswVacio;
-    private JSONObject jsonLogin;
+    private String jsonLogin;
     public static final int longitudMinimaContraseña = 8;
+    Comprobations comprobations;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -56,6 +62,9 @@ public class LoginFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         forgotPassw =(TextView) view.findViewById(R.id.txvForgotPassw);
         userLogin = (EditText)view.findViewById(R.id.edtUserLogin);
         passwLogin = (EditText)view.findViewById(R.id.edtPasswLogin);
@@ -65,11 +74,15 @@ public class LoginFragment extends Fragment{
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
 
+        comprobations = new Comprobations();
+
         return view;
     }
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
+
 
         forgotPassw.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -92,21 +105,22 @@ public class LoginFragment extends Fragment{
         });
 
         acceptLogin.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
 
                 strUserLogin=userLogin.getText().toString();
                 strUserPassw=passwLogin.getText().toString();
 
-                userLoginVacio=comprobarCamposNoVacios(strUserLogin);
+                userLoginVacio=comprobations.comprobarCamposNoVacios(strUserLogin);
                 if (userLoginVacio == false){
-                    userPasswVacio=comprobarCamposNoVacios(strUserPassw);
+                    userPasswVacio=comprobations.comprobarCamposNoVacios(strUserPassw);
                     if (userPasswVacio == false){
                         if (strUserPassw.length()>=longitudMinimaContraseña){
                             jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
 
                             //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
-                            //comprobarLoginCorrecto();
+                            comprobarLoginCorrecto(jsonLogin);
 
 
                         }else{
@@ -126,50 +140,64 @@ public class LoginFragment extends Fragment{
 
     }
 
-    private boolean comprobarCamposNoVacios(String texto) {
-        boolean vacio=false ;
+    private String crearJsonLogin(String usuario, String passw) {
+        String strJsonLogin;
 
-        if ( (texto == null) || (texto.equals(""))){
-            vacio=true;
-        }
-        return vacio;
+        strJsonLogin=  ("{\"email\": \"" + usuario + "\", \"password\": \"" + passw +"\"}");
+        return strJsonLogin;
     }
 
-    private JSONObject crearJsonLogin(String usuario, String passw) {
-
-        JSONObject objJsonLogin = new JSONObject();
-        try {
-            objJsonLogin.put("email",usuario);
-            objJsonLogin.put("password",passw);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return objJsonLogin;
-    }
-
-    private void comprobarLoginCorrecto(String email, String password) {
+    private String comprobarLoginCorrecto(String JsonLogin) {
+        String result="";
+        InputStream inputStream = null;
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://www.nuestradireccion");
+        HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/login");
 
 
         try {
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("id", "12345"));
-            nameValuePairs.add(new BasicNameValuePair("stringdata", "Hi"));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("jsonLogin",JsonLogin));
+
+            httppost.setEntity(new UrlEncodedFormEntity(params));
+
+            // 7. Set some headers to inform server about the type of the content
+            //httppost.setHeader("Accept", "application/json");
+            //httppost.setHeader("Content-type", "application/json");
+
+            /*Finalmente ejecutamos enviando la info al server*/
+            HttpResponse resp = httpclient.execute(httppost);
+            HttpEntity ent = resp.getEntity();/*y obtenemos una respuesta*/
 
 
-            // Execute HTTP Post Request
-            HttpResponse response = httpclient.execute(httppost);
+            String text = EntityUtils.toString(ent);
+            Toast toastAlerta = Toast.makeText(getContext(),text, Toast.LENGTH_SHORT);
+            toastAlerta.show();
 
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
+            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
+            toastError.show();
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
+            toastError.show();
         }
+
+        return result;
+
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
 
     }
 
