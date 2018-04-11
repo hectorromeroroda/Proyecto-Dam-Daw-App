@@ -24,13 +24,13 @@ public class AppHelper extends SQLiteOpenHelper{
         String comunity =
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY," +
                         "Name VARCHAR(45)," +
-                        "Max_Users INT," +
+                        "MaxUsers INT," +
                         "MediaId)";
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
-                        "Text VARCHAR(500," +
-                        "Publication_Date DATE," +
+                        "Text VARCHAR(500)," +
+                        "PublicationDate DATE," +
                         "UserId INT," +
                         "CommunityId INT," +
                         "FOREIGN KEY (UserId) REFERENCES User(_id)," +
@@ -39,9 +39,9 @@ public class AppHelper extends SQLiteOpenHelper{
         String poll =
                 "CREATE TABLE Poll(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
-                        "Text VARCHAR(500," +
-                        "Start_Date DATE," +
-                        "Finish_Date DATE," +
+                        "Text VARCHAR(500)," +
+                        "StartDate DATE," +
+                        "FinishDate DATE," +
                         "TotalVotesDone INT," +
                         "UserId INT," +
                         "CommunityId INT," +
@@ -51,7 +51,7 @@ public class AppHelper extends SQLiteOpenHelper{
         String proposition =
                 "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY," +
                         "propositionTitle VARCHAR(45)," +
-                        "propositionText VARCHAR(500," +
+                        "propositionText VARCHAR(500)," +
                         "propositionVoted INT," +
                         "UserId INT," +
                         "CommunityId INT," +
@@ -87,7 +87,7 @@ public class AppHelper extends SQLiteOpenHelper{
                         "OptionDescription VARCHAR(500)," +
                         "OptionResult INT," +
                         "PollId INT," +
-                        "FOREIGN KEY (PollId) REFERENCES Poll(__id))";
+                        "FOREIGN KEY (PollId) REFERENCES Poll( _id))";
         String postComment =
                 "CREATE TABLE PostComment (_id INTEGER PRIMARY KEY," +
                         "CommentText VARCHAR(500)," +
