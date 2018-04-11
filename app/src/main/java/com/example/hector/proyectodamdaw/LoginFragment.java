@@ -1,7 +1,9 @@
 package com.example.hector.proyectodamdaw;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,13 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
@@ -27,6 +27,7 @@ import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -44,8 +45,9 @@ public class LoginFragment extends Fragment{
     private  String strUserPassw;
     private Boolean userLoginVacio;
     private Boolean userPasswVacio;
-    private JSONObject jsonLogin;
+    private String jsonLogin;
     public static final int longitudMinimaContraseña = 8;
+    Comprobations comprobations;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -65,11 +67,15 @@ public class LoginFragment extends Fragment{
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
 
+        comprobations = new Comprobations();
+
         return view;
     }
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
+
 
         forgotPassw.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -92,15 +98,16 @@ public class LoginFragment extends Fragment{
         });
 
         acceptLogin.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
 
                 strUserLogin=userLogin.getText().toString();
                 strUserPassw=passwLogin.getText().toString();
 
-                userLoginVacio=comprobarCamposNoVacios(strUserLogin);
+                userLoginVacio=comprobations.comprobarCamposNoVacios(strUserLogin);
                 if (userLoginVacio == false){
-                    userPasswVacio=comprobarCamposNoVacios(strUserPassw);
+                    userPasswVacio=comprobations.comprobarCamposNoVacios(strUserPassw);
                     if (userPasswVacio == false){
                         if (strUserPassw.length()>=longitudMinimaContraseña){
                             jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
@@ -126,29 +133,16 @@ public class LoginFragment extends Fragment{
 
     }
 
-    private boolean comprobarCamposNoVacios(String texto) {
-        boolean vacio=false ;
+    private String crearJsonLogin(String usuario, String passw) {
+        String strJsonLogin;
 
-        if ( (texto == null) || (texto.equals(""))){
-            vacio=true;
-        }
-        return vacio;
+        strJsonLogin=  ("{\"email\":\"" + usuario + ",\"password\":\"" + passw +"\"}");
+        Toast toastAlerta = Toast.makeText(getContext(), strJsonLogin, Toast.LENGTH_SHORT);
+        toastAlerta.show();
+        return strJsonLogin;
     }
 
-    private JSONObject crearJsonLogin(String usuario, String passw) {
-
-        JSONObject objJsonLogin = new JSONObject();
-        try {
-            objJsonLogin.put("email",usuario);
-            objJsonLogin.put("password",passw);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return objJsonLogin;
-    }
-
-    private void comprobarLoginCorrecto(String email, String password) {
+    private void comprobarLoginCorrecto(String JsonLogin) {
 
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("http://www.nuestradireccion");
@@ -156,10 +150,12 @@ public class LoginFragment extends Fragment{
 
         try {
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("id", "12345"));
-            nameValuePairs.add(new BasicNameValuePair("stringdata", "Hi"));
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+            nameValuePairs.add(new BasicNameValuePair("JsonLogin", JsonLogin));
+
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            //Hace la petición
+            HttpResponse response = httpclient.execute(httppost);
 
 
             // Execute HTTP Post Request
