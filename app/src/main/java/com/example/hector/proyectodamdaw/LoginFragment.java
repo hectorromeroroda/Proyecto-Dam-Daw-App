@@ -15,10 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,48 +110,46 @@ public class LoginFragment extends Fragment{
                 strUserLogin=userLogin.getText().toString();
                 strUserPassw=passwLogin.getText().toString();
 
-                userLoginVacio=comprobations.comprobarCamposNoVacios(strUserLogin);
+                userLoginVacio=comprobations.checkEmptyFields(strUserLogin);
                 if (userLoginVacio == false){
-                    userPasswVacio=comprobations.comprobarCamposNoVacios(strUserPassw);
+                    userPasswVacio=comprobations.checkEmptyFields(strUserPassw);
                     if (userPasswVacio == false){
                         if (strUserPassw.length()>=longitudMinimaContraseña){
-                            jsonLogin= crearJsonLogin(strUserLogin, strUserPassw);
+                            jsonLogin= createJsonLogin(strUserLogin, strUserPassw);
 
                             //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
-                            comprobarLoginCorrecto(jsonLogin);
-
+                            checkLoginCorreect(jsonLogin);
 
                         }else{
-                            Toast toastAlerta = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
-                            toastAlerta.show();
+                            Toast toastAlert = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
+                            toastAlert.show();
                         }
                     }else{
-                        Toast toastAlerta = Toast.makeText(getContext(), R.string.toastPassw, Toast.LENGTH_SHORT);
-                        toastAlerta.show();
+                        Toast toastAlert = Toast.makeText(getContext(), R.string.toastPassw, Toast.LENGTH_SHORT);
+                        toastAlert.show();
                     }
                 }else{
-                    Toast toastAlerta = Toast.makeText(getContext(), R.string.toastUser, Toast.LENGTH_SHORT);
-                    toastAlerta.show();
+                    Toast toastAlert = Toast.makeText(getContext(), R.string.toastUser, Toast.LENGTH_SHORT);
+                    toastAlert.show();
                 }
             }
         });
 
     }
 
-    private String crearJsonLogin(String usuario, String passw) {
+    private String createJsonLogin(String usuario, String passw) {
         String strJsonLogin;
 
         strJsonLogin=  ("{\"email\": \"" + usuario + "\", \"password\": \"" + passw +"\"}");
         return strJsonLogin;
     }
 
-    private String comprobarLoginCorrecto(String JsonLogin) {
+    private String checkLoginCorreect(String JsonLogin) {
         String result="";
         InputStream inputStream = null;
 
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/login");
-
 
         try {
             // Add your data
@@ -162,18 +158,18 @@ public class LoginFragment extends Fragment{
 
             httppost.setEntity(new UrlEncodedFormEntity(params));
 
-            // 7. Set some headers to inform server about the type of the content
+            //Set some headers to inform server about the type of the content
             //httppost.setHeader("Accept", "application/json");
             //httppost.setHeader("Content-type", "application/json");
 
             /*Finalmente ejecutamos enviando la info al server*/
-            HttpResponse resp = httpclient.execute(httppost);
-            HttpEntity ent = resp.getEntity();/*y obtenemos una respuesta*/
+            HttpResponse response = httpclient.execute(httppost);
+            /*y obtenemos una respuesta*/
+            HttpEntity entity = response.getEntity();
 
-
-            String text = EntityUtils.toString(ent);
-            Toast toastAlerta = Toast.makeText(getContext(),text, Toast.LENGTH_SHORT);
-            toastAlerta.show();
+            String text = EntityUtils.toString(entity);
+            Toast toastResult = Toast.makeText(getContext(),text, Toast.LENGTH_SHORT);
+            toastResult.show();
 
         } catch (ClientProtocolException e) {
             // TODO Auto-generated catch block
@@ -185,18 +181,6 @@ public class LoginFragment extends Fragment{
             toastError.show();
         }
 
-        return result;
-
-    }
-
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
-
-        inputStream.close();
         return result;
 
     }
