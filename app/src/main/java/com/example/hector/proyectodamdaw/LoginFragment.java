@@ -45,10 +45,10 @@ public class LoginFragment extends Fragment{
     ProgressDialog Dialog;
     private String strUserLogin;
     private  String strUserPassw;
-    private Boolean userLoginVacio;
-    private Boolean userPasswVacio;
+    private Boolean userLoginEmpty;
+    private Boolean userPasswEmpty;
     private String jsonLogin;
-    public static final int longitudMinimaContraseña = 8;
+    public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
 
     public LoginFragment() {
@@ -60,6 +60,7 @@ public class LoginFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
+        //Para permitir la conexion POST
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -68,9 +69,6 @@ public class LoginFragment extends Fragment{
         passwLogin = (EditText)view.findViewById(R.id.edtPasswLogin);
         acceptLogin = (Button) view.findViewById(R.id.btnAcceptLogin);
         registerLogin = (Button) view.findViewById(R.id.btnRegisterLogin);
-
-        Dialog = new ProgressDialog(getContext());
-        Dialog.setCancelable(false);
 
         comprobations = new Comprobations();
 
@@ -110,11 +108,11 @@ public class LoginFragment extends Fragment{
                 strUserLogin=userLogin.getText().toString();
                 strUserPassw=passwLogin.getText().toString();
 
-                userLoginVacio=comprobations.checkEmptyFields(strUserLogin);
-                if (userLoginVacio == false){
-                    userPasswVacio=comprobations.checkEmptyFields(strUserPassw);
-                    if (userPasswVacio == false){
-                        if (strUserPassw.length()>=longitudMinimaContraseña){
+                userLoginEmpty =comprobations.checkEmptyFields(strUserLogin);
+                if (userLoginEmpty == false){
+                    userPasswEmpty =comprobations.checkEmptyFields(strUserPassw);
+                    if (userPasswEmpty == false){
+                        if (strUserPassw.length()>= miniumLenghtPassw){
                             jsonLogin= createJsonLogin(strUserLogin, strUserPassw);
 
                             //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
@@ -125,11 +123,11 @@ public class LoginFragment extends Fragment{
                             toastAlert.show();
                         }
                     }else{
-                        Toast toastAlert = Toast.makeText(getContext(), R.string.toastPassw, Toast.LENGTH_SHORT);
+                        Toast toastAlert = Toast.makeText(getContext(),  R.string.toastPassw, Toast.LENGTH_SHORT);
                         toastAlert.show();
                     }
                 }else{
-                    Toast toastAlert = Toast.makeText(getContext(), R.string.toastUser, Toast.LENGTH_SHORT);
+                    Toast toastAlert = Toast.makeText(getContext(),  R.string.toastUser, Toast.LENGTH_SHORT);
                     toastAlert.show();
                 }
             }
@@ -162,13 +160,13 @@ public class LoginFragment extends Fragment{
             //httppost.setHeader("Accept", "application/json");
             //httppost.setHeader("Content-type", "application/json");
 
-            /*Finalmente ejecutamos enviando la info al server*/
+            //Enviamos la info al server
             HttpResponse response = httpclient.execute(httppost);
             /*y obtenemos una respuesta*/
             HttpEntity entity = response.getEntity();
 
-            String text = EntityUtils.toString(entity);
-            Toast toastResult = Toast.makeText(getContext(),text, Toast.LENGTH_SHORT);
+            result = EntityUtils.toString(entity);
+            Toast toastResult = Toast.makeText(getContext(),result, Toast.LENGTH_SHORT);
             toastResult.show();
 
         } catch (ClientProtocolException e) {

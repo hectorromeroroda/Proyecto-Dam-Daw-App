@@ -1,5 +1,8 @@
 package com.example.hector.proyectodamdaw;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Hector on 11/04/2018.
  */
@@ -7,11 +10,37 @@ package com.example.hector.proyectodamdaw;
 public class Comprobations {
 
     protected boolean checkEmptyFields(String texto) {
-        boolean vacio=false ;
+        boolean empty=false ;
 
         if ( (texto == null) || (texto.equals(""))){
-            vacio=true;
+            empty=true;
         }
-        return vacio;
+        return empty;
     }
+
+    protected  boolean checkStringsEquals(String strFirst, String strSecond){
+        boolean equals = false;
+
+        if (strFirst.equals(strSecond)){
+            equals = true;
+        }
+
+        return equals;
+    }
+
+    protected  boolean checkEmailFormat(String strEmail){
+        boolean formatCorrect = false;
+
+        // Patrón para validar el email
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+        Matcher mather = pattern.matcher(strEmail);
+
+        if (mather.find() == true) {
+            formatCorrect=true;
+        }
+
+        return formatCorrect;
+    }
+
 }

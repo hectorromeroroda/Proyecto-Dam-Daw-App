@@ -7,7 +7,7 @@
     <string name="search_menu">Buscar</string>
 
     //LoginFragment---
-    <string name="txvUserLogin">Nombre de usuario</string>
+    <string name="txvUserLogin">Email</string>
     <string name="edtUserLogin">Usuario</string>
     <string name="txvLogin">Login</string>
     <string name="edtPasswLogin">Password</string>
