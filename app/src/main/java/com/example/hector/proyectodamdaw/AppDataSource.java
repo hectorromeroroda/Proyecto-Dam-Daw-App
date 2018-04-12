@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class AppDataSource {
 
-    ConstantsFile tables = new ConstantsFile();
+    //Selects constants
 
     private AppHelper databaseHelper;
     private SQLiteDatabase  databaseWritable, databaseReadable;
