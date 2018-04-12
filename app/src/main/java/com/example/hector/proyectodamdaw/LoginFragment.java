@@ -147,7 +147,9 @@ public class LoginFragment extends Fragment{
         InputStream inputStream = null;
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/login");
+        HttpPost httppost = new HttpPost("https://domo-200915.appspot.com/auth/login");
+        //http://192.168.56.1:3000/auth/login
+        //https://domo-200915.appspot.com/auth/login
 
         try {
             // Add your data
@@ -166,7 +168,7 @@ public class LoginFragment extends Fragment{
             HttpEntity entity = response.getEntity();
 
             result = EntityUtils.toString(entity);
-            Toast toastResult = Toast.makeText(getContext(),result, Toast.LENGTH_SHORT);
+            Toast toastResult = Toast.makeText(getContext(),result, Toast.LENGTH_LONG);
             toastResult.show();
 
         } catch (ClientProtocolException e) {

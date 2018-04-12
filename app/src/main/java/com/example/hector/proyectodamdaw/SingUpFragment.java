@@ -8,6 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.client.ClientProtocolException;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.util.EntityUtils;
 
 /**
  * Created by Hector on 03-Apr-18.
@@ -37,6 +54,7 @@ public class SingUpFragment extends Fragment{
     private boolean emailsSame;
     private Boolean passwEmpty;
     private Boolean repeatPasswEmpty;
+    private  Boolean passwSame;
     Comprobations comprobations;
     public static final int miniumLenghtPassw = 8;
 
@@ -94,7 +112,25 @@ public class SingUpFragment extends Fragment{
                                     if (emailsSame = true){
                                         passwEmpty =comprobations.checkEmptyFields(strPassw);
                                         if (passwEmpty=true){
+                                            if (strPassw.length()>= miniumLenghtPassw){
+                                                repeatPasswEmpty =comprobations.checkEmptyFields(strRepeatPassw);
+                                                if (repeatPasswEmpty=true){
+                                                    passwSame= comprobations.checkStringsEquals(strPassw, strRepeatPassw);
+                                                    if (passwSame=true){
 
+                                                        jsonRegister= createJsonSingUp(strUserName, strSurname, strPassw, strEmail);
+
+                                                        registerUser(jsonRegister);
+
+                                                    }else{
+                                                        //Aqui si los passw no son iguales
+                                                    }
+                                                }else{
+                                                    //Aqui si confirmacion passw vacia
+                                                }
+                                            }else{
+                                                //Aqui si el passw es mas corto de 8
+                                            }
                                         }else{
                                             //Aqui si el passw esta vacio
                                         }
@@ -116,10 +152,58 @@ public class SingUpFragment extends Fragment{
                 }else{
                     //Aqui si nombre esta vacio
                 }
-
-
             }
         });
+
+    }
+
+    private String createJsonSingUp(String nombre, String apellido, String passw, String email) {
+        String jsonRegister;
+
+        jsonRegister=  ("{\"firstname\": \"" + nombre + "\", \"lastname\": \"" + apellido + "\", \"password\": \"" + passw + "\", \"email\": \"" + email + "\"}");
+        return jsonRegister;
+    }
+
+    private String registerUser(String JsonSingUp) {
+        String result="";
+        InputStream inputStream = null;
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("https://domo-200915.appspot.com/auth/register");
+        //http://192.168.56.1:3000/auth/register
+        //https://domo-200915.appspot.com/auth/register
+
+        try {
+            // Add your data
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("jsonRegister",JsonSingUp));
+
+            httppost.setEntity(new UrlEncodedFormEntity(params));
+
+            //Set some headers to inform server about the type of the content
+            //httppost.setHeader("Accept", "application/json");
+            //httppost.setHeader("Content-type", "application/json");
+
+            //Enviamos la info al server
+            HttpResponse response = httpclient.execute(httppost);
+            /*y obtenemos una respuesta*/
+            HttpEntity entity = response.getEntity();
+
+            result = EntityUtils.toString(entity);
+            Toast toastResult = Toast.makeText(getContext(),result, Toast.LENGTH_LONG);
+            toastResult.show();
+
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
+            toastError.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
+            toastError.show();
+        }
+
+        return result;
 
     }
 }
