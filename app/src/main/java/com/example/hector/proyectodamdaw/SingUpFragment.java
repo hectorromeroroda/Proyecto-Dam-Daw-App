@@ -100,57 +100,67 @@ public class SingUpFragment extends Fragment{
 
                 userNameEmpty =comprobations.checkEmptyFields(strUserName);
                 if (userNameEmpty == false){
-                    surnameEmpty =comprobations.checkEmptyFields(strSurname);
+                    surnameEmpty = comprobations.checkEmptyFields(strSurname);
                     if (surnameEmpty == false){
-                        emailEmpty =comprobations.checkEmptyFields(strEmail);
+                        emailEmpty = comprobations.checkEmptyFields(strEmail);
                         if (emailEmpty == false){
-                            emailFormat= comprobations.checkEmailFormat(strEmail);
-                            if (emailFormat=true){
+                            emailFormat = comprobations.checkEmailFormat(strEmail);
+                            if (emailFormat==true){
                                 repeatEmailEmpty =comprobations.checkEmptyFields(strRepeatEmail);
                                 if (repeatEmailEmpty == false){
                                     emailsSame= comprobations.checkStringsEquals(strEmail, strRepeatEmail);
-                                    if (emailsSame = true){
+                                    if (emailsSame == true){
                                         passwEmpty =comprobations.checkEmptyFields(strPassw);
-                                        if (passwEmpty=true){
+                                        if (passwEmpty==false){
                                             if (strPassw.length()>= miniumLenghtPassw){
                                                 repeatPasswEmpty =comprobations.checkEmptyFields(strRepeatPassw);
-                                                if (repeatPasswEmpty=true){
+                                                if (repeatPasswEmpty==false){
                                                     passwSame= comprobations.checkStringsEquals(strPassw, strRepeatPassw);
-                                                    if (passwSame=true){
+                                                    if (passwSame==true){
 
                                                         jsonRegister= createJsonSingUp(strUserName, strSurname, strPassw, strEmail);
 
                                                         registerUser(jsonRegister);
 
                                                     }else{
-                                                        //Aqui si los passw no son iguales
+                                                        Toast toastError = Toast.makeText(getContext(),R.string.toastPasswSame, Toast.LENGTH_LONG);
+                                                        toastError.show();
                                                     }
                                                 }else{
-                                                    //Aqui si confirmacion passw vacia
+                                                    Toast toastError = Toast.makeText(getContext(),R.string.toastRepeatPasswEmpty, Toast.LENGTH_LONG);
+                                                    toastError.show();
                                                 }
                                             }else{
-                                                //Aqui si el passw es mas corto de 8
+                                                Toast toastError = Toast.makeText(getContext(),R.string.toastPasswLenght, Toast.LENGTH_LONG);
+                                                toastError.show();
                                             }
                                         }else{
-                                            //Aqui si el passw esta vacio
+                                            Toast toastError = Toast.makeText(getContext(),R.string.toastPasswEmpty, Toast.LENGTH_LONG);
+                                            toastError.show();
                                         }
                                     }else{
-                                        //Aqui si los emails no son iguales
+                                        Toast toastError = Toast.makeText(getContext(),R.string.toastEmailSame, Toast.LENGTH_LONG);
+                                        toastError.show();
                                     }
                                 }else{
-                                    //Aqui si confirmacion email vacio
+                                    Toast toastError = Toast.makeText(getContext(),R.string.toastRepeatEmailEmpty, Toast.LENGTH_LONG);
+                                    toastError.show();
                                 }
                             }else{
-                                //Aqui si el formato del email es incorrecto
+                                Toast toastError = Toast.makeText(getContext(),R.string.toastEmailFormat, Toast.LENGTH_LONG);
+                                toastError.show();
                             }
                         }else{
-                            //Aqui si email esta vacio
+                            Toast toastError = Toast.makeText(getContext(),R.string.toastEmailEmpty, Toast.LENGTH_LONG);
+                            toastError.show();
                         }
                     }else{
-                        //Aqui si apellidos esta vacio
+                        Toast toastError = Toast.makeText(getContext(),R.string.toastSurnameEmpty, Toast.LENGTH_LONG);
+                        toastError.show();
                     }
                 }else{
-                    //Aqui si nombre esta vacio
+                    Toast toastError = Toast.makeText(getContext(),R.string.toastNameEmpty, Toast.LENGTH_LONG);
+                    toastError.show();
                 }
             }
         });
@@ -169,7 +179,7 @@ public class SingUpFragment extends Fragment{
         InputStream inputStream = null;
 
         HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("https://domo-200915.appspot.com/auth/register");
+        HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/register");
         //http://192.168.56.1:3000/auth/register
         //https://domo-200915.appspot.com/auth/register
 
