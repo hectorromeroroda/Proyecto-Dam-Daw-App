@@ -1,12 +1,14 @@
 package com.example.hector.proyectodamdaw;
 
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,7 @@ public class LoginFragment extends Fragment{
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
+    loginUserAsync loginUserAsync;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -115,8 +118,8 @@ public class LoginFragment extends Fragment{
                         if (strUserPassw.length()>= miniumLenghtPassw){
                             jsonLogin= createJsonLogin(strUserLogin, strUserPassw);
 
-                            //AQUI CREAR LA CONEXION CON EL SRVIDOR PARA ENVIAR EL JSON ETC
-                            checkLoginCorreect(jsonLogin);
+                            loginUserAsync = new loginUserAsync();
+                            loginUserAsync.execute(jsonLogin);
 
                         }else{
                             Toast toastAlert = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
@@ -183,6 +186,51 @@ public class LoginFragment extends Fragment{
 
         return result;
 
+    }
+
+    private class loginUserAsync extends AsyncTask<String, Void, String> {
+        String result = "";
+
+        protected String doInBackground(String... argumentos) {
+
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/login");
+                //http://192.168.56.1:3000/auth/login
+                //https://domo-200915.appspot.com/auth/login
+
+                // Add your data
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("jsonLogin", argumentos[0]));
+
+                httppost.setEntity(new UrlEncodedFormEntity(params));
+
+                //Set some headers to inform server about the type of the content
+                //httppost.setHeader("Accept", "application/json");
+                //httppost.setHeader("Content-type", "application/json");
+
+                //Enviamos la info al server
+                HttpResponse response = httpclient.execute(httppost);
+                //Obtenemos una respuesta*/
+                HttpEntity entity = response.getEntity();
+
+                result = EntityUtils.toString(entity);
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                Log.i("ResponseObject: ", e.toString());
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String mensaje) {
+
+            //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
+            Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
+            toastResult.show();
+
+        }
     }
 
 

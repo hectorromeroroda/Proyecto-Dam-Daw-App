@@ -1,8 +1,10 @@
 package com.example.hector.proyectodamdaw;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
@@ -56,6 +55,7 @@ public class SingUpFragment extends Fragment{
     private Boolean repeatPasswEmpty;
     private  Boolean passwSame;
     Comprobations comprobations;
+    registerUserAsync registerUserAsync;
     public static final int miniumLenghtPassw = 8;
 
     public SingUpFragment() {
@@ -119,8 +119,8 @@ public class SingUpFragment extends Fragment{
                                                     if (passwSame==true){
 
                                                         jsonRegister= createJsonSingUp(strUserName, strSurname, strPassw, strEmail);
-
-                                                        registerUser(jsonRegister);
+                                                        registerUserAsync = new registerUserAsync();
+                                                        registerUserAsync.execute(jsonRegister);
 
                                                     }else{
                                                         Toast toastError = Toast.makeText(getContext(),R.string.toastPasswSame, Toast.LENGTH_LONG);
@@ -174,46 +174,49 @@ public class SingUpFragment extends Fragment{
         return jsonRegister;
     }
 
-    private String registerUser(String JsonSingUp) {
-        String result="";
-        InputStream inputStream = null;
 
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/register");
-        //http://192.168.56.1:3000/auth/register
-        //https://domo-200915.appspot.com/auth/register
+    private class registerUserAsync extends AsyncTask<String, Void, String> {
+        String result = "";
 
-        try {
-            // Add your data
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("jsonRegister",JsonSingUp));
+        protected String doInBackground(String... argumentos) {
 
-            httppost.setEntity(new UrlEncodedFormEntity(params));
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/register");
+                //http://192.168.56.1:3000/auth/register
+                //https://domo-200915.appspot.com/auth/register
 
-            //Set some headers to inform server about the type of the content
-            //httppost.setHeader("Accept", "application/json");
-            //httppost.setHeader("Content-type", "application/json");
+                // Add your data
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("jsonRegister", argumentos[0]));
 
-            //Enviamos la info al server
-            HttpResponse response = httpclient.execute(httppost);
-            /*y obtenemos una respuesta*/
-            HttpEntity entity = response.getEntity();
+                httppost.setEntity(new UrlEncodedFormEntity(params));
 
-            result = EntityUtils.toString(entity);
-            Toast toastResult = Toast.makeText(getContext(),result, Toast.LENGTH_LONG);
-            toastResult.show();
+                //Set some headers to inform server about the type of the content
+                //httppost.setHeader("Accept", "application/json");
+                //httppost.setHeader("Content-type", "application/json");
 
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
-            toastError.show();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
-            toastError.show();
+                //Enviamos la info al server
+                HttpResponse response = httpclient.execute(httppost);
+                //Obtenemos una respuesta*/
+                HttpEntity entity = response.getEntity();
+
+                result = EntityUtils.toString(entity);
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                Log.i("ResponseObject: ", e.toString());
+            }
+
+            return result;
         }
 
-        return result;
+        protected void onPostExecute(String mensaje) {
 
+            //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
+            Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
+            toastResult.show();
+
+        }
     }
 }
