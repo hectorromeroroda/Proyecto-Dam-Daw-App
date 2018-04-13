@@ -33,6 +33,17 @@
     <string name="txvRepeatPasswSingUp">Confirmi el password</string>
     <string name="edtRepeatPasswSingUp">Confirmació password</string>
     <string name="btnAcceptSingUp">Aceptar</string>
+    <string name="title_activity_communities">CommunitiesActivity</string>
+    <string name="toastNameEmpty">Te que omplir el camp Nom</string>
+    <string name="toastSurnameEmpty">e que omplir el camp Cognoms</string>
+    <string name="toastEmailEmpty">e que omplir el camp Email</string>
+    <string name="toastEmailFormat">El format del campo Email es incorrecte</string>
+    <string name="toastRepeatEmailEmpty">e que omplir el camp Confirmar Email</string>
+    <string name="toastEmailSame">Les direccions de correu no coincideixen</string>
+    <string name="toastPasswEmpty">Te que omplir el camp Password</string>
+    <string name="toastPasswLenght">El password te que tenir un mínim de 8 caracters</string>
+    <string name="toastRepeatPasswEmpty">Te que omplir el camp Confirmacio Password</string>
+    <string name="toastPasswSame">Els passwords no coincideixen</string>
 
     /CommunitiesActivity---
     <string name="tabTusComunidades">Les teves comunitats</string>
@@ -65,6 +76,9 @@
     //RowProposalInProgress---
     <string name="txvRowApoyoMinimo">% de recolzament mínim:</string>
     <string name="txvRowApoyoActual">% de recolzament actual:</string>
+
+    //RowOthercommunitie---
+    <string name="btnRowAcces">ferse-se membre</string>
 
     //RowProposalClosed---
     <string name="txvRowApoyoFinalClosed">% de recolzament final:</string>

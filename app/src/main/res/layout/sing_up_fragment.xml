@@ -130,7 +130,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtEmailSingUp"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -161,7 +161,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtRepeatEmailSingUp"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -190,7 +190,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtPasswSingUp"
-                    android:inputType="textPersonName"
+                    android:inputType="textPassword"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -219,7 +219,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtRepeatPasswSingUp"
-                    android:inputType="textPersonName"
+                    android:inputType="textPassword"
                     android:textSize="20sp" />
 
             </LinearLayout>
