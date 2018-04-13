@@ -49,6 +49,7 @@ public class LoginFragment extends Fragment{
     private  String strUserPassw;
     private Boolean userLoginEmpty;
     private Boolean userPasswEmpty;
+    private Boolean emailFormat;
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
@@ -113,20 +114,26 @@ public class LoginFragment extends Fragment{
 
                 userLoginEmpty =comprobations.checkEmptyFields(strUserLogin);
                 if (userLoginEmpty == false){
-                    userPasswEmpty =comprobations.checkEmptyFields(strUserPassw);
-                    if (userPasswEmpty == false){
-                        if (strUserPassw.length()>= miniumLenghtPassw){
-                            jsonLogin= createJsonLogin(strUserLogin, strUserPassw);
+                    emailFormat= comprobations.checkEmailFormat(strUserLogin);
+                    if (emailFormat==true){
+                        userPasswEmpty =comprobations.checkEmptyFields(strUserPassw);
+                        if (userPasswEmpty == false){
+                            if (strUserPassw.length()>= miniumLenghtPassw){
+                                jsonLogin= createJsonLogin(strUserLogin, strUserPassw);
 
-                            loginUserAsync = new loginUserAsync();
-                            loginUserAsync.execute(jsonLogin);
+                                loginUserAsync = new loginUserAsync();
+                                loginUserAsync.execute(jsonLogin);
 
+                            }else{
+                                Toast toastAlert = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
+                                toastAlert.show();
+                            }
                         }else{
-                            Toast toastAlert = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
+                            Toast toastAlert = Toast.makeText(getContext(),  R.string.toastPassw, Toast.LENGTH_SHORT);
                             toastAlert.show();
                         }
                     }else{
-                        Toast toastAlert = Toast.makeText(getContext(),  R.string.toastPassw, Toast.LENGTH_SHORT);
+                        Toast toastAlert = Toast.makeText(getContext(),R.string.toastEmailFormat, Toast.LENGTH_LONG);
                         toastAlert.show();
                     }
                 }else{
@@ -227,6 +234,7 @@ public class LoginFragment extends Fragment{
         protected void onPostExecute(String mensaje) {
 
             //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
+            //SI EL LOGIN ES CORRECTO, ENVIAR A ALLCOMMUNITIES ACTIVITY
             Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
             toastResult.show();
 

@@ -214,6 +214,7 @@ public class SingUpFragment extends Fragment{
         protected void onPostExecute(String mensaje) {
 
             //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
+            //SI EL REGISTRO ES CORRECTO, GUARDAR LOS DATOS Y ENVIAR A ALLCOMMUNITIES ACTIVITY
             Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
             toastResult.show();
 
