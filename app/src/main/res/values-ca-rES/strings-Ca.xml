@@ -77,6 +77,9 @@
     <string name="txvRowApoyoMinimo">% de recolzament mínim:</string>
     <string name="txvRowApoyoActual">% de recolzament actual:</string>
 
+    //RowOthercommunitie---
+    <string name="btnRowAcces">ferse-se membre</string>
+
     //RowProposalClosed---
     <string name="txvRowApoyoFinalClosed">% de recolzament final:</string>
 

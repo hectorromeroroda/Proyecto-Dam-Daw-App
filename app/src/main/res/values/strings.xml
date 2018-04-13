@@ -78,6 +78,9 @@
     <string name="txvRowApoyoMinimo">% de apoyo mínimo:</string>
     <string name="txvRowApoyoActual">% de apoyo actual:</string>
 
+    //RowOthercommunitie---
+    <string name="btnRowAcces">Hacer-se miembro</string>
+
     //RowProposalClosed---
     <string name="txvRowApoyoFinalClosed">% de apoyo final:</string>
 
