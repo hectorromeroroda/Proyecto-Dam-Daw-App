@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hector.proyectodamdaw">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +26,7 @@
             android:name=".CommunitiesActivity"
             android:label="@string/title_activity_communities"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RowCommunitie" />
+        <activity android:name=".RowMyCommunitie" />
         <activity
             android:name=".SingleCommunitieActivity"
             android:label="@string/title_activity_single_communitie"
@@ -35,7 +38,9 @@
         <activity
             android:name=".CreateContentActivity"
             android:label="@string/title_activity_create_content"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RowOtherCommunitie" />
+        <activity android:name=".RowPost"></activity>
     </application>
 
 </manifest>
