@@ -1,4 +1,4 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.R;
 
 import java.io.IOException;
 import java.io.InputStream;

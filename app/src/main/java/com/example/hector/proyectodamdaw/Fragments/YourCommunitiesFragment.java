@@ -1,4 +1,4 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,34 +6,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
+
+import com.example.hector.proyectodamdaw.R;
+
 
 /**
- * Created by Hector on 07-Apr-18.
+ * Created by Hector on 03-Apr-18.
  */
 
-public class AllProposalFragment extends Fragment{
+public class YourCommunitiesFragment extends Fragment{
 
     protected RecyclerView.LayoutManager layoutManager;
-    protected RecyclerView recyclerViewProposals;
-    RadioButton rdbInProgress;
-    RadioButton rdbclosed;
+    protected RecyclerView recyclerViewYourCommunities;
+    protected RecyclerView recyclerViewYourInvitations;
 
-
-    public AllProposalFragment() {
+    public YourCommunitiesFragment() {
         // Required empty public constructor
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.all_proposal_fragment, container, false);
+        View view = inflater.inflate(R.layout.your_communities_fragment, container, false);
 
-        recyclerViewProposals = (RecyclerView) view.findViewById(R.id.rcvProposals);
-        rdbInProgress=(RadioButton)view.findViewById(R.id.rdbProposalInProgress);
-        rdbclosed=(RadioButton)view.findViewById(R.id.rdbProposalClosed);
-
-
+        recyclerViewYourCommunities = (RecyclerView) view.findViewById(R.id.rcvYourCommunities);
+        recyclerViewYourInvitations = (RecyclerView) view.findViewById(R.id.rcvYourinvitations);
 
         return view;
     }

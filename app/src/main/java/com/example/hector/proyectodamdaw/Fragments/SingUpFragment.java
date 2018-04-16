@@ -1,4 +1,4 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.R;
 
 import java.util.ArrayList;
 import java.util.List;
