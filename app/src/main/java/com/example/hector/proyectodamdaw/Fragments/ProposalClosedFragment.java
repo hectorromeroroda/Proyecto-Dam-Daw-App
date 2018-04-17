@@ -1,4 +1,4 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.example.hector.proyectodamdaw.R;
 
 /**
  * Created by Hector on 09-Apr-18.

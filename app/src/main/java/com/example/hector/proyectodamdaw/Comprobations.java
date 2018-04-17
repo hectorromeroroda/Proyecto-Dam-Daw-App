@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class Comprobations {
 
-    protected boolean checkEmptyFields(String texto) {
+    public boolean checkEmptyFields(String texto) {
         boolean empty=false ;
 
         if ( (texto == null) || (texto.equals(""))){
@@ -18,7 +18,7 @@ public class Comprobations {
         return empty;
     }
 
-    protected  boolean checkStringsEquals(String strFirst, String strSecond){
+    public   boolean checkStringsEquals(String strFirst, String strSecond){
         boolean equals = false;
 
         if (strFirst.equals(strSecond)){
@@ -28,7 +28,7 @@ public class Comprobations {
         return equals;
     }
 
-    protected  boolean checkEmailFormat(String strEmail){
+    public   boolean checkEmailFormat(String strEmail){
         boolean formatCorrect = false;
 
         // Patrón para validar el email

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activitys.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,24 +23,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CommunitiesActivity"
+            android:name=".Activitys.CommunitiesActivity"
             android:label="@string/title_activity_communities"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RowMyCommunitie" />
+        <activity android:name=".Rows.RowMyCommunitie" />
         <activity
-            android:name=".SingleCommunitieActivity"
+            android:name=".Activitys.SingleCommunitieActivity"
             android:label="@string/title_activity_single_communitie"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RowVotacionInProgress" />
-        <activity android:name=".RowVotacionClosed" />
-        <activity android:name=".RowProposalInProgress" />
-        <activity android:name=".RowProposalClosed" />
+        <activity android:name=".Rows.RowVotacionInProgress" />
+        <activity android:name=".Rows.RowVotacionClosed" />
+        <activity android:name=".Rows.RowProposalInProgress" />
+        <activity android:name=".Rows.RowProposalClosed" />
         <activity
-            android:name=".CreateContentActivity"
+            android:name=".Activitys.CreateContentActivity"
             android:label="@string/title_activity_create_content"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RowOtherCommunitie" />
-        <activity android:name=".RowPost"></activity>
+        <activity android:name=".Rows.RowOtherCommunitie" />
+        <activity android:name=".Rows.RowPost"></activity>
     </application>
 
 </manifest>

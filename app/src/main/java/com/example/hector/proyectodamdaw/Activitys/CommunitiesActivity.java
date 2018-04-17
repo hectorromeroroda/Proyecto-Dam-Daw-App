@@ -1,14 +1,11 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Activitys;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,14 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.SearchView;
 import android.widget.Toast;
 
-public class SingleCommunitieActivity extends AppCompatActivity
+import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
+import com.example.hector.proyectodamdaw.R;
+import com.example.hector.proyectodamdaw.Fragments.YourCommunitiesFragment;
+
+
+public class CommunitiesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private TabLayout tabs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         setContentView(R.layout.activity_communities);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,15 +48,13 @@ public class SingleCommunitieActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
-        tabs.addTab(tabs.newTab().setText(R.string.tabPost));
-        tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
-        tabs.addTab(tabs.newTab().setText(R.string.tabCalendario));
+        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        TabAdapterSingle adapter = new TabAdapterSingle(getSupportFragmentManager(), tabs.getTabCount());
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -71,6 +74,9 @@ public class SingleCommunitieActivity extends AppCompatActivity
             }
 
         });
+
+
+
     }
 
     @Override
@@ -95,7 +101,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
             public boolean onQueryTextSubmit(String query) {
 
                 //AQUI TIENEN QUE IR LAS BUSQUEDAS
-                Toast toastAlerta = Toast.makeText(getApplicationContext(), "Para ver que funciona Singlecommunities activity", Toast.LENGTH_SHORT);
+                Toast toastAlerta = Toast.makeText(getApplicationContext(), "Para ver que funciona communities activity", Toast.LENGTH_SHORT);
                 toastAlerta.show();
 
                 return false;
@@ -109,6 +115,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
                 return false;
             }
         });
+
         return true;
     }
 
@@ -151,45 +158,39 @@ public class SingleCommunitieActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+}
 
-    class TabAdapterSingle extends FragmentStatePagerAdapter {
+class TabAdapter extends FragmentStatePagerAdapter {
 
-        //integer to count number of tabs
-        int tabCount;
+    //integer to count number of tabs
+    int tabCount;
 
-        //Constructor to the class
-        public TabAdapterSingle(FragmentManager fm, int tabCount) {
-            super(fm);
-            //Initializing tab count
-            this.tabCount= tabCount;
+    //Constructor to the class
+    public TabAdapter(FragmentManager fm, int tabCount) {
+        super(fm);
+        //Initializing tab count
+        this.tabCount= tabCount;
+    }
+
+    //Overriding method getItem
+    @Override
+    public Fragment getItem(int position) {
+        //Returning the current tabs
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new YourCommunitiesFragment();
+                break;
+            case 1:
+                fragment = new OtherCommunitiesFragment();
+                break;
         }
+        return fragment;
+    }
 
-        //Overriding method getItem
-        @Override
-        public Fragment getItem(int position) {
-            //Returning the current tabs
-            Fragment fragment = null;
-            switch (position) {
-                case 0:
-                    fragment = new AllVotacionesFragment();
-                    break;
-                case 1:
-                    fragment = new AllPostFragment();
-                    break;
-                case 2:
-                    fragment = new AllProposalFragment();
-                    break;
-                case 3:
-                    fragment = new AllCalendarFragment();
-                    break;
-            }
-            return fragment;
-        }
-
-        //Overriden method getCount to get the number of tabs
-        @Override
-        public int getCount() {
-            return 4;
-        }
+    //Overriden method getCount to get the number of tabs
+    @Override
+    public int getCount() {
+        return 2;
     }
 }
