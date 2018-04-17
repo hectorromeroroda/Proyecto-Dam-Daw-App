@@ -43,6 +43,22 @@ public class LoginActivity extends AppCompatActivity
     }
 
     @Override
+    public void onResume() {
+
+        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
+
+        super.onResume();
+    }
+
+    @Override
+    public void onRestart() {
+
+        //AQUI CODIGO PARA CARGAR EL ESTADO CUANDO SE VUELVE A CARGAR EL ACTIVITY
+
+        super.onRestart();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
