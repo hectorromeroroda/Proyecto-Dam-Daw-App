@@ -19,34 +19,45 @@ public class AppHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+        /*COMENTAR DB CACHE FALTA DE TABLAS*/
         String comunity =
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY," +
                         "Name VARCHAR(45)," +
-                        "Max_Users INT," +
+                        "MaxUsers INT," +
                         "MediaId)";
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
-                        "Text VARCHAR(500," +
-                        "Publication_Date DATE," +
+                        "Text VARCHAR(500)," +
+                        "PublicationDate DATE," +
                         "UserId INT," +
-                        "CommunityId INT)";
+                        "CommunityId INT," +
+                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
+                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
+                        ")";
         String poll =
                 "CREATE TABLE Poll(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
-                        "Text VARCHAR(500," +
-                        "Start_Date DATE," +
-                        "Finish_Date DATE," +
+                        "Text VARCHAR(500)," +
+                        "StartDate DATE," +
+                        "FinishDate DATE," +
                         "TotalVotesDone INT," +
                         "UserId INT," +
-                        "CommunityId INT)";
+                        "CommunityId INT," +
+                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
+                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
+                        ")";
         String proposition =
                 "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY," +
                         "propositionTitle VARCHAR(45)," +
-                        "propositionText VARCHAR(500," +
+                        "propositionText VARCHAR(500)," +
                         "propositionVoted INT," +
                         "UserId INT," +
-                        "CommunityId INT)";
+                        "CommunityId INT," +
+                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
+                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
+                        ")";
         String user =
                 "CREATE TABLE User(_id INTEGER PRIMARY KEY," +
                         "UserName VARCHAR(45)," +
@@ -66,31 +77,44 @@ public class AppHelper extends SQLiteOpenHelper{
                         "Sended Date," +
                         "Recived Date," +
                         "UserSenderId INT," +
-                        "UserReceiverId INT)";
+                        "UserReceiverId INT," +
+                        "FOREIGN KEY (UserSenderId) REFERENCES User(_id)," +
+                        "FOREIGN KEY (UserReceiverId) REFERENCES User(_id)" +
+                        ")";
         String optionPoll =
                 "CREATE TABLE (_id INTEGER PRIMARY KEY," +
                         "OptionTitle VARCHAR(45)," +
                         "OptionDescription VARCHAR(500)," +
                         "OptionResult INT," +
-                        "PollId INT)";
+                        "PollId INT," +
+                        "FOREIGN KEY (PollId) REFERENCES Poll( _id))";
         String postComment =
                 "CREATE TABLE PostComment (_id INTEGER PRIMARY KEY," +
                         "CommentText VARCHAR(500)," +
                         "CommentPublicationDate DATE," +
                         "PostId INT," +
-                        "UserId INT)";
+                        "UserId INT," +
+                        "FOREIGN KEY (PostId) REFERENCES Post(_id)," +
+                        "FOREIGN KEY (UserId) REFERENCES User(_id)" +
+                        ")";
         String pollComment =
                 "CREATE TABLE PollComment (_id INTEGER PRIMARY KEY," +
                         "PollText VARCHAR(500)," +
                         "PollPublicationDate DATE," +
                         "PollId INT," +
-                        "UserId INT)";
+                        "UserId INT," +
+                        "FOREIGN KEY (PostId) REFERENCES Post(_id)," +
+                        "FOREIGN KEY (UserId) REFERENCES User(_id)" +
+                        ")";
         String propositionComment =
                 "CREATE TABLE PropositionComment (_id INTEGER PRIMARY KEY," +
                         "PropositionText VARCHAR(500)," +
                         "CommentPublicationDate DATE," +
                         "PropositionId INT," +
-                        "UserId INT)";
+                        "UserId INT," +
+                        "FOREIGN KEY (PostId) REFERENCES Post(_id)," +
+                        "FOREIGN KEY (UserId) REFERENCES User(_id)" +
+                        ")";
 
     }
 
