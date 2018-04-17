@@ -170,6 +170,33 @@ public class SingUpFragment extends Fragment{
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        String color= "jj";
+        // Save in savedInstanceState.
+        savedInstanceState.putStringArray(color);
+    }
+
+
+    @Override
+    public void onResume() {
+
+        //AQUI CODIGO PARA CARGAR EL ESTADO ANTES DE QUE RECARGUE LA ACTIVIDAD
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+
+        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
+        savedInstanceState.putStringArray(SPINNER_DATA, colors);
+
+        super.onPause();
+    }
+
     private String createJsonSingUp(String nombre, String apellido, String passw, String email) {
         String jsonRegister;
 
