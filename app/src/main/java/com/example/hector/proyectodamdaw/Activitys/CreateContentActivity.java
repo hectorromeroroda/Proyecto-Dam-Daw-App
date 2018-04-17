@@ -50,7 +50,7 @@ public class CreateContentActivity extends AppCompatActivity
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
+        TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -71,6 +71,23 @@ TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tab
 
         });
     }
+
+    @Override
+    public void onResume() {
+
+        //AQUI CODIGO PARA CARGAR EL ESTADO ANTES DE QUE RECARGUE LA ACTIVIDAD
+
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+
+        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
+
+        super.onPause();
+    }
+
 
     @Override
     public void onBackPressed() {
