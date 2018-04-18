@@ -20,6 +20,9 @@ import android.widget.Toast;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -199,15 +202,26 @@ public class LoginFragment extends Fragment{
 
         protected void onPostExecute(String mensaje) {
 
+            String responseContent;
+
             //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
             //SI EL LOGIN ES CORRECTO, ENVIAR A ALLCOMMUNITIES ACTIVITY
+            try {
+                JSONObject jsResponse= new JSONObject(mensaje);
+                responseContent=jsResponse.getString("errorMessage");
+                Toast toastResult = Toast.makeText(getContext(), responseContent, Toast.LENGTH_LONG);
+                toastResult.show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
             if (rememberMe.isChecked()==true){
                 //AQUI HACER ACCIONES Y GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
             }else{
                 //AQUI HACER ACCIONES Y  NO! GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
             }
-            Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
-            toastResult.show();
+
 
         }
     }

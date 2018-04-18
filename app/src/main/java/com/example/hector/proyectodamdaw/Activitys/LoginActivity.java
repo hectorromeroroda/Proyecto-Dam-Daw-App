@@ -59,9 +59,9 @@ public class LoginActivity extends AppCompatActivity
 
     private void loadFragment(Fragment newFragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentLogin, newFragment,newFragment.getClass().getName())
-                .addToBackStack(null)
-                .commit();
+                .replace(R.id.contentLogin, newFragment,newFragment.getClass().getName()).commit();
+                //.addToBackStack(null)    ---SIRVE PARA GUARDAR EL FRAGMEN EN LA PILA, PERO ESTE NO LO NECESITAMOS
+
     }
 
     @Override
