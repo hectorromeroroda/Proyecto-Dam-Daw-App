@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class LoginFragment extends Fragment{
     EditText  passwLogin;
     Button acceptLogin;
     Button registerLogin;
+    CheckBox rememberMe;
     ProgressDialog Dialog;
     private String strUserLogin;
     private  String strUserPassw;
@@ -72,6 +74,7 @@ public class LoginFragment extends Fragment{
         passwLogin = (EditText)view.findViewById(R.id.edtPasswLogin);
         acceptLogin = (Button) view.findViewById(R.id.btnAcceptLogin);
         registerLogin = (Button) view.findViewById(R.id.btnRegisterLogin);
+        rememberMe = (CheckBox) view.findViewById(R.id.ckbRememberMe);
 
         comprobations = new Comprobations();
 
@@ -151,8 +154,6 @@ public class LoginFragment extends Fragment{
                 .commit();
     }
 
-
-
     private String createJsonLogin(String usuario, String passw) {
         String strJsonLogin;
 
@@ -200,6 +201,11 @@ public class LoginFragment extends Fragment{
 
             //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
             //SI EL LOGIN ES CORRECTO, ENVIAR A ALLCOMMUNITIES ACTIVITY
+            if (rememberMe.isChecked()==true){
+                //AQUI HACER ACCIONES Y GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
+            }else{
+                //AQUI HACER ACCIONES Y  NO! GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
+            }
             Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
             toastResult.show();
 
