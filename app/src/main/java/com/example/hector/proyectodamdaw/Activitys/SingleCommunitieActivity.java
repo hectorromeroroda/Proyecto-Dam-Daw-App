@@ -77,22 +77,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
     }
 
     @Override
-    public void onResume() {
-
-        //AQUI CODIGO PARA CARGAR EL ESTADO ANTES DE QUE RECARGUE LA ACTIVIDAD
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-
-        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
-
-        super.onPause();
-    }
-
-    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {

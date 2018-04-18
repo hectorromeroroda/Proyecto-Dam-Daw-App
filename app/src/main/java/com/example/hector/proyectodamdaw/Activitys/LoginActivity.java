@@ -13,10 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
+import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,28 +36,39 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         //Cambiar de fragment
-        Fragment fragment = new LoginFragment();
+        Fragment fragmentLogin = new LoginFragment();
+        Fragment fragmentSingUp = new SingUpFragment();
+
+
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+
+        if (currentFragment == null) {
+            //carga del primer fragment justo en la carga inicial de la app
+            loadFragment(fragmentLogin);
+        } else{
+            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
+
+            }else{
+                if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
+
+                }else{
+
+                }
+
+            }
+
+        }
+
+
+    }
+
+    private void loadFragment(Fragment newFragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentLogin, fragment)
+                .replace(R.id.contentLogin, newFragment,newFragment.getClass().getName())
+                .addToBackStack(null)
                 .commit();
-
-    }
-
-    @Override
-    public void onResume() {
-
-        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
-
-        super.onResume();
-    }
-
-    @Override
-    public void onRestart() {
-
-        //AQUI CODIGO PARA CARGAR EL ESTADO CUANDO SE VUELVE A CARGAR EL ACTIVITY
-
-        super.onRestart();
     }
 
     @Override
