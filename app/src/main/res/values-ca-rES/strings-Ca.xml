@@ -18,6 +18,7 @@
     <string name="toastUser">Te que omplir el Nom dusuari</string>
     <string name="toastPassw">Te que omplir la contrasenya</string>
     <string name="toastLenghtPassw">La contraseña te que tenir un mínim de 8 caràcters</string>
+    <string name="ckbRememberMe">No tancar la sessió</string>
 
     //LoginSingUpFragment---
     <string name="txvRegisterSingUp">Registre</string>

@@ -35,7 +35,9 @@ public class LoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        
+        //Para poner como seleccionado el item  que se quiera del navigationdrawer
+        navigationView.setCheckedItem(R.id.nav_camera);
+
         //Cambiar de fragment
         Fragment fragmentLogin = new LoginFragment();
         Fragment fragmentSingUp = new SingUpFragment();
@@ -101,25 +103,26 @@ public class LoginActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+
+        } else if (id == R.id.nav_gallery) {
             Intent intent = new Intent(this, CommunitiesActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_manage) {
             Intent intent = new Intent(this, CreateContentActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
 
+        item.setChecked(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
