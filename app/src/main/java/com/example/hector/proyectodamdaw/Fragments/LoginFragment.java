@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,15 +20,15 @@ import android.widget.Toast;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.R;
 
-import java.io.IOException;
-import java.io.InputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
@@ -47,6 +47,7 @@ public class LoginFragment extends Fragment{
     EditText  passwLogin;
     Button acceptLogin;
     Button registerLogin;
+    CheckBox rememberMe;
     ProgressDialog Dialog;
     private String strUserLogin;
     private  String strUserPassw;
@@ -76,6 +77,7 @@ public class LoginFragment extends Fragment{
         passwLogin = (EditText)view.findViewById(R.id.edtPasswLogin);
         acceptLogin = (Button) view.findViewById(R.id.btnAcceptLogin);
         registerLogin = (Button) view.findViewById(R.id.btnRegisterLogin);
+        rememberMe = (CheckBox) view.findViewById(R.id.ckbRememberMe);
 
         comprobations = new Comprobations();
 
@@ -84,6 +86,7 @@ public class LoginFragment extends Fragment{
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
 
 
 
@@ -100,10 +103,9 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                //Caambiar de fragment
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.contentLogin, new SingUpFragment());
-                transaction.commit();
+                Fragment fragmentSingUp = new SingUpFragment();
+                Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+                loadFragment(fragmentSingUp);
             }
         });
 
@@ -148,72 +150,18 @@ public class LoginFragment extends Fragment{
 
     }
 
-    @Override
-    public void onResume() {
-
-        //AQUI CODIGO PARA CARGAR EL ESTADO ANTES DE QUE RECARGUE LA ACTIVIDAD
-
-        super.onResume();
+    private void loadFragment(Fragment newFragment) {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentLogin, newFragment,newFragment.getClass().getName())
+                .addToBackStack(null)
+                .commit();
     }
-
-    @Override
-    public void onPause() {
-
-        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
-
-        super.onPause();
-    }
-
-
 
     private String createJsonLogin(String usuario, String passw) {
         String strJsonLogin;
 
         strJsonLogin=  ("{\"email\": \"" + usuario + "\", \"password\": \"" + passw +"\"}");
         return strJsonLogin;
-    }
-
-    private String checkLoginCorreect(String JsonLogin) {
-        String result="";
-        InputStream inputStream = null;
-
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost("https://domo-200915.appspot.com/auth/login");
-        //http://192.168.56.1:3000/auth/login
-        //https://domo-200915.appspot.com/auth/login
-
-        try {
-            // Add your data
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("jsonLogin",JsonLogin));
-
-            httppost.setEntity(new UrlEncodedFormEntity(params));
-
-            //Set some headers to inform server about the type of the content
-            //httppost.setHeader("Accept", "application/json");
-            //httppost.setHeader("Content-type", "application/json");
-
-            //Enviamos la info al server
-            HttpResponse response = httpclient.execute(httppost);
-            /*y obtenemos una respuesta*/
-            HttpEntity entity = response.getEntity();
-
-            result = EntityUtils.toString(entity);
-            Toast toastResult = Toast.makeText(getContext(),result, Toast.LENGTH_LONG);
-            toastResult.show();
-
-        } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
-            toastError.show();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            Toast toastError = Toast.makeText(getContext(),  e.toString()  , Toast.LENGTH_SHORT);
-            toastError.show();
-        }
-
-        return result;
-
     }
 
     private class loginUserAsync extends AsyncTask<String, Void, String> {
@@ -254,10 +202,26 @@ public class LoginFragment extends Fragment{
 
         protected void onPostExecute(String mensaje) {
 
+            String responseContent;
+
             //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
             //SI EL LOGIN ES CORRECTO, ENVIAR A ALLCOMMUNITIES ACTIVITY
-            Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
-            toastResult.show();
+            try {
+                JSONObject jsResponse= new JSONObject(mensaje);
+                responseContent=jsResponse.getString("errorMessage");
+                Toast toastResult = Toast.makeText(getContext(), responseContent, Toast.LENGTH_LONG);
+                toastResult.show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            if (rememberMe.isChecked()==true){
+                //AQUI HACER ACCIONES Y GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
+            }else{
+                //AQUI HACER ACCIONES Y  NO! GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
+            }
+
 
         }
     }

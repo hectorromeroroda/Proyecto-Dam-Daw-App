@@ -47,21 +47,4 @@ public class AllProposalFragment extends Fragment{
 
     }
 
-    @Override
-    public void onResume() {
-
-        //AQUI CODIGO PARA CARGAR EL ESTADO ANTES DE QUE RECARGUE LA ACTIVIDAD
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-
-        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
-
-        super.onPause();
-    }
-
-
 }

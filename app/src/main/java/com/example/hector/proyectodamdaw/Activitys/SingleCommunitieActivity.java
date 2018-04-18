@@ -44,6 +44,8 @@ public class SingleCommunitieActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Para poner como seleccionado el item  que se quiera del navigationdrawer
+        navigationView.setCheckedItem(R.id.nav_share);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
@@ -74,22 +76,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
             }
 
         });
-    }
-
-    @Override
-    public void onResume() {
-
-        //AQUI CODIGO PARA CARGAR EL ESTADO ANTES DE QUE RECARGUE LA ACTIVIDAD
-
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-
-        //AQUI CODIGO PARA GUARDAR EL ESTADO ANTES DE QUE SE CIERRE LA ACTIVIDAD
-
-        super.onPause();
     }
 
     @Override

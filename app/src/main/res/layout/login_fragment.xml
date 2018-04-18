@@ -83,7 +83,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:paddingTop="20dp">
@@ -111,20 +110,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/txvForgotPassw"
-                    android:layout_width="match_parent"
+
+                <CheckBox
+                    android:id="@+id/ckbRememberMe"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:autoLink="web"
-                    android:text="@string/txvForgotPassw"
-                    android:textAlignment="textStart" />
+                    android:text="@string/ckbRememberMe" />
 
             </LinearLayout>
 
@@ -142,6 +140,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/btnAcceptLogin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/txvForgotPassw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autoLink="web"
+                    android:text="@string/txvForgotPassw"
+                    android:textAlignment="center" />
+
             </LinearLayout>
 
             <LinearLayout
