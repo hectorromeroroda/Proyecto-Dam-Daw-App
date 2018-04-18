@@ -35,13 +35,10 @@ public class LoginActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        
         //Cambiar de fragment
         Fragment fragmentLogin = new LoginFragment();
         Fragment fragmentSingUp = new SingUpFragment();
-
-
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
 
         if (currentFragment == null) {
@@ -53,15 +50,9 @@ public class LoginActivity extends AppCompatActivity
             }else{
                 if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
 
-                }else{
-
                 }
-
             }
-
         }
-
-
     }
 
     private void loadFragment(Fragment newFragment) {

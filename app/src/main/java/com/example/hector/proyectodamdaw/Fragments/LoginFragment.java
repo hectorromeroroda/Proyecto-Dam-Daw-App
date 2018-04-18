@@ -151,7 +151,7 @@ public class LoginFragment extends Fragment{
                 .commit();
     }
 
-  
+
 
     private String createJsonLogin(String usuario, String passw) {
         String strJsonLogin;
