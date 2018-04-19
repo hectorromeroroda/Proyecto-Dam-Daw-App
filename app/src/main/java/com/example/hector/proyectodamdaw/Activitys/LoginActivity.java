@@ -119,7 +119,9 @@ public class LoginActivity extends AppCompatActivity
 
             startActivityForResult(intent,123);
         } else if (id == R.id.nav_share) {
+            Intent intent = new Intent(this, EditProfileActivity.class );
 
+            startActivityForResult(intent,123);
         } else if (id == R.id.nav_send) {
 
         }

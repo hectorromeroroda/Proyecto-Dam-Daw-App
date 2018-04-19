@@ -40,7 +40,11 @@
             android:label="@string/title_activity_create_content"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Rows.RowOtherCommunitie" />
-        <activity android:name=".Rows.RowPost"></activity>
+        <activity android:name=".Rows.RowPost" />
+        <activity
+            android:name=".Activitys.EditProfileActivity"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
