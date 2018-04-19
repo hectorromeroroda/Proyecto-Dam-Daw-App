@@ -59,14 +59,17 @@ public class AppHelper extends SQLiteOpenHelper{
                         "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
                         ")";
         String user =
-                "CREATE TABLE User(_id INTEGER PRIMARY KEY," +
-                        "UserFirstName VARCHAR(45)," +
-                        "UserLastName VARCHAR(45)," +
-                        "UserLoginName VARCHAR(45)," +
-                        "UserEmail VARCHAR(45)," +
-                        "UserStikies TINYINT(1)," +
-                        "UserPublicProfile BIT," +
+                "CREATE TABLE User(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "UserFirstName VARCHAR(45) NOT NULL," +
+                        "UserLastName VARCHAR(45) NOT NULL," +
+                        "UserAliasName VARCHAR(45) NOT NULL," +
+                        "UserEmail VARCHAR(45) NOT NULL," +
+                        "UserStikies TINYINT(1) NOT NULL," +
+                        "UserPublicProfile BIT NOT NULL," +
+                        "UserToken VARCHAR(150)," +
                         "MediaId INT)";
+        sqLiteDatabase.execSQL(user);
+
         String messages =
                 "CREATE TABLE Message (_id INTEGER PRIMARY KEY," +
                         "Text VARCHAR(500)," +
@@ -115,7 +118,7 @@ public class AppHelper extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 
     }
 }
