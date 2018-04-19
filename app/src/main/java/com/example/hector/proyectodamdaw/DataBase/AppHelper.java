@@ -60,16 +60,12 @@ public class AppHelper extends SQLiteOpenHelper{
                         ")";
         String user =
                 "CREATE TABLE User(_id INTEGER PRIMARY KEY," +
-                        "UserName VARCHAR(45)," +
-                        "UserFirstSurname VARCHAR(45)," +
-                        "UserSecondSurname VARCHAR(45)," +
+                        "UserFirstName VARCHAR(45)," +
+                        "UserLastName VARCHAR(45)," +
                         "UserLoginName VARCHAR(45)," +
-                        "UserPassword VARCHAR(45)," +
                         "UserEmail VARCHAR(45)," +
                         "UserStikies TINYINT(1)," +
                         "UserPublicProfile BIT," +
-                        "UserActivated BIT," +
-                        "UserTelephone VARCHAR(15)," +
                         "MediaId INT)";
         String messages =
                 "CREATE TABLE Message (_id INTEGER PRIMARY KEY," +
