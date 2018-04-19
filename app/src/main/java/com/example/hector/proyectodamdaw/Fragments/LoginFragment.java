@@ -201,27 +201,33 @@ public class LoginFragment extends Fragment{
         }
 
         protected void onPostExecute(String mensaje) {
+            String responseContentError;
+            String jsToken;
 
-            String responseContent;
-
-            //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
-            //SI EL LOGIN ES CORRECTO, ENVIAR A ALLCOMMUNITIES ACTIVITY
             try {
                 JSONObject jsResponse= new JSONObject(mensaje);
-                responseContent=jsResponse.getString("errorMessage");
-                Toast toastResult = Toast.makeText(getContext(), responseContent, Toast.LENGTH_LONG);
+                responseContentError=jsResponse.getString("errorMessage");
+                Toast toastResult = Toast.makeText(getContext(), responseContentError, Toast.LENGTH_LONG);
                 toastResult.show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+            try {
+                JSONObject jsResponse= new JSONObject(mensaje);
+                jsToken=jsResponse.getString("token");
+                Toast toastResult = Toast.makeText(getContext(), jsToken, Toast.LENGTH_LONG);
+                toastResult.show();
 
-            if (rememberMe.isChecked()==true){
-                //AQUI HACER ACCIONES Y GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
-            }else{
-                //AQUI HACER ACCIONES Y  NO! GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS
+                if (rememberMe.isChecked()==true){
+                    //AQUI GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS Y ENVIAR A ALLCOMUNITIES
+                }else{
+                    //AQUI NO! GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS Y ENVIAR A ALLCOMUNITIES
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
 
         }
     }

@@ -95,5 +95,6 @@
     <string name="tab1">Votación</string>
     <string name="tab2">Propuesta</string>
     <string name="tab3">Post</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
 
 </resources>

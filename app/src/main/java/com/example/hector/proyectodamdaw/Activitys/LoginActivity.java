@@ -89,7 +89,9 @@ public class LoginActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+
+            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
             return true;
         }
 
@@ -117,7 +119,9 @@ public class LoginActivity extends AppCompatActivity
 
             startActivityForResult(intent,123);
         } else if (id == R.id.nav_share) {
+            Intent intent = new Intent(this, EditProfileActivity.class );
 
+            startActivityForResult(intent,123);
         } else if (id == R.id.nav_send) {
 
         }
