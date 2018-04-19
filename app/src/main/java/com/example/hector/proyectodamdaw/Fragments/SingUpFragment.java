@@ -228,6 +228,7 @@ public class SingUpFragment extends Fragment{
             String jsEmail;
             String jsProfilePublic;
             String jsStikies;
+            String jsToken;
 
 
             try {
@@ -249,6 +250,7 @@ public class SingUpFragment extends Fragment{
                 jsLastName= jsResponse.getString("last_name");
                 jsEmail= jsResponse.getString("email");
                 jsProfilePublic= jsResponse.getString("profile_is_public");
+                jsToken=jsResponse.getString("token");
                 // FALTA TOKEN. LUEGO GUARDARLOS EN BD
                 //ENVIAR A ALLCOMMUNITIES ACTIVITY
                 Toast toastResult = Toast.makeText(getContext(), jsFirstName +"  " + jsLastName + "  " + jsEmail + "  " + jsProfilePublic + "   " + jsStikies, Toast.LENGTH_LONG);
