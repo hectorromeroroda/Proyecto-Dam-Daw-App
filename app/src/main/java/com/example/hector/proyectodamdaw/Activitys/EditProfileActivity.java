@@ -2,6 +2,7 @@ package com.example.hector.proyectodamdaw.Activitys;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Fragments.EditProfileFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -20,7 +22,7 @@ public class EditProfileActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_communities);
+        setContentView(R.layout.activity_edit_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,6 +39,25 @@ public class EditProfileActivity extends AppCompatActivity
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_camera);
 
+        //Cambiar de fragment
+        Fragment fragmentEditProfile = new EditProfileFragment();
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+
+        if (currentFragment == null) {
+            //carga del primer fragment justo en la carga inicial de la app
+            loadFragment(fragmentEditProfile);
+        } else{
+            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditProfile.getClass().getName())) {
+
+            }
+        }
+
+    }
+
+    private void loadFragment(Fragment newFragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentEditProfile, newFragment,newFragment.getClass().getName()).commit();
+        //.addToBackStack(null)    ---SIRVE PARA GUARDAR EL FRAGMEN EN LA PILA, PERO ESTE NO LO NECESITAMOS
 
     }
 

@@ -206,7 +206,7 @@ public class LoginFragment extends Fragment{
 
             try {
                 JSONObject jsResponse= new JSONObject(mensaje);
-                responseContentError=jsResponse.getString("errorMessage");
+                responseContentError=jsResponse.getString("authError");
                 Toast toastResult = Toast.makeText(getContext(), responseContentError, Toast.LENGTH_LONG);
                 toastResult.show();
             } catch (JSONException e) {
