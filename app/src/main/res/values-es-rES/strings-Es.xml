@@ -100,6 +100,8 @@
     <string name="edtRepeatNewPasswEdit">Confirmación password</string>
     <string name="rdbProfilePublic">Perfil publico</string>
     <string name="rdbProfilePrivate">Perfil Privado</string>
-    <string name="btnAcceptEditProfile">Guardar</string>
+    <string name="btnAcceptEditProfile">Guardar cambios</string>
+    <string name="toastAliasEmpty">Debe completar el campo Alias</string>
+    <string name="toastOldPasswEmpty">Debe completar el campo anterior password</string>
 
 </resources>
