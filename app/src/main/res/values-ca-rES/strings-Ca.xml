@@ -95,4 +95,12 @@
     <string name="tab2">Proposta</string>
     <string name="tab3">Post</string>
 
+    //EditProfileFragment---
+    <string name="edtOldPasswEdit">Password antic</string>
+    <string name="edtPasswNewEdit">Nou password</string>
+    <string name="edtRepeatNewPasswEdit">Confirmació password</string>
+    <string name="rdbProfilePublic">Perfil public</string>
+    <string name="rdbProfilePrivate">Perfil Privat</string>
+    <string name="btnAcceptEditProfile">Guardar</string>
+
 </resources>
