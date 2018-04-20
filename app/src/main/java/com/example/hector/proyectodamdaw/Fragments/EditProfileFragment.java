@@ -167,4 +167,19 @@ public class EditProfileFragment extends Fragment{
 
     }
 
+    //-----------------------------------POR AQUI!!!!!!!!!!!!!1 ESTOY CREANDO LOS JSONS
+    private String createJsonUserEdit(String nombre, String apellido, String alias, String oldPassw, String newPassw, String repeatNewpassw, boolean publicProfile) {
+        String jsonRegister;
+
+        jsonRegister=  ("{\"firstname\": \"" + nombre + "\", \"lastname\": \"" + apellido + "\", \"password\": \"" + passw + "\", \"email\": \"" + email + "\"}");
+        return jsonRegister;
+    }
+
+    private String createJsonUserEditImage(String nombre, String apellido, String alias, String oldPassw, String newPassw, String repeatNewpassw, boolean publicProfile, String uriImage) {
+        String jsonRegister;
+
+        jsonRegister=  ("{\"firstname\": \"" + nombre + "\", \"lastname\": \"" + apellido + "\", \"password\": \"" + passw + "\", \"email\": \"" + email + "\"}");
+        return jsonRegister;
+    }
+
 }
