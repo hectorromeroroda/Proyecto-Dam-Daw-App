@@ -48,6 +48,7 @@ public class ProposalClosedFragment extends Fragment{
 
 
     }
+
 }
 
 

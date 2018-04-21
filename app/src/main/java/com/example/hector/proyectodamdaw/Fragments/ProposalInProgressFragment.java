@@ -50,6 +50,7 @@ public class ProposalInProgressFragment extends Fragment{
 
 
     }
+
 }
 
 

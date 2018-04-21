@@ -51,5 +51,6 @@ public class AllVotacionesFragment extends Fragment {
         }
 
     }
+
 }
 

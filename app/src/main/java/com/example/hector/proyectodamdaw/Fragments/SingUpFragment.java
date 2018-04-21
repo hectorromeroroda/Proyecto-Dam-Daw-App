@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +92,7 @@ public class SingUpFragment extends Fragment{
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
 
         acceptSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +174,8 @@ public class SingUpFragment extends Fragment{
 
     }
 
+
+
     private String createJsonSingUp(String nombre, String apellido, String passw, String email) {
         String jsonRegister;
 
@@ -216,10 +222,43 @@ public class SingUpFragment extends Fragment{
 
         protected void onPostExecute(String mensaje) {
 
-            //AQUI LAS ACCIONES A HACER CUANDO SE RECIVE LA INFORMACION DEL SERVIDOR
-            //SI EL REGISTRO ES CORRECTO, GUARDAR LOS DATOS Y ENVIAR A ALLCOMMUNITIES ACTIVITY
-            Toast toastResult = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
-            toastResult.show();
+            String responseContentError;
+            String jsFirstName;
+            String jsLastName;
+            String jsEmail;
+            String jsProfilePublic;
+            String jsStikies;
+            String jsToken;
+
+
+            try {
+                JSONObject jsResponse= new JSONObject(mensaje);
+                responseContentError=jsResponse.getString("authError");
+                Toast toastResult = Toast.makeText(getContext(), responseContentError, Toast.LENGTH_LONG);
+                toastResult.show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                JSONObject jsResponse= new JSONObject(mensaje);
+                JSONObject features= new JSONObject();
+                features = jsResponse.getJSONObject("features");
+
+                jsStikies=features.getString("stickyQty");
+                jsFirstName= jsResponse.getString("first_name");
+                jsLastName= jsResponse.getString("last_name");
+                jsEmail= jsResponse.getString("email");
+                jsProfilePublic= jsResponse.getString("profile_is_public");
+                //jsToken=jsResponse.getString("token");
+                // FALTA TOKEN. LUEGO GUARDARLOS EN BD
+                //ENVIAR A ALLCOMMUNITIES ACTIVITY
+                Toast toastResult = Toast.makeText(getContext(), jsFirstName +"  " + jsLastName + "  " + jsEmail + "  " + jsProfilePublic + "   " + jsStikies, Toast.LENGTH_LONG);
+                toastResult.show();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }

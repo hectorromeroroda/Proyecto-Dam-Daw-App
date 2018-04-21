@@ -18,6 +18,7 @@
     <string name="toastUser">Te que omplir el Nom dusuari</string>
     <string name="toastPassw">Te que omplir la contrasenya</string>
     <string name="toastLenghtPassw">La contraseña te que tenir un mínim de 8 caràcters</string>
+    <string name="ckbRememberMe">No tancar la sessió</string>
 
     //LoginSingUpFragment---
     <string name="txvRegisterSingUp">Registre</string>
@@ -93,5 +94,15 @@
     <string name="tab1">Votació</string>
     <string name="tab2">Proposta</string>
     <string name="tab3">Post</string>
+
+    //EditProfileFragment---
+    <string name="edtOldPasswEdit">Password antic</string>
+    <string name="edtPasswNewEdit">Nou password</string>
+    <string name="edtRepeatNewPasswEdit">Confirmació password</string>
+    <string name="rdbProfilePublic">Perfil public</string>
+    <string name="rdbProfilePrivate">Perfil Privat</string>
+    <string name="btnAcceptEditProfile">Guardar canvis</string>
+    <string name="toastAliasEmpty">Te que omplir el camp Alias</string>
+    <string name="toastOldPasswEmpty">Te que omplir el camp anterior password</string>
 
 </resources>

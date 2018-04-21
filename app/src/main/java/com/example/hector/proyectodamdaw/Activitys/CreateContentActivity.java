@@ -41,6 +41,8 @@ public class CreateContentActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Para poner como seleccionado el item  que se quiera del navigationdrawer
+        navigationView.setCheckedItem(R.id.nav_share);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tab1));
@@ -50,7 +52,7 @@ public class CreateContentActivity extends AppCompatActivity
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
+        TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -71,6 +73,9 @@ TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tab
 
         });
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -97,7 +102,8 @@ TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tab
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
             return true;
         }
 

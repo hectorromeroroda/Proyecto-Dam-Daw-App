@@ -18,6 +18,7 @@
     <string name="toastUser">Deve completar el campo Nombre de usuario</string>
     <string name="toastPassw">Deve completar el campo Contraseña</string>
     <string name="toastLenghtPassw">La contraseña deve tener un minimo de 8 carácteres</string>
+    <string name="ckbRememberMe">No cerrar la sessión</string>
 
     //LoginSingUpFragment---
     <string name="txvRegisterSingUp">Registro</string>
@@ -94,5 +95,16 @@
     <string name="tab1">Votación</string>
     <string name="tab2">Propuesta</string>
     <string name="tab3">Post</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+
+    //EditProfileFragment---
+    <string name="edtOldPasswEdit">Password antiguo</string>
+    <string name="edtPasswNewEdit">Nuevo password</string>
+    <string name="edtRepeatNewPasswEdit">Confirmación password</string>
+    <string name="rdbProfilePublic">Perfil publico</string>
+    <string name="rdbProfilePrivate">Perfil Privado</string>
+    <string name="btnAcceptEditProfile">Guardar cambios</string>
+    <string name="toastAliasEmpty">Debe completar el campo Alias</string>
+    <string name="toastOldPasswEmpty">Debe completar el campo anterior password</string>
 
 </resources>

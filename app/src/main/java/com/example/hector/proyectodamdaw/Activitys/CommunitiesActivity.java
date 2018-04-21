@@ -1,5 +1,6 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,7 @@ public class CommunitiesActivity extends AppCompatActivity
     private TabLayout tabs;
 
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,8 @@ public class CommunitiesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Para poner como seleccionado el item  que se quiera del navigationdrawer
+        navigationView.setCheckedItem(R.id.nav_gallery);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
@@ -119,6 +123,7 @@ public class CommunitiesActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -127,7 +132,8 @@ public class CommunitiesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
             return true;
         }
 
