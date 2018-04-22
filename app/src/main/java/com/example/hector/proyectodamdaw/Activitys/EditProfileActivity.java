@@ -2,7 +2,6 @@ package com.example.hector.proyectodamdaw.Activitys;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,10 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.hector.proyectodamdaw.Fragments.EditProfileFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -39,27 +41,26 @@ public class EditProfileActivity extends AppCompatActivity
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_camera);
 
-        //Cambiar de fragment
-        Fragment fragmentEditProfile = new EditProfileFragment();
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+        Spinner spinnerEditProfile = (Spinner) findViewById(R.id.spnEditProfile);
+        String[] items = {"Editar email", "Editar password", "Editar tipo de perfil", "Editar imagen de perfil"};
+        spinnerEditProfile.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items));
 
-        if (currentFragment == null) {
-            //carga del primer fragment justo en la carga inicial de la app
-            loadFragment(fragmentEditProfile);
-        } else{
-            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditProfile.getClass().getName())) {
+        spinnerEditProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+
+                //AQUI ACCIONES DE CAMBIAR FRAGMENTS--------------------------
             }
-        }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
 
     }
 
-    private void loadFragment(Fragment newFragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentEditProfile, newFragment,newFragment.getClass().getName()).commit();
-        //.addToBackStack(null)    ---SIRVE PARA GUARDAR EL FRAGMEN EN LA PILA, PERO ESTE NO LO NECESITAMOS
-
-    }
 
     @Override
     public void onBackPressed() {
