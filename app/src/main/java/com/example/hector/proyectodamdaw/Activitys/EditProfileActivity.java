@@ -17,7 +17,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.hector.proyectodamdaw.Fragments.EditProfileFragment;
+import com.example.hector.proyectodamdaw.Fragments.EditPasswProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.R;
 
@@ -57,7 +57,7 @@ public class EditProfileActivity extends AppCompatActivity
                 switch (pos) {
                     case 0:
                         //Cambiar de fragment
-                        Fragment fragmentEditProfile = new EditProfileFragment();
+                        Fragment fragmentEditProfile = new EditPasswProfileFragment();
                         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
 
                         if (currentFragment == null) {
@@ -78,8 +78,8 @@ public class EditProfileActivity extends AppCompatActivity
                             //carga del primer fragment justo en la carga inicial de la app
                             loadFragment(Login);
                         } else{
-                            if (currentFragment1.getClass().getName().equalsIgnoreCase(Login.getClass().getName())) {
-
+                            if (!currentFragment1.getClass().getName().equalsIgnoreCase(Login.getClass().getName())) {
+                                loadFragment(Login);
                             }
                         }
                         break;
