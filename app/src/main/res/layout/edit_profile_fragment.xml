@@ -52,62 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:paddingTop="20dp">
-
-                <ImageView
-                    android:id="@+id/imgLogoNameEdit"
-                    android:layout_width="90dp"
-                    android:layout_height="63dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@mipmap/ic_login_icon_foreground" />
-
-                <EditText
-                    android:id="@+id/edtNameEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/edtNameSingUp"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:paddingTop="10dp">
-
-                <ImageView
-                    android:id="@+id/imgLogoSurnameNameEdit"
-                    android:layout_width="90dp"
-                    android:layout_height="63dp"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@mipmap/ic_login_icon_foreground" />
-
-                <EditText
-                    android:id="@+id/edtSurnameEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/edtSurnameSingUp"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
@@ -124,12 +68,12 @@
                     app:srcCompat="@mipmap/ic_login_icon_foreground" />
 
                 <EditText
-                    android:id="@+id/edtAliasEdit"
+                    android:id="@+id/edtEmailEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Alias"
+                    android:hint="@string/edtEmailEdit"
                     android:inputType="textEmailAddress"
                     android:textSize="20sp" />
 

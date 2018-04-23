@@ -20,9 +20,7 @@ import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileFragment extends Fragment{
 
-    EditText nameEdit;
-    EditText surnameEdit;
-    EditText aliasEdit;
+    EditText emailEdit;
     EditText oldPasswEdit;
     EditText passwNewEdit;
     EditText repeatNewPasswEdit;
@@ -30,17 +28,13 @@ public class EditProfileFragment extends Fragment{
     RadioButton rdbPrivateProfile;
     ImageButton imgbLoadImage;
     Button btnAcceptEditProfile;
-    private String strUserName;
-    private String strSurname;
-    private String strAlias;
+    private String strEmail;
     private String strOldPassw;
     private String strNewPassw;
     private String strRepeatNewPassw;
     private Boolean publicProfile;
     private String strUri= null;
-    private Boolean strUserNameEmpty;
-    private Boolean strSurnameEmpty;
-    private Boolean strAliasEmpty;
+    private Boolean strEmailEmpty;
     private Boolean strOldPasswEmpty;
     private Boolean strNewPasswEmpty;
     private Boolean passwSame;
@@ -58,9 +52,7 @@ public class EditProfileFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.edit_profile_fragment, container, false);
 
-        nameEdit = (EditText)view.findViewById(R.id.edtNameEdit);
-        surnameEdit = (EditText)view.findViewById(R.id.edtSurnameEdit);
-        aliasEdit = (EditText)view.findViewById(R.id.edtAliasEdit);
+        emailEdit = (EditText)view.findViewById(R.id.edtEmailEdit);
         oldPasswEdit = (EditText)view.findViewById(R.id.edtOldPasswEdit);
         passwNewEdit = (EditText)view.findViewById(R.id.edtPasswNewEdit);
         repeatNewPasswEdit = (EditText)view.findViewById(R.id.edtRepeatNewPasswEdit);
@@ -84,9 +76,7 @@ public class EditProfileFragment extends Fragment{
         btnAcceptEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                strUserName=nameEdit.getText().toString();
-                strSurname=surnameEdit.getText().toString();
-                strAlias=aliasEdit.getText().toString();
+                strEmail = emailEdit.getText().toString();
                 strOldPassw=oldPasswEdit.getText().toString();
                 strNewPassw=passwNewEdit.getText().toString();
                 strRepeatNewPassw=repeatNewPasswEdit.getText().toString();
@@ -99,12 +89,8 @@ public class EditProfileFragment extends Fragment{
                     }
                 }
 
-                strUserNameEmpty =comprobations.checkEmptyFields(strUserName);
-                if (strUserNameEmpty == false){
-                    strSurnameEmpty =comprobations.checkEmptyFields(strSurname);
-                    if (strSurnameEmpty == false){
-                        strAliasEmpty =comprobations.checkEmptyFields(strAlias);
-                        if (strAliasEmpty == false){
+                        strEmailEmpty =comprobations.checkEmptyFields(strEmail);
+                        if (strEmailEmpty == false){
                             strOldPasswEmpty =comprobations.checkEmptyFields(strOldPassw);
                             if (strOldPasswEmpty == false){
                                 if (strOldPassw.length()>= miniumLenghtPassw){
@@ -118,6 +104,7 @@ public class EditProfileFragment extends Fragment{
                                                 //CREAR CONEXION HTTP-POST PARA ENVIAR LOS DATOS
                                                 //SI LA RESPUESTA ES CORRECTA:
                                                     //GUARDAR  INFO EN LA BD LOCAL CON UNA QUERY SIN DATO URI
+                                                    
                                             }else{
                                                 //CREAR JSON CON LOS DATOS "RECUERDA RADIOBUTONS Y URI IMAGEN"
                                                 //CREAR CONEXION HTTP-POST PARA ENVIAR LOS DATOS
@@ -138,21 +125,12 @@ public class EditProfileFragment extends Fragment{
                                     toastError.show();
                                 }
                             }else{
-                                Toast toastError = Toast.makeText(getContext(),R.string.toastOldPasswEmpty, Toast.LENGTH_LONG);
-                                toastError.show();
+
                             }
                         }else{
-                            Toast toastError = Toast.makeText(getContext(),R.string.toastAliasEmpty, Toast.LENGTH_LONG);
-                            toastError.show();
+
                         }
-                    }else{
-                        Toast toastError = Toast.makeText(getContext(),R.string.toastSurnameEmpty, Toast.LENGTH_LONG);
-                        toastError.show();
-                    }
-                }else{
-                    Toast toastError = Toast.makeText(getContext(),R.string.toastNameEmpty, Toast.LENGTH_LONG);
-                    toastError.show();
-                }
+
 
             }
         });
@@ -167,19 +145,6 @@ public class EditProfileFragment extends Fragment{
 
     }
 
-    //-----------------------------------POR AQUI!!!!!!!!!!!!!1 ESTOY CREANDO LOS JSONS
-    private String createJsonUserEdit(String nombre, String apellido, String alias, String oldPassw, String newPassw, String repeatNewpassw, boolean publicProfile) {
-        String jsonRegister;
 
-        jsonRegister=  ("{\"firstname\": \"" + nombre + "\", \"lastname\": \"" + apellido + "\", \"password\": \"" + passw + "\", \"email\": \"" + email + "\"}");
-        return jsonRegister;
-    }
-
-    private String createJsonUserEditImage(String nombre, String apellido, String alias, String oldPassw, String newPassw, String repeatNewpassw, boolean publicProfile, String uriImage) {
-        String jsonRegister;
-
-        jsonRegister=  ("{\"firstname\": \"" + nombre + "\", \"lastname\": \"" + apellido + "\", \"password\": \"" + passw + "\", \"email\": \"" + email + "\"}");
-        return jsonRegister;
-    }
 
 }
