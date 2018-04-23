@@ -2,6 +2,7 @@ package com.example.hector.proyectodamdaw.Activitys;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +17,8 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Fragments.EditProfileFragment;
+import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -51,7 +54,44 @@ public class EditProfileActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
 
-                //AQUI ACCIONES DE CAMBIAR FRAGMENTS--------------------------
+                switch (pos) {
+                    case 0:
+                        //Cambiar de fragment
+                        Fragment fragmentEditProfile = new EditProfileFragment();
+                        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+
+                        if (currentFragment == null) {
+                            //carga del primer fragment justo en la carga inicial de la app
+                            loadFragment(fragmentEditProfile);
+                        } else{
+                            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditProfile.getClass().getName())) {
+
+                            }
+                        }
+                        break;
+                    case 1:
+                        //Cambiar de fragment
+                        Fragment Login = new LoginFragment();
+                        Fragment currentFragment1 = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+
+                        if (currentFragment1 == null) {
+                            //carga del primer fragment justo en la carga inicial de la app
+                            loadFragment(Login);
+                        } else{
+                            if (currentFragment1.getClass().getName().equalsIgnoreCase(Login.getClass().getName())) {
+
+                            }
+                        }
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+
+                }
+
             }
 
             @Override
@@ -61,6 +101,12 @@ public class EditProfileActivity extends AppCompatActivity
 
     }
 
+    private void loadFragment(Fragment newFragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentEditProfile, newFragment,newFragment.getClass().getName()).commit();
+        //.addToBackStack(null)    ---SIRVE PARA GUARDAR EL FRAGMEN EN LA PILA, PERO ESTE NO LO NECESITAMOS
+
+    }
 
     @Override
     public void onBackPressed() {
