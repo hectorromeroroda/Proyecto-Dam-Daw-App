@@ -10,10 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Fragments.EditProfileFragment;
+import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -39,18 +44,60 @@ public class EditProfileActivity extends AppCompatActivity
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_camera);
 
-        //Cambiar de fragment
-        Fragment fragmentEditProfile = new EditProfileFragment();
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+        Spinner spinnerEditProfile = (Spinner) findViewById(R.id.spnEditProfile);
+        String[] items = {"Editar email", "Editar password", "Editar tipo de perfil", "Editar imagen de perfil"};
+        spinnerEditProfile.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items));
 
-        if (currentFragment == null) {
-            //carga del primer fragment justo en la carga inicial de la app
-            loadFragment(fragmentEditProfile);
-        } else{
-            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditProfile.getClass().getName())) {
+        spinnerEditProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+
+                switch (pos) {
+                    case 0:
+                        //Cambiar de fragment
+                        Fragment fragmentEditProfile = new EditProfileFragment();
+                        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+
+                        if (currentFragment == null) {
+                            //carga del primer fragment justo en la carga inicial de la app
+                            loadFragment(fragmentEditProfile);
+                        } else{
+                            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditProfile.getClass().getName())) {
+
+                            }
+                        }
+                        break;
+                    case 1:
+                        //Cambiar de fragment
+                        Fragment Login = new LoginFragment();
+                        Fragment currentFragment1 = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+
+                        if (currentFragment1 == null) {
+                            //carga del primer fragment justo en la carga inicial de la app
+                            loadFragment(Login);
+                        } else{
+                            if (currentFragment1.getClass().getName().equalsIgnoreCase(Login.getClass().getName())) {
+
+                            }
+                        }
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+
+                }
 
             }
-        }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
 
     }
 
