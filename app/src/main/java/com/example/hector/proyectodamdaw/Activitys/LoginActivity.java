@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AppDataSources bd;
+    private boolean rememberMe=false;
 
 
     @Override
@@ -38,23 +43,37 @@ public class LoginActivity extends AppCompatActivity
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_camera);
 
-        //Cambiar de fragment
-        Fragment fragmentLogin = new LoginFragment();
-        Fragment fragmentSingUp = new SingUpFragment();
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+        //Para buscar si esta marcado el rememberMe
+        bd = new AppDataSources(this);
+        Cursor cursorRememberMeState = bd.rememmberMeUserLogin();
 
-        if (currentFragment == null) {
-            //carga del primer fragment justo en la carga inicial de la app
-            loadFragment(fragmentLogin);
-        } else{
-            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
-
-            }else{
-                if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
-
-                }
-            }
+        if (cursorRememberMeState.moveToFirst() != false){
+            rememberMe = Boolean.valueOf(cursorRememberMeState.getString(0));
         }
+         if (rememberMe==true){
+             //Envia a AllComminities
+             Intent intent = new Intent(this, CommunitiesActivity.class );
+             startActivity(intent);
+         }else{
+             //Cambiar de fragment
+             Fragment fragmentLogin = new LoginFragment();
+             Fragment fragmentSingUp = new SingUpFragment();
+             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+
+             if (currentFragment == null) {
+                 //carga del primer fragment justo en la carga inicial de la app
+                 loadFragment(fragmentLogin);
+             } else{
+                 if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
+
+                 }else{
+                     if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
+
+                     }
+                 }
+             }
+         }
+
     }
 
     private void loadFragment(Fragment newFragment) {

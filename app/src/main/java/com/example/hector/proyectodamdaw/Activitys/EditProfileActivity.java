@@ -17,8 +17,10 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.hector.proyectodamdaw.Fragments.EditProfileFragment;
-import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
+import com.example.hector.proyectodamdaw.Fragments.EditEmailProfileFragment;
+import com.example.hector.proyectodamdaw.Fragments.EditImageProfileFragment;
+import com.example.hector.proyectodamdaw.Fragments.EditPasswProfileFragment;
+import com.example.hector.proyectodamdaw.Fragments.EditTypeProfileFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -54,40 +56,63 @@ public class EditProfileActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
 
+                Fragment currentFragment;
                 switch (pos) {
                     case 0:
                         //Cambiar de fragment
-                        Fragment fragmentEditProfile = new EditProfileFragment();
-                        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+                        Fragment fragmentEditEmail = new EditEmailProfileFragment();
+                         currentFragment= getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
 
                         if (currentFragment == null) {
                             //carga del primer fragment justo en la carga inicial de la app
-                            loadFragment(fragmentEditProfile);
+                            loadFragment(fragmentEditEmail);
                         } else{
-                            if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditProfile.getClass().getName())) {
-
+                            if (!currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditEmail.getClass().getName())) {
+                                loadFragment(fragmentEditEmail);
                             }
                         }
                         break;
                     case 1:
                         //Cambiar de fragment
-                        Fragment Login = new LoginFragment();
-                        Fragment currentFragment1 = getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
+                        Fragment fragmentEditPassw = new EditPasswProfileFragment();
+                        currentFragment= getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
 
-                        if (currentFragment1 == null) {
+                        if (currentFragment == null) {
                             //carga del primer fragment justo en la carga inicial de la app
-                            loadFragment(Login);
+                            loadFragment(fragmentEditPassw);
                         } else{
-                            if (currentFragment1.getClass().getName().equalsIgnoreCase(Login.getClass().getName())) {
-
+                            if (!currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditPassw.getClass().getName())) {
+                                loadFragment(fragmentEditPassw);
                             }
                         }
                         break;
                     case 2:
+                        //Cambiar de fragment
+                        Fragment fragmentEditType = new EditTypeProfileFragment();
+                        currentFragment= getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
 
+                        if (currentFragment == null) {
+                            //carga del primer fragment justo en la carga inicial de la app
+                            loadFragment(fragmentEditType);
+                        } else{
+                            if (!currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditType.getClass().getName())) {
+                                loadFragment(fragmentEditType);
+                            }
+                        }
                         break;
                     case 3:
+                        //Cambiar de fragment
+                        Fragment fragmentEditImage = new EditImageProfileFragment();
+                        currentFragment= getSupportFragmentManager().findFragmentById(R.id.contentEditProfile);
 
+                        if (currentFragment == null) {
+                            //carga del primer fragment justo en la carga inicial de la app
+                            loadFragment(fragmentEditImage);
+                        } else{
+                            if (!currentFragment.getClass().getName().equalsIgnoreCase(fragmentEditImage.getClass().getName())) {
+                                loadFragment(fragmentEditImage);
+                            }
+                        }
                         break;
 
                 }

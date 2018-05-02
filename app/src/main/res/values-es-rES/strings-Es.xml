@@ -44,6 +44,7 @@
     <string name="toastPasswLenght">El password deve tener un mínimo de 8 caracteres</string>
     <string name="toastRepeatPasswEmpty">Deve completar el campo Confirmación Password</string>
     <string name="toastPasswSame">Los passwords no coinciden</string>
+    <string name="toastRegisterOk">Registro realizado con exito</string>
 
     /CommunitiesActivity---
     <string name="tabTusComunidades">Tus comunidades</string>
@@ -94,13 +95,25 @@
     <string name="tab2">Propuesta</string>
     <string name="tab3">Post</string>
 
-    //EditProfileFragment---
-    <string name="edtEmailEdit">Nuevo Email</string>
+    //EditPasswProfileFragment---
     <string name="edtOldPasswEdit">Password antiguo</string>
     <string name="edtPasswNewEdit">Nuevo password</string>
     <string name="edtRepeatNewPasswEdit">Confirmación password</string>
-    <string name="rdbProfilePublic">Perfil publico</string>
-    <string name="rdbProfilePrivate">Perfil Privado</string>
     <string name="btnAcceptEditProfile">Guardar cambios</string>
+
+    //EditPasswProfileFragment---
+    <string name="edtOldEmailEdit">Email antiguo</string>
+    <string name="edtNewEmailEdit">Nuevo email</string>
+    <string name="edtRepeatNewEmailEdit">Confirmación email</string>
+
+    //EditPasswProfileFragment---
+    <string name="rdbProfilePublic">Perfil público</string>
+    <string name="rdbProfilePrivate">Perfil privado</string>
+
+    //EditEmailProfileFragment---
+    <string name="toatsOldEmailEmpty">Deve completar el campo email antiguo</string>
+    <string name="toatsNewEmailEmpty">Deve completar el campo email nuevo</string>
+    <string name="toatsFormatOldEmail">Formato del antiguo email incorrecto</string>
+    <string name="toatsFormatNewEmail">Formato del nuevo email incorrecto</string>
 
 </resources>
