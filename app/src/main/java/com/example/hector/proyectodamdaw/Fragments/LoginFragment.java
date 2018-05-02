@@ -207,6 +207,14 @@ public class LoginFragment extends Fragment{
         protected void onPostExecute(String mensaje) {
             String responseContentError;
             String jsToken;
+            String jsFirstName;
+            String jsLastName;
+            String jsEmail;
+            String jsProfilePublic;
+            String jsStikies;
+            String[] jsInvited;
+            String[] jsComunities;
+
 
             try {
                 JSONObject jsResponse= new JSONObject(mensaje);
