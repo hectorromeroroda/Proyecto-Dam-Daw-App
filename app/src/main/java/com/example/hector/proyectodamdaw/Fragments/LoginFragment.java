@@ -229,6 +229,12 @@ public class LoginFragment extends Fragment{
                 JSONObject jsResponse= new JSONObject(mensaje);
                 jsToken=jsResponse.getString("token");
 
+                jsStikies=jsResponse.getString("stickyQty");
+                jsFirstName= jsResponse.getString("first_name");
+                jsLastName= jsResponse.getString("last_name");
+                jsEmail= jsResponse.getString("email");
+                jsProfilePublic= jsResponse.getString("profile_is_public");
+
                 if (rememberMe.isChecked()==true){
                     bd.saveUserLogin(jsToken,true);
                     //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
