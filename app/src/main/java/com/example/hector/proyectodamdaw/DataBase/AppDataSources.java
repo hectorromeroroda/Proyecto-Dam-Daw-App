@@ -2,6 +2,7 @@ package com.example.hector.proyectodamdaw.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -13,12 +14,12 @@ public class AppDataSources {
     public static final String table_USER = "User";
     public static final String USER_FIRST_NAME = "UserFirstName";
     public static final String USER_LAST_NAME = "UserLastName";
-    public static final String USER_ALIAS_NAME = "UserAliasName";
     public static final String USER_EMAIL = "UserEmail";
     public static final String USER_STIKIES = "UserStikies";
     public static final String USER_PUBLIC_PROFILE = "UserPublicProfile";
     public static final String USER_TOKEN = "UserToken";
-    public static final String MEDIA_ID = "MediaId";
+    public static final String USER_REMEMBER_ME = "UserRememberMe";
+
 
     private AppHelper dbHelper;
     private SQLiteDatabase dbW, dbR;
@@ -44,31 +45,43 @@ public class AppDataSources {
     }
 
     // FUNCIONS QUE RETORNAN CURSORES--------------------
+    public Cursor rememmberMeUserLogin() {
+
+        String selectQuery = " SELECT UserRememberMe FROM User";
+
+        return dbR.rawQuery(selectQuery,null);
+    }
+
+    public Cursor typeProfile() {
+        // Retorna el campo tipo de perfil publico/privado
+        String selectQuery = " SELECT UserPublicProfile FROM User";
+
+        return dbR.rawQuery(selectQuery,null);
+    }
 
 
 
 
 
     // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------
-    public void saveUserRegister( String firstName, String lastName, String userAlias, String userEmail, int userStikies, Boolean userPublicProfile, String userToken) {
+    public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, Boolean rememberMe) {
         // Guardar los datos del registro del usuario
         ContentValues values = new ContentValues();
         values.put(USER_FIRST_NAME, firstName);
         values.put(USER_LAST_NAME, lastName);
-        values.put(USER_ALIAS_NAME, userAlias);
         values.put(USER_EMAIL, userEmail);
         values.put(USER_STIKIES, userStikies);
         values.put(USER_PUBLIC_PROFILE, userPublicProfile);
         values.put(USER_TOKEN, userToken);
+        values.put(USER_REMEMBER_ME, rememberMe);
         dbW.insert(table_USER,null,values);
     }
 
-    public void saveUserLogin(String userEmail, String userToken) {
-        // Modificar el valor del token del usuario
-        ContentValues values = new ContentValues();
-        values.put(USER_TOKEN, userToken);
+    public void saveUserLogin(String userToken, boolean rememberMe) {
+        // Modificar el valor del token  y el estado de rememberMe del usuario
+        String UpdateQuery = "UPDATE User SET UserToken = '" + userToken + "', UserRememberMe= '" + rememberMe + "'";
 
-        dbW.update(table_USER,values, USER_EMAIL + " = ?", new String[] { String.valueOf(userEmail) });
+        dbW.rawQuery(UpdateQuery,null);
     }
 
 }

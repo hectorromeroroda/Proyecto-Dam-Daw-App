@@ -1,5 +1,6 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -12,7 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
 import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
 
 import org.json.JSONException;
@@ -63,6 +66,7 @@ public class SingUpFragment extends Fragment{
     Comprobations comprobations;
     registerUserAsync registerUserAsync;
     public static final int miniumLenghtPassw = 8;
+    private AppDataSources bd;
 
     public SingUpFragment() {
         // Required empty public constructor
@@ -86,6 +90,7 @@ public class SingUpFragment extends Fragment{
         acceptSingUp = (Button) view.findViewById(R.id.btnAcceptSingUp);
 
         comprobations = new Comprobations();
+        bd = new AppDataSources(getContext());
 
         return view;
     }
@@ -191,9 +196,9 @@ public class SingUpFragment extends Fragment{
 
             try {
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/register");
-                //http://192.168.56.1:3000/auth/register
-                //https://domo-200915.appspot.com/auth/register
+                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/register");
+                //http://192.168.56.1:3000/register
+                //https://domo-200915.appspot.com/register
 
                 // Add your data
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -250,11 +255,16 @@ public class SingUpFragment extends Fragment{
                 jsLastName= jsResponse.getString("last_name");
                 jsEmail= jsResponse.getString("email");
                 jsProfilePublic= jsResponse.getString("profile_is_public");
-                //jsToken=jsResponse.getString("token");
-                // FALTA TOKEN. LUEGO GUARDARLOS EN BD
-                //ENVIAR A ALLCOMMUNITIES ACTIVITY
-                Toast toastResult = Toast.makeText(getContext(), jsFirstName +"  " + jsLastName + "  " + jsEmail + "  " + jsProfilePublic + "   " + jsStikies, Toast.LENGTH_LONG);
+                jsToken=jsResponse.getString("token");
+
+                bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, false);
+
+                Toast toastResult = Toast.makeText(getContext(), R.string.toastRegisterOk, Toast.LENGTH_LONG);
                 toastResult.show();
+
+                //Envia a AllComminities
+                Intent intent = new Intent(getContext(), CommunitiesActivity.class );
+                startActivity(intent);
 
             } catch (JSONException e) {
                 e.printStackTrace();
