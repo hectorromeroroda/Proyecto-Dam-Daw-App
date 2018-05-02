@@ -45,6 +45,7 @@
     <string name="toastPasswLenght">El password te que tenir un mínim de 8 caracters</string>
     <string name="toastRepeatPasswEmpty">Te que omplir el camp Confirmacio Password</string>
     <string name="toastPasswSame">Els passwords no coincideixen</string>
+    <string name="toastRegisterOk">Registre realizat amb èxit</string>
 
     /CommunitiesActivity---
     <string name="tabTusComunidades">Les teves comunitats</string>
@@ -109,6 +110,12 @@
     //EditPasswProfileFragment---
     <string name="rdbProfilePublic">Perfil públic</string>
     <string name="rdbProfilePrivate">Perfil privat</string>
+
+    //EditEmailProfileFragment---
+    <string name="toatsOldEmailEmpty">Te que omplir el camp email antic</string>
+    <string name="toatsNewEmailEmpty">Te que omplir el camp email nou</string>
+    <string name="toatsFormatOldEmail">Format del antic email incorrecte</string>
+    <string name="toatsFormatNewEmail">Format del nou email incorrecte</string>
 
 
 </resources>

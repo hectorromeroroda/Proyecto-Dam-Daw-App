@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.R;
 
 /**
@@ -23,6 +25,11 @@ public class EditPasswProfileFragment extends Fragment{
     private String strOldPassw;
     private String strNewPassw;
     private String strRepeatNewPassw;
+    private boolean oldPasswEmpty;
+    private boolean newPasswEmpty;
+    private  Boolean passwSame;
+    Comprobations comprobations;
+    public static final int miniumLenghtPassw = 8;
 
     public EditPasswProfileFragment() {
         // Required empty public constructor
@@ -38,6 +45,8 @@ public class EditPasswProfileFragment extends Fragment{
         passwNewEdit = (EditText)view.findViewById(R.id.edtPasswNewEdit);
         repeatNewPasswEdit = (EditText)view.findViewById(R.id.edtRepeatNewPasswEdit);
 
+        comprobations = new Comprobations();
+
         return view;
     }
 
@@ -48,11 +57,45 @@ public class EditPasswProfileFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                //CREAR JSON CON LOS DATOS LOS EDITTEXT
-                //CREAR CONEXION HTTP-POST PARA ENVIAR LOS DATOS
-                //SI LA RESPUESTA ES CORRECTA " EL ANTIGUO PASSW ES CORRECTO:
-                //NOTIFICAR CAMBIO CORRECTO AL USUARIO
 
+                strOldPassw=oldPasswEdit.getText().toString();
+                strNewPassw=passwNewEdit.getText().toString();
+                strRepeatNewPassw=repeatNewPasswEdit.getText().toString();
+
+                oldPasswEmpty =comprobations.checkEmptyFields(strOldPassw);
+                if (oldPasswEmpty == false){
+                    if (strOldPassw.length()>= miniumLenghtPassw){
+                        newPasswEmpty =comprobations.checkEmptyFields(strNewPassw);
+                        if (newPasswEmpty == false){
+                            if (strNewPassw.length()>= miniumLenghtPassw){
+                                passwSame= comprobations.checkStringsEquals(strNewPassw, strRepeatNewPassw);
+                                if (passwSame==true){
+
+                                    //CREAR JSON CON LOS DATOS LOS EDITTEXT
+                                    //CREAR CONEXION HTTP-POST PARA ENVIAR LOS DATOS
+                                    //SI LA RESPUESTA ES CORRECTA " EL ANTIGUO PASSW ES CORRECTO
+                                    //NOTIFICAR CAMBIO CORRECTO AL USUARIO
+
+                                }else{
+                                    Toast toastError = Toast.makeText(getContext(),R.string.toastPasswSame, Toast.LENGTH_LONG);
+                                    toastError.show();
+                                }
+                            }else{
+                                Toast toastError = Toast.makeText(getContext(),R.string.toatsNewPasswLenght, Toast.LENGTH_LONG);
+                                toastError.show();
+                            }
+                        }else{
+                            Toast toastError = Toast.makeText(getContext(),R.string.toatsNewPasswEmpty, Toast.LENGTH_LONG);
+                            toastError.show();
+                        }
+                    }else{
+                        Toast toastError = Toast.makeText(getContext(),R.string.toatsOldPasswLenght, Toast.LENGTH_LONG);
+                        toastError.show();
+                    }
+                }else{
+                    Toast toastError = Toast.makeText(getContext(),R.string.toatsOldPasswEmpty, Toast.LENGTH_LONG);
+                    toastError.show();
+                }
             }
 
 

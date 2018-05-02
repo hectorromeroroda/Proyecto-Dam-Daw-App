@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
 
 import org.json.JSONException;
@@ -58,6 +59,7 @@ public class LoginFragment extends Fragment{
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
     loginUserAsync loginUserAsync;
+    private AppDataSources bd;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -80,6 +82,7 @@ public class LoginFragment extends Fragment{
         rememberMe = (CheckBox) view.findViewById(R.id.ckbRememberMe);
 
         comprobations = new Comprobations();
+        bd = new AppDataSources(getContext());
 
         return view;
     }
@@ -171,9 +174,9 @@ public class LoginFragment extends Fragment{
 
             try {
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/auth/login");
-                //http://192.168.56.1:3000/auth/login
-                //https://domo-200915.appspot.com/auth/login
+                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/login");
+                //http://192.168.56.1:3000/login
+                //https://domo-200915.appspot.com/login
 
                 // Add your data
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -187,6 +190,7 @@ public class LoginFragment extends Fragment{
 
                 //Enviamos la info al server
                 HttpResponse response = httpclient.execute(httppost);
+
                 //Obtenemos una respuesta*/
                 HttpEntity entity = response.getEntity();
 
@@ -216,13 +220,19 @@ public class LoginFragment extends Fragment{
             try {
                 JSONObject jsResponse= new JSONObject(mensaje);
                 jsToken=jsResponse.getString("token");
-                Toast toastResult = Toast.makeText(getContext(), jsToken, Toast.LENGTH_LONG);
-                toastResult.show();
 
                 if (rememberMe.isChecked()==true){
-                    //AQUI GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS Y ENVIAR A ALLCOMUNITIES
+                    bd.saveUserLogin(jsToken,true);
+                    //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
+                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON (ID ENVIADO, NOMBRE, NUM USERS, NUM CONTENIDO, DESCRPCION
+                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
+                    //AQUI ENVIAR A ALLCOMUNITIES
                 }else{
-                    //AQUI NO! GUARDAR EL TOKEN RECIBIDO EN LA BASE DE DATOS Y ENVIAR A ALLCOMUNITIES
+                    bd.saveUserLogin(jsToken,false);
+                    //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
+                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON
+                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
+                    //AQUI ENVIAR A ALLCOMUNITIES
                 }
 
             } catch (JSONException e) {

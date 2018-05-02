@@ -22,9 +22,13 @@ public class AppHelper extends SQLiteOpenHelper{
 
         /*COMENTAR DB CACHE FALTA DE TABLAS*/
         String comunity =
-                "CREATE TABLE Community (_id INTEGER PRIMARY KEY," +
-                        "Name VARCHAR(45)," +
-                        "MaxUsers INT," +
+                "CREATE TABLE Community (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "Id INT NOT NULL," +
+                        "Name VARCHAR(45)NOT NULL," +
+                        "Description VARCHAR(300) NOT NULL," +
+                        "NumUsers INT," +
+                        "NumContent INT," +
+                        "UserInvited BIT," +
                         "MediaId)";
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
@@ -62,11 +66,12 @@ public class AppHelper extends SQLiteOpenHelper{
                 "CREATE TABLE User(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "UserFirstName VARCHAR(45) NOT NULL," +
                         "UserLastName VARCHAR(45) NOT NULL," +
-                        "UserAliasName VARCHAR(45) NOT NULL," +
                         "UserEmail VARCHAR(45) NOT NULL," +
                         "UserStikies TINYINT(1) NOT NULL," +
                         "UserPublicProfile BIT NOT NULL," +
                         "UserToken VARCHAR(150)," +
+                        "UserRememberMe BIT NOT NULL," +
+                        "UserRol VARCHAR(45)," +
                         "MediaId INT)";
         sqLiteDatabase.execSQL(user);
 
