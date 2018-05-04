@@ -102,20 +102,24 @@
     <string name="edtRepeatNewPasswEdit">Confirmació password</string>
     <string name="btnAcceptEditProfile">Guardar canvis</string>
 
-    //EditPasswProfileFragment---
+
+    //EditEmailwProfileFragment---
     <string name="edtOldEmailEdit">Email antic</string>
     <string name="edtNewEmailEdit">Nuu email</string>
     <string name="edtRepeatNewEmailEdit">Confirmació email</string>
-
-    //EditPasswProfileFragment---
-    <string name="rdbProfilePublic">Perfil públic</string>
-    <string name="rdbProfilePrivate">Perfil privat</string>
-
-    //EditEmailProfileFragment---
     <string name="toatsOldEmailEmpty">Te que omplir el camp email antic</string>
     <string name="toatsNewEmailEmpty">Te que omplir el camp email nou</string>
     <string name="toatsFormatOldEmail">Format del antic email incorrecte</string>
     <string name="toatsFormatNewEmail">Format del nou email incorrecte</string>
+
+
+    //EditTypeProfileFragment---
+    <string name="rdbProfilePublic">Perfil públic</string>
+    <string name="rdbProfilePrivate">Perfil privat</string>
+    <string name="ToastRespuestaProfileStae">Canvis guardats amb exit</string>
+
+
+
 
 
 </resources>

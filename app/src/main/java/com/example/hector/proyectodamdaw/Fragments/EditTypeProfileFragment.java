@@ -18,6 +18,7 @@ import com.example.hector.proyectodamdaw.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
-import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.client.methods.HttpPut;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import cz.msebera.android.httpclient.util.EntityUtils;
@@ -43,6 +44,8 @@ public class EditTypeProfileFragment extends Fragment{
     private Boolean publicProfile;
     private Boolean resultCursorPublicProfile;
     private AppDataSources bd;
+    private String jsonEditProfile;
+    editTypeProfileAsync editTypeProfileAsync;
 
     public EditTypeProfileFragment() {
         // Required empty public constructor
@@ -68,8 +71,6 @@ public class EditTypeProfileFragment extends Fragment{
                 rdbPrivateProfile.setChecked(true);
             }
         }
-
-
         return view;
     }
 
@@ -88,23 +89,14 @@ public class EditTypeProfileFragment extends Fragment{
                     }
                 }
 
-                createJsonEditTypeProfile(String . valueOf ( publicProfile ));
-
-                //CREAR CONEXION HTTP-POST PARA ENVIAR LOS DATOS
-
-
+                //Crea la conexion httpPut para enviarla al servidor
+                editTypeProfileAsync = new editTypeProfileAsync();
+                editTypeProfileAsync.execute(jsonEditProfile);
             }
 
 
         });
 
-    }
-
-    private String createJsonEditTypeProfile(String profileIsPublic) {
-        String strJsonLogin;
-
-        strJsonLogin=  ("{\"profile_is_public\": \"" + profileIsPublic + "\"}");
-        return strJsonLogin;
     }
 
     private class editTypeProfileAsync extends AsyncTask<String, Void, String> {
@@ -113,23 +105,20 @@ public class EditTypeProfileFragment extends Fragment{
         protected String doInBackground(String... argumentos) {
 
             try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/profile");
+
+                URL url = new URL("http://192.168.56.1:3000/profile");
                 //http://192.168.56.1:3000/profile
                 //https://domo-200915.appspot.com/profile
 
-                // Add your data
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("typeprofile", argumentos[0]));
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPut put= new HttpPut(String.valueOf(url));
 
-                httppost.setEntity(new UrlEncodedFormEntity(params));
+                List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+                pairs.add(new BasicNameValuePair("typeprofile", publicProfile.toString()));
+                put.setEntity(new UrlEncodedFormEntity(pairs));
 
-                //Set some headers to inform server about the type of the content
-                //httppost.setHeader("Accept", "application/json");
-                //httppost.setHeader("Content-type", "application/json");
+                HttpResponse response = httpclient.execute(put);
 
-                //Enviamos la info al server
-                HttpResponse response = httpclient.execute(httppost);
                 //Obtenemos una respuesta*/
                 HttpEntity entity = response.getEntity();
 
@@ -147,6 +136,7 @@ public class EditTypeProfileFragment extends Fragment{
     protected void onPostExecute(String mensaje) {
         String responseContentError;
         String jsToken;
+        String profileState;
 
         try {
             JSONObject jsResponse= new JSONObject(mensaje);
@@ -158,12 +148,14 @@ public class EditTypeProfileFragment extends Fragment{
         }
 
         try {
+            //CREO QUE LA RESPUESTA ESPERADA TIENE QUE SER UN 200 OK O ALGO ASI
             JSONObject jsResponse= new JSONObject(mensaje);
+            profileState= jsResponse.getString("profile_is_public");
 
-
-            //GUARDAR DATOS EN LA BD LOCAL
-            //NOTIFICAR LOS CAMBIOS AL USUARIO
-
+            //Guarda los datos en la base datos
+            bd.saveEditTypeProfile(publicProfile);
+            Toast toastResult = Toast.makeText(getContext(), R.string.ToastRespuestaProfileStae, Toast.LENGTH_LONG);
+            toastResult.show();
 
         } catch (JSONException e) {
             e.printStackTrace();
