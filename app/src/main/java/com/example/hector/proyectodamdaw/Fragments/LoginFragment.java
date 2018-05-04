@@ -21,6 +21,7 @@ import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -212,8 +213,8 @@ public class LoginFragment extends Fragment{
             String jsEmail;
             String jsProfilePublic;
             String jsStikies;
-            String[] jsInvited;
-            String[] jsComunities;
+            JSONArray jsInvited = new JSONArray();
+            JSONArray jsComunities  = new JSONArray();
 
 
             try {
@@ -234,6 +235,10 @@ public class LoginFragment extends Fragment{
                 jsLastName= jsResponse.getString("last_name");
                 jsEmail= jsResponse.getString("email");
                 jsProfilePublic= jsResponse.getString("profile_is_public");
+                jsInvited = jsResponse.getJSONArray("invited");
+                jsComunities = jsResponse.getJSONArray("communities");
+
+
 
                 if (rememberMe.isChecked()==true){
                     bd.saveUserLogin(jsToken,true);
