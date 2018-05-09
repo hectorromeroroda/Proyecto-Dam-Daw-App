@@ -20,20 +20,26 @@ import android.widget.Toast;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.client.HttpClient;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import cz.msebera.android.httpclient.util.EntityUtils;
@@ -59,7 +65,6 @@ public class LoginFragment extends Fragment{
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
-    loginUserAsync loginUserAsync;
     private AppDataSources bd;
 
     public LoginFragment() {
@@ -85,14 +90,14 @@ public class LoginFragment extends Fragment{
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
 
+        Dialog = new ProgressDialog(getContext());
+        Dialog.setCancelable(false);
+
         return view;
     }
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-
-
-
 
         forgotPassw.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -130,8 +135,11 @@ public class LoginFragment extends Fragment{
                             if (strUserPassw.length()>= miniumLenghtPassw){
                                 jsonLogin= createJsonLogin(strUserLogin, strUserPassw);
 
-                                loginUserAsync = new loginUserAsync();
-                                loginUserAsync.execute(jsonLogin);
+                                try {
+                                    loginUserAsync(jsonLogin);
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
 
                             }else{
                                 Toast toastAlert = Toast.makeText(getContext(), R.string.toastLenghtPassw, Toast.LENGTH_SHORT);
@@ -168,100 +176,93 @@ public class LoginFragment extends Fragment{
         return strJsonLogin;
     }
 
-    private class loginUserAsync extends AsyncTask<String, Void, String> {
-        String result = "";
+    private void loginUserAsync(String datos) throws UnsupportedEncodingException {
 
-        protected String doInBackground(String... argumentos) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(0, 10000);
 
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/login");
-                //http://192.168.56.1:3000/login
-                //https://domo-200915.appspot.com/login
+        StringEntity ent = new StringEntity(datos);
 
-                // Add your data
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("jsonLogin", argumentos[0]));
+        String Url = "http://192.168.56.1:3000/login";
 
-                httppost.setEntity(new UrlEncodedFormEntity(params));
+        client.post(getContext(), Url, ent , "application/json",new AsyncHttpResponseHandler() {
 
-                //Set some headers to inform server about the type of the content
-                //httppost.setHeader("Accept", "application/json");
-                //httppost.setHeader("Content-type", "application/json");
-
-                //Enviamos la info al server
-                HttpResponse response = httpclient.execute(httppost);
-
-                //Obtenemos una respuesta*/
-                HttpEntity entity = response.getEntity();
-
-                result = EntityUtils.toString(entity);
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                Log.i("ResponseObject: ", e.toString());
+            @Override
+            public void onStart() {
+                // called before request is started
+                Dialog.setMessage("Descargando datos...");
+                Dialog.show();
             }
 
-            return result;
-        }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                //JSONObject jsResponse;
+                //
+                String responseContentError;
+                String jsToken;
+                String jsFirstName;
+                String jsLastName;
+                String jsEmail;
+                String jsProfilePublic;
+                String jsStikies;
+                JSONArray jsInvited = new JSONArray();
+                JSONArray jsComunities = new JSONArray();
+                String strResponse = new String(responseBody);
 
-        protected void onPostExecute(String mensaje) {
-            String responseContentError;
-            String jsToken;
-            String jsFirstName;
-            String jsLastName;
-            String jsEmail;
-            String jsProfilePublic;
-            String jsStikies;
-            JSONArray jsInvited = new JSONArray();
-            JSONArray jsComunities  = new JSONArray();
+                try {
 
+                   // JSONObject jsResponse = new JSONObject(strResponse);
+                    //responseContentError = jsResponse.getString("authError");
 
-            try {
-                JSONObject jsResponse= new JSONObject(mensaje);
-                responseContentError=jsResponse.getString("authError");
-                Toast toastResult = Toast.makeText(getContext(), responseContentError, Toast.LENGTH_LONG);
-                toastResult.show();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                    JSONObject jsResponse = new JSONObject(strResponse);
+                    jsToken = jsResponse.getString("token");
 
-            try {
-                JSONObject jsResponse= new JSONObject(mensaje);
-                jsToken=jsResponse.getString("token");
+                    jsStikies = jsResponse.getString("stickyQty");
+                    jsFirstName = jsResponse.getString("first_name");
+                    jsLastName = jsResponse.getString("last_name");
+                    jsEmail = jsResponse.getString("email");
+                    jsProfilePublic = jsResponse.getString("profile_is_public");
+                    jsInvited = jsResponse.getJSONArray("invited");
+                    jsComunities = jsResponse.getJSONArray("communities");
 
-                jsStikies=jsResponse.getString("stickyQty");
-                jsFirstName= jsResponse.getString("first_name");
-                jsLastName= jsResponse.getString("last_name");
-                jsEmail= jsResponse.getString("email");
-                jsProfilePublic= jsResponse.getString("profile_is_public");
-                jsInvited = jsResponse.getJSONArray("invited");
-                jsComunities = jsResponse.getJSONArray("communities");
+                    if (rememberMe.isChecked() == true) {
+                        bd.saveUserLogin(jsToken, true);
+                        //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
+                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON (ID ENVIADO, NOMBRE, NUM USERS, NUM CONTENIDO, DESCRPCION
+                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
+                        //AQUI ENVIAR A ALLCOMUNITIES
+                    } else {
+                        bd.saveUserLogin(jsToken, false);
+                        //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
+                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON
+                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
+                        //AQUI ENVIAR A ALLCOMUNITIES
+                    }
 
-
-
-                if (rememberMe.isChecked()==true){
-                    bd.saveUserLogin(jsToken,true);
-                    //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
-                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON (ID ENVIADO, NOMBRE, NUM USERS, NUM CONTENIDO, DESCRPCION
-                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
-                    //AQUI ENVIAR A ALLCOMUNITIES
-                }else{
-                    bd.saveUserLogin(jsToken,false);
-                    //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
-                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON
-                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
-                    //AQUI ENVIAR A ALLCOMUNITIES
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+                Dialog.dismiss();
             }
 
-        }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                String mensajeError = new String(error.getMessage().toString());
+                String badResponse = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
+                Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
+                toastAlerta.show();
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+
+        });
+
     }
-
-
 
 
 }
