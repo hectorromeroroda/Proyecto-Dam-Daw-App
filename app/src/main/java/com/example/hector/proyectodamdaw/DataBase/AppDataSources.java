@@ -84,4 +84,11 @@ public class AppDataSources {
         dbW.rawQuery(UpdateQuery,null);
     }
 
+    public void saveEditTypeProfile(boolean profileState) {
+
+        String UpdateQuery = "UPDATE User SET UserPublicProfile = '" + profileState + "'";
+
+        dbW.rawQuery(UpdateQuery,null);
+    }
+
 }

@@ -103,27 +103,30 @@
     <string name="edtPasswNewEdit">Nuevo password</string>
     <string name="edtRepeatNewPasswEdit">Confirmación password</string>
     <string name="btnAcceptEditProfile">Guardar cambios</string>
+    <string name="toatsOldPasswEmpty">Deve completar el campo password antiguo</string>
+    <string name="toatsNewPasswEmpty">Deve completar el campo nuevo password</string>
+    <string name="toatsNewPasswLenght">El nuevo password es demasido corto</string>
+    <string name="toatsOldPasswLenght">El nuevo password es demasido corto</string>
 
-    //EditPasswProfileFragment---
+    //EditEmailProfileFragment---
     <string name="edtOldEmailEdit">Email antiguo</string>
     <string name="edtNewEmailEdit">Nuevo email</string>
     <string name="edtRepeatNewEmailEdit">Confirmación email</string>
-
-    //EditPasswProfileFragment---
-    <string name="rdbProfilePublic">Perfil público</string>
-    <string name="rdbProfilePrivate">Perfil privado</string>
-
-    //EditEmailProfileFragment---
     <string name="toatsOldEmailEmpty">Deve completar el campo email antiguo</string>
     <string name="toatsNewEmailEmpty">Deve completar el campo email nuevo</string>
     <string name="toatsFormatOldEmail">Formato del antiguo email incorrecto</string>
     <string name="toatsFormatNewEmail">Formato del nuevo email incorrecto</string>
 
-    //EditPasswProfileFragment---
-    <string name="toatsOldPasswEmpty">Deve completar el campo password antiguo</string>
-    <string name="toatsNewPasswEmpty">Deve completar el campo nuevo password</string>
-    <string name="toatsNewPasswLenght">El nuevo password es demasido corto</string>
-    <string name="toatsOldPasswLenght">El nuevo password es demasido corto</string>
+    //EditTypeProfileFragment---
+    <string name="rdbProfilePublic">Perfil público</string>
+    <string name="rdbProfilePrivate">Perfil privado</string>
+    <string name="ToastRespuestaProfileStae">Cambios guardados con exito</string>
+
+
+
+
+
+
 
 
 
