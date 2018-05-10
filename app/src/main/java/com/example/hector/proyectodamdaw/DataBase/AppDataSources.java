@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.hector.proyectodamdaw.Content.Communitie;
+
 /**
  * Created by Hector on 19/04/2018.
  */
@@ -148,6 +150,14 @@ public class AppDataSources {
         values.put(COMMUNITY_DESCRIPTION, description);
         values.put(COMMUNITY_USER_INVITED, UserInvited);
         dbW.insert(table_COMM,null,values);
+    }
+
+    public static Communitie extraerCommunity(Cursor cursor){
+        Communitie communitie = new Communitie();
+        communitie.setName(cursor.getString(1));
+        communitie.setDescription(cursor.getString(2));
+        communitie.setNumUsers(cursor.getInt(3));
+        return communitie;
     }
 
 }
