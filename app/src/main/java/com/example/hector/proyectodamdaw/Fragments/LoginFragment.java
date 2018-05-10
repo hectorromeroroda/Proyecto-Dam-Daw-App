@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -215,6 +216,11 @@ public class LoginFragment extends Fragment{
                     jsEmail = jsResponse.getString("email");
                     jsProfilePublic = jsResponse.getString("profile_is_public");
                     jsInvited = jsResponse.getJSONArray("invited");
+
+
+                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
+
+
                     jsComunities = jsResponse.getJSONArray("communities");
 
                     for (int index = 0; index < jsComunities.length(); index++) {
@@ -230,12 +236,15 @@ public class LoginFragment extends Fragment{
                         jsCommName=data.getString("name");
                         jsCommDescription=data.getString("description");
 
+                        Cursor cursorIdComminityExist = bd.searchIdCommunitie(jsCommId);
+                        if (cursorIdComminityExist.moveToFirst() != false){
+                            String id = cursorIdComminityExist.getString(0);
+                           bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jscommRole);
 
-                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON (ID ENVIADO, NOMBRE, NUM USERS, NUM CONTENIDO, DESCRPCION
-                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
-
+                        }else {
+                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jscommRole,jsCommId);
+                        }
                     }
-
 
                     jsToken=jsResponse.getString("token");
 

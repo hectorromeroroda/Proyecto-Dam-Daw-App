@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class AppDataSources {
 
     public static final String table_USER = "User";
+    public static final String table_COMM = "Community";
     public static final String USER_FIRST_NAME = "UserFirstName";
     public static final String USER_LAST_NAME = "UserLastName";
     public static final String USER_EMAIL = "UserEmail";
@@ -19,6 +20,13 @@ public class AppDataSources {
     public static final String USER_PUBLIC_PROFILE = "UserPublicProfile";
     public static final String USER_TOKEN = "UserToken";
     public static final String USER_REMEMBER_ME = "UserRememberMe";
+    public static final String COMMUNITY_ID = "IdCommunity";
+    public static final String COMMUNITY_ROLE = "UserRole";
+    public static final String COMMUNITY_MEMBERS = "NumUsers";
+    public static final String COMMUNITY_PUBLIC = "IsPublic";
+    public static final String COMMUNITY_CONTENTS = "NumContent";
+    public static final String COMMUNITY_NAME = "Name";
+    public static final String COMMUNITY_DESCRIPTION = "Description";
 
 
     private AppHelper dbHelper;
@@ -48,14 +56,18 @@ public class AppDataSources {
     public Cursor rememmberMeUserLogin() {
 
         String selectQuery = " SELECT UserRememberMe FROM User";
-
         return dbR.rawQuery(selectQuery,null);
     }
 
     public Cursor typeProfile() {
         // Retorna el campo tipo de perfil publico/privado
         String selectQuery = " SELECT UserPublicProfile FROM User";
+        return dbR.rawQuery(selectQuery,null);
+    }
 
+    public Cursor searchIdCommunitie(String idcommunitie) {
+
+        String selectQuery = " SELECT _id FROM Community WHERE IdCommunity= '" + idcommunitie + "'";
         return dbR.rawQuery(selectQuery,null);
     }
 
@@ -89,6 +101,26 @@ public class AppDataSources {
         String UpdateQuery = "UPDATE User SET UserPublicProfile = '" + profileState + "'";
 
         dbW.rawQuery(UpdateQuery,null);
+    }
+
+    public void updateCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, String userRole) {
+
+        String UpdateQuery = "UPDATE Community SET NumUsers = '" + numMembers + "', IsPublic= '" + isPublic + "'"+ ", NumContent= '"
+                + numContents + "'"+ ", Name= '" + name + "'"+ ", Description= '" + description + "'"+ ", UserRole= '" + userRole + "'";
+
+        dbW.rawQuery(UpdateQuery,null);
+    }
+
+    public void saveCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, String userRole, String id) {
+        ContentValues values = new ContentValues();
+        values.put(COMMUNITY_ID, id);
+        values.put(COMMUNITY_ROLE, userRole);
+        values.put(COMMUNITY_MEMBERS, numMembers);
+        values.put(COMMUNITY_PUBLIC, isPublic);
+        values.put(COMMUNITY_CONTENTS, numContents);
+        values.put(COMMUNITY_NAME, name);
+        values.put(COMMUNITY_DESCRIPTION, description);
+        dbW.insert(table_COMM,null,values);
     }
 
 }

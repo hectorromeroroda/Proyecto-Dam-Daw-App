@@ -29,7 +29,10 @@ public class AppHelper extends SQLiteOpenHelper{
                         "NumUsers INT," +
                         "NumContent INT," +
                         "UserInvited BIT," +
+                        "UserRole VARCHAR(45)NOT NULL," +
+                        "IsPublic BIT," +
                         "MediaId)";
+        sqLiteDatabase.execSQL(comunity);
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
