@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
@@ -95,7 +97,6 @@ public class LoginFragment extends Fragment{
             }
 
         });
-
 
         registerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,11 +216,31 @@ public class LoginFragment extends Fragment{
                     jsLastName = jsResponse.getString("last_name");
                     jsEmail = jsResponse.getString("email");
                     jsProfilePublic = jsResponse.getString("profile_is_public");
+
                     jsInvited = jsResponse.getJSONArray("invited");
 
+                    for (int index = 0; index < jsInvited.length(); index++) {
+                        JSONObject object = jsInvited.getJSONObject(index);
 
-                    //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
 
+                        JSONObject data= new JSONObject();
+                        data = object.getJSONObject("data");
+                        jsCommMemmbers=data.getString("members");
+                        jsCommPublic=data.getString("public");
+                        jsCommContents=data.getString("contents");
+                        jsCommId=data.getString("_id");
+                        jsCommName=data.getString("name");
+                        jsCommDescription=data.getString("description");
+
+                        Cursor cursorIdComminityExist = bd.searchIdCommunitie(jsCommId);
+                        if (cursorIdComminityExist.moveToFirst() != false){
+                            String id = cursorIdComminityExist.getString(0);
+                            bd.updateCommunityUserInvited(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription);
+
+                        }else {
+                            bd.saveCommunityUserinvited(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId, true);
+                        }
+                    }
 
                     jsComunities = jsResponse.getJSONArray("communities");
 
@@ -249,14 +270,15 @@ public class LoginFragment extends Fragment{
                     jsToken=jsResponse.getString("token");
 
                     if (rememberMe.isChecked() == true) {
-                        bd.saveUserLogin(jsToken, true);
-                        //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
-                        //AQUI ENVIAR A ALLCOMUNITIES
+                        bd.updateUserLoginTokenRememberMe(jsToken, true);
                     } else {
-                        bd.saveUserLogin(jsToken, false);
-                        //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
-                        //AQUI ENVIAR A ALLCOMUNITIES
+                        bd.updateUserLoginTokenRememberMe(jsToken, false);
                     }
+                    
+                    bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail);
+                    //Envia a AllComminities
+                    Intent intent = new Intent(getContext(), CommunitiesActivity.class );
+                    startActivity(intent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
