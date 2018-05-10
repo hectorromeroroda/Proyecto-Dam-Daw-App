@@ -192,6 +192,13 @@ public class LoginFragment extends Fragment{
                 String jsEmail;
                 String jsProfilePublic;
                 String jsStikies;
+                String jsCommMemmbers;
+                String jsCommPublic;
+                String jsCommContents;
+                String jsCommId;
+                String jsCommName;
+                String jsCommDescription;
+                String jscommRole;
                 JSONArray jsInvited = new JSONArray();
                 JSONArray jsComunities = new JSONArray();
                 String strResponse = new String(responseBody);
@@ -209,19 +216,36 @@ public class LoginFragment extends Fragment{
                     jsProfilePublic = jsResponse.getString("profile_is_public");
                     jsInvited = jsResponse.getJSONArray("invited");
                     jsComunities = jsResponse.getJSONArray("communities");
+
+                    for (int index = 0; index < jsComunities.length(); index++) {
+                        JSONObject object = jsComunities.getJSONObject(index);
+                        jscommRole = object.getString("role");
+
+                        JSONObject data= new JSONObject();
+                        data = object.getJSONObject("data");
+                        jsCommMemmbers=data.getString("members");
+                        jsCommPublic=data.getString("public");
+                        jsCommContents=data.getString("contents");
+                        jsCommId=data.getString("_id");
+                        jsCommName=data.getString("name");
+                        jsCommDescription=data.getString("description");
+
+
+                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON (ID ENVIADO, NOMBRE, NUM USERS, NUM CONTENIDO, DESCRPCION
+                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
+
+                    }
+
+
                     jsToken=jsResponse.getString("token");
 
                     if (rememberMe.isChecked() == true) {
                         bd.saveUserLogin(jsToken, true);
                         //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
-                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON (ID ENVIADO, NOMBRE, NUM USERS, NUM CONTENIDO, DESCRPCION
-                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
                         //AQUI ENVIAR A ALLCOMUNITIES
                     } else {
                         bd.saveUserLogin(jsToken, false);
                         //ACTUALIZAR DATOS USUARIO COMO EMAIL, STIKIES ETC
-                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE PERTENECE QUE ENVIA EL JSON
-                        //GUARDAR LOS DATOS DE COMUNIDADEES A LAS QUE TIENE INVITACIONES QUE ENVIA EL JSON
                         //AQUI ENVIAR A ALLCOMUNITIES
                     }
 
