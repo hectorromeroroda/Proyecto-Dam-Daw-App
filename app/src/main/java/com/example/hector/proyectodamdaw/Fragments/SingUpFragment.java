@@ -1,11 +1,11 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
+
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +17,18 @@ import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
 
-import cz.msebera.android.httpclient.HttpEntity;
-import cz.msebera.android.httpclient.HttpResponse;
-import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
-import cz.msebera.android.httpclient.client.methods.HttpPost;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.message.BasicNameValuePair;
-import cz.msebera.android.httpclient.util.EntityUtils;
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 /**
  * Created by Hector on 03-Apr-18.
@@ -47,6 +43,7 @@ public class SingUpFragment extends Fragment{
     EditText passwSingUp;
     EditText repeatPasswSingUp;
     Button acceptSingUp;
+    ProgressDialog Dialog;
     private String strUserName;
     private String strSurname;
     private String strEmail;
@@ -64,7 +61,6 @@ public class SingUpFragment extends Fragment{
     private Boolean repeatPasswEmpty;
     private  Boolean passwSame;
     Comprobations comprobations;
-    registerUserAsync registerUserAsync;
     public static final int miniumLenghtPassw = 8;
     private AppDataSources bd;
 
@@ -91,6 +87,9 @@ public class SingUpFragment extends Fragment{
 
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
+
+        Dialog = new ProgressDialog(getContext());
+        Dialog.setCancelable(false);
 
         return view;
     }
@@ -131,9 +130,11 @@ public class SingUpFragment extends Fragment{
                                                     if (passwSame==true){
 
                                                         jsonRegister= createJsonSingUp(strUserName, strSurname, strPassw, strEmail);
-                                                        registerUserAsync = new registerUserAsync();
-                                                        registerUserAsync.execute(jsonRegister);
-
+                                                        try {
+                                                            registerUserAsync(jsonRegister);
+                                                        } catch (UnsupportedEncodingException e) {
+                                                            e.printStackTrace();
+                                                        }
                                                     }else{
                                                         Toast toastError = Toast.makeText(getContext(),R.string.toastPasswSame, Toast.LENGTH_LONG);
                                                         toastError.show();
@@ -188,88 +189,79 @@ public class SingUpFragment extends Fragment{
         return jsonRegister;
     }
 
+    private void registerUserAsync(String datos) throws UnsupportedEncodingException {
 
-    private class registerUserAsync extends AsyncTask<String, Void, String> {
-        String result = "";
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(0, 10000);
 
-        protected String doInBackground(String... argumentos) {
+        StringEntity entity = new StringEntity(datos);
+        entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.56.1:3000/register");
-                //http://192.168.56.1:3000/register
-                //https://domo-200915.appspot.com/register
+        String Url = "http://192.168.43.219:3000/register";
 
-                // Add your data
-                List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("jsonRegister", argumentos[0]));
+        client.post(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
 
-                httppost.setEntity(new UrlEncodedFormEntity(params));
-
-                //Set some headers to inform server about the type of the content
-                //httppost.setHeader("Accept", "application/json");
-                //httppost.setHeader("Content-type", "application/json");
-
-                //Enviamos la info al server
-                HttpResponse response = httpclient.execute(httppost);
-                //Obtenemos una respuesta*/
-                HttpEntity entity = response.getEntity();
-
-                result = EntityUtils.toString(entity);
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                Log.i("ResponseObject: ", e.toString());
+            @Override
+            public void onStart() {
+                // called before request is started
+                Dialog.setMessage("Verificando datos...");
+                Dialog.show();
             }
 
-            return result;
-        }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String responseContentError;
+                String jsFirstName;
+                String jsLastName;
+                String jsEmail;
+                String jsProfilePublic;
+                String jsStikies;
+                String jsToken;
+                String strResponse = new String(responseBody);
 
-        protected void onPostExecute(String mensaje) {
+                try {
+                    JSONObject jsResponse= new JSONObject(strResponse);
+                    JSONObject features= new JSONObject();
+                    features = jsResponse.getJSONObject("features");
 
-            String responseContentError;
-            String jsFirstName;
-            String jsLastName;
-            String jsEmail;
-            String jsProfilePublic;
-            String jsStikies;
-            String jsToken;
+                    jsStikies=features.getString("stickyQty");
+                    jsFirstName= jsResponse.getString("first_name");
+                    jsLastName= jsResponse.getString("last_name");
+                    jsEmail= jsResponse.getString("email");
+                    jsProfilePublic= jsResponse.getString("profile_is_public");
+                    jsToken=jsResponse.getString("token");
 
+                    bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, false);
 
-            try {
-                JSONObject jsResponse= new JSONObject(mensaje);
-                responseContentError=jsResponse.getString("authError");
-                Toast toastResult = Toast.makeText(getContext(), responseContentError, Toast.LENGTH_LONG);
-                toastResult.show();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                    Toast toastResult = Toast.makeText(getContext(), R.string.toastRegisterOk, Toast.LENGTH_LONG);
+                    toastResult.show();
+
+                    //Envia a AllComminities
+                    Intent intent = new Intent(getContext(), CommunitiesActivity.class );
+                    startActivity(intent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Dialog.dismiss();
             }
 
-            try {
-                JSONObject jsResponse= new JSONObject(mensaje);
-                JSONObject features= new JSONObject();
-                features = jsResponse.getJSONObject("features");
-
-                jsStikies=features.getString("stickyQty");
-                jsFirstName= jsResponse.getString("first_name");
-                jsLastName= jsResponse.getString("last_name");
-                jsEmail= jsResponse.getString("email");
-                jsProfilePublic= jsResponse.getString("profile_is_public");
-                jsToken=jsResponse.getString("token");
-
-                bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, false);
-
-                Toast toastResult = Toast.makeText(getContext(), R.string.toastRegisterOk, Toast.LENGTH_LONG);
-                toastResult.show();
-
-                //Envia a AllComminities
-                Intent intent = new Intent(getContext(), CommunitiesActivity.class );
-                startActivity(intent);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                String mensajeError = new String(error.getMessage().toString());
+                String badResponse = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
+                Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
+                toastAlerta.show();
+                Dialog.dismiss();
             }
 
-        }
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+
+        });
+
     }
 }

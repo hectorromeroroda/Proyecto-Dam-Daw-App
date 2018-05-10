@@ -1,13 +1,11 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,27 +20,17 @@ import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestHandle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.HttpEntity;
-import cz.msebera.android.httpclient.HttpResponse;
-import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.HttpClient;
-import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
-import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.entity.StringEntity;
-import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.message.BasicNameValuePair;
-import cz.msebera.android.httpclient.util.EntityUtils;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 /**
  * Created by Hector on 31-Mar-18.
@@ -181,23 +169,22 @@ public class LoginFragment extends Fragment{
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        StringEntity ent = new StringEntity(datos);
+        StringEntity entity = new StringEntity(datos);
+        entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.56.1:3000/login";
+        String Url = "http://192.168.43.219:3000/login";
 
-        client.post(getContext(), Url, ent , "application/json",new AsyncHttpResponseHandler() {
+        client.post(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
 
             @Override
             public void onStart() {
                 // called before request is started
-                Dialog.setMessage("Descargando datos...");
+                Dialog.setMessage("Verificando datos...");
                 Dialog.show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                //JSONObject jsResponse;
-                //
                 String responseContentError;
                 String jsToken;
                 String jsFirstName;
@@ -211,19 +198,18 @@ public class LoginFragment extends Fragment{
 
                 try {
 
-                   // JSONObject jsResponse = new JSONObject(strResponse);
-                    //responseContentError = jsResponse.getString("authError");
+                    JSONObject jsResponse= new JSONObject(strResponse);
+                    JSONObject features= new JSONObject();
+                    features = jsResponse.getJSONObject("features");
 
-                    JSONObject jsResponse = new JSONObject(strResponse);
-                    jsToken = jsResponse.getString("token");
-
-                    jsStikies = jsResponse.getString("stickyQty");
+                    jsStikies=features.getString("stickyQty");
                     jsFirstName = jsResponse.getString("first_name");
                     jsLastName = jsResponse.getString("last_name");
                     jsEmail = jsResponse.getString("email");
                     jsProfilePublic = jsResponse.getString("profile_is_public");
                     jsInvited = jsResponse.getJSONArray("invited");
                     jsComunities = jsResponse.getJSONArray("communities");
+                    jsToken=jsResponse.getString("token");
 
                     if (rememberMe.isChecked() == true) {
                         bd.saveUserLogin(jsToken, true);
