@@ -274,7 +274,7 @@ public class LoginFragment extends Fragment{
                     } else {
                         bd.updateUserLoginTokenRememberMe(jsToken, false);
                     }
-                    
+
                     bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail);
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );

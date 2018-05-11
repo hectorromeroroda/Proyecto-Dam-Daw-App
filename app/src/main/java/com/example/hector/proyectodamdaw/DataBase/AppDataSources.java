@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.hector.proyectodamdaw.Content.Communitie;
+
 /**
  * Created by Hector on 19/04/2018.
  */
@@ -72,11 +74,14 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery,null);
     }
 
+    public Cursor todasComunities() {
+        String selectQuery = "SELECT * FROM Community";
+
+        return dbR.rawQuery(selectQuery, null);
 
 
-
-
-    // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------
+    }
+        // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------
     public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, Boolean rememberMe) {
         // Guardar los datos del registro del usuario
         ContentValues values = new ContentValues();
@@ -148,6 +153,14 @@ public class AppDataSources {
         values.put(COMMUNITY_DESCRIPTION, description);
         values.put(COMMUNITY_USER_INVITED, UserInvited);
         dbW.insert(table_COMM,null,values);
+    }
+
+    public static Communitie extraerCommunity(Cursor cursor){
+        Communitie communitie = new Communitie();
+        communitie.setName(cursor.getString(2));
+        communitie.setDescription(cursor.getString(3));
+        communitie.setNumUsers(cursor.getInt(4));
+        return communitie;
     }
 
 }
