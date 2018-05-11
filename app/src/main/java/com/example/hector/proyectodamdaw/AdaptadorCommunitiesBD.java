@@ -1,7 +1,10 @@
+package com.example.hector.proyectodamdaw;
+
 import android.content.Context;
 import android.database.Cursor;
 
 import com.example.hector.proyectodamdaw.Content.Communitie;
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 
 /**
  * Created by Hector on 10/05/2018.
@@ -26,7 +29,7 @@ public class AdaptadorCommunitiesBD extends AdaptadorCommunities{
 
     public Communitie communitiePosicion(int posicion){
         cursor.moveToPosition(posicion);
-        return infanteriaSubDataSources.extraerInmersion(cursor);
+        return AppDataSources.extraerCommunity(cursor);
     }
 
     public  int idPosicion (int posicion){

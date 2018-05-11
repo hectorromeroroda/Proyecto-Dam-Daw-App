@@ -154,9 +154,9 @@ public class AppDataSources {
 
     public static Communitie extraerCommunity(Cursor cursor){
         Communitie communitie = new Communitie();
-        communitie.setName(cursor.getString(1));
-        communitie.setDescription(cursor.getString(2));
-        communitie.setNumUsers(cursor.getInt(3));
+        communitie.setName(cursor.getString(2));
+        communitie.setDescription(cursor.getString(3));
+        communitie.setNumUsers(cursor.getInt(4));
         return communitie;
     }
 
