@@ -16,7 +16,7 @@ import com.example.hector.proyectodamdaw.R;
  * Created by Hector on 10/05/2018.
  */
 
-public class AdaptadorCommunities {
+public class AdaptadorCommunities extends RecyclerView.Adapter<AdaptadorCommunities.ViewHolder>{
     protected Communitie communitie; //Comunidad a mostrar
     protected View.OnClickListener onClickListener;
     protected LayoutInflater inflador; //Crea Layouts a partir del XML

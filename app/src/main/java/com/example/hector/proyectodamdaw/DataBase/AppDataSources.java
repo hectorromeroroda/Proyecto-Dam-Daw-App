@@ -74,11 +74,14 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery,null);
     }
 
+    public Cursor todasComunities() {
+        String selectQuery = "SELECT * FROM Community";
+
+        return dbR.rawQuery(selectQuery, null);
 
 
-
-
-    // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------
+    }
+        // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------
     public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, Boolean rememberMe) {
         // Guardar los datos del registro del usuario
         ContentValues values = new ContentValues();
