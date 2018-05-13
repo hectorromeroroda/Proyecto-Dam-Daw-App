@@ -18,6 +18,7 @@
     <string name="toastPassw">Deve completar el campo Contraseña</string>
     <string name="toastLenghtPassw">La contraseña deve tener un minimo de 8 carácteres</string>
     <string name="ckbRememberMe">No cerrar la sessión</string>
+    <string name="dialog">"Verificando datos...</string>
 
     //LoginSingUpFragment---
     <string name="txvRegisterSingUp">Registro</string>
@@ -101,19 +102,21 @@
     <string name="edtRepeatNewPasswEdit">Confirmación password</string>
     <string name="btnAcceptEditProfile">Guardar cambios</string>
 
-    //EditPasswProfileFragment---
+    //EditEmailProfileFragment---
     <string name="edtOldEmailEdit">Email antiguo</string>
     <string name="edtNewEmailEdit">Nuevo email</string>
     <string name="edtRepeatNewEmailEdit">Confirmación email</string>
-
-    //EditPasswProfileFragment---
-    <string name="rdbProfilePublic">Perfil público</string>
-    <string name="rdbProfilePrivate">Perfil privado</string>
-
-    //EditEmailProfileFragment---
     <string name="toatsOldEmailEmpty">Deve completar el campo email antiguo</string>
     <string name="toatsNewEmailEmpty">Deve completar el campo email nuevo</string>
     <string name="toatsFormatOldEmail">Formato del antiguo email incorrecto</string>
     <string name="toatsFormatNewEmail">Formato del nuevo email incorrecto</string>
+
+    //EditTypeProfileFragment---
+    <string name="rdbProfilePublic">Perfil público</string>
+    <string name="rdbProfilePrivate">Perfil privado</string>
+    <string name="ToastRespuestaProfileStae">Cambios guardados con exito</string>
+
+
+
 
 </resources>
