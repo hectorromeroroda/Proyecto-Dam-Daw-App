@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/imgLogoOldPasswEdit"
+                    android:layout_width="80dp"
+                    android:layout_height="53dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    app:srcCompat="@mipmap/ic_locked_foreground" />
+
+                <EditText
+                    android:id="@+id/edtOldPasswEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/edtOldPasswEdit"
+                    android:inputType="textEmailAddress"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/imgLogoPasswNewEdit"
+                    android:layout_width="90dp"
+                    android:layout_height="63dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/btnAcceptLogin"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@mipmap/ic_locked_foreground" />
+
+                <EditText
+                    android:id="@+id/edtPasswNewEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/edtPasswNewEdit"
+                    android:inputType="textPassword"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/imgLogoRepeatNewPasswEdit"
+                    android:layout_width="90dp"
+                    android:layout_height="63dp"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@mipmap/ic_locked_foreground" />
+
+                <EditText
+                    android:id="@+id/edtRepeatNewPasswEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/edtRepeatNewPasswEdit"
+                    android:inputType="textPassword"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnAcceptEditPassw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp">
+
+                <Button
+                    android:id="@+id/btnAcceptChanges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btnAcceptEditProfile" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

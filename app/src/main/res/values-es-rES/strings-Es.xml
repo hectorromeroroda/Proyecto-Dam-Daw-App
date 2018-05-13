@@ -3,18 +3,25 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Configuración</string>
+    <string name="search_menu">Buscar</string>
 
-    //LoginActivity---
+    //LoginFragment---
     <string name="txvUserLogin">Nombre de usuario</string>
     <string name="edtUserLogin">Usuario</string>
-    <string name="txvPasswLogin">Password</string>
+    <string name="txvLogin">Login</string>
     <string name="edtPasswLogin">Password</string>
-    <string name="txvSingUpLogin">Registrarse</string>
+    <string name="btnSingUpLogin">Registrarse</string>
+    <string name="txvSingUpLogin">¿Todavia no eres miembro?</string>
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
+    <string name="toastUser">Deve completar el campo Nombre de usuario</string>
+    <string name="toastPassw">Deve completar el campo Contraseña</string>
+    <string name="toastLenghtPassw">La contraseña deve tener un minimo de 8 carácteres</string>
+    <string name="ckbRememberMe">No cerrar la sessión</string>
+    <string name="dialog">"Verificando datos...</string>
 
-    //LoginSingUp---
-    <string name="txvNameSingUp">Nombre</string>
+    //LoginSingUpFragment---
+    <string name="txvRegisterSingUp">Registro</string>
     <string name="edtNameSingUp">Nombre</string>
     <string name="txvSurnameSingUp">Apellidos</string>
     <string name="edtSurnameSingUp">Apellidos</string>
@@ -27,4 +34,89 @@
     <string name="txvRepeatPasswSingUp">Confirme el password</string>
     <string name="edtRepeatPasswSingUp">Confirmación password</string>
     <string name="btnAcceptSingUp">Aceptar</string>
+    <string name="title_activity_communities">CommunitiesActivity</string>
+    <string name="toastNameEmpty">Deve completar el campo Nombre</string>
+    <string name="toastSurnameEmpty">Deve completar el campo Apellidos</string>
+    <string name="toastEmailEmpty">Deve completar el campo Email</string>
+    <string name="toastEmailFormat">El formato del campo Email es incorrecto</string>
+    <string name="toastRepeatEmailEmpty">Deve completar el campo Confirmar Email</string>
+    <string name="toastEmailSame">Las direciones de correo no coinciden</string>
+    <string name="toastPasswEmpty">Deve completar el campo Password</string>
+    <string name="toastPasswLenght">El password deve tener un mínimo de 8 caracteres</string>
+    <string name="toastRepeatPasswEmpty">Deve completar el campo Confirmación Password</string>
+    <string name="toastPasswSame">Los passwords no coinciden</string>
+    <string name="toastRegisterOk">Registro realizado con exito</string>
+
+    /CommunitiesActivity---
+    <string name="tabTusComunidades">Tus comunidades</string>
+    <string name="tabOtrasComunidades">Otras comunidades</string>
+
+    /YourCommunitiesFragment y OthercommunitiesFragment---
+    <string name="txvInvitationCommunities">Tus invitaciones</string>
+
+    /SingleCommunityActivity---
+    <string name="tabVotaciones">Votaciones</string>
+    <string name="tabPost">Post</string>
+    <string name="tabPropuestas">Propuestas</string>
+    <string name="tabCalendario">Calendario</string>
+
+    //AllVotacionesUpFragment---
+    <string name="rdbVotacionInProgress">En curso</string>
+    <string name="rdbVotacionClosed">Terminadas</string>
+
+    //AllProposalsUpFragment---
+    <string name="rdbProposalInProgress">En curso</string>
+    <string name="rdbProposalClosed">Terminadas</string>
+
+    //RowVotacionInProgress---
+    <string name="txvRowQuestionsVotacion">Número de preguntas:</string>
+    <string name="txvRowFechaFinVotacion">Fecha de finalización:</string>
+
+    //RowVotacionClosed---
+    <string name="txvRowAprovedVotacionClosed">Estado final:</string>
+
+    //RowProposalInProgress---
+    <string name="txvRowApoyoMinimo">% de apoyo mínimo:</string>
+    <string name="txvRowApoyoActual">% de apoyo actual:</string>
+
+    //RowOthercommunitie---
+    <string name="btnRowAcces">Hacer-se miembro</string>
+
+    //RowProposalClosed---
+    <string name="txvRowApoyoFinalClosed">% de apoyo final:</string>
+
+    //ProposalInProgressFragment---
+    <string name="rdbAcceptProposal">Si</string>
+    <string name="rdbDiscardProposal">No</string>
+    <string name="btnSendProposal">Enviar</string>
+
+    //ProposalInProgressFragment---
+    <string name="title_activity_create_content">CreateContentActivity</string>
+    <string name="tab1">Votación</string>
+    <string name="tab2">Propuesta</string>
+    <string name="tab3">Post</string>
+
+    //EditPasswProfileFragment---
+    <string name="edtOldPasswEdit">Password antiguo</string>
+    <string name="edtPasswNewEdit">Nuevo password</string>
+    <string name="edtRepeatNewPasswEdit">Confirmación password</string>
+    <string name="btnAcceptEditProfile">Guardar cambios</string>
+
+    //EditEmailProfileFragment---
+    <string name="edtOldEmailEdit">Email antiguo</string>
+    <string name="edtNewEmailEdit">Nuevo email</string>
+    <string name="edtRepeatNewEmailEdit">Confirmación email</string>
+    <string name="toatsOldEmailEmpty">Deve completar el campo email antiguo</string>
+    <string name="toatsNewEmailEmpty">Deve completar el campo email nuevo</string>
+    <string name="toatsFormatOldEmail">Formato del antiguo email incorrecto</string>
+    <string name="toatsFormatNewEmail">Formato del nuevo email incorrecto</string>
+
+    //EditTypeProfileFragment---
+    <string name="rdbProfilePublic">Perfil público</string>
+    <string name="rdbProfilePrivate">Perfil privado</string>
+    <string name="ToastRespuestaProfileStae">Cambios guardados con exito</string>
+
+
+
+
 </resources>

@@ -4,18 +4,25 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Configuració</string>
+    <string name="search_menu">Buscar</string>
 
-    //LoginActivity---
+    //LoginFragment---
     <string name="txvUserLogin">Nom d\'usuari</string>
     <string name="edtUserLogin">Usuari</string>
-    <string name="txvPasswLogin">Password</string>
+    <string name="txvLogin">Login</string>
     <string name="edtPasswLogin">Password</string>
-    <string name="txvSingUpLogin">Registrar-se</string>
+    <string name="btnSingUpLogin">Registrar-se</string>
+    <string name="txvSingUpLogin">Encara no ets membre?</string>
     <string name="txvForgotPassw">Ha oblidat la contrasenya?</string>
     <string name="btnAcceptLogin">Entrar</string>
+    <string name="toastUser">Te que omplir el Nom dusuari</string>
+    <string name="toastPassw">Te que omplir la contrasenya</string>
+    <string name="toastLenghtPassw">La contraseña te que tenir un mínim de 8 caràcters</string>
+    <string name="ckbRememberMe">No tancar la sessió</string>
+    <string name="dialog">"Verificant les dades...</string>
 
-    //LoginSingUp---
-    <string name="txvNameSingUp">Nom</string>
+    //LoginSingUpFragment---
+    <string name="txvRegisterSingUp">Registre</string>
     <string name="edtNameSingUp">Nom</string>
     <string name="txvSurnameSingUp">Cognoms</string>
     <string name="edtSurnameSingUp">Cognoms</string>
@@ -28,6 +35,92 @@
     <string name="txvRepeatPasswSingUp">Confirmi el password</string>
     <string name="edtRepeatPasswSingUp">Confirmació password</string>
     <string name="btnAcceptSingUp">Aceptar</string>
+    <string name="title_activity_communities">CommunitiesActivity</string>
+    <string name="toastNameEmpty">Te que omplir el camp Nom</string>
+    <string name="toastSurnameEmpty">e que omplir el camp Cognoms</string>
+    <string name="toastEmailEmpty">e que omplir el camp Email</string>
+    <string name="toastEmailFormat">El format del campo Email es incorrecte</string>
+    <string name="toastRepeatEmailEmpty">e que omplir el camp Confirmar Email</string>
+    <string name="toastEmailSame">Les direccions de correu no coincideixen</string>
+    <string name="toastPasswEmpty">Te que omplir el camp Password</string>
+    <string name="toastPasswLenght">El password te que tenir un mínim de 8 caracters</string>
+    <string name="toastRepeatPasswEmpty">Te que omplir el camp Confirmacio Password</string>
+    <string name="toastPasswSame">Els passwords no coincideixen</string>
+    <string name="toastRegisterOk">Registre realizat amb èxit</string>
+
+    /CommunitiesActivity---
+    <string name="tabTusComunidades">Les teves comunitats</string>
+    <string name="tabOtrasComunidades">Altres comunitats</string>
+
+    /YourCommunitiesFragment y OthercommunitiesFragment---
+    <string name="txvInvitationCommunities">Tus invitaciones</string>
+
+    /SingleCommunityActivity---
+    <string name="tabVotaciones">Votacions</string>
+    <string name="tabPost">Post</string>
+    <string name="tabPropuestas">Propostes</string>
+    <string name="tabCalendario">Calendari</string>
+
+    //AllVotacionesUpFragment---
+    <string name="rdbVotacionInProgress">En proces</string>
+    <string name="rdbVotacionClosed">Acabades</string>
+
+    //AllProposalsUpFragment---
+    <string name="rdbProposalInProgress">En proces</string>
+    <string name="rdbProposalClosed">Acabades</string>
+
+    //RowVotacionInProgress---
+    <string name="txvRowQuestionsVotacion">Numero de preguntes:</string>
+    <string name="txvRowFechaFinVotacion">Data de finalització:</string>
+
+    //RowVotacionClosed---
+    <string name="txvRowAprovedVotacionClosed">Estat final:</string>
+
+    //RowProposalInProgress---
+    <string name="txvRowApoyoMinimo">% de recolzament mínim:</string>
+    <string name="txvRowApoyoActual">% de recolzament actual:</string>
+
+    //RowOthercommunitie---
+    <string name="btnRowAcces">ferse-se membre</string>
+
+    //RowProposalClosed---
+    <string name="txvRowApoyoFinalClosed">% de recolzament final:</string>
+
+    //ProposalInProgressFragment---
+    <string name="rdbAcceptProposal">Si</string>
+    <string name="rdbDiscardProposal">No</string>
+    <string name="btnSendProposal">Enviar</string>
+
+    //ProposalInProgressFragment---
+    <string name="title_activity_create_content">CreateContentActivity</string>
+    <string name="tab1">Votació</string>
+    <string name="tab2">Proposta</string>
+    <string name="tab3">Post</string>
+
+    //EditPasswProfileFragment---
+    <string name="edtOldPasswEdit">Password antic</string>
+    <string name="edtPasswNewEdit">Nou password</string>
+    <string name="edtRepeatNewPasswEdit">Confirmació password</string>
+    <string name="btnAcceptEditProfile">Guardar canvis</string>
+
+
+    //EditEmailwProfileFragment---
+    <string name="edtOldEmailEdit">Email antic</string>
+    <string name="edtNewEmailEdit">Nuu email</string>
+    <string name="edtRepeatNewEmailEdit">Confirmació email</string>
+    <string name="toatsOldEmailEmpty">Te que omplir el camp email antic</string>
+    <string name="toatsNewEmailEmpty">Te que omplir el camp email nou</string>
+    <string name="toatsFormatOldEmail">Format del antic email incorrecte</string>
+    <string name="toatsFormatNewEmail">Format del nou email incorrecte</string>
+
+
+    //EditTypeProfileFragment---
+    <string name="rdbProfilePublic">Perfil públic</string>
+    <string name="rdbProfilePrivate">Perfil privat</string>
+    <string name="ToastRespuestaProfileStae">Canvis guardats amb exit</string>
+
+
+
 
 
 </resources>
