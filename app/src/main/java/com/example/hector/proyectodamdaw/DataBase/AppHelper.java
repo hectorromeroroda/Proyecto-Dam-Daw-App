@@ -33,6 +33,16 @@ public class AppHelper extends SQLiteOpenHelper{
                         "IsPublic BIT," +
                         "MediaId)";
         sqLiteDatabase.execSQL(comunity);
+        String comunityUser =
+                "CREATE TABLE CommunityUser (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "IdCommunity INT NOT NULL," +
+                        "IdUserSqlite INT NOT NULL," +
+                        "UserInvited BIT," +
+                        "UserRole VARCHAR(45)NOT NULL," +
+                        "FOREIGN KEY (IdCommunity) REFERENCES Community(IdCommunity)," +
+                        "FOREIGN KEY (IdUserSqlite) REFERENCES User(_id)" +
+                        ")";
+        sqLiteDatabase.execSQL(comunityUser);
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
