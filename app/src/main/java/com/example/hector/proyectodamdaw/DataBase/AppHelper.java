@@ -20,7 +20,7 @@ public class AppHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        /*COMENTAR DB CACHE FALTA DE TABLAS*/
+     /*COMENTAR DB CACHE FALTA DE TABLAS*/
         String comunity =
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "IdCommunity INT NOT NULL," +

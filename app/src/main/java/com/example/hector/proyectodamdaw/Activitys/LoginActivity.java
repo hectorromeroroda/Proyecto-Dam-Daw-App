@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
-        Cursor cursorRememberMeState = bd.rememmberMeUserLogin();
+        Cursor cursorRememberMeState = bd.rememmberMeUserLogin(11);//ESTO ES INVENTADO SE TIENE QUE CAMBIAR VALOR
 
         if (cursorRememberMeState.moveToFirst() != false){
             rememberMe = Boolean.valueOf(cursorRememberMeState.getString(0));

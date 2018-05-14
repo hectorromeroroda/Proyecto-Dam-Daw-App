@@ -62,7 +62,7 @@ public class EditTypeProfileFragment extends Fragment{
         bd = new AppDataSources(getContext());
 
         //Recupera el estado actual del perfil y lo carga en los radiobutons
-        Cursor cursorTypeProfileMeState = bd.typeProfile();
+        Cursor cursorTypeProfileMeState = bd.typeProfile(1);//VALOR INVENTADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if (cursorTypeProfileMeState.moveToFirst() != false){
             resultCursorPublicProfile = Boolean.valueOf(cursorTypeProfileMeState.getString(0));
             if (resultCursorPublicProfile==true){
@@ -153,7 +153,7 @@ public class EditTypeProfileFragment extends Fragment{
             profileState= jsResponse.getString("profile_is_public");
 
             //Guarda los datos en la base datos
-            bd.saveEditTypeProfile(publicProfile);
+           // bd.saveEditTypeProfile(publicProfile);
             Toast toastResult = Toast.makeText(getContext(), R.string.ToastRespuestaProfileStae, Toast.LENGTH_LONG);
             toastResult.show();
 

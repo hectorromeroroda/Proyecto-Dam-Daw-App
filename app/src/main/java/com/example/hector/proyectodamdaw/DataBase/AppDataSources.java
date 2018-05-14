@@ -89,7 +89,7 @@ public class AppDataSources {
 
 
     }
-        // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------------------------------------------------------------------------------
+    // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------------------------------------------------------------------------------
     public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, Boolean rememberMe) {
         // Guardar los datos del registro del usuario
         ContentValues values = new ContentValues();
@@ -103,9 +103,9 @@ public class AppDataSources {
         dbW.insert(table_USER,null,values);
     }
 
-    public void saveCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, String id) {
+    public void saveCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, int communityId) {
         ContentValues values = new ContentValues();
-        values.put(COMMUNITY_ID, id);
+        values.put(COMMUNITY_ID, communityId);
         values.put(COMMUNITY_MEMBERS, numMembers);
         values.put(COMMUNITY_PUBLIC, isPublic);
         values.put(COMMUNITY_CONTENTS, numContents);
@@ -182,3 +182,5 @@ public class AppDataSources {
     }
 
 }
+
+
