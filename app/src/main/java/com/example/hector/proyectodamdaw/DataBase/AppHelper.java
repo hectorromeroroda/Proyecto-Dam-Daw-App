@@ -23,7 +23,7 @@ public class AppHelper extends SQLiteOpenHelper{
      /*COMENTAR DB CACHE FALTA DE TABLAS*/
         String comunity =
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "IdCommunity INT NOT NULL," +
+                        "IdCommunity VARCHAR(45) NOT NULL," +
                         "Name VARCHAR(45)NOT NULL," +
                         "Description VARCHAR(300) NOT NULL," +
                         "NumUsers INT," +
@@ -33,7 +33,7 @@ public class AppHelper extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(comunity);
         String comunityUser =
                 "CREATE TABLE CommunityUser (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "IdCommunity INT NOT NULL," +
+                        "IdCommunity VARCHAR(45) NOT NULL," +
                         "IdUserSqlite INT NOT NULL," +
                         "UserInvited BIT," +
                         "UserRole VARCHAR(45)NOT NULL," +

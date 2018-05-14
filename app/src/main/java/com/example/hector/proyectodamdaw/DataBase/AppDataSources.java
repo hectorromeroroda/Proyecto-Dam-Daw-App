@@ -103,7 +103,7 @@ public class AppDataSources {
         dbW.insert(table_USER,null,values);
     }
 
-    public void saveCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, int communityId) {
+    public void saveCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, String communityId) {
         ContentValues values = new ContentValues();
         values.put(COMMUNITY_ID, communityId);
         values.put(COMMUNITY_MEMBERS, numMembers);
@@ -114,7 +114,7 @@ public class AppDataSources {
         dbW.insert(table_COMM,null,values);
     }
 
-    public void saveCommunityUser(int communityId, int userId, String userRole, boolean userInvited) {
+    public void saveCommunityUser(String communityId, int userId, String userRole, boolean userInvited) {
         ContentValues values = new ContentValues();
         values.put(COMMUNITY_ID, communityId);
         values.put(USER_ID_SQLITE, userId);
@@ -157,7 +157,7 @@ public class AppDataSources {
         dbW.rawQuery(UpdateQuery,null);
     }
 
-    public void updateCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, int idCommunity) {
+    public void updateCommunity(int numMembers, boolean isPublic, int numContents, String name, String description, String idCommunity) {
 
         String UpdateQuery = "UPDATE Community SET NumUsers = '" + numMembers + "', IsPublic= '" + isPublic + "'"+ ", NumContent= '"
                 + numContents + "'"+ ", Name= '" + name + "'"+ ", Description= '" + description + "' WHERE IdCommunity= '" + idCommunity + "'";
@@ -165,7 +165,7 @@ public class AppDataSources {
         dbW.rawQuery(UpdateQuery,null);
     }
 
-    public void updateCommunityUserInvited(int numMembers, boolean isPublic, int numContents, String name, String description, int idCommunity) {
+    public void updateCommunityUserInvited(int numMembers, boolean isPublic, int numContents, String name, String description, String idCommunity) {
 
         String UpdateQuery = "UPDATE Community SET NumUsers = '" + numMembers + "', IsPublic= '" + isPublic + "'"+ ", NumContent= '"
                 + numContents + "'"+ ", Name= '" + name + "'"+ ", Description= '" + description + "' WHERE IdCommunity= '" + idCommunity + "'";
