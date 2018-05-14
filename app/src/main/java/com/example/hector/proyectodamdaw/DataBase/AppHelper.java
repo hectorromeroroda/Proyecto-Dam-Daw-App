@@ -20,22 +20,20 @@ public class AppHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        /*COMENTAR DB CACHE FALTA DE TABLAS*/
+     /*COMENTAR DB CACHE FALTA DE TABLAS*/
         String comunity =
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "IdCommunity INT NOT NULL," +
+                        "IdCommunity VARCHAR(45) NOT NULL," +
                         "Name VARCHAR(45)NOT NULL," +
                         "Description VARCHAR(300) NOT NULL," +
                         "NumUsers INT," +
                         "NumContent INT," +
-                        "UserInvited BIT," +
-                        "UserRole VARCHAR(45)NOT NULL," +
                         "IsPublic BIT," +
                         "MediaId)";
         sqLiteDatabase.execSQL(comunity);
         String comunityUser =
                 "CREATE TABLE CommunityUser (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "IdCommunity INT NOT NULL," +
+                        "IdCommunity VARCHAR(45) NOT NULL," +
                         "IdUserSqlite INT NOT NULL," +
                         "UserInvited BIT," +
                         "UserRole VARCHAR(45)NOT NULL," +
