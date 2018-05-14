@@ -5,33 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_selec_community"
+            android:icon="@drawable/community_selector"
+            android:title="Selector de comunidad" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_community"
+            android:icon="@drawable/community"
+            android:title="Comunidad" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_events"
+            android:icon="@drawable/calendar"
+            android:title="Eventos" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/chat"
+            android:title="Chat" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Usuario">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_statistics"
+                android:icon="@drawable/statistics"
+                android:title="Estadística" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/avatar"
+                android:title="Perfil" />
         </menu>
     </item>
 
