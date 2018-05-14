@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProyectoDamDaw</string>
+    <string name="app_name">Domo</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -122,14 +122,4 @@
     <string name="rdbProfilePublic">Perfil público</string>
     <string name="rdbProfilePrivate">Perfil privado</string>
     <string name="ToastRespuestaProfileStae">Cambios guardados con exito</string>
-
-
-
-
-
-
-
-
-
-
 </resources>

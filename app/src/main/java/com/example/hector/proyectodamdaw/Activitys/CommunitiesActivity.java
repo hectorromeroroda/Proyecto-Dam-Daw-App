@@ -49,7 +49,7 @@ public class CommunitiesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_gallery);
+        navigationView.setCheckedItem(R.id.nav_selec_community);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
@@ -146,17 +146,17 @@ public class CommunitiesActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_selec_community) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_community) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_events) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_chat) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_statistics) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_profile) {
 
         }
 

@@ -5,33 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_selec_community"
             android:icon="@drawable/community_selector"
-            android:title="Import_Communities" />
+            android:title="Selector de comunidad" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_community"
             android:icon="@drawable/community"
-            android:title="Gallery_Communities" />
+            android:title="Comunidad" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_events"
             android:icon="@drawable/calendar"
-            android:title="Slideshow_Communities" />
+            android:title="Eventos" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_chat"
             android:icon="@drawable/chat"
-            android:title="Tools_Communities" />
+            android:title="Chat" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Usuario">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_statistics"
                 android:icon="@drawable/statistics"
-                android:title="Share_Communities" />
+                android:title="Estadística" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_profile"
                 android:icon="@drawable/avatar"
-                android:title="Send_Communities" />
+                android:title="Perfil" />
         </menu>
     </item>
 
