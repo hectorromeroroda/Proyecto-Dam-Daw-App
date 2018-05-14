@@ -28,8 +28,6 @@ public class AppHelper extends SQLiteOpenHelper{
                         "Description VARCHAR(300) NOT NULL," +
                         "NumUsers INT," +
                         "NumContent INT," +
-                        "UserInvited BIT," +
-                        "UserRole VARCHAR(45)NOT NULL," +
                         "IsPublic BIT," +
                         "MediaId)";
         sqLiteDatabase.execSQL(comunity);
