@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_balance_foreground"/>
+            android:src="@mipmap/ic_balance_letras_foreground"/>
     </item>
 
 </layer-list>
