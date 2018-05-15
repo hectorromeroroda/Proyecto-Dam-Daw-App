@@ -14,10 +14,10 @@
     <string name="txvSingUpLogin">¿Todavia no eres miembro?</string>
     <string name="txvForgotPassw">¿Has olvidado la contraseña?</string>
     <string name="btnAcceptLogin">Entrar</string>
-    <string name="toastUser">Deve completar el campo Nombre de usuario</string>
-    <string name="toastPassw">Deve completar el campo Contraseña</string>
-    <string name="toastLenghtPassw">La contraseña deve tener un minimo de 8 carácteres</string>
-    <string name="ckbRememberMe">No cerrar la sessión</string>
+    <string name="toastUser">Debe completar el campo Nombre de usuario</string>
+    <string name="toastPassw">Debe completar el campo Contraseña</string>
+    <string name="toastLenghtPassw">La contraseña debe tener un mínimo de 8 carácteres</string>
+    <string name="ckbRememberMe">No cerrar la sesión</string>
     <string name="dialog">"Verificando datos...</string>
 
     //LoginSingUpFragment---
@@ -35,17 +35,17 @@
     <string name="edtRepeatPasswSingUp">Confirmación password</string>
     <string name="btnAcceptSingUp">Aceptar</string>
     <string name="title_activity_communities">CommunitiesActivity</string>
-    <string name="toastNameEmpty">Deve completar el campo Nombre</string>
-    <string name="toastSurnameEmpty">Deve completar el campo Apellidos</string>
-    <string name="toastEmailEmpty">Deve completar el campo Email</string>
+    <string name="toastNameEmpty">Debe completar el campo Nombre</string>
+    <string name="toastSurnameEmpty">Debe completar el campo Apellidos</string>
+    <string name="toastEmailEmpty">Debe completar el campo Email</string>
     <string name="toastEmailFormat">El formato del campo Email es incorrecto</string>
-    <string name="toastRepeatEmailEmpty">Deve completar el campo Confirmar Email</string>
+    <string name="toastRepeatEmailEmpty">Debe completar el campo Confirmar Email</string>
     <string name="toastEmailSame">Las direciones de correo no coinciden</string>
-    <string name="toastPasswEmpty">Deve completar el campo Password</string>
-    <string name="toastPasswLenght">El password deve tener un mínimo de 8 caracteres</string>
-    <string name="toastRepeatPasswEmpty">Deve completar el campo Confirmación Password</string>
+    <string name="toastPasswEmpty">Debe completar el campo Password</string>
+    <string name="toastPasswLenght">El password debe tener un mínimo de 8 caracteres</string>
+    <string name="toastRepeatPasswEmpty">Debe completar el campo Confirmación Password</string>
     <string name="toastPasswSame">Los passwords no coinciden</string>
-    <string name="toastRegisterOk">Registro realizado con exito</string>
+    <string name="toastRegisterOk">Registro realizado con éxito</string>
 
     /CommunitiesActivity---
     <string name="tabTusComunidades">Tus comunidades</string>
@@ -80,7 +80,7 @@
     <string name="txvRowApoyoActual">% de apoyo actual:</string>
 
     //RowOthercommunitie---
-    <string name="btnRowAcces">Hacer-se miembro</string>
+    <string name="btnRowAcces">Hacerse miembro</string>
 
     //RowProposalClosed---
     <string name="txvRowApoyoFinalClosed">% de apoyo final:</string>
@@ -106,15 +106,15 @@
     <string name="edtOldEmailEdit">Email antiguo</string>
     <string name="edtNewEmailEdit">Nuevo email</string>
     <string name="edtRepeatNewEmailEdit">Confirmación email</string>
-    <string name="toatsOldEmailEmpty">Deve completar el campo email antiguo</string>
-    <string name="toatsNewEmailEmpty">Deve completar el campo email nuevo</string>
+    <string name="toatsOldEmailEmpty">Debe completar el campo email antiguo</string>
+    <string name="toatsNewEmailEmpty">Debe completar el campo email nuevo</string>
     <string name="toatsFormatOldEmail">Formato del antiguo email incorrecto</string>
     <string name="toatsFormatNewEmail">Formato del nuevo email incorrecto</string>
 
     //EditTypeProfileFragment---
     <string name="rdbProfilePublic">Perfil público</string>
     <string name="rdbProfilePrivate">Perfil privado</string>
-    <string name="ToastRespuestaProfileStae">Cambios guardados con exito</string>
+    <string name="ToastRespuestaProfileStae">Cambios guardados con éxito</string>
 
 
 

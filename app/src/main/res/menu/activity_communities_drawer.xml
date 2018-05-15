@@ -5,13 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_selec_community"
+            android:id="@+id/nav_my_community"
             android:icon="@drawable/community_selector"
-            android:title="Selector de comunidad" />
-        <item
-            android:id="@+id/nav_community"
-            android:icon="@drawable/community"
             android:title="Comunidad" />
+        <item
+            android:id="@+id/nav_community_selector"
+            android:icon="@drawable/community"
+            android:title="Selector de Comunidad" />
         <item
             android:id="@+id/nav_events"
             android:icon="@drawable/calendar"

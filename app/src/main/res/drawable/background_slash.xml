@@ -2,12 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@color/colorPrimary"/>
+        android:drawable="@color/AzulFuerte"/>
 
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/ic_balance_letras_foreground"/>
+            android:src="@mipmap/ic_balance_foreground"/>
     </item>
 
 </layer-list>
