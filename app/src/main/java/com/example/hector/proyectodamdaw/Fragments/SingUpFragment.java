@@ -231,7 +231,7 @@ public class SingUpFragment extends Fragment{
                     jsProfilePublic= jsResponse.getString("profile_is_public");
                     jsToken=jsResponse.getString("token");
 
-                    bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, false);
+                    bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, 0);
 
                     Toast toastResult = Toast.makeText(getContext(), R.string.toastRegisterOk, Toast.LENGTH_LONG);
                     toastResult.show();
