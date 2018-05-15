@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppDataSources bd;
-    private boolean rememberMe=false;
+    private String rememberMe;
 
 
     @Override
@@ -45,34 +45,32 @@ public class LoginActivity extends AppCompatActivity
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
-        Cursor cursorRememberMeState = bd.rememmberMeUserLogin(11);//ESTO ES INVENTADO SE TIENE QUE CAMBIAR VALOR
+        Cursor cursorRememberMeState = bd.rememmberMeUserLogin();
 
         if (cursorRememberMeState.moveToFirst() != false){
-            rememberMe = Boolean.valueOf(cursorRememberMeState.getString(0));
+            rememberMe = cursorRememberMeState.getString(0);
+            //Envia a AllComminities
+            Intent intent = new Intent(this, CommunitiesActivity.class );
+            startActivity(intent);
+        }else{
+            //Cambiar de fragment
+            Fragment fragmentLogin = new LoginFragment();
+            Fragment fragmentSingUp = new SingUpFragment();
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+
+            if (currentFragment == null) {
+                //carga del primer fragment justo en la carga inicial de la app
+                loadFragment(fragmentLogin);
+            } else{
+                if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
+
+                }else{
+                    if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
+
+                    }
+                }
+            }
         }
-         if (rememberMe==true){
-             //Envia a AllComminities
-             Intent intent = new Intent(this, CommunitiesActivity.class );
-             startActivity(intent);
-         }else{
-             //Cambiar de fragment
-             Fragment fragmentLogin = new LoginFragment();
-             Fragment fragmentSingUp = new SingUpFragment();
-             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
-
-             if (currentFragment == null) {
-                 //carga del primer fragment justo en la carga inicial de la app
-                 loadFragment(fragmentLogin);
-             } else{
-                 if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
-
-                 }else{
-                     if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
-
-                     }
-                 }
-             }
-         }
 
     }
 

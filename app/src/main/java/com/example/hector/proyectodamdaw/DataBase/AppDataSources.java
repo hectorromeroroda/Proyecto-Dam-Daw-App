@@ -20,6 +20,7 @@ public class AppDataSources {
     public static final String USER_LAST_NAME = "UserLastName";
     public static final String USER_EMAIL = "UserEmail";
     public static final String USER_ID_SQLITE = "IdUserSqlite";
+    public static final String USER_ID = "_id";
     public static final String USER_STIKIES = "UserStikies";
     public static final String USER_PUBLIC_PROFILE = "UserPublicProfile";
     public static final String USER_TOKEN = "UserToken";
@@ -58,9 +59,9 @@ public class AppDataSources {
     }
 
     // FUNCIONS QUE RETORNAN CURSORES-----------------------------------------------------------------------------------------------------------------
-    public Cursor rememmberMeUserLogin(int idUser) {
+    public Cursor rememmberMeUserLogin() {
 
-        String selectQuery = " SELECT UserRememberMe FROM User WHERE _id= '" + idUser + "'";
+        String selectQuery = " SELECT UserFirstName FROM User WHERE UserRememberMe= 1 ";
         return dbR.rawQuery(selectQuery,null);
     }
 
@@ -90,7 +91,7 @@ public class AppDataSources {
 
     }
     // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------------------------------------------------------------------------------
-    public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, Boolean rememberMe) {
+    public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, int rememberMe) {
         // Guardar los datos del registro del usuario
         ContentValues values = new ContentValues();
         values.put(USER_FIRST_NAME, firstName);
@@ -143,16 +144,24 @@ public class AppDataSources {
         dbW.rawQuery(UpdateQuery,null);
     }
 
-    public void updateUserLoginTokenRememberMe(String userToken, boolean rememberMe, int idUser) {
+    public void updateUserLoginTokenRememberMe(String userToken, int rememberMe, int idUser) {
         // Modificar el valor del token  y el estado de rememberMe del usuario
-        String UpdateQuery = "UPDATE User SET UserToken = '" + userToken + "', UserRememberMe= '" + rememberMe + "' WHERE _id= '" + idUser + "'";;
+        String UpdateQuery = "UPDATE User SET UserToken = '" + userToken + "', UserRememberMe= " + rememberMe + " WHERE _id= " + idUser + "";
 
         dbW.rawQuery(UpdateQuery,null);
     }
 
+    public void pruebaUpdate(String userToken, int rememberMe, int idUser) {
+        ContentValues values = new ContentValues();
+        values.put(USER_TOKEN, userToken);
+        values.put(USER_REMEMBER_ME, rememberMe);
+
+        dbW.update(table_USER,values, USER_ID + " = ?", new String[] { String.valueOf(idUser) });
+    }
+
     public void updateUserLogin(int stikies, boolean profileIsPublic, String email, int idUser) {
 
-        String UpdateQuery = "UPDATE User SET UserStikies = '" + stikies + "', UserPublicProfile= '" + profileIsPublic + "', UserEmail= '" + email + "' WHERE _id= '" + idUser + "'";
+        String UpdateQuery = "UPDATE User SET UserStikies = '" + stikies + "', UserPublicProfile= '" + profileIsPublic + "', UserEmail= '" + email + "' WHERE _id= " + idUser + "";
 
         dbW.rawQuery(UpdateQuery,null);
     }

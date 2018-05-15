@@ -219,18 +219,25 @@ public class LoginFragment extends Fragment{
                     jsProfilePublic = jsResponse.getString("profile_is_public");
                     jsToken=jsResponse.getString("token");
 
+                    int prueba = 1;
                     //Actualiza datos del usuario
                     Cursor  cursorIdUserSqlite= bd.userIdSqlite(jsEmail);
                     if (cursorIdUserSqlite.moveToFirst() != false){
                         idUserSqlite = cursorIdUserSqlite.getInt(0);
-                    }
+                        if (rememberMe.isChecked() == true) {
+                            bd.pruebaUpdate(jsToken, prueba, idUserSqlite);
+                        } else {
+                            bd.updateUserLoginTokenRememberMe(jsToken, 0, idUserSqlite);
+                        }
+                        bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail, idUserSqlite);
+                    }else{
+                        if (rememberMe.isChecked() == true) {
+                            bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, 1);
+                        } else {
+                            bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, 0);
+                        }
 
-                    if (rememberMe.isChecked() == true) {
-                        bd.updateUserLoginTokenRememberMe(jsToken, true, idUserSqlite);
-                    } else {
-                        bd.updateUserLoginTokenRememberMe(jsToken, false, idUserSqlite);
                     }
-                    bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail, idUserSqlite);
 
                     //Datos sobre las comunidades a las que se esta invitado
                     jsInvited = jsResponse.getJSONArray("invited");
