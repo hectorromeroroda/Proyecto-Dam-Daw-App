@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Negro"
     tools:context="com.example.hector.proyectodamdaw.Rows.RowOtherCommunitie">
 
     <LinearLayout
@@ -37,19 +38,22 @@
                 android:id="@+id/txvRowNameOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/LilaFuerte" />
 
             <TextView
                 android:id="@+id/txvrowDescriptionOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/LilaFuerte" />
 
             <TextView
                 android:id="@+id/txvRowNumUsersOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/LilaFuerte" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +68,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/btnRowAcces" />
+                android:backgroundTint="@color/Negro"
+                android:text="@string/btnRowAcces"
+                android:textColor="@color/LilaFuerte" />
         </LinearLayout>
 
     </LinearLayout>

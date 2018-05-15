@@ -6,10 +6,10 @@
 
 
     <color name="Azul_lila">#7872A8</color>
-    <color name="Azul_medio">#8576F6</color>
+    <color name="Azul_medio">#8576f6</color>
     <color name="AzulFuerte">#4B39D6</color>
     <color name="Lila_azul">#A57BFB</color>
-    <color name="LilaFuerte">#6F4EB3</color>
+    <color name="LilaFuerte">#6f4eb3</color>
     <color name="Negro">#2d2d2d</color>
     <color name="Blanco">#FFFFFF</color>
 </resources>

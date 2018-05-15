@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hector.proyectodamdaw.Activitys.LoginActivity">
+    tools:context="com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -18,16 +18,8 @@
             android:background="@color/Negro"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <Spinner
-            android:id="@+id/spnEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/Negro"
-            android:popupBackground="@color/Negro" />
-
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_edit_profile" />
+    <include layout="@layout/content_create_content" />
 
 </android.support.design.widget.CoordinatorLayout>

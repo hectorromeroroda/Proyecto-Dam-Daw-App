@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Negro">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,7 +13,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="25dp"
-            android:paddingRight="25dp" >
+            android:paddingRight="25dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -28,6 +29,7 @@
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textAlignment="center"
+                    android:textColor="@color/LilaFuerte"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -43,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
+                    android:textColor="@color/LilaFuerte"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -55,7 +58,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
-                    android:background="#000000" />
+                    android:background="@color/Lila_azul" />
 
             </LinearLayout>
 
@@ -71,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
+                    android:textColor="@color/LilaFuerte"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -83,7 +87,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
-                    android:background="#000000" />
+                    android:background="@color/Lila_azul" />
 
             </LinearLayout>
 
@@ -103,14 +107,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/rdbAcceptProposal" />
+                        android:buttonTint="@color/LilaFuerte"
+                        android:text="@string/rdbAcceptProposal"
+                        android:textColor="@color/LilaFuerte" />
 
                     <RadioButton
                         android:id="@+id/rdbDiscardProposal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/rdbDiscardProposal" />
+                        android:buttonTint="@color/LilaFuerte"
+                        android:text="@string/rdbDiscardProposal"
+                        android:textColor="@color/LilaFuerte" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -126,7 +134,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/btnSendProposal" />
+                    android:backgroundTint="@color/Negro"
+                    android:text="@string/btnSendProposal"
+                    android:textColor="@color/LilaFuerte" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
