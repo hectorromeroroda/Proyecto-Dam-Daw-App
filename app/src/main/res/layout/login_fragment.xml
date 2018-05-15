@@ -77,7 +77,7 @@
                     android:ems="10"
                     android:hint="@string/txvUserLogin"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/AzulFuerte"
+                    android:textColor="@color/LilaFuerte"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -105,7 +105,7 @@
                     android:ems="10"
                     android:hint="@string/edtPasswLogin"
                     android:inputType="textPassword"
-                    android:textColor="@color/AzulFuerte"
+                    android:textColor="@color/LilaFuerte"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -125,6 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:buttonTint="@color/LilaFuerte"
                     android:text="@string/ckbRememberMe"
                     android:textColor="@color/LilaFuerte" />
 
@@ -182,7 +183,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
-                    android:background="#000000" />
+                    android:background="@color/Lila_azul" />
 
             </LinearLayout>
 
@@ -218,6 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/Negro"
                     android:text="@string/btnSingUpLogin"
                     android:textColor="@color/LilaFuerte" />
             </LinearLayout>

@@ -15,14 +15,17 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="@color/Negro"
             app:layout_scrollFlags="scroll|enterAlways"></android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/Negro"
             android:paddingTop="10dp"
             app:tabGravity="center"
+            app:tabIndicatorColor="@color/Lila_azul"
             app:tabMode="scrollable">
 
         </android.support.design.widget.TabLayout>
@@ -34,6 +37,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/Negro"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout_editor_absoluteX="25dp">
 

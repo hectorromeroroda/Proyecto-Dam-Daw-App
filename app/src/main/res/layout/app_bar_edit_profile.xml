@@ -15,14 +15,16 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/Negro"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <Spinner
             android:id="@+id/spnEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/Negro"
+            android:popupBackground="@color/Negro" />
 
     </android.support.design.widget.AppBarLayout>
 
