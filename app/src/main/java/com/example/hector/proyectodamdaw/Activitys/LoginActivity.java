@@ -16,13 +16,15 @@ import android.view.MenuItem;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
+import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppDataSources bd;
-    private boolean rememberMe=false;
+    private int idUserSqlite;
+    GlobalVariables globalBariables;
 
 
     @Override
@@ -42,37 +44,39 @@ public class LoginActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
+        globalBariables= new GlobalVariables();
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
-        Cursor cursorRememberMeState = bd.rememmberMeUserLogin(11);//ESTO ES INVENTADO SE TIENE QUE CAMBIAR VALOR
+        Cursor cursorRememberMeState = bd.rememmberMeUserLogin();
 
         if (cursorRememberMeState.moveToFirst() != false){
-            rememberMe = Boolean.valueOf(cursorRememberMeState.getString(0));
+            idUserSqlite = cursorRememberMeState.getInt(0);
+
+            //Poner en id de usuario en variable gobal
+            globalBariables.setIdUserSqlite(idUserSqlite);
+            //Envia a AllComminities
+            Intent intent = new Intent(this, CommunitiesActivity.class );
+            startActivity(intent);
+        }else{
+            //Cambiar de fragment
+            Fragment fragmentLogin = new LoginFragment();
+            Fragment fragmentSingUp = new SingUpFragment();
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+
+            if (currentFragment == null) {
+                //carga del primer fragment justo en la carga inicial de la app
+                loadFragment(fragmentLogin);
+            } else{
+                if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
+
+                }else{
+                    if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
+
+                    }
+                }
+            }
         }
-         if (rememberMe==true){
-             //Envia a AllComminities
-             Intent intent = new Intent(this, CommunitiesActivity.class );
-             startActivity(intent);
-         }else{
-             //Cambiar de fragment
-             Fragment fragmentLogin = new LoginFragment();
-             Fragment fragmentSingUp = new SingUpFragment();
-             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
-
-             if (currentFragment == null) {
-                 //carga del primer fragment justo en la carga inicial de la app
-                 loadFragment(fragmentLogin);
-             } else{
-                 if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
-
-                 }else{
-                     if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
-
-                     }
-                 }
-             }
-         }
 
     }
 
@@ -108,11 +112,6 @@ public class LoginActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
