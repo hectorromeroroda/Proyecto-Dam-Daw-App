@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
 import com.example.hector.proyectodamdaw.R;
 import com.example.hector.proyectodamdaw.Fragments.YourCommunitiesFragment;
@@ -30,6 +31,7 @@ public class CommunitiesActivity extends AppCompatActivity
 
     private ViewPager viewPager;
     private TabLayout tabs;
+    private AppDataSources bd;
 
 
     @SuppressLint("ResourceType")
@@ -58,6 +60,8 @@ public class CommunitiesActivity extends AppCompatActivity
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        bd = new AppDataSources(this);
 
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
@@ -134,7 +138,11 @@ public class CommunitiesActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
+            //Accion al dar boton logout
+            boolean state = true;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
+
             return true;
         }
 

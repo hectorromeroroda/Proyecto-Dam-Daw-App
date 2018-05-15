@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.AllCalendarFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllPostFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllProposalFragment;
@@ -29,6 +30,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
 
     private ViewPager viewPager;
     private TabLayout tabs;
+    private AppDataSources bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class SingleCommunitieActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
+
+        bd = new AppDataSources(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
@@ -127,7 +131,10 @@ public class SingleCommunitieActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
+            //Accion al dar boton logout
+            boolean state = true;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
             return true;
         }
 

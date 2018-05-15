@@ -18,6 +18,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.EditEmailProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditImageProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditPasswProfileFragment;
@@ -26,6 +27,8 @@ import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AppDataSources bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class EditProfileActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
+
+        bd = new AppDataSources(this);
 
         Spinner spinnerEditProfile = (Spinner) findViewById(R.id.spnEditProfile);
         String[] items = {"Editar email", "Editar password", "Editar tipo de perfil", "Editar imagen de perfil"};
@@ -184,6 +189,10 @@ public class EditProfileActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
+            //Accion al dar boton logout
+            boolean state = true;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
             return true;
         }
 

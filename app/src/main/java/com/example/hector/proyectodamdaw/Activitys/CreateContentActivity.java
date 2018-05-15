@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.AllPostFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllProposalFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllVotacionesFragment;
@@ -26,6 +27,7 @@ public class CreateContentActivity extends AppCompatActivity
 
     private ViewPager viewPager;
     private TabLayout tabs;
+    private AppDataSources bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class CreateContentActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
+
+        bd = new AppDataSources(this);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tab1));
@@ -104,7 +108,10 @@ public class CreateContentActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
+            //Accion al dar boton logout
+            boolean state = true;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
             return true;
         }
 
