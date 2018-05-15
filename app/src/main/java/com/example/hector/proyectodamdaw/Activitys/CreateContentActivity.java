@@ -1,5 +1,6 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -42,7 +43,7 @@ public class CreateContentActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_selec_community);
+        navigationView.setCheckedItem(R.id.nav_my_community);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tab1));
@@ -116,20 +117,29 @@ public class CreateContentActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_selec_community) {
-            // Handle the camera action
-        } else if (id == R.id.nav_community) {
+        if (id == R.id.nav_my_community) {
+            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
+            startActivityForResult(intent,123);
+        } else if (id == R.id.nav_community_selector) {
+            Intent intent = new Intent(this, CommunitiesActivity.class );
+
+            startActivityForResult(intent,123);
         } else if (id == R.id.nav_events) {
 
         } else if (id == R.id.nav_chat) {
+            /*Intent intent = new Intent(this, CreateContentActivity.class );
 
+            startActivityForResult(intent,123);*/
         } else if (id == R.id.nav_statistics) {
 
-        } else if (id == R.id.nav_profile) {
 
+        } else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(this, EditProfileActivity.class );
+            startActivityForResult(intent,123);
         }
 
+        item.setChecked(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

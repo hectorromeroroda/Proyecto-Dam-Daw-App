@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_selec_community);
+        navigationView.setCheckedItem(R.id.nav_my_community);
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
@@ -123,26 +123,26 @@ public class LoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_selec_community) {
+        if (id == R.id.nav_my_community) {
+            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
-        } else if (id == R.id.nav_community) {
+            startActivityForResult(intent,123);
+        } else if (id == R.id.nav_community_selector) {
             Intent intent = new Intent(this, CommunitiesActivity.class );
 
             startActivityForResult(intent,123);
         } else if (id == R.id.nav_events) {
-            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
-            startActivityForResult(intent,123);
         } else if (id == R.id.nav_chat) {
-            Intent intent = new Intent(this, CreateContentActivity.class );
+            /*Intent intent = new Intent(this, CreateContentActivity.class );
 
-            startActivityForResult(intent,123);
+            startActivityForResult(intent,123);*/
         } else if (id == R.id.nav_statistics) {
-            Intent intent = new Intent(this, EditProfileActivity.class );
 
-            startActivityForResult(intent,123);
+
         } else if (id == R.id.nav_profile) {
-
+            Intent intent = new Intent(this, EditProfileActivity.class );
+            startActivityForResult(intent,123);
         }
 
         item.setChecked(true);

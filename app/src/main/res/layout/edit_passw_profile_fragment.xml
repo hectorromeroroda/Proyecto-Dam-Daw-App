@@ -42,7 +42,7 @@
                     android:ems="10"
                     android:hint="@string/edtOldPasswEdit"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColorHint="@color/LilaFuerte"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -73,7 +73,8 @@
                     android:ems="10"
                     android:hint="@string/edtPasswNewEdit"
                     android:inputType="textPassword"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Azul_medio"
+                    android:textColorHint="@color/LilaFuerte"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -103,7 +104,8 @@
                     android:ems="10"
                     android:hint="@string/edtRepeatNewPasswEdit"
                     android:inputType="textPassword"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Azul_medio"
+                    android:textColorHint="@color/LilaFuerte"
                     android:textSize="20sp" />
 
             </LinearLayout>

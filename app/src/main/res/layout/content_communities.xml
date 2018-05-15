@@ -26,7 +26,8 @@
             android:paddingTop="10dp"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/Lila_azul"
-            app:tabMode="scrollable">
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/LilaFuerte">
 
         </android.support.design.widget.TabLayout>
 
