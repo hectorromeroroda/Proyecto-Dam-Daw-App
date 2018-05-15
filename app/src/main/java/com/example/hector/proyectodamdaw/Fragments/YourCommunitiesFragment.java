@@ -12,6 +12,7 @@ import com.example.hector.proyectodamdaw.AdaptadorCommunities;
 import com.example.hector.proyectodamdaw.AdaptadorCommunitiesBD;
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 
@@ -27,6 +28,7 @@ public class YourCommunitiesFragment extends Fragment{
     private Communitie communitie = new Communitie();
     public AdaptadorCommunitiesBD adaptadorBD;
     private AppDataSources bd;
+    GlobalVariables globalBariables;
 
     public YourCommunitiesFragment() {
         // Required empty public constructor
@@ -40,6 +42,7 @@ public class YourCommunitiesFragment extends Fragment{
         recyclerViewYourCommunities = (RecyclerView) view.findViewById(R.id.rcvYourCommunities);
         recyclerViewYourInvitations = (RecyclerView) view.findViewById(R.id.rcvYourinvitations);
         bd = new AppDataSources(getContext());
+        globalBariables= new GlobalVariables();
 
         return view;
     }
@@ -47,7 +50,7 @@ public class YourCommunitiesFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        adaptadorBD = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunities());
+        adaptadorBD = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunitiesPrueba( globalBariables.getIdUserSqlite()));
         recyclerViewYourCommunities.setAdapter(adaptadorBD);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewYourCommunities.setLayoutManager(layoutManager);

@@ -11,7 +11,7 @@ public class GlobalVariables extends Application{
 
     private static int idUserSqlite;
 
-    public static int getIdUserSqlite() {
+    public  int getIdUserSqlite() {
         return idUserSqlite;
     }
 
