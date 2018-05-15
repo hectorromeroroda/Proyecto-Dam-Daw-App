@@ -132,7 +132,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             //Accion al dar boton logout
-            boolean state = true;
+            int state = 1;
             int intFalse=0;
             bd.updateUserRememberMe(intFalse,state);
             return true;

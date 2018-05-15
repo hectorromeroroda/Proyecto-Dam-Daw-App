@@ -152,7 +152,7 @@ public class AppDataSources {
         dbW.update(table_USER,values, USER_ID + " = ?", new String[] { String.valueOf(idUser) });
     }
 
-    public void updateUserRememberMe( int rememberMe, boolean state) {
+    public void updateUserRememberMe( int rememberMe, int state) {
         ContentValues values = new ContentValues();
         values.put(USER_REMEMBER_ME, rememberMe);
 
