@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -56,6 +57,7 @@ public class LoginFragment extends Fragment{
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
+    GlobalVariables globalBariables;
     private AppDataSources bd;
 
     public LoginFragment() {
@@ -219,15 +221,16 @@ public class LoginFragment extends Fragment{
                     jsProfilePublic = jsResponse.getString("profile_is_public");
                     jsToken=jsResponse.getString("token");
 
-                    int prueba = 1;
+                    int intTrue = 1;
+                    int intFalse=0;
                     //Actualiza datos del usuario
                     Cursor  cursorIdUserSqlite= bd.userIdSqlite(jsEmail);
                     if (cursorIdUserSqlite.moveToFirst() != false){
                         idUserSqlite = cursorIdUserSqlite.getInt(0);
                         if (rememberMe.isChecked() == true) {
-                            bd.pruebaUpdate(jsToken, prueba, idUserSqlite);
+                            bd.updateUserLoginTokenRememberMe(jsToken, intTrue, idUserSqlite);
                         } else {
-                            bd.updateUserLoginTokenRememberMe(jsToken, 0, idUserSqlite);
+                            bd.updateUserLoginTokenRememberMe(jsToken, intFalse, idUserSqlite);
                         }
                         bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail, idUserSqlite);
                     }else{
@@ -287,7 +290,8 @@ public class LoginFragment extends Fragment{
 
                         }
 
-
+                    //Poner en id de usuario en variable gobal
+                    globalBariables.setIdUserSqlite(idUserSqlite);
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );
                     startActivity(intent);

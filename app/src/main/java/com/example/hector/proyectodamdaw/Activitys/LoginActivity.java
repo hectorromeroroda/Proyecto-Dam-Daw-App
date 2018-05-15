@@ -16,13 +16,15 @@ import android.view.MenuItem;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
+import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppDataSources bd;
-    private String rememberMe;
+    private int idUserSqlite;
+    GlobalVariables globalBariables;
 
 
     @Override
@@ -42,13 +44,17 @@ public class LoginActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_selec_community);
+        globalBariables= new GlobalVariables();
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
         Cursor cursorRememberMeState = bd.rememmberMeUserLogin();
 
         if (cursorRememberMeState.moveToFirst() != false){
-            rememberMe = cursorRememberMeState.getString(0);
+            idUserSqlite = cursorRememberMeState.getInt(0);
+
+            //Poner en id de usuario en variable gobal
+            globalBariables.setIdUserSqlite(idUserSqlite);
             //Envia a AllComminities
             Intent intent = new Intent(this, CommunitiesActivity.class );
             startActivity(intent);

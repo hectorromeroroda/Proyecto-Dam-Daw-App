@@ -61,7 +61,7 @@ public class AppDataSources {
     // FUNCIONS QUE RETORNAN CURSORES-----------------------------------------------------------------------------------------------------------------
     public Cursor rememmberMeUserLogin() {
 
-        String selectQuery = " SELECT UserFirstName FROM User WHERE UserRememberMe= 1 ";
+        String selectQuery = " SELECT _id FROM User WHERE UserRememberMe= 1 ";
         return dbR.rawQuery(selectQuery,null);
     }
 
@@ -145,13 +145,6 @@ public class AppDataSources {
     }
 
     public void updateUserLoginTokenRememberMe(String userToken, int rememberMe, int idUser) {
-        // Modificar el valor del token  y el estado de rememberMe del usuario
-        String UpdateQuery = "UPDATE User SET UserToken = '" + userToken + "', UserRememberMe= " + rememberMe + " WHERE _id= " + idUser + "";
-
-        dbW.rawQuery(UpdateQuery,null);
-    }
-
-    public void pruebaUpdate(String userToken, int rememberMe, int idUser) {
         ContentValues values = new ContentValues();
         values.put(USER_TOKEN, userToken);
         values.put(USER_REMEMBER_ME, rememberMe);
