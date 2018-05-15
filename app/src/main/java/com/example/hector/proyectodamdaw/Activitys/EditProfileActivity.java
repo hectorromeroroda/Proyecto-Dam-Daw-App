@@ -193,6 +193,11 @@ public class EditProfileActivity extends AppCompatActivity
             int state = 1;
             int intFalse=0;
             bd.updateUserRememberMe(intFalse,state);
+
+            Intent intent = new Intent(this, LoginActivity.class );
+            //Limpia la pila de activitys para llenarla empezando de 0
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             return true;
         }
 
