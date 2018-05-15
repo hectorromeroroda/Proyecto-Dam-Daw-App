@@ -152,6 +152,13 @@ public class AppDataSources {
         dbW.update(table_USER,values, USER_ID + " = ?", new String[] { String.valueOf(idUser) });
     }
 
+    public void updateUserRememberMe( int rememberMe, int state) {
+        ContentValues values = new ContentValues();
+        values.put(USER_REMEMBER_ME, rememberMe);
+
+        dbW.update(table_USER,values, USER_REMEMBER_ME + " = ?", new String[] { String.valueOf(state) });
+    }
+
     public void updateUserLogin(int stikies, boolean profileIsPublic, String email, int idUser) {
 
         String UpdateQuery = "UPDATE User SET UserStikies = '" + stikies + "', UserPublicProfile= '" + profileIsPublic + "', UserEmail= '" + email + "' WHERE _id= " + idUser + "";
