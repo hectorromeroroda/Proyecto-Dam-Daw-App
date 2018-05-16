@@ -44,7 +44,7 @@
                     android:layout_weight="1"
                     android:text="@string/txvRegisterSingUp"
                     android:textAlignment="center"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
                     android:textSize="30sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -73,8 +73,8 @@
                     android:ems="10"
                     android:hint="@string/edtNameSingUp"
                     android:inputType="textPersonName"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textColorLink="@color/Azul_medio"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -104,8 +104,8 @@
                     android:ems="10"
                     android:hint="@string/edtSurnameSingUp"
                     android:inputType="textPersonName"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textColorLink="@color/Azul_medio"
                     android:textSize="20sp" />
 
@@ -133,13 +133,13 @@
                 <EditText
                     android:id="@+id/edtEmailSingUp"
                     android:layout_width="251dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtEmailSingUp"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textColorLink="@color/Azul_medio"
                     android:textSize="20sp" />
 
@@ -167,13 +167,13 @@
                 <EditText
                     android:id="@+id/edtRepeatEmailSingUp"
                     android:layout_width="251dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtRepeatEmailSingUp"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textColorLink="@color/Azul_medio"
                     android:textSize="20sp" />
 
@@ -204,8 +204,8 @@
                     android:ems="10"
                     android:hint="@string/edtPasswSingUp"
                     android:inputType="textPassword"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textColorLink="@color/Azul_medio"
                     android:textSize="20sp" />
 
@@ -236,8 +236,8 @@
                     android:ems="10"
                     android:hint="@string/edtRepeatPasswSingUp"
                     android:inputType="textPassword"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textColorLink="@color/Azul_medio"
                     android:textSize="20sp" />
 
@@ -257,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/Negro"
                     android:text="@string/btnAcceptSingUp"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </LinearLayout>
 
         </LinearLayout>

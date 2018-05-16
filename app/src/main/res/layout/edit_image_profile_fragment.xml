@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/Negro"
                     android:text="@string/btnAcceptEditProfile"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </LinearLayout>
 
         </LinearLayout>
