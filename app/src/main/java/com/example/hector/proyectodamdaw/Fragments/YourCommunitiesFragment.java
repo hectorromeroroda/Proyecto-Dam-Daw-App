@@ -22,6 +22,7 @@ import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +68,11 @@ public class YourCommunitiesFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        RefreshCommuities();
+        GlobalVariables globales1 = GlobalVariables.getInstance();
+        boolean refreshData=globales1.getRefreshData();
+        if (refreshData==true){
+            RefreshCommuities();
+        }
 
         adaptadorBD = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunities());
         recyclerViewYourCommunities.setAdapter(adaptadorBD);
@@ -82,7 +87,6 @@ public class YourCommunitiesFragment extends Fragment{
 
         String Url = "http://192.168.43.219:3000/profile";
 
-        //AKI CONSULTA BD PARA RECUPERAR TOKEN DEL USUARIO CON ID DE VARIABLE GLOBAL
         GlobalVariables globales = GlobalVariables.getInstance();
         int idUser=globales.getIdUserSqlite();
 
@@ -91,7 +95,7 @@ public class YourCommunitiesFragment extends Fragment{
             userToken = cursorUserToken.getString(0);
         }
 
-        client.setBasicAuth("Bearer",userToken);
+        client.addHeader("Authorization", "Bearer " + userToken);
         client.get(getContext(), Url, new AsyncHttpResponseHandler() {
 
             @Override
