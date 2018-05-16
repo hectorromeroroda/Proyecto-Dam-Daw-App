@@ -9,13 +9,13 @@ import android.app.Application;
 public class GlobalVariables extends Application{
 
 
-    private static int idUserSqlite;
+    public   int idUserSqlite;
 
     public  int getIdUserSqlite() {
         return idUserSqlite;
     }
 
-    public static void setIdUserSqlite(int id_UserSqlite) {
+    public  void setIdUserSqlite(int id_UserSqlite) {
         idUserSqlite = id_UserSqlite;
     }
 

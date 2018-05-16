@@ -82,6 +82,7 @@ public class LoginFragment extends Fragment{
 
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
+        globalBariables= new GlobalVariables();
 
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);

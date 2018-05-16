@@ -24,8 +24,7 @@
         <activity
             android:name=".Activitys.LoginActivity"
             android:label=" "
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activitys.CommunitiesActivity"
             android:label=" "
@@ -48,7 +47,8 @@
         <activity
             android:name=".Activitys.EditProfileActivity"
             android:label=" "
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Rows.RowCommunitieInvited"></activity>
     </application>
 
 </manifest>
