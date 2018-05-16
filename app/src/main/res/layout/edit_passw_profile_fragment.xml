@@ -37,12 +37,13 @@
                 <EditText
                     android:id="@+id/edtOldPasswEdit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="53dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtOldPasswEdit"
                     android:inputType="textEmailAddress"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -68,13 +69,13 @@
                 <EditText
                     android:id="@+id/edtPasswNewEdit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="63dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtPasswNewEdit"
                     android:inputType="textPassword"
-                    android:textColor="@color/Azul_medio"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -99,13 +100,13 @@
                 <EditText
                     android:id="@+id/edtRepeatNewPasswEdit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="64dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/edtRepeatNewPasswEdit"
                     android:inputType="textPassword"
-                    android:textColor="@color/Azul_medio"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -126,7 +127,7 @@
                     android:layout_weight="1"
                     android:background="@color/Negro"
                     android:text="@string/btnAcceptEditProfile"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </LinearLayout>
 
         </LinearLayout>

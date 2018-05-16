@@ -33,18 +33,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:buttonTint="@color/LilaFuerte"
+                        android:buttonTint="@color/Blanco"
                         android:text="@string/rdbProposalInProgress"
-                        android:textColor="@color/LilaFuerte" />
+                        android:textColor="@color/Blanco" />
 
                     <RadioButton
                         android:id="@+id/rdbProposalClosed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:buttonTint="@color/LilaFuerte"
+                        android:buttonTint="@color/Blanco"
                         android:text="@string/rdbProposalClosed"
-                        android:textColor="@color/LilaFuerte" />
+                        android:textColor="@color/Blanco" />
                 </RadioGroup>
 
             </LinearLayout>

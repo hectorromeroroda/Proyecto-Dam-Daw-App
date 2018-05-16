@@ -38,8 +38,7 @@
                 android:id="@+id/txvRowNameCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@color/LilaFuerte" />
+                android:text="TextView" />
 
             <TextView
                 android:id="@+id/txvrowDescriptionCommunitie"

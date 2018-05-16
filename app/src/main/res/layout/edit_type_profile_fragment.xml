@@ -31,18 +31,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/LilaFuerte"
+                    android:buttonTint="@color/Blanco"
                     android:text="@string/rdbProfilePublic"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
 
                 <RadioButton
                     android:id="@+id/rdbProfilePrivate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/LilaFuerte"
+                    android:buttonTint="@color/Blanco"
                     android:text="@string/rdbProfilePrivate"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </RadioGroup>
 
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/Negro"
                 android:text="@string/btnAcceptEditProfile"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
         </LinearLayout>
     </LinearLayout>
 

@@ -27,7 +27,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -59,7 +59,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
                 android:text="@string/txvRowQuestionsVotacion"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/txvRowFechaFinVotacion"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/txvRowAprovedVotacionClosed"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte"
+                android:textColor="@color/Blanco"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
