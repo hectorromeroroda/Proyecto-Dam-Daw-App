@@ -292,7 +292,10 @@ public class LoginFragment extends Fragment{
                         }
 
                     //Poner en id de usuario en variable gobal
-                    globalBariables.setIdUserSqlite(idUserSqlite);
+
+                    GlobalVariables globales = GlobalVariables.getInstance();
+                    globales.setIdUserSqlite(idUserSqlite);
+                    //globalBariables.setIdUserSqlite(idUserSqlite);
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );
                     startActivity(intent);

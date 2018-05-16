@@ -71,6 +71,12 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery,null);
     }
 
+    public Cursor searchUserToken(int idSqlite) {
+
+        String selectQuery = " SELECT UserToken FROM User WHERE _id= " + idSqlite + "";
+        return dbR.rawQuery(selectQuery,null);
+    }
+
     public Cursor typeProfile(int idUser) {
         // Retorna el campo tipo de perfil publico/privado
         String selectQuery = " SELECT UserPublicProfile FROM User WHERE _id= '" + idUser + "'";

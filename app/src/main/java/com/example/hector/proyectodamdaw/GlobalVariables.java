@@ -8,8 +8,10 @@ import android.app.Application;
 
 public class GlobalVariables extends Application{
 
+    private static GlobalVariables instance;
 
     public   int idUserSqlite;
+
 
     public  int getIdUserSqlite() {
         return idUserSqlite;
@@ -17,6 +19,13 @@ public class GlobalVariables extends Application{
 
     public  void setIdUserSqlite(int id_UserSqlite) {
         idUserSqlite = id_UserSqlite;
+    }
+
+    public static synchronized GlobalVariables getInstance(){
+        if(instance==null){
+            instance=new GlobalVariables();
+        }
+        return instance;
     }
 
 
