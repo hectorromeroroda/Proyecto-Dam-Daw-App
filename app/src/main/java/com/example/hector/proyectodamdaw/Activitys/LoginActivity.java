@@ -130,16 +130,7 @@ public class LoginActivity extends AppCompatActivity
             Intent intent = new Intent(this, CommunitiesActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_events) {
-
-        } else if (id == R.id.nav_chat) {
-            /*Intent intent = new Intent(this, CreateContentActivity.class );
-
-            startActivityForResult(intent,123);*/
-        } else if (id == R.id.nav_statistics) {
-
-
-        } else if (id == R.id.nav_profile) {
+        }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
             startActivityForResult(intent,123);
         }
