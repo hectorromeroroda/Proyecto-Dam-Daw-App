@@ -43,7 +43,6 @@ public class YourCommunitiesFragment extends Fragment{
     public AdaptadorCommunitiesBD adaptadorBD;
     private AppDataSources bd;
     ProgressDialog Dialog;
-    GlobalVariables globalBariables;
     int idSqlite;
     String userToken;
 
@@ -59,7 +58,6 @@ public class YourCommunitiesFragment extends Fragment{
         recyclerViewYourCommunities = (RecyclerView) view.findViewById(R.id.rcvYourCommunities);
         recyclerViewYourInvitations = (RecyclerView) view.findViewById(R.id.rcvYourinvitations);
         bd = new AppDataSources(getContext());
-        globalBariables= new GlobalVariables();
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
 
@@ -68,7 +66,6 @@ public class YourCommunitiesFragment extends Fragment{
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        idSqlite =globalBariables.getIdUserSqlite();
 
         RefreshCommuities();
 
@@ -76,7 +73,6 @@ public class YourCommunitiesFragment extends Fragment{
         recyclerViewYourCommunities.setAdapter(adaptadorBD);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewYourCommunities.setLayoutManager(layoutManager);
-
     }
 
     private void RefreshCommuities() {

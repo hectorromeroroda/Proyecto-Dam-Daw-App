@@ -3,6 +3,7 @@ package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -217,6 +219,7 @@ public class SingUpFragment extends Fragment{
                 String jsProfilePublic;
                 String jsStikies;
                 String jsToken;
+                int idUserSqlite=0;
                 String strResponse = new String(responseBody);
 
                 try {
@@ -235,6 +238,14 @@ public class SingUpFragment extends Fragment{
 
                     Toast toastResult = Toast.makeText(getContext(), R.string.toastRegisterOk, Toast.LENGTH_LONG);
                     toastResult.show();
+
+                    Cursor cursorIdUserSqlite= bd.userIdSqlite(jsEmail);
+                    if (cursorIdUserSqlite.moveToFirst() != false) {
+                        idUserSqlite = cursorIdUserSqlite.getInt(0);
+                        //Poner en id de usuario en variable gobal
+                        GlobalVariables globales = GlobalVariables.getInstance();
+                        globales.setIdUserSqlite(idUserSqlite);
+                    }
 
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );

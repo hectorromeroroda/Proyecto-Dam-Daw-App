@@ -57,7 +57,6 @@ public class LoginFragment extends Fragment{
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
-    GlobalVariables globalBariables;
     private AppDataSources bd;
 
     public LoginFragment() {
@@ -82,7 +81,6 @@ public class LoginFragment extends Fragment{
 
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
-        globalBariables= new GlobalVariables();
 
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
@@ -292,10 +290,9 @@ public class LoginFragment extends Fragment{
                         }
 
                     //Poner en id de usuario en variable gobal
-
                     GlobalVariables globales = GlobalVariables.getInstance();
                     globales.setIdUserSqlite(idUserSqlite);
-                    //globalBariables.setIdUserSqlite(idUserSqlite);
+
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );
                     startActivity(intent);
