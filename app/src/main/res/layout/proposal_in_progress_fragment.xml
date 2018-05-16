@@ -29,7 +29,7 @@
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textAlignment="center"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -107,18 +107,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:buttonTint="@color/LilaFuerte"
+                        android:buttonTint="@color/Blanco"
                         android:text="@string/rdbAcceptProposal"
-                        android:textColor="@color/LilaFuerte" />
+                        android:textColor="@color/Blanco" />
 
                     <RadioButton
                         android:id="@+id/rdbDiscardProposal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:buttonTint="@color/LilaFuerte"
+                        android:buttonTint="@color/Blanco"
                         android:text="@string/rdbDiscardProposal"
-                        android:textColor="@color/LilaFuerte" />
+                        android:textColor="@color/Blanco" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -136,7 +136,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/Negro"
                     android:text="@string/btnSendProposal"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

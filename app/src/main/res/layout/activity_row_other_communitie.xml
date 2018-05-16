@@ -39,21 +39,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
 
             <TextView
                 android:id="@+id/txvrowDescriptionOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
 
             <TextView
                 android:id="@+id/txvRowNumUsersOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
         </LinearLayout>
 
         <LinearLayout
@@ -70,7 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/Negro"
                 android:text="@string/btnRowAcces"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
         </LinearLayout>
 
     </LinearLayout>

@@ -57,9 +57,9 @@
                     android:ems="10"
                     android:hint="@string/txvUserLogin"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
-                    android:textColorLink="@color/Azul_medio"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
+                    android:textColorLink="@color/Blanco"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -87,8 +87,8 @@
                     android:ems="10"
                     android:hint="@string/edtPasswLogin"
                     android:inputType="textPassword"
-                    android:textColor="@color/LilaFuerte"
-                    android:textColorHint="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
+                    android:textColorHint="@color/Blanco"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -108,9 +108,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/LilaFuerte"
+                    android:buttonTint="@color/Blanco"
                     android:text="@string/ckbRememberMe"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
 
             </LinearLayout>
 
@@ -130,7 +130,7 @@
                     android:background="@color/Negro"
                     android:elevation="0dp"
                     android:text="@string/btnAcceptLogin"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,7 +150,7 @@
                     android:autoLink="web"
                     android:text="@string/txvForgotPassw"
                     android:textAlignment="center"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
 
             </LinearLayout>
 
@@ -166,7 +166,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
-                    android:background="@color/Lila_azul" />
+                    android:background="@color/AzulFuerte" />
 
             </LinearLayout>
 
@@ -184,7 +184,7 @@
                     android:layout_weight="1"
                     android:text="@string/txvSingUpLogin"
                     android:textAlignment="center"
-                    android:textColor="@color/LilaFuerte"
+                    android:textColor="@color/Blanco"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -204,7 +204,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/Negro"
                     android:text="@string/btnSingUpLogin"
-                    android:textColor="@color/LilaFuerte" />
+                    android:textColor="@color/Blanco" />
             </LinearLayout>
 
         </LinearLayout>
