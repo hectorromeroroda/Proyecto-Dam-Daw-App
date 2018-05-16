@@ -17,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
+                android:layout_height="156dp"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingTop="20dp">
@@ -25,7 +25,7 @@
                 <ImageView
                     android:id="@+id/imgAppLogoLogin"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="109dp"
                     android:layout_weight="1"
                     app:srcCompat="@mipmap/ic_balance_foreground" />
             </LinearLayout>

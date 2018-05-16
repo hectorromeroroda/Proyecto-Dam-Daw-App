@@ -56,7 +56,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
         tabs.addTab(tabs.newTab().setText(R.string.tabPost));
         tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
-        tabs.addTab(tabs.newTab().setText(R.string.tabCalendario));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -160,15 +159,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
             Intent intent = new Intent(this, CommunitiesActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_events) {
-
-        } else if (id == R.id.nav_chat) {
-            /*Intent intent = new Intent(this, CreateContentActivity.class );
-
-            startActivityForResult(intent,123);*/
-        } else if (id == R.id.nav_statistics) {
-
-
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
             startActivityForResult(intent,123);
@@ -207,9 +197,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
                 case 2:
                     fragment = new AllProposalFragment();
                     break;
-                case 3:
-                    fragment = new AllCalendarFragment();
-                    break;
             }
             return fragment;
         }
@@ -217,7 +204,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         //Overriden method getCount to get the number of tabs
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
 }

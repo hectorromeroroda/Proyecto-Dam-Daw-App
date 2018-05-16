@@ -12,22 +12,10 @@
             android:id="@+id/nav_community_selector"
             android:icon="@drawable/community"
             android:title="Selector de comunidades" />
-        <item
-            android:id="@+id/nav_events"
-            android:icon="@drawable/calendar"
-            android:title="Eventos" />
-        <item
-            android:id="@+id/nav_chat"
-            android:icon="@drawable/chat"
-            android:title="Chat" />
     </group>
 
     <item android:title="Usuario">
         <menu>
-            <item
-                android:id="@+id/nav_statistics"
-                android:icon="@drawable/statistics"
-                android:title="Estadística" />
             <item
                 android:id="@+id/nav_profile"
                 android:icon="@drawable/avatar"
