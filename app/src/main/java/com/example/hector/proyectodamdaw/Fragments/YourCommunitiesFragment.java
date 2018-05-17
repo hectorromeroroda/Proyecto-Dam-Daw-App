@@ -1,8 +1,6 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
-import com.example.hector.proyectodamdaw.AdaptadorCommunities;
 import com.example.hector.proyectodamdaw.AdaptadorCommunitiesBD;
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
@@ -22,7 +18,6 @@ import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,10 +33,13 @@ import cz.msebera.android.httpclient.Header;
 public class YourCommunitiesFragment extends Fragment{
 
     protected RecyclerView.LayoutManager layoutManager;
+    protected RecyclerView.LayoutManager layoutManagerInvited;
     protected RecyclerView recyclerViewYourCommunities;
     protected RecyclerView recyclerViewYourInvitations;
     private Communitie communitie = new Communitie();
-    public AdaptadorCommunitiesBD adaptadorBD;
+    private Communitie communitieInvited = new Communitie();
+    public AdaptadorCommunitiesBD adaptadorBdPertenece;
+    public AdaptadorCommunitiesBD adaptadorBdInvited;
     private AppDataSources bd;
     ProgressDialog Dialog;
     int idSqlite;
@@ -76,10 +74,17 @@ public class YourCommunitiesFragment extends Fragment{
             RefreshCommuities();
         }
 
-        adaptadorBD = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunitiesPrueba(idSqlite));
-        recyclerViewYourCommunities.setAdapter(adaptadorBD);
+        //ReciclerView de comunidades a las que pertenece
+        adaptadorBdPertenece = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunitiesPertenece(idSqlite));
+        recyclerViewYourCommunities.setAdapter(adaptadorBdPertenece);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewYourCommunities.setLayoutManager(layoutManager);
+
+        //ReciclerView de comunidades a las que estainvitado
+        adaptadorBdInvited = new AdaptadorCommunitiesBD(getContext(),communitieInvited,bd.todasComunitiesInvited(idSqlite));
+        recyclerViewYourInvitations.setAdapter(adaptadorBdInvited);
+        layoutManagerInvited = new LinearLayoutManager(getContext());
+        recyclerViewYourInvitations.setLayoutManager(layoutManagerInvited);
     }
 
     private void RefreshCommuities() {
