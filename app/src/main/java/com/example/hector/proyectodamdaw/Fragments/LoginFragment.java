@@ -57,7 +57,6 @@ public class LoginFragment extends Fragment{
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
-    GlobalVariables globalBariables;
     private AppDataSources bd;
 
     public LoginFragment() {
@@ -240,6 +239,10 @@ public class LoginFragment extends Fragment{
                             bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, 0);
                         }
 
+                        Cursor  cursorIdUserSqlite1= bd.userIdSqlite(jsEmail);
+                        if (cursorIdUserSqlite1.moveToFirst() != false) {
+                            idUserSqlite = cursorIdUserSqlite1.getInt(0);
+                        }
                     }
 
                     //Datos sobre las comunidades a las que se esta invitado
@@ -291,7 +294,9 @@ public class LoginFragment extends Fragment{
                         }
 
                     //Poner en id de usuario en variable gobal
-                    globalBariables.setIdUserSqlite(idUserSqlite);
+                    GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                    globales.setIdUserSqlite(idUserSqlite);
+
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );
                     startActivity(intent);
