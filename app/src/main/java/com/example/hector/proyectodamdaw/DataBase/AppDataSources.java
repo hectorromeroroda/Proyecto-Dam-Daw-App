@@ -95,7 +95,7 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery, null);
     }
     public Cursor todasComunitiesPrueba(int idUserSqlite) {
-        String selectQuery = "SELECT * FROM Community WHERE IdCommunity= (SELECT IdCommunity FROM CommunityUser WHERE IdUserSqlite= '" + idUserSqlite + "' AND UserInvited= 0)";
+        String selectQuery = "SELECT * FROM Community WHERE IdCommunity IN (SELECT IdCommunity FROM CommunityUser WHERE IdUserSqlite= '" + idUserSqlite + "' AND UserInvited= 0)";
 
         return dbR.rawQuery(selectQuery, null);
     }

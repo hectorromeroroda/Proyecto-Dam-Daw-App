@@ -68,13 +68,15 @@ public class YourCommunitiesFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        GlobalVariables globales1 = GlobalVariables.getInstance();
-        boolean refreshData=globales1.getRefreshData();
+        GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+        boolean refreshData=globales.getRefreshData();
+        idSqlite=globales.getIdUserSqlite();
+
         if (refreshData==true){
             RefreshCommuities();
         }
 
-        adaptadorBD = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunities());
+        adaptadorBD = new AdaptadorCommunitiesBD(getContext(),communitie,bd.todasComunitiesPrueba(idSqlite));
         recyclerViewYourCommunities.setAdapter(adaptadorBD);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewYourCommunities.setLayoutManager(layoutManager);
