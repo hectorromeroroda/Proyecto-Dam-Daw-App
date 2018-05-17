@@ -188,7 +188,6 @@ public class LoginFragment extends Fragment{
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String responseContentError;
                 String jsToken;
                 String jsFirstName;
                 String jsLastName;
@@ -208,7 +207,7 @@ public class LoginFragment extends Fragment{
                 String strResponse = new String(responseBody);
 
                 try {
-                    //Datos sobre el usuario
+
                     JSONObject jsResponse= new JSONObject(strResponse);
                     JSONObject features= new JSONObject();
                     features = jsResponse.getJSONObject("features");
@@ -250,7 +249,6 @@ public class LoginFragment extends Fragment{
                     for (int index = 0; index < jsInvited.length(); index++) {
                         JSONObject objectInvited = jsInvited.getJSONObject(index);
 
-
                         //jsCommMemmbers = objectInvited.getString("members");
                         //jsCommPublic = objectInvited.getString("public");
                         //jsCommContents = objectInvited.getString("contents");
@@ -271,7 +269,6 @@ public class LoginFragment extends Fragment{
                         jsComunities = jsResponse.getJSONArray("communities");
                         for (int index1 = 0; index1 < jsComunities.length(); index1++) {
                             JSONObject objectPertenece = jsInvited.getJSONObject(index1);
-
 
                             //jsCommMemmbers = objectPertenece.getString("members");
                             //jsCommPublic = objectPertenece.getString("public");
@@ -304,7 +301,6 @@ public class LoginFragment extends Fragment{
                 }
                 Dialog.dismiss();
             }
-
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {

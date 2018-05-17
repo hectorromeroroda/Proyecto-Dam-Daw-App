@@ -114,7 +114,6 @@ public class YourCommunitiesFragment extends Fragment{
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String responseContentError;
                 String jsToken;
                 String jsFirstName;
                 String jsLastName;
@@ -134,23 +133,39 @@ public class YourCommunitiesFragment extends Fragment{
                 String strResponse = new String(responseBody);
 
                 try {
-                    //Datos sobre el usuario
+
                     JSONObject jsResponse= new JSONObject(strResponse);
+                    JSONObject features= new JSONObject();
+                    features = jsResponse.getJSONObject("features");
+
+                    jsStikies=features.getString("stickyQty");
+                    jsFirstName = jsResponse.getString("first_name");
+                    jsLastName = jsResponse.getString("last_name");
+                    jsEmail = jsResponse.getString("email");
+                    jsProfilePublic = jsResponse.getString("profile_is_public");
+                    jsToken=jsResponse.getString("token");
+
+                    int intTrue = 1;
+                    //Actualiza datos del usuario
+                    Cursor  cursorIdUserSqlite= bd.userIdSqlite(jsEmail);
+                    if (cursorIdUserSqlite.moveToFirst() != false) {
+                        idUserSqlite = cursorIdUserSqlite.getInt(0);
+                        bd.updateUserLoginTokenRememberMe(jsToken, intTrue, idUserSqlite);
+                        bd.updateUserLogin(Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsEmail, idUserSqlite);
+                    }
 
                     //Datos sobre las comunidades a las que se esta invitado
                     jsInvited = jsResponse.getJSONArray("invited");
                     for (int index = 0; index < jsInvited.length(); index++) {
-                        JSONObject object = jsInvited.getJSONObject(index);
+                        JSONObject objectInvited = jsInvited.getJSONObject(index);
 
-                        JSONObject data = new JSONObject();
-                        data = object.getJSONObject("data");
-                        jsCommMemmbers = data.getString("members");
-                        jsCommPublic = data.getString("public");
-                        jsCommContents = data.getString("contents");
-                        jsCommId = data.getString("_id");
-                        jsCommName = data.getString("name");
-                        jsCommDescription = data.getString("description");
-                        jscommRole = data.getString("role");
+                        //jsCommMemmbers = objectInvited.getString("members");
+                        //jsCommPublic = objectInvited.getString("public");
+                        //jsCommContents = objectInvited.getString("contents");
+                        jsCommId = objectInvited.getString("id");
+                        jsCommName = objectInvited.getString("name");
+                        jsCommDescription = objectInvited.getString("description");
+                        jscommRole = objectInvited.getString("role");
 
                         Cursor cursorIdComminityExist = bd.searchIdCommunitie(jsCommId);
                         if (cursorIdComminityExist.moveToFirst() != false) {
@@ -160,20 +175,19 @@ public class YourCommunitiesFragment extends Fragment{
                             bd.saveCommunityUser(jsCommId, idUserSqlite, jscommRole, true);
                         }
                     }
+
                     //Datos sobre las comunidades a las que se pertenece
                     jsComunities = jsResponse.getJSONArray("communities");
                     for (int index1 = 0; index1 < jsComunities.length(); index1++) {
-                        JSONObject object1 = jsComunities.getJSONObject(index1);
-                        jscommRole = object1.getString("role");
+                        JSONObject objectPertenece = jsInvited.getJSONObject(index1);
 
-                        JSONObject data1= new JSONObject();
-                        data1 = object1.getJSONObject("data");
-                        jsCommMemmbers=data1.getString("members");
-                        jsCommPublic=data1.getString("public");
-                        jsCommContents=data1.getString("contents");
-                        jsCommId=data1.getString("_id");
-                        jsCommName=data1.getString("name");
-                        jsCommDescription=data1.getString("description");
+                        //jsCommMemmbers = objectPertenece.getString("members");
+                        //jsCommPublic = objectPertenece.getString("public");
+                        //jsCommContents = objectPertenece.getString("contents");
+                        jsCommId = objectPertenece.getString("id");
+                        jsCommName = objectPertenece.getString("name");
+                        jsCommDescription = objectPertenece.getString("description");
+                        jscommRole = objectPertenece.getString("role");
 
                         Cursor cursorIdComminityExist1 = bd.searchIdCommunitie(jsCommId);
                         if (cursorIdComminityExist1.moveToFirst() != false){
@@ -190,7 +204,6 @@ public class YourCommunitiesFragment extends Fragment{
                 }
                 Dialog.dismiss();
             }
-
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
