@@ -17,7 +17,6 @@ public class OtherCommunitiesFragment extends Fragment{
 
     protected RecyclerView.LayoutManager layoutManager;
     protected RecyclerView recyclerViewOtherCommunities;
-    protected RecyclerView recyclerViewOtherYourInvitations;
 
     public OtherCommunitiesFragment() {
         // Required empty public constructor
@@ -30,7 +29,6 @@ public class OtherCommunitiesFragment extends Fragment{
 
 
         recyclerViewOtherCommunities = (RecyclerView) view.findViewById(R.id.rcvOtherCommunities);
-        recyclerViewOtherYourInvitations = (RecyclerView) view.findViewById(R.id.rcvOtherYourinvitations);
 
         return view;
     }
