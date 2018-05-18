@@ -25,7 +25,7 @@
                 android:id="@+id/imgRowLogoCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@mipmap/ic_balance_foreground" />
         </LinearLayout>
 
         <LinearLayout
@@ -38,21 +38,22 @@
                 android:id="@+id/txvRowNameCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/Blanco" />
 
             <TextView
                 android:id="@+id/txvrowDescriptionCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
 
             <TextView
                 android:id="@+id/txvRowNumUsersCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/LilaFuerte" />
+                android:textColor="@color/Blanco" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,25 +64,43 @@
             android:paddingTop="10dp">
 
             <ImageButton
-                android:id="@+id/imgbRowPost"
+                android:id="@+id/BtnEncuesta"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/elections" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Votación"
+                android:textColor="@color/Blanco" />
 
             <ImageButton
-                android:id="@+id/imgbRowChat"
+                android:id="@+id/BtnPost"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/post_it" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Posts"
+                android:textColor="@color/Blanco" />
 
             <ImageButton
-                android:id="@+id/imgRowCalendar"
+                android:id="@+id/BtnPropuestas"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@drawable/community" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Propuestas"
+                android:textColor="@color/Blanco" />
         </LinearLayout>
 
     </LinearLayout>
