@@ -106,6 +106,11 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery, null);
     }
 
+    public Cursor allOtherCommunities() {
+        String selectQuery = "SELECT * FROM Community WHERE IdCommunity NOT IN (SELECT IdCommunity FROM CommunityUser)";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
 
     // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------------------------------------------------------------------------------
     public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, int rememberMe) {
