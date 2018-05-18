@@ -59,7 +59,7 @@ public class OtherCommunitiesFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        RefreshOtherCommunities();
+        //RefreshOtherCommunities();//ACTIVAR ESTO PARA ACTUALIZAR LAS COMUNIDADES----------------------------------------------------
 
         //ReciclerView de comunidades que ni pertenece ni esta invitado
         adaptadorBd = new AdaptadorCommunitiesBD(getContext(),communitie,bd.allOtherCommunities());
@@ -103,7 +103,6 @@ public class OtherCommunitiesFragment extends Fragment{
                 String jsCommDescription;
                 String jscommRole;
                 int idUserSqlite=0;
-                JSONArray jsInvited = new JSONArray();
                 JSONArray jsComunities = new JSONArray();
                 String strResponse = new String(responseBody);
 
@@ -114,11 +113,11 @@ public class OtherCommunitiesFragment extends Fragment{
                     //Datos sobre las comunidades ke ni se pertenece ni se esta invitado
                     jsComunities = jsResponse.getJSONArray("communities");
                     for (int index1 = 0; index1 < jsComunities.length(); index1++) {
-                        JSONObject objectPertenece = jsInvited.getJSONObject(index1);
+                        JSONObject objectPertenece = jsComunities.getJSONObject(index1);
 
-                        //jsCommMemmbers = objectPertenece.getString("members");
-                        //jsCommPublic = objectPertenece.getString("public");
-                        //jsCommContents = objectPertenece.getString("contents");
+                        jsCommMemmbers = objectPertenece.getString("members");
+                        jsCommPublic = objectPertenece.getString("public");
+                        jsCommContents = objectPertenece.getString("posts");
                         jsCommId = objectPertenece.getString("id");
                         jsCommName = objectPertenece.getString("name");
                         jsCommDescription = objectPertenece.getString("description");
