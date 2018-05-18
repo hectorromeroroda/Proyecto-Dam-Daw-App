@@ -71,6 +71,12 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery,null);
     }
 
+    public Cursor searchUserToken(int idSqlite) {
+
+        String selectQuery = " SELECT UserToken FROM User WHERE _id= " + idSqlite + "";
+        return dbR.rawQuery(selectQuery,null);
+    }
+
     public Cursor typeProfile(int idUser) {
         // Retorna el campo tipo de perfil publico/privado
         String selectQuery = " SELECT UserPublicProfile FROM User WHERE _id= '" + idUser + "'";
@@ -87,9 +93,25 @@ public class AppDataSources {
         String selectQuery = "SELECT * FROM Community";
 
         return dbR.rawQuery(selectQuery, null);
-
-
     }
+    public Cursor todasComunitiesPertenece(int idUserSqlite) {
+        String selectQuery = "SELECT * FROM Community WHERE IdCommunity IN (SELECT IdCommunity FROM CommunityUser WHERE IdUserSqlite= '" + idUserSqlite + "' AND UserInvited= 0)";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
+    public Cursor todasComunitiesInvited(int idUserSqlite) {
+        String selectQuery = "SELECT * FROM Community WHERE IdCommunity IN (SELECT IdCommunity FROM CommunityUser WHERE IdUserSqlite= '" + idUserSqlite + "' AND UserInvited= 1)";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
+    public Cursor allOtherCommunities() {
+        String selectQuery = "SELECT * FROM Community WHERE IdCommunity NOT IN (SELECT IdCommunity FROM CommunityUser)";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
     // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------------------------------------------------------------------------------
     public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, int rememberMe) {
         // Guardar los datos del registro del usuario
@@ -150,6 +172,13 @@ public class AppDataSources {
         values.put(USER_REMEMBER_ME, rememberMe);
 
         dbW.update(table_USER,values, USER_ID + " = ?", new String[] { String.valueOf(idUser) });
+    }
+
+    public void updateUserRememberMe( int rememberMe, int state) {
+        ContentValues values = new ContentValues();
+        values.put(USER_REMEMBER_ME, rememberMe);
+
+        dbW.update(table_USER,values, USER_REMEMBER_ME + " = ?", new String[] { String.valueOf(state) });
     }
 
     public void updateUserLogin(int stikies, boolean profileIsPublic, String email, int idUser) {

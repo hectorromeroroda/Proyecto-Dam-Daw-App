@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity
 
     private AppDataSources bd;
     private int idUserSqlite;
-    GlobalVariables globalBariables;
 
 
     @Override
@@ -44,7 +43,6 @@ public class LoginActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
-        globalBariables= new GlobalVariables();
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
@@ -54,7 +52,10 @@ public class LoginActivity extends AppCompatActivity
             idUserSqlite = cursorRememberMeState.getInt(0);
 
             //Poner en id de usuario en variable gobal
-            globalBariables.setIdUserSqlite(idUserSqlite);
+            GlobalVariables globales = GlobalVariables.getInstance();
+            globales.setIdUserSqlite(idUserSqlite);
+            globales.setRefreshData(true);
+
             //Envia a AllComminities
             Intent intent = new Intent(this, CommunitiesActivity.class );
             startActivity(intent);
