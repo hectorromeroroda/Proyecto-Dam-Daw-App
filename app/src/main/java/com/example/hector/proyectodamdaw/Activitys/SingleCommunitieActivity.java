@@ -23,6 +23,8 @@ import com.example.hector.proyectodamdaw.Fragments.AllCalendarFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllPostFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllProposalFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllVotacionesFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateCommunitieFragment;
+import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class SingleCommunitieActivity extends AppCompatActivity
@@ -56,6 +58,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
         tabs.addTab(tabs.newTab().setText(R.string.tabPost));
         tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
+        tabs.addTab(tabs.newTab().setText(R.string.tabCreateCommunitie));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -197,6 +200,9 @@ public class SingleCommunitieActivity extends AppCompatActivity
                 case 2:
                     fragment = new AllProposalFragment();
                     break;
+                case 4:
+                    fragment = new CreateCommunitieFragment();
+                    break;
             }
             return fragment;
         }
@@ -204,7 +210,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         //Overriden method getCount to get the number of tabs
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 }

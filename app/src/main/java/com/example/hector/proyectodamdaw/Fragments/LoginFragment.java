@@ -249,9 +249,9 @@ public class LoginFragment extends Fragment{
                     for (int index = 0; index < jsInvited.length(); index++) {
                         JSONObject objectInvited = jsInvited.getJSONObject(index);
 
-                        //jsCommMemmbers = objectInvited.getString("members");
-                        //jsCommPublic = objectInvited.getString("public");
-                        //jsCommContents = objectInvited.getString("contents");
+                        jsCommMemmbers = objectInvited.getString("members");
+                        jsCommPublic = objectInvited.getString("public");
+                        jsCommContents = objectInvited.getString("posts");
                         jsCommId = objectInvited.getString("id");
                         jsCommName = objectInvited.getString("name");
                         jsCommDescription = objectInvited.getString("description");
@@ -268,11 +268,11 @@ public class LoginFragment extends Fragment{
                         //Datos sobre las comunidades a las que se pertenece
                         jsComunities = jsResponse.getJSONArray("communities");
                         for (int index1 = 0; index1 < jsComunities.length(); index1++) {
-                            JSONObject objectPertenece = jsInvited.getJSONObject(index1);
+                            JSONObject objectPertenece = jsComunities.getJSONObject(index1);
 
-                            //jsCommMemmbers = objectPertenece.getString("members");
-                            //jsCommPublic = objectPertenece.getString("public");
-                            //jsCommContents = objectPertenece.getString("contents");
+                            jsCommMemmbers = objectPertenece.getString("members");
+                            jsCommPublic = objectPertenece.getString("public");
+                            jsCommContents = objectPertenece.getString("posts");
                             jsCommId = objectPertenece.getString("id");
                             jsCommName = objectPertenece.getString("name");
                             jsCommDescription = objectPertenece.getString("description");
