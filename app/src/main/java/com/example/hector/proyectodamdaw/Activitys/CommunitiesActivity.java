@@ -21,6 +21,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.Fragments.CreateCommunitieFragment;
 import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
 import com.example.hector.proyectodamdaw.R;
 import com.example.hector.proyectodamdaw.Fragments.YourCommunitiesFragment;
@@ -57,6 +58,7 @@ public class CommunitiesActivity extends AppCompatActivity
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
         tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabCreateCommunitie));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -203,6 +205,9 @@ class TabAdapter extends FragmentStatePagerAdapter {
             case 1:
                 fragment = new OtherCommunitiesFragment();
                 break;
+            case 2:
+                fragment = new CreateCommunitieFragment();
+                break;
         }
         return fragment;
     }
@@ -210,6 +215,6 @@ class TabAdapter extends FragmentStatePagerAdapter {
     //Overriden method getCount to get the number of tabs
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

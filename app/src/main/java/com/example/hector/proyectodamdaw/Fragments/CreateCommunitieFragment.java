@@ -45,6 +45,8 @@ public class CreateCommunitieFragment  extends Fragment {
     EditText  descriptionNewCommunity;
     Button btnCreateCommunity;
     String jsonCreateCommunity;
+    String name;
+    String description;
     Comprobations comprobations;
 
     public CreateCommunitieFragment() {
@@ -70,8 +72,6 @@ public class CreateCommunitieFragment  extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        String name;
-        String description;
         boolean nameEmpty;
         boolean descriptionEmpty;
 
@@ -119,9 +119,9 @@ public class CreateCommunitieFragment  extends Fragment {
         String Url = "http://192.168.43.219:3000/community/new";
 
         GlobalVariables globales = GlobalVariables.getInstance();
-        int idUser=globales.getIdUserSqlite();
+        final int idUser=globales.getIdUserSqlite();
 
-        Cursor cursorUserToken = bd.searchUserToken(idUser);
+        final Cursor cursorUserToken = bd.searchUserToken(idUser);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
@@ -139,8 +139,12 @@ public class CreateCommunitieFragment  extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-            //AQUI MIRAR SI LA RESPUESTA ES CORRECTA, ENTONCES GUARDAR EN BD Y REFRESCAR... (HAY KE PENSARLO TODABIA)---------------------------------------
-                //HAY KE TENER EN CUENTA QUE CUANDO CREAS UNA COMUNIDAD TE AGREGA A ESA COMUNIDAD, POR EL TEMA DE LA BD LOCAL QUE HAY KE GUARDAR EN LA TABLA COMUNITYUSER Y TAMBIEN EN LA DE COMMUNITY
+                //FALTA CONTROLAR QUE LA RESPUESTA SEA DE COMUNIDAD CREADA CON EXITO, ENTONCES HACER LAS QUERYS------------------------------------------------------
+                //PERDIR A LLUIS QUE ENVIE EL ID DE LA COMUNIDAD QUE SE ACABA DE CREAR JUNTO CON EL MENSAJE DE CREADA OK-----------------------------------------------------
+                bd.saveCommunity(1, true, 0, name, description, jsCommId);
+                bd.saveCommunityUser(jsCommId, idUser, "owner", false);
+
+                //FALTA HACER EL INTENT HACIA SINGLECOMUNITYaCTIVITY-----------------------------------------------------------------------------------------------------
 
                 Dialog.dismiss();
             }
@@ -149,7 +153,7 @@ public class CreateCommunitieFragment  extends Fragment {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 String mensajeError = new String(error.getMessage().toString());
-                String badResponse = "No se ha podido enviar la informacion al servidor. " + mensajeError;
+                String badResponse = "No se ha podido crear la comunidad, ha habido un problema al conectar con el servidor. " + mensajeError;
                 Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
                 toastAlerta.show();
                 Dialog.dismiss();
