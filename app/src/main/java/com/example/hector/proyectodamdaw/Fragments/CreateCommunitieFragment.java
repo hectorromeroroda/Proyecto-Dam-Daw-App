@@ -97,12 +97,12 @@ public class CreateCommunitieFragment  extends Fragment {
                         }
 
                     }else{
-                        //AQUI MENSAJE DESRIPCION NO VACIA------------------------------------------------------------------------
-                    }
+                        Toast toastAlert = Toast.makeText(getContext(),  "El campo descripcion no puede estar vacio", Toast.LENGTH_SHORT);
+                        toastAlert.show();                    }
 
                 }else{
-                    //AQUI MENSAJE NOMBRE NO VACIO---------------------------------------------------------------------------------
-                }
+                    Toast toastAlert = Toast.makeText(getContext(), "El campo nombre no puede estar vaci", Toast.LENGTH_SHORT);
+                    toastAlert.show();                }
             }
         });
 
@@ -150,9 +150,13 @@ public class CreateCommunitieFragment  extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                //FALTA QUE LLUIS ENVIE EN LA RESPUESTA LA ID DE LA COMUNIDAD RECIENCREADA------------------------------------------------------------------
+                //FALTA QUE LLUIS ENVIE EN LA RESPUESTA LA ID DE LA COMUNIDAD RECIEN CREADA------------------------------------------------------------------
                 //bd.saveCommunity(1, true, 0, name, description, jsCommId);
                 //bd.saveCommunityUser(jsCommId, idUser, "owner", false);
+
+                //Poner en id de la comunidad creada en variable gobal
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                globales.setCommunityId(idUserSqlite);
 
                 //Envia a SingleCommunityActivity, creas la comunidad y entras en ella directamente
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

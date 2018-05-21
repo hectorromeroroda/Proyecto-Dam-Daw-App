@@ -137,9 +137,10 @@ public class CreateProposal  extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                String IdCommunidadActual=globales.getCommunityId();
 
-                //FALTA CREAR LA QUERY PARA GUARDAR LA PROPUESTA EN LA BASE DE DATOS-----------------------------------------------------------------------
-
+                bd.saveProposal(strNombre,strDescripcion,strPregunta,"Si","No",IdCommunidadActual,false);
 
                 //Envia a SingleCommunityActivity al crear la propuesta
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
@@ -151,7 +152,7 @@ public class CreateProposal  extends Fragment {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 String mensajeError = new String(error.getMessage().toString());
-                String badResponse = "No se ha podido crear la comunidad, ha habido un problema al conectar con el servidor o comunidad ya existente. " + mensajeError;
+                String badResponse = "No se ha podido crear la propuesta, ha habido un problema al conectar con el servidor o comunidad ya existente. " + mensajeError;
                 Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
                 toastAlerta.show();
                 Dialog.dismiss();

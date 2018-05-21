@@ -68,12 +68,13 @@ public class AppHelper extends SQLiteOpenHelper{
         String proposition =
                 "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY," +
                         "propositionTitle VARCHAR(45)," +
-                        "propositionText VARCHAR(500)," +
-                        "propositionVoted INT," +
-                        "UserId INT," +
+                        "propositionDescription VARCHAR(100)," +
+                        "propositionPregunta VARCHAR(500)," +
+                        "propositionRespuestaSi VARCHAR(45)," +
+                        "propositionRespuestaNo VARCHAR(45)," +
                         "CommunityId INT," +
-                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
-                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
+                        "propositionYaVotada BIT," +
+                        "FOREIGN KEY (CommunityId) REFERENCES Community(IdCommunity)" +
                         ")";
         sqLiteDatabase.execSQL(proposition);
         String user =
