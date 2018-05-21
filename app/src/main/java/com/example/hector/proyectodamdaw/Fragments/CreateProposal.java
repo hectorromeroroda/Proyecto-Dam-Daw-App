@@ -3,8 +3,10 @@ package com.example.hector.proyectodamdaw.Fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,26 +77,39 @@ public class CreateProposal  extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        boolean nombreVacio;
-        boolean descripcionVacio;
-        boolean preguntaVacio;
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
 
-        strNombre=titulo.getText().toString();
-        strDescripcion=descripcion.getText().toString();
-        strPregunta=pregunta.getText().toString();
+                boolean nombreVacio;
+                boolean descripcionVacio;
+                boolean preguntaVacio;
+                String JsonCreateProposal;
 
-        nombreVacio =comprobations.checkEmptyFields(strNombre);
-        if (nombreVacio == false) {
-            descripcionVacio =comprobations.checkEmptyFields(strDescripcion);
-            if (descripcionVacio == false) {
-                preguntaVacio =comprobations.checkEmptyFields(strPregunta);
-                if (preguntaVacio == false) {
+                strNombre=titulo.getText().toString();
+                strDescripcion=descripcion.getText().toString();
+                strPregunta=pregunta.getText().toString();
 
-                    createJsonNewProposal(strNombre,strDescripcion," ",strPregunta,"Si,","No");
+                nombreVacio =comprobations.checkEmptyFields(strNombre);
+                if (nombreVacio == false) {
+                    descripcionVacio =comprobations.checkEmptyFields(strDescripcion);
+                    if (descripcionVacio == false) {
+                        preguntaVacio =comprobations.checkEmptyFields(strPregunta);
+                        if (preguntaVacio == false) {
 
+                            JsonCreateProposal= createJsonNewProposal(strNombre,strDescripcion," ",strPregunta,"Si,","No");
+                            try {
+                                createProposalAsync(JsonCreateProposal);
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }
             }
-        }
+        });
+
     }
 
     private String createJsonNewProposal(String nombre, String descripcion, String imagen,  String pregunta, String respuestaSi, String respuestNo) {
@@ -152,7 +167,7 @@ public class CreateProposal  extends Fragment {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 String mensajeError = new String(error.getMessage().toString());
-                String badResponse = "No se ha podido crear la propuesta, ha habido un problema al conectar con el servidor o comunidad ya existente. " + mensajeError;
+                String badResponse = "No se ha podido crear la propuesta, ha habido un problema al conectar con el servidor. " + mensajeError;
                 Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
                 toastAlerta.show();
                 Dialog.dismiss();
