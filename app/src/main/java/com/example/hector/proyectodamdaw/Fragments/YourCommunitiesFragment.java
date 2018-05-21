@@ -111,7 +111,6 @@ public class YourCommunitiesFragment extends Fragment{
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String jsToken;
                 String jsFirstName;
                 String jsLastName;
                 String jsEmail;
@@ -140,14 +139,13 @@ public class YourCommunitiesFragment extends Fragment{
                     jsLastName = jsResponse.getString("last_name");
                     jsEmail = jsResponse.getString("email");
                     jsProfilePublic = jsResponse.getString("profile_is_public");
-                    jsToken=jsResponse.getString("token");
 
                     int intTrue = 1;
                     //Actualiza datos del usuario
                     Cursor  cursorIdUserSqlite= bd.userIdSqlite(jsEmail);
                     if (cursorIdUserSqlite.moveToFirst() != false) {
                         idUserSqlite = cursorIdUserSqlite.getInt(0);
-                        bd.updateUserLoginTokenRememberMe(jsToken, intTrue, idUserSqlite);
+                        bd.updateUserLoginTokenRememberMe(userToken, intTrue, idUserSqlite);
                         bd.updateUserLogin(Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsEmail, idUserSqlite);
                     }
 

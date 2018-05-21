@@ -3,7 +3,10 @@ package com.example.hector.proyectodamdaw.Fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,16 +17,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
+import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
 import com.example.hector.proyectodamdaw.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
@@ -43,7 +43,7 @@ public class CreateCommunitieFragment  extends Fragment {
     String userToken;
     EditText nameNewCommunity;
     EditText  descriptionNewCommunity;
-    Button btnCreateCommunity;
+    Button createComm;
     String jsonCreateCommunity;
     String name;
     String description;
@@ -60,11 +60,15 @@ public class CreateCommunitieFragment  extends Fragment {
 
         nameNewCommunity = (EditText)view.findViewById(R.id.edtNameNewCommunity);
         descriptionNewCommunity = (EditText)view.findViewById(R.id.edtDescriptionNeCommunity);
-        btnCreateCommunity = (Button) view.findViewById(R.id.btnCreateCommunity);
+        createComm = (Button) view.findViewById(R.id.btnCreateCom);
         bd = new AppDataSources(getContext());
         comprobations = new Comprobations();
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
+
+        //Para permitir la conexion POST
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         return view;
     }
@@ -72,30 +76,37 @@ public class CreateCommunitieFragment  extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        boolean nameEmpty;
-        boolean descriptionEmpty;
+        createComm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean nameEmpty;
+                boolean descriptionEmpty;
 
-        name=nameNewCommunity.getText().toString();
-        description=descriptionNewCommunity.getText().toString();
+                name=nameNewCommunity.getText().toString();
+                description=descriptionNewCommunity.getText().toString();
 
-        nameEmpty =comprobations.checkEmptyFields(name);
-        if (nameEmpty == false){
-            descriptionEmpty =comprobations.checkEmptyFields(description);
-            if (descriptionEmpty == false){
-                jsonCreateCommunity= createJsonCreateCommunity(name,description);
-                try {
-                    createCommunityAsync(jsonCreateCommunity);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                nameEmpty =comprobations.checkEmptyFields(name);
+                if (nameEmpty == false){
+                    descriptionEmpty =comprobations.checkEmptyFields(description);
+                    if (descriptionEmpty == false){
+                        jsonCreateCommunity= createJsonCreateCommunity(name,description);
+                        try {
+                            createCommunityAsync(jsonCreateCommunity);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
+                    }else{
+                        //AQUI MENSAJE DESRIPCION NO VACIA------------------------------------------------------------------------
+                    }
+
+                }else{
+                    //AQUI MENSAJE NOMBRE NO VACIO---------------------------------------------------------------------------------
                 }
-
-            }else{
-                //AQUI MENSAJE DESRIPCION NO VACIA
             }
+        });
 
-        }else{
-            //AQUI MENSAJE NOMBRE NO VACIO
-        }
+
 
 
 
@@ -139,13 +150,13 @@ public class CreateCommunitieFragment  extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                //FALTA CONTROLAR QUE LA RESPUESTA SEA DE COMUNIDAD CREADA CON EXITO, ENTONCES HACER LAS QUERYS------------------------------------------------------
-                //PERDIR A LLUIS QUE ENVIE EL ID DE LA COMUNIDAD QUE SE ACABA DE CREAR JUNTO CON EL MENSAJE DE CREADA OK-----------------------------------------------------
-                bd.saveCommunity(1, true, 0, name, description, jsCommId);
-                bd.saveCommunityUser(jsCommId, idUser, "owner", false);
+                //FALTA QUE LLUIS ENVIE EN LA RESPUESTA LA ID DE LA COMUNIDAD RECIENCREADA------------------------------------------------------------------
+                //bd.saveCommunity(1, true, 0, name, description, jsCommId);
+                //bd.saveCommunityUser(jsCommId, idUser, "owner", false);
 
-                //FALTA HACER EL INTENT HACIA SINGLECOMUNITYaCTIVITY-----------------------------------------------------------------------------------------------------
-
+                //Envia a SingleCommunityActivity, creas la comunidad y entras en ella directamente
+                Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
+                startActivity(intent);
                 Dialog.dismiss();
             }
 
@@ -153,7 +164,7 @@ public class CreateCommunitieFragment  extends Fragment {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 String mensajeError = new String(error.getMessage().toString());
-                String badResponse = "No se ha podido crear la comunidad, ha habido un problema al conectar con el servidor. " + mensajeError;
+                String badResponse = "No se ha podido crear la comunidad, ha habido un problema al conectar con el servidor o comunidad ya existente. " + mensajeError;
                 Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
                 toastAlerta.show();
                 Dialog.dismiss();
