@@ -41,17 +41,6 @@ public class AppHelper extends SQLiteOpenHelper{
                         "FOREIGN KEY (IdUserSqlite) REFERENCES User(_id)" +
                         ")";
         sqLiteDatabase.execSQL(comunityUser);
-        String post =
-                "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
-                        "Title VARCHAR(45)," +
-                        "Text VARCHAR(500)," +
-                        "PublicationDate DATE," +
-                        "UserId INT," +
-                        "CommunityId INT," +
-                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
-                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
-                        ")";
-        sqLiteDatabase.execSQL(post);
         String poll =
                 "CREATE TABLE Poll(_id INTEGER PRIMARY KEY," +
                         "Title VARCHAR(45)," +
@@ -68,14 +57,24 @@ public class AppHelper extends SQLiteOpenHelper{
         String proposition =
                 "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY," +
                         "propositionTitle VARCHAR(45)," +
-                        "propositionText VARCHAR(500)," +
-                        "propositionVoted INT," +
-                        "UserId INT," +
+                        "propositionDescription VARCHAR(100)," +
+                        "propositionPregunta VARCHAR(500)," +
+                        "propositionRespuestaSi VARCHAR(45)," +
+                        "propositionRespuestaNo VARCHAR(45)," +
                         "CommunityId INT," +
-                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
-                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
+                        "propositionYaVotada BIT," +
+                        "FOREIGN KEY (CommunityId) REFERENCES Community(IdCommunity)" +
                         ")";
         sqLiteDatabase.execSQL(proposition);
+        String post =
+                "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
+                        "postTitle VARCHAR(45)," +
+                        "postDescription VARCHAR(100)," +
+                        "postContent VARCHAR(500)," +
+                        "CommunityId INT," +
+                        "FOREIGN KEY (CommunityId) REFERENCES Community(IdCommunity)" +
+                        ")";
+        sqLiteDatabase.execSQL(post);
         String user =
                 "CREATE TABLE User(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "UserFirstName VARCHAR(45) NOT NULL," +

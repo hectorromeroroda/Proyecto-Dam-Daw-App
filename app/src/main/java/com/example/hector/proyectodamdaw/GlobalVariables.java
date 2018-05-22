@@ -12,6 +12,7 @@ public class GlobalVariables extends Application{
 
     public   int idUserSqlite;
     public   boolean RefreshData = false;
+    public  String communityId;
 
 
     public  int getIdUserSqlite() {
@@ -28,6 +29,14 @@ public class GlobalVariables extends Application{
 
     public  void setRefreshData(boolean refreshData) {
         RefreshData = refreshData;
+    }
+
+    public  String getCommunityId() {
+        return communityId;
+    }
+
+    public  void setCommunityId(String idCommunity) {
+        communityId = idCommunity;
     }
 
     public static synchronized GlobalVariables getInstance(){

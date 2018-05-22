@@ -159,6 +159,26 @@ public class AppDataSources {
         dbW.insert(table_COMM,null,values);
     }
 
+    public void saveProposal(String nombre, String descripcion,String pregunta,  String respuestaSi, String respuestaNo, String comunidadId, boolean yaVotada) {
+        ContentValues values = new ContentValues();
+        values.put("propositionTitle", nombre);
+        values.put("propositionDescription", descripcion);
+        values.put("propositionPregunta", pregunta);
+        values.put("propositionRespuestaSi", respuestaSi);
+        values.put("propositionRespuestaNo", respuestaNo);
+        values.put("CommunityId", comunidadId);
+        values.put("propositionYaVotada", yaVotada);
+        dbW.insert("Proposition",null,values);
+    }
+    public void savePost(String nombre, String descripcion,String contenido,  String comunidadId) {
+        ContentValues values = new ContentValues();
+        values.put("postTitle", nombre);
+        values.put("postDescription", descripcion);
+        values.put("postContent", contenido);
+        values.put("CommunityId", comunidadId);
+        dbW.insert("Post",null,values);
+    }
+
     public void saveEditTypeProfile(boolean profileState, int idUser) {
 
         String UpdateQuery = "UPDATE User SET UserPublicProfile = '" + profileState + "' WHERE _id= '" + idUser + "'";
