@@ -170,6 +170,14 @@ public class AppDataSources {
         values.put("propositionYaVotada", yaVotada);
         dbW.insert("Proposition",null,values);
     }
+    public void savePost(String nombre, String descripcion,String contenido,  String comunidadId) {
+        ContentValues values = new ContentValues();
+        values.put("postTitle", nombre);
+        values.put("postDescription", descripcion);
+        values.put("postContent", contenido);
+        values.put("CommunityId", comunidadId);
+        dbW.insert("Post",null,values);
+    }
 
     public void saveEditTypeProfile(boolean profileState, int idUser) {
 

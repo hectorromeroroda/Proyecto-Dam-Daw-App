@@ -151,7 +151,7 @@ public class CreatePostFragment extends Fragment {
                 GlobalVariables globales = GlobalVariables.getInstance().getInstance();
                 String IdCommunidadActual=globales.getCommunityId();
 
-                //HACER LA QUERY A LA BD PARA GUARDAR EL NUEVO POST
+                bd.savePost(strNombre,strDescripcion,strContenido,IdCommunidadActual);
 
                 //Envia a SingleCommunityActivity al crear el post
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
