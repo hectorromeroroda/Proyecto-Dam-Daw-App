@@ -42,6 +42,7 @@ public class CommunitiesActivity extends AppCompatActivity
         setContentView(R.layout.activity_communities);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -55,18 +56,17 @@ public class CommunitiesActivity extends AppCompatActivity
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
 
-        tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
-        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
-        tabs.addTab(tabs.newTab().setText(R.string.tabCreateCommunitie));
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         bd = new AppDataSources(this);
 
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
+        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabCreateCommunitie));
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -86,7 +86,8 @@ public class CommunitiesActivity extends AppCompatActivity
 
         });
 
-
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);
 
     }
 
@@ -208,6 +209,8 @@ class TabAdapter extends FragmentStatePagerAdapter {
             case 2:
                 fragment = new CreateCommunitieFragment();
                 break;
+            default:
+                return null;
         }
         return fragment;
     }
@@ -215,6 +218,6 @@ class TabAdapter extends FragmentStatePagerAdapter {
     //Overriden method getCount to get the number of tabs
     @Override
     public int getCount() {
-        return 3;
+        return tabCount;
     }
 }
