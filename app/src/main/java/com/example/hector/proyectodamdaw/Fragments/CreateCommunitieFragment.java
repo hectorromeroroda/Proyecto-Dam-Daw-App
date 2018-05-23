@@ -25,6 +25,9 @@ import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
@@ -106,10 +109,6 @@ public class CreateCommunitieFragment  extends Fragment {
             }
         });
 
-
-
-
-
     }
 
     private String createJsonCreateCommunity(String name, String description) {
@@ -150,13 +149,27 @@ public class CreateCommunitieFragment  extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                //FALTA QUE LLUIS ENVIE EN LA RESPUESTA LA ID DE LA COMUNIDAD RECIEN CREADA------------------------------------------------------------------
-                //bd.saveCommunity(1, true, 0, name, description, jsCommId);
-                //bd.saveCommunityUser(jsCommId, idUser, "owner", false);
+                String jsCommId="";
+
+                String strResponse = new String(responseBody);
+                JSONObject jsResponse= null;
+                try {
+                    jsResponse = new JSONObject(strResponse);
+                    jsCommId = jsResponse.getString("id");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                bd.saveCommunity(1, true, 0, name, description, jsCommId);
+                bd.saveCommunityUser(jsCommId, idUser, "owner", false);
 
                 //Poner en id de la comunidad creada en variable gobal
                 GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-              //  globales.setCommunityId(idUserSqlite);
+
+                globales.setCommunityId(idUserSqlite);
+
+                globales.setCommunityId(jsCommId);
+
 
                 //Envia a SingleCommunityActivity, creas la comunidad y entras en ella directamente
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

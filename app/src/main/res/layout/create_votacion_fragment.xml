@@ -53,6 +53,24 @@
             </LinearLayout>
 
             <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtNewVotacionContenido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Contenido"
+                android:inputType="textPersonName"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
@@ -60,16 +78,18 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/edtNewVotacionContenido"
+                    android:id="@+id/edtFechaFinalizacion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="Contenido"
-                    android:inputType="textPersonName"
+                    android:focusable="false"
+                    android:hint="Introduzca la fecha de finalizacion"
+                    android:inputType="date"
+                    android:clickable="true"
                     android:textSize="20sp" />
-            </LinearLayout>
 
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
