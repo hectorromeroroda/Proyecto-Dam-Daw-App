@@ -43,6 +43,7 @@ public class CreatePostFragment extends Fragment {
     String strDescripcion;
     String strContenido;
     String userToken;
+    String idComunidadActual;
     Comprobations comprobations;
     private AppDataSources bd;
 
@@ -68,6 +69,9 @@ public class CreatePostFragment extends Fragment {
         bd = new AppDataSources(getContext());
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
+
+        GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+        idComunidadActual=globales.getCommunityId();
 
         return  view;
     }
@@ -101,18 +105,27 @@ public class CreatePostFragment extends Fragment {
                                 e.printStackTrace();
                             }
 
+                        }else{
+                            Toast toastAlert = Toast.makeText(getContext(),  "El campo contenido es obligatiorio", Toast.LENGTH_SHORT);
+                            toastAlert.show();
                         }
+                    }else{
+                        Toast toastAlert = Toast.makeText(getContext(),  "El campo descripcion es obligatiorio", Toast.LENGTH_SHORT);
+                        toastAlert.show();
                     }
+                }else{
+                    Toast toastAlert = Toast.makeText(getContext(), "El campo nombre Titulo es obligatiorio", Toast.LENGTH_SHORT);
+                    toastAlert.show();
                 }
             }
         });
     }
 
-    private String createJsonNewPost(String nombre, String descripcion, String imagen,  String cuerpo) {
+    private String createJsonNewPost(String nombre, String descripcion, String cuerpo,  String imagen) {
         String strJsonNewPost;
 
-        strJsonNewPost=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"image\": \"" + imagen + "\", " +
-                "\"body\": \"" + cuerpo + "\"}");
+        strJsonNewPost=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\", " +
+                "\"image\": \"" + imagen + "\"}");
         return strJsonNewPost;
     }
 
@@ -124,8 +137,7 @@ public class CreatePostFragment extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        //FALTA PONER LA URL CORRECTA QUE DIGA EL LLUIS------------------------------------------------------------------------------------
-        String Url = "http://192.168.43.219:3000/post/new";
+        String Url = "http://192.168.43.219:3000/" + idComunidadActual + "/content/new/post";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         final int idUser=globales.getIdUserSqlite();
@@ -148,10 +160,9 @@ public class CreatePostFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-                String IdCommunidadActual=globales.getCommunityId();
 
-                bd.savePost(strNombre,strDescripcion,strContenido,IdCommunidadActual);
+
+                bd.savePost(strNombre,strDescripcion,strContenido,idComunidadActual);
 
                 //Envia a SingleCommunityActivity al crear el post
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

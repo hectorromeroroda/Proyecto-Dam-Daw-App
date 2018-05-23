@@ -178,6 +178,34 @@ public class AppDataSources {
         values.put("CommunityId", comunidadId);
         dbW.insert("Post",null,values);
     }
+    public void savePoll(String titulo, String descripcion,String contenido, String fechaInicio, String fechaFinal,  String comunidadId, boolean yaVotada, String pregunta1,
+                          String respuesta1a, String respuesta1b, String pregunta2, String respuesta2a, String respuesta2b,  String pregunta3, String respuesta3a, String respuesta3b,
+                          String pregunta4, String respuesta4a, String respuesta4b,  String pregunta5, String respuesta5a, String respuesta5b) {
+        ContentValues values = new ContentValues();
+        values.put("PollTitle", titulo);
+        values.put("PollDescription", descripcion);
+        values.put("PollContenido", contenido);
+        values.put("PollStartDate", fechaInicio);
+        values.put("PollFinishDate", fechaFinal);
+        values.put("PollCommunityId", comunidadId);
+        values.put("PollYaVotada", yaVotada);
+        values.put("pollPregunta1", pregunta1);
+        values.put("pollRespuesta1a", respuesta1a);
+        values.put("pollRespuesta1b", respuesta1b);
+        values.put("pollPregunta2", pregunta2);
+        values.put("pollRespuesta2a", respuesta2a);
+        values.put("pollRespuesta2b", respuesta2b);
+        values.put("pollPregunta3", pregunta3);
+        values.put("pollRespuesta3a", respuesta3a);
+        values.put("pollRespuesta3b", respuesta3b);
+        values.put("pollPregunta4", pregunta4);
+        values.put("pollRespuesta4a", respuesta4a);
+        values.put("pollRespuesta4b", respuesta4b);
+        values.put("pollPregunta5", pregunta5);
+        values.put("pollRespuesta5a", respuesta5a);
+        values.put("pollRespuesta5b", respuesta5b);
+        dbW.insert("Poll",null,values);
+    }
 
     public void saveEditTypeProfile(boolean profileState, int idUser) {
 
