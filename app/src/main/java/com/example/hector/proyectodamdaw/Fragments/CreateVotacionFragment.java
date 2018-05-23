@@ -209,9 +209,9 @@ public class CreateVotacionFragment extends Fragment {
                                                                                     respuesta5bVacia =comprobations.checkEmptyFields(strRespuesta5b);
                                                                                     if (respuesta5bVacia == false){
 
-                                                                                        //FALTA COMPROBAR QUE LA TABLA DE LA BD Y EL INSERT ESTEN CORREECTOS SEGUN EL JSON---------------
-                                                                                        //FALTA COMPLETAR EL JSON--------------------------------------------------------------------
-                                                                                        jsonNewVotacion=createJsonNewVotacion();
+                                                                                        jsonNewVotacion=createJsonNewVotacion(strNombre,strDescripcion,strContenido,strFechaFinalizacion, strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                                                                                        strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b,strPregunta5,strRespuesta5a,strRespuesta5b);
+
                                                                                         try {
                                                                                             createVotaciontAsync(jsonNewVotacion);
                                                                                         } catch (UnsupportedEncodingException e) {
@@ -295,12 +295,17 @@ public class CreateVotacionFragment extends Fragment {
 
     }
 
-    //FALTA MONTAR EL JSON CORRECTAMENTE-----------------------------------------------------------------------------------------------------------------------------
-    private String createJsonNewVotacion(String nombre, String descripcion, String cuerpo) {
+    private String createJsonNewVotacion(String nombre, String descripcion, String cuerpo, String fechaFin, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
+    String tituloPregunta3, String respuesta3a, String respuesta3b, String tituloPregunta4, String respuesta4a, String respuesta4b, String tituloPregunta5, String respuesta5a, String respuesta5b) {
         String strJsonNewVotacion;
 
-        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
-                " \"data\":[{\"title\": \"" + tituloPregunta + "\", \"options\": [{\"value\": \"" + respuesta1 + "\"},{\"value\": " + respuesta2 + "\"}]}]}");
+        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\", \"endDate\": \"" + fechaFin + "\"," +
+                " \"data\":[" +
+                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": " + respuesta1b + "\"}]}" +
+                "{\"title\": \"" + tituloPregunta2 + "\", \"options\": [{\"value\": \"" + respuesta2a + "\"},{\"value\": " + respuesta2b + "\"}]}" +
+                "{\"title\": \"" + tituloPregunta3 + "\", \"options\": [{\"value\": \"" + respuesta3a + "\"},{\"value\": " + respuesta3b + "\"}]}" +
+                "{\"title\": \"" + tituloPregunta4 + "\", \"options\": [{\"value\": \"" + respuesta4a + "\"},{\"value\": " + respuesta4b + "\"}]}" +
+                "{\"title\": \"" + tituloPregunta5 + "\", \"options\": [{\"value\": \"" + respuesta5a + "\"},{\"value\": " + respuesta5b + "\"}]}]}");
         return strJsonNewVotacion;
     }
 
@@ -335,8 +340,8 @@ public class CreateVotacionFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                //FALTA MONTAR LA QUERY PARA GUARDAR EN LA BD LOCAL----------------------------------------------------------------------------------------------------
-                bd.savePoll();
+                bd.savePoll(strNombre,strDescripcion,strContenido," ",strFechaFinalizacion, idComunidadActual,false,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                        strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b,strPregunta5,strRespuesta5a,strRespuesta5b);
 
                 //Envia a SingleCommunityActivity al crear la votacion
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
