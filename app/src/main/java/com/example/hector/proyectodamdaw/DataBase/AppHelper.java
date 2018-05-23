@@ -41,19 +41,6 @@ public class AppHelper extends SQLiteOpenHelper{
                         "FOREIGN KEY (IdUserSqlite) REFERENCES User(_id)" +
                         ")";
         sqLiteDatabase.execSQL(comunityUser);
-        String poll =
-                "CREATE TABLE Poll(_id INTEGER PRIMARY KEY," +
-                        "Title VARCHAR(45)," +
-                        "Text VARCHAR(500)," +
-                        "StartDate DATE," +
-                        "FinishDate DATE," +
-                        "TotalVotesDone INT," +
-                        "UserId INT," +
-                        "CommunityId INT," +
-                        "FOREIGN KEY (UserId) REFERENCES User(_id)," +
-                        "FOREIGN KEY (CommunityId) REFERENCES Community(_id)" +
-                        ")";
-        sqLiteDatabase.execSQL(poll);
         String proposition =
                 "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY," +
                         "propositionTitle VARCHAR(45)," +
@@ -61,11 +48,38 @@ public class AppHelper extends SQLiteOpenHelper{
                         "propositionPregunta VARCHAR(500)," +
                         "propositionRespuestaSi VARCHAR(45)," +
                         "propositionRespuestaNo VARCHAR(45)," +
-                        "CommunityId INT," +
+                        "propositionCommunityId INT," +
                         "propositionYaVotada BIT," +
-                        "FOREIGN KEY (CommunityId) REFERENCES Community(IdCommunity)" +
+                        "FOREIGN KEY (propositionCommunityId) REFERENCES Community(IdCommunity)" +
                         ")";
         sqLiteDatabase.execSQL(proposition);
+        String poll =
+                "CREATE TABLE Poll(_id INTEGER PRIMARY KEY," +
+                        "PollTitle VARCHAR(45)," +
+                        "PollDescription VARCHAR(100)," +
+                        "PollContenido VARCHAR(500)," +
+                        "PollStartDate DATE," +
+                        "PollFinishDate DATE," +
+                        "PollCommunityId INT," +
+                        "PollYaVotada BIT," +
+                        "pollPregunta1 VARCHAR(500)," +
+                        "pollRespuesta1a VARCHAR(100)," +
+                        "pollRespuesta1b VARCHAR(100)," +
+                        "pollPregunta2 VARCHAR(500)," +
+                        "pollRespuesta2a VARCHAR(100)," +
+                        "pollRespuesta2b VARCHAR(100)," +
+                        "pollPregunta3 VARCHAR(500)," +
+                        "pollRespuesta3a VARCHAR(100)," +
+                        "pollRespuesta3b VARCHAR(100)," +
+                        "pollPregunta4 VARCHAR(500)," +
+                        "pollRespuesta4a VARCHAR(100)," +
+                        "pollRespuesta4b VARCHAR(100)," +
+                        "pollPregunta5 VARCHAR(500)," +
+                        "pollRespuesta5a VARCHAR(100)," +
+                        "pollRespuesta5b VARCHAR(100)," +
+                        "FOREIGN KEY (PollCommunityId) REFERENCES Community(IdCommunity)" +
+                        ")";
+        sqLiteDatabase.execSQL(poll);
         String post =
                 "CREATE TABLE Post(_id INTEGER PRIMARY KEY," +
                         "postTitle VARCHAR(45)," +
