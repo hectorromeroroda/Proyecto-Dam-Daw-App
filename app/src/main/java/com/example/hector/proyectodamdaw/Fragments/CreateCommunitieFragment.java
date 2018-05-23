@@ -156,7 +156,7 @@ public class CreateCommunitieFragment  extends Fragment {
 
                 //Poner en id de la comunidad creada en variable gobal
                 GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-                globales.setCommunityId(idUserSqlite);
+              //  globales.setCommunityId(idUserSqlite);
 
                 //Envia a SingleCommunityActivity, creas la comunidad y entras en ella directamente
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

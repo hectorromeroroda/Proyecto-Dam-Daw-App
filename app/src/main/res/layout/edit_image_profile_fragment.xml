@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negro">
+    android:background="@color/Blanco">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -80,9 +80,9 @@
                     android:id="@+id/btnAcceptEditImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/Negro"
+                    android:background="@color/Blanco"
                     android:text="@string/btnAcceptEditProfile"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
             </LinearLayout>
 
         </LinearLayout>

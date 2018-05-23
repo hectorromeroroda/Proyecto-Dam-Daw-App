@@ -15,19 +15,19 @@
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/Negro"
+            android:background="@color/Blanco"
             app:layout_scrollFlags="scroll|enterAlways"></android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Negro"
+            android:background="@color/Blanco"
             android:paddingTop="10dp"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/AzulFuerte"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/Blanco">
+            app:tabSelectedTextColor="@color/Negro">
 
         </android.support.design.widget.TabLayout>
 
@@ -38,7 +38,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/Negro"
+        android:background="@color/Blanco"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout_editor_absoluteX="25dp">
 
