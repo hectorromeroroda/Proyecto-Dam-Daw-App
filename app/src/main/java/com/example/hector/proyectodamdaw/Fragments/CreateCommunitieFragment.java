@@ -50,6 +50,7 @@ public class CreateCommunitieFragment  extends Fragment {
     String jsonCreateCommunity;
     String name;
     String description;
+    int idUserSqlite;
     Comprobations comprobations;
 
     public CreateCommunitieFragment() {
@@ -129,9 +130,9 @@ public class CreateCommunitieFragment  extends Fragment {
         String Url = "http://192.168.43.219:3000/community/new";
 
         GlobalVariables globales = GlobalVariables.getInstance();
-        final int idUser=globales.getIdUserSqlite();
+        idUserSqlite=globales.getIdUserSqlite();
 
-        final Cursor cursorUserToken = bd.searchUserToken(idUser);
+        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
@@ -161,13 +162,10 @@ public class CreateCommunitieFragment  extends Fragment {
                 }
 
                 bd.saveCommunity(1, true, 0, name, description, jsCommId);
-                bd.saveCommunityUser(jsCommId, idUser, "owner", false);
+                bd.saveCommunityUser(jsCommId, idUserSqlite, "owner", false);
 
                 //Poner en id de la comunidad creada en variable gobal
                 GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-
-                globales.setCommunityId(idUserSqlite);
-
                 globales.setCommunityId(jsCommId);
 
 

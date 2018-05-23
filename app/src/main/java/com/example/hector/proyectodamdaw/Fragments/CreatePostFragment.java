@@ -44,6 +44,7 @@ public class CreatePostFragment extends Fragment {
     String strContenido;
     String userToken;
     String idComunidadActual;
+    int idUserSqlite;
     Comprobations comprobations;
     private AppDataSources bd;
 
@@ -140,9 +141,9 @@ public class CreatePostFragment extends Fragment {
         String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/post";
 
         GlobalVariables globales = GlobalVariables.getInstance();
-        final int idUser=globales.getIdUserSqlite();
+        idUserSqlite=globales.getIdUserSqlite();
 
-        final Cursor cursorUserToken = bd.searchUserToken(idUser);
+        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
