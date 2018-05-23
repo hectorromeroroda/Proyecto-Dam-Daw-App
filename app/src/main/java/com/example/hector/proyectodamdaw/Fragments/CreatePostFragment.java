@@ -63,7 +63,7 @@ public class CreatePostFragment extends Fragment {
         titulo = (EditText)view.findViewById(R.id.edtNameNewPost);
         descripcion = (EditText)view.findViewById(R.id.edtDescriptionNewPost);
         contenido = (EditText)view.findViewById(R.id.edtContenidoNewPost);
-        btnEnviar = (Button) view.findViewById(R.id.btnSendNewProposal);
+        btnEnviar = (Button) view.findViewById(R.id.btnSendNewPost);
 
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
