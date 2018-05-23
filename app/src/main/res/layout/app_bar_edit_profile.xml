@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/Negro"
-            android:popupBackground="@color/Negro" />
+            android:background="@color/Blanco"
+            android:popupBackground="@color/Blanco" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negro"
+    android:background="@color/Blanco"
     tools:context="com.example.hector.proyectodamdaw.Rows.RowPost">
 
     <android.support.v7.widget.CardView
@@ -14,14 +14,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/Negro"
+            android:background="@color/Blanco"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/txvPostImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/Negro"
+                android:background="@color/Blanco"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
@@ -34,7 +34,7 @@
                 android:paddingTop="10dp"
                 android:text="TextView"
                 android:textAlignment="center"
-                android:textColor="@color/Blanco"
+                android:textColor="@color/Negro"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="TextView"
-                android:textColor="@color/Blanco"
+                android:textColor="@color/Negro"
                 android:textSize="14sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negro">
+    android:background="@color/Blanco">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                     android:layout_weight="1"
                     android:text="TextView"
                     android:textAlignment="center"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -107,18 +107,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:buttonTint="@color/Blanco"
+                        android:buttonTint="@color/Negro"
                         android:text="@string/rdbAcceptProposal"
-                        android:textColor="@color/Blanco" />
+                        android:textColor="@color/Negro" />
 
                     <RadioButton
                         android:id="@+id/rdbDiscardProposal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:buttonTint="@color/Blanco"
+                        android:buttonTint="@color/Negro"
                         android:text="@string/rdbDiscardProposal"
-                        android:textColor="@color/Blanco" />
+                        android:textColor="@color/Negro" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -134,9 +134,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/Negro"
+                    android:backgroundTint="@color/Blanco"
                     android:text="@string/btnSendProposal"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

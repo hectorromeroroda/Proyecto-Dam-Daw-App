@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negro"
+    android:background="@color/Blanco"
     tools:context="com.example.hector.proyectodamdaw.Rows.RowMyCommunitie">
 
     <LinearLayout
@@ -39,21 +39,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
 
             <TextView
                 android:id="@+id/txvrowDescriptionCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
 
             <TextView
                 android:id="@+id/txvRowNumUsersCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Votación"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
 
             <ImageButton
                 android:id="@+id/BtnPost"
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Posts"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
 
             <ImageButton
                 android:id="@+id/BtnPropuestas"
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Propuestas"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
         </LinearLayout>
 
     </LinearLayout>

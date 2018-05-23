@@ -27,7 +27,7 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="BLA BLA BLA 2"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/Blanco" />
+        android:textColor="@color/Negro" />
 
     <TextView
         android:id="@+id/textView"
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:background="@color/cardview_shadow_end_color"
         android:text="android.studio@android.com"
-        android:textColor="@color/Blanco" />
+        android:textColor="@color/Negro" />
 
 </LinearLayout>
