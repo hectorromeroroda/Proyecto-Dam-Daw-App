@@ -25,7 +25,7 @@
                     android:layout_height="wrap_content"
                     android:text="Crear una nueva comunidad"
                     android:textAlignment="center"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -45,7 +45,7 @@
                     android:ems="10"
                     android:hint="Nombre de la comunidad"
                     android:inputType="textPersonName"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -64,7 +64,7 @@
                     android:ems="10"
                     android:hint="Descripcion de la comunidad"
                     android:inputType="textPersonName"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -81,10 +81,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/Negro"
+                    android:backgroundTint="@color/Blanco"
                     android:text="Crear"
                     android:textAlignment="center"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

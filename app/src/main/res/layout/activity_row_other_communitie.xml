@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negro"
+    android:background="@color/Blanco"
     tools:context="com.example.hector.proyectodamdaw.Rows.RowOtherCommunitie">
 
     <LinearLayout
@@ -39,21 +39,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
 
             <TextView
                 android:id="@+id/txvrowDescriptionOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
 
             <TextView
                 android:id="@+id/txvRowNumUsersOtherCommunitie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,10 +68,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/Blanco"
-                android:backgroundTint="@color/Blanco"
+                android:background="@color/Negro"
+                android:backgroundTint="@color/Negro"
                 android:text="@string/btnRowAcces"
-                android:textColor="@color/Blanco" />
+                android:textColor="@color/Negro" />
         </LinearLayout>
 
     </LinearLayout>

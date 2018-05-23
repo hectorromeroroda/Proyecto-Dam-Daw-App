@@ -23,6 +23,6 @@
 
     <style name="labelColor">
         <item name="android:textColor">@color/LilaFuerte</item>
-        <item name="android:background">@color/Negro</item>
+        <item name="android:background">@color/Blanco</item>
     </style>
 </resources>

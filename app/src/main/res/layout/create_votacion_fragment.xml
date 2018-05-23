@@ -334,10 +334,10 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/Negro"
+                    android:backgroundTint="@color/Blanco"
                     android:text="Crear"
                     android:textAlignment="center"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>

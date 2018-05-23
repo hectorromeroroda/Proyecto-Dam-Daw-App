@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Negro">
+    android:background="@color/Blanco">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -57,9 +57,9 @@
                     android:ems="10"
                     android:hint="@string/txvUserLogin"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/Blanco"
-                    android:textColorHint="@color/Blanco"
-                    android:textColorLink="@color/Blanco"
+                    android:textColor="@color/Negro"
+                    android:textColorHint="@color/Negro"
+                    android:textColorLink="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -87,8 +87,8 @@
                     android:ems="10"
                     android:hint="@string/edtPasswLogin"
                     android:inputType="textPassword"
-                    android:textColor="@color/Blanco"
-                    android:textColorHint="@color/Blanco"
+                    android:textColor="@color/Negro"
+                    android:textColorHint="@color/Negro"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -108,9 +108,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:buttonTint="@color/Blanco"
+                    android:buttonTint="@color/Negro"
                     android:text="@string/ckbRememberMe"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
 
             </LinearLayout>
 
@@ -127,10 +127,10 @@
                     android:id="@+id/btnAcceptLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/Negro"
+                    android:background="@color/Blanco"
                     android:elevation="0dp"
                     android:text="@string/btnAcceptLogin"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
             </LinearLayout>
 
             <LinearLayout
@@ -150,7 +150,7 @@
                     android:autoLink="web"
                     android:text="@string/txvForgotPassw"
                     android:textAlignment="center"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
 
             </LinearLayout>
 
@@ -184,7 +184,7 @@
                     android:layout_weight="1"
                     android:text="@string/txvSingUpLogin"
                     android:textAlignment="center"
-                    android:textColor="@color/Blanco"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -202,9 +202,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/Negro"
+                    android:backgroundTint="@color/Blanco"
                     android:text="@string/btnSingUpLogin"
-                    android:textColor="@color/Blanco" />
+                    android:textColor="@color/Negro" />
             </LinearLayout>
 
         </LinearLayout>
