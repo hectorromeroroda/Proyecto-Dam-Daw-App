@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.Content.Post;
+import com.example.hector.proyectodamdaw.Content.Proposal;
 
 /**
  * Created by Hector on 19/04/2018.
@@ -119,6 +120,13 @@ public class AppDataSources {
 
         return dbR.rawQuery(selectQuery, null);
     }
+
+    public Cursor todosProposalCommunity(String idCommunity) {
+        String selectQuery = "SELECT * FROM Proposition WHERE propositionCommunityId= '" + idCommunity + "'";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
     public Cursor todasComunitiesPertenece(int idUserSqlite) {
         String selectQuery = "SELECT * FROM Community WHERE IdCommunity IN (SELECT IdCommunity FROM CommunityUser WHERE IdUserSqlite= '" + idUserSqlite + "' AND UserInvited= 0)";
 
@@ -189,7 +197,7 @@ public class AppDataSources {
         values.put("propositionTitle", nombre);
         values.put("propositionDescription", descripcion);
         values.put("propositionPregunta", pregunta);
-        values.put("CommunityId", comunidadId);
+        values.put("propositionCommunityId", comunidadId);
         values.put("propositionYaVotada", yaVotada);
         dbW.insert("Proposition",null,values);
     }
@@ -198,7 +206,7 @@ public class AppDataSources {
         values.put("propositionTitle", nombre);
         values.put("propositionDescription", descripcion);
         values.put("propositionId", idPropuesta);
-        values.put("CommunityId", comunidadId);
+        values.put("propositionCommunityId", comunidadId);
         dbW.insert("Proposition",null,values);
     }
     public void savePost(String nombre, String descripcion,String contenido,  String comunidadId) {
@@ -333,6 +341,13 @@ public class AppDataSources {
         post.setDescription(cursor.getString(2));
         post.setContent(cursor.getString(3));
         return post;
+    }
+
+    public static Proposal extraerProposal(Cursor cursor){
+        Proposal proposal = new Proposal();
+        proposal.setTitle(cursor.getString(1));
+        proposal.setDescription(cursor.getString(3));
+        return proposal;
     }
 
 }

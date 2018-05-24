@@ -341,4 +341,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
         });
 
     }
+
+
 }
