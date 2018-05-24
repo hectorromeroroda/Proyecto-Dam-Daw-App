@@ -39,9 +39,20 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txvPostDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="TextView"
+                android:textColor="@color/Negro"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/txvPostcontent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autoText="false"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
                 android:text="TextView"

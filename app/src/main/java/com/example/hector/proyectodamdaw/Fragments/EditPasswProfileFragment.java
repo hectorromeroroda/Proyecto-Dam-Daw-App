@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.R;
 
 import org.json.JSONException;

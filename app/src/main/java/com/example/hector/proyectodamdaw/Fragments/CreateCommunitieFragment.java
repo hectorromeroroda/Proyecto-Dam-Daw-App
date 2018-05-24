@@ -3,10 +3,8 @@ package com.example.hector.proyectodamdaw.Fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,9 +16,9 @@ import android.widget.Toast;
 
 
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.GlobalVariables;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -102,11 +100,13 @@ public class CreateCommunitieFragment  extends Fragment {
 
                     }else{
                         Toast toastAlert = Toast.makeText(getContext(),  "El campo descripcion no puede estar vacio", Toast.LENGTH_SHORT);
-                        toastAlert.show();                    }
+                        toastAlert.show();
+                    }
 
                 }else{
-                    Toast toastAlert = Toast.makeText(getContext(), "El campo nombre no puede estar vaci", Toast.LENGTH_SHORT);
-                    toastAlert.show();                }
+                    Toast toastAlert = Toast.makeText(getContext(), "El campo nombre no puede estar vacio", Toast.LENGTH_SHORT);
+                    toastAlert.show();
+                }
             }
         });
 

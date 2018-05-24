@@ -1,21 +1,22 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Otros;
 
 import android.content.Context;
 import android.database.Cursor;
 
 import com.example.hector.proyectodamdaw.Content.Communitie;
+import com.example.hector.proyectodamdaw.Content.Post;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 
 /**
- * Created by Hector on 10/05/2018.
+ * Created by Hector on 24/05/2018.
  */
 
-public class AdaptadorCommunitiesBD extends AdaptadorCommunities{
+public class AdaptadorAllPostBD extends  AdaptadorAllPost{
     public Cursor cursor;
 
 
-    public AdaptadorCommunitiesBD(Context contexto, Communitie communitie, Cursor cursor) {
-        super(contexto, communitie);
+    public AdaptadorAllPostBD(Context contexto, Post post, Cursor cursor) {
+        super(contexto, post);
         this.cursor = cursor;
     }
 
@@ -27,9 +28,9 @@ public class AdaptadorCommunitiesBD extends AdaptadorCommunities{
         this.cursor=cursor;
     }
 
-    public Communitie communitiePosicion(int posicion){
+    public Post postPosicion(int posicion){
         cursor.moveToPosition(posicion);
-        return AppDataSources.extraerCommunity(cursor);
+        return AppDataSources.extraerPost(cursor);
     }
 
     public  int idPosicion (int posicion){
@@ -39,9 +40,9 @@ public class AdaptadorCommunitiesBD extends AdaptadorCommunities{
 
     // Usando como base el ViewHolder y lo personalizamos
     @Override
-    public void onBindViewHolder(ViewHolder holder, int posicion) {
-        Communitie communitie = communitiePosicion(posicion);
-        personalizaVista(holder, communitie);
+    public void onBindViewHolder(AdaptadorAllPost.ViewHolder holder, int posicion) {
+        Post post = postPosicion(posicion);
+        personalizaVista(holder, post);
     }
 
     @Override
@@ -49,4 +50,3 @@ public class AdaptadorCommunitiesBD extends AdaptadorCommunities{
         return cursor.getCount();
     }
 }
-

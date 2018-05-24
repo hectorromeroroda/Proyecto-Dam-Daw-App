@@ -15,9 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.GlobalVariables;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;

@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.GlobalVariables;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -73,6 +73,7 @@ public class CreatePostFragment extends Fragment {
 
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
+        idUserSqlite=globales.getIdUserSqlite();
 
         return  view;
     }
@@ -99,7 +100,7 @@ public class CreatePostFragment extends Fragment {
                         contenidoVacio =comprobations.checkEmptyFields(strContenido);
                         if (contenidoVacio == false) {
 
-                            jsonCreatePost= createJsonNewPost(strNombre,strDescripcion," ",strContenido);
+                            jsonCreatePost= createJsonNewPost(strNombre,strDescripcion,strContenido,"");
                             try {
                                 createPostAsync(jsonCreatePost);
                             } catch (UnsupportedEncodingException e) {
@@ -138,10 +139,7 @@ public class CreatePostFragment extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/post";
-
-        GlobalVariables globales = GlobalVariables.getInstance();
-        idUserSqlite=globales.getIdUserSqlite();
+        String Url = "http://192.168.43.219:3000/community/"+ idComunidadActual +"/content/new/post";
 
         final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
