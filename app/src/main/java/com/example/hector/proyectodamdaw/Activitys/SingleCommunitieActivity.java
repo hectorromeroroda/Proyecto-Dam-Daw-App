@@ -1,6 +1,8 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -25,7 +27,16 @@ import com.example.hector.proyectodamdaw.Fragments.AllProposalFragment;
 import com.example.hector.proyectodamdaw.Fragments.AllVotacionesFragment;
 import com.example.hector.proyectodamdaw.Fragments.CreateCommunitieFragment;
 import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 public class SingleCommunitieActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +44,11 @@ public class SingleCommunitieActivity extends AppCompatActivity
     private ViewPager viewPager;
     private TabLayout tabs;
     private AppDataSources bd;
+    ProgressDialog Dialog;
+    String userToken;
+    String idComunidadActual;
+    int idUserSqlite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +69,20 @@ public class SingleCommunitieActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_my_community);
 
         bd = new AppDataSources(this);
+        Dialog = new ProgressDialog(this);
+        Dialog.setCancelable(false);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabVotaciones));
         tabs.addTab(tabs.newTab().setText(R.string.tabPost));
         tabs.addTab(tabs.newTab().setText(R.string.tabPropuestas));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+        GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+        idComunidadActual=globales.getCommunityId();
+        idUserSqlite=globales.getIdUserSqlite();
+
+        RefreshContentCommuities();
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -208,5 +232,113 @@ public class SingleCommunitieActivity extends AppCompatActivity
         public int getCount() {
             return 3;
         }
+    }
+
+    private void RefreshContentCommuities() {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(0, 10000);
+
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual;
+
+        Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
+        if (cursorUserToken.moveToFirst() != false){
+            userToken = cursorUserToken.getString(0);
+        }
+
+        client.addHeader("Authorization", "Bearer " + userToken);
+        client.get(this, Url, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+                Dialog.setMessage("Cargando datos...");
+                Dialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String jsId;
+                String jsTitle;
+                String jsDescription;
+                String jsType;
+                String strResponse = new String(responseBody);
+                JSONArray jsContents = new JSONArray();
+                boolean yaExiste= false;
+
+                try {
+
+
+
+                    JSONObject jsResponse= new JSONObject(strResponse);
+
+                    jsContents = jsResponse.getJSONArray("contents");
+                    for (int index = 0; index < jsContents.length(); index++) {
+                        JSONObject objContenido = jsContents.getJSONObject(index);
+
+                        yaExiste= false;
+
+                        jsId = objContenido.getString("_id");
+                        jsTitle = objContenido.getString("title");
+                        jsDescription = objContenido.getString("description");
+                        jsType = objContenido.getString("type");
+
+
+                        switch (jsType) {
+                            case "Request":
+                                Cursor cursorIdPropositionExist = bd.searchIdProposition(jsTitle);
+                                if (cursorIdPropositionExist.moveToFirst() != false) {
+                                    bd.updatePropositiontId(jsId,jsTitle);
+                                }else{
+                                    bd.saveProposal1(jsTitle,jsDescription,jsId,idComunidadActual);
+                                }
+                                break;
+                            case "Post":
+                                Cursor cursorIdPostExist =bd.searchIdPost(jsTitle);
+                                if (cursorIdPostExist.moveToFirst() != false) {
+                                   bd.updatePostId(jsId,jsTitle);
+                                }else{
+                                    bd.savePost1(jsTitle,jsDescription,idComunidadActual,jsId);
+                                }
+                                break;
+                            case "Poll":
+                                Cursor cursorIdPollExist =bd.searchIdVotacion(jsTitle);
+                                if (cursorIdPollExist.moveToFirst() != false) {
+                                    bd.updatePolltId(jsId,jsTitle);
+                                }else{
+                                    bd.savePoll1(jsTitle,jsDescription,idComunidadActual,jsId);
+                                }
+                                break;
+                        }
+
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                String mensajeError = new String(error.getMessage().toString());
+                String valor = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
+                Toast toastError = Toast.makeText(getApplicationContext(), valor, Toast.LENGTH_SHORT);
+                toastError.show();
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+
+        });
+
     }
 }
