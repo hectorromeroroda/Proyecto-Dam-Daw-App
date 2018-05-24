@@ -77,6 +77,7 @@ public class CreateVotacionFragment extends Fragment {
     String strRespuesta5b;
     String idComunidadActual;
     Comprobations comprobations;
+    int idUserSqlite;
     private AppDataSources bd;
 
 
@@ -116,6 +117,7 @@ public class CreateVotacionFragment extends Fragment {
 
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
+        idUserSqlite=globales.getIdUserSqlite();
 
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
@@ -150,6 +152,7 @@ public class CreateVotacionFragment extends Fragment {
                 boolean pregunta5Vacia;
                 boolean respuesta5aVacia;
                 boolean respuesta5bVacia;
+                boolean fechaFinalizacionVacia;
                 String jsonNewVotacion;
 
                 strNombre=titulo.getText().toString();
@@ -208,14 +211,19 @@ public class CreateVotacionFragment extends Fragment {
                                                                                 if (respuesta5aVacia == false) {
                                                                                     respuesta5bVacia =comprobations.checkEmptyFields(strRespuesta5b);
                                                                                     if (respuesta5bVacia == false){
+                                                                                        fechaFinalizacionVacia =comprobations.checkEmptyFields(strFechaFinalizacion);
+                                                                                        if (fechaFinalizacionVacia == false){
+                                                                                            jsonNewVotacion=createJsonNewVotacion(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                                                                                                    strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b,strPregunta5,strRespuesta5a,strRespuesta5b);
 
-                                                                                        jsonNewVotacion=createJsonNewVotacion(strNombre,strDescripcion,strContenido,strFechaFinalizacion, strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
-                                                                                        strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b,strPregunta5,strRespuesta5a,strRespuesta5b);
-
-                                                                                        try {
-                                                                                            createVotaciontAsync(jsonNewVotacion);
-                                                                                        } catch (UnsupportedEncodingException e) {
-                                                                                            e.printStackTrace();
+                                                                                            try {
+                                                                                                createVotaciontAsync(jsonNewVotacion);
+                                                                                            } catch (UnsupportedEncodingException e) {
+                                                                                                e.printStackTrace();
+                                                                                            }
+                                                                                        }else{
+                                                                                            Toast toastAlert = Toast.makeText(getContext(),  "El campo Fecha finalizacion es obligatiorio", Toast.LENGTH_SHORT);
+                                                                                            toastAlert.show();
                                                                                         }
                                                                                     }else{
                                                                                         Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 2 de la pregunta 5 es obligatiorio", Toast.LENGTH_SHORT);
@@ -295,17 +303,17 @@ public class CreateVotacionFragment extends Fragment {
 
     }
 
-    private String createJsonNewVotacion(String nombre, String descripcion, String cuerpo, String fechaFin, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
+    private String createJsonNewVotacion(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
     String tituloPregunta3, String respuesta3a, String respuesta3b, String tituloPregunta4, String respuesta4a, String respuesta4b, String tituloPregunta5, String respuesta5a, String respuesta5b) {
         String strJsonNewVotacion;
 
-        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\", \"endDate\": \"" + fechaFin + "\"," +
+        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
                 " \"data\":[" +
-                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": " + respuesta1b + "\"}]}" +
-                "{\"title\": \"" + tituloPregunta2 + "\", \"options\": [{\"value\": \"" + respuesta2a + "\"},{\"value\": " + respuesta2b + "\"}]}" +
-                "{\"title\": \"" + tituloPregunta3 + "\", \"options\": [{\"value\": \"" + respuesta3a + "\"},{\"value\": " + respuesta3b + "\"}]}" +
-                "{\"title\": \"" + tituloPregunta4 + "\", \"options\": [{\"value\": \"" + respuesta4a + "\"},{\"value\": " + respuesta4b + "\"}]}" +
-                "{\"title\": \"" + tituloPregunta5 + "\", \"options\": [{\"value\": \"" + respuesta5a + "\"},{\"value\": " + respuesta5b + "\"}]}]}");
+                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": \"" + respuesta1b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta2 + "\", \"options\": [{\"value\": \"" + respuesta2a + "\"},{\"value\": \"" + respuesta2b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta3 + "\", \"options\": [{\"value\": \"" + respuesta3a + "\"},{\"value\": \"" + respuesta3b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta4 + "\", \"options\": [{\"value\": \"" + respuesta4a + "\"},{\"value\": \"" + respuesta4b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta5 + "\", \"options\": [{\"value\": \"" + respuesta5a + "\"},{\"value\": \"" + respuesta5b + "\"}]}]}");
         return strJsonNewVotacion;
     }
 
@@ -319,10 +327,7 @@ public class CreateVotacionFragment extends Fragment {
 
         String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/poll";
 
-        GlobalVariables globales = GlobalVariables.getInstance();
-        final int idUser=globales.getIdUserSqlite();
-
-        final Cursor cursorUserToken = bd.searchUserToken(idUser);
+        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
