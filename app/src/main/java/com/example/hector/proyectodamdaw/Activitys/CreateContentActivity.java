@@ -17,9 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.Fragments.AllPostFragment;
-import com.example.hector.proyectodamdaw.Fragments.AllProposalFragment;
-import com.example.hector.proyectodamdaw.Fragments.AllVotacionesFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreatePostFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateProposalFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateVotacionFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class CreateContentActivity extends AppCompatActivity
@@ -49,16 +49,13 @@ public class CreateContentActivity extends AppCompatActivity
 
         bd = new AppDataSources(this);
 
-        tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tab1));
-        tabs.addTab(tabs.newTab().setText(R.string.tab2));
-        tabs.addTab(tabs.newTab().setText(R.string.tab3));
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
+        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("Crear votacion"));
+        tabs.addTab(tabs.newTab().setText("Crear propuesta"));
+        tabs.addTab(tabs.newTab().setText("Crear post"));
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -77,6 +74,9 @@ public class CreateContentActivity extends AppCompatActivity
             }
 
         });
+
+        TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);
     }
 
 
@@ -167,14 +167,16 @@ public class CreateContentActivity extends AppCompatActivity
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = new AllVotacionesFragment();
+                    fragment = new CreateVotacionFragment();
                     break;
                 case 1:
-                    fragment = new AllPostFragment();
+                    fragment = new CreateProposalFragment();
                     break;
                 case 2:
-                    fragment = new AllProposalFragment();
+                    fragment = new CreatePostFragment();
                     break;
+                default:
+                    return null;
             }
             return fragment;
         }
@@ -182,7 +184,7 @@ public class CreateContentActivity extends AppCompatActivity
         //Overriden method getCount to get the number of tabs
         @Override
         public int getCount() {
-            return 3;
+            return tabCount;
         }
     }
 }

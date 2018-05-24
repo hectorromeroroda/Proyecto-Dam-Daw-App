@@ -34,7 +34,7 @@ import cz.msebera.android.httpclient.protocol.HTTP;
  * Created by Hector on 21/05/2018.
  */
 
-public class CreateProposal  extends Fragment {
+public class CreateProposalFragment extends Fragment {
 
     ProgressDialog Dialog;
     EditText titulo;
@@ -49,7 +49,7 @@ public class CreateProposal  extends Fragment {
     Comprobations comprobations;
     private AppDataSources bd;
 
-    public CreateProposal() {
+    public CreateProposalFragment() {
         // Required empty public constructor
     }
 
@@ -102,7 +102,7 @@ public class CreateProposal  extends Fragment {
                         preguntaVacio =comprobations.checkEmptyFields(strPregunta);
                         if (preguntaVacio == false) {
 
-                            JsonCreateProposal= createJsonNewProposal(strNombre,strDescripcion," ",strPregunta,"Si,");
+                            JsonCreateProposal= createJsonNewProposal(strNombre,strDescripcion,strPregunta);
                             try {
                                 createProposalAsync(JsonCreateProposal);
                             } catch (UnsupportedEncodingException e) {
@@ -116,11 +116,11 @@ public class CreateProposal  extends Fragment {
 
     }
 
-    private String createJsonNewProposal(String nombre, String descripcion, String cuerpo, String titulo, String opcion) {
+    private String createJsonNewProposal(String nombre, String descripcion, String pregunta) {
         String strJsonNewProposal;
 
-        strJsonNewProposal=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\", " +
-                "\"data\": {\"title\": \"" + titulo + "\", \"option\": \"" + opcion + "\"}}");
+        strJsonNewProposal=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + descripcion + "\", " +
+                "\"data\": {\"option\": \"" + pregunta + "\"}}");
         return strJsonNewProposal;
     }
 
@@ -132,7 +132,7 @@ public class CreateProposal  extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/" + idComunidadActual + "/content/new/proposal";
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/proposal";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         final int idUser=globales.getIdUserSqlite();
@@ -155,7 +155,7 @@ public class CreateProposal  extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                bd.saveProposal(strNombre,strDescripcion,strPregunta,"Si","No",idComunidadActual,false);
+                bd.saveProposal(strNombre,strDescripcion,strPregunta,idComunidadActual,false);
 
                 //Envia a SingleCommunityActivity al crear la propuesta
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

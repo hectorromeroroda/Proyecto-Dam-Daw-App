@@ -162,7 +162,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
 
             startActivityForResult(intent,123);
         } else if (id == R.id.nav_profile) {
-            Intent intent = new Intent(this, EditProfileActivity.class );
+            Intent intent = new Intent(this, CreateContentActivity.class );
             startActivityForResult(intent,123);
         }
 

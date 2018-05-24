@@ -63,7 +63,7 @@ public class CreatePostFragment extends Fragment {
         titulo = (EditText)view.findViewById(R.id.edtNameNewPost);
         descripcion = (EditText)view.findViewById(R.id.edtDescriptionNewPost);
         contenido = (EditText)view.findViewById(R.id.edtContenidoNewPost);
-        btnEnviar = (Button) view.findViewById(R.id.btnSendNewProposal);
+        btnEnviar = (Button) view.findViewById(R.id.btnSendNewPost);
 
         comprobations = new Comprobations();
         bd = new AppDataSources(getContext());
@@ -137,7 +137,7 @@ public class CreatePostFragment extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/" + idComunidadActual + "/content/new/post";
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/post";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         final int idUser=globales.getIdUserSqlite();
@@ -159,8 +159,6 @@ public class CreatePostFragment extends Fragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-
 
                 bd.savePost(strNombre,strDescripcion,strContenido,idComunidadActual);
 
