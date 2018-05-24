@@ -1,4 +1,4 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Otros;
 
 import android.app.Application;
 

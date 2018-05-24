@@ -3,10 +3,8 @@ package com.example.hector.proyectodamdaw.Fragments;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,9 +16,9 @@ import android.widget.Toast;
 
 
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.GlobalVariables;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -50,6 +48,7 @@ public class CreateCommunitieFragment  extends Fragment {
     String jsonCreateCommunity;
     String name;
     String description;
+    int idUserSqlite;
     Comprobations comprobations;
 
     public CreateCommunitieFragment() {
@@ -101,11 +100,13 @@ public class CreateCommunitieFragment  extends Fragment {
 
                     }else{
                         Toast toastAlert = Toast.makeText(getContext(),  "El campo descripcion no puede estar vacio", Toast.LENGTH_SHORT);
-                        toastAlert.show();                    }
+                        toastAlert.show();
+                    }
 
                 }else{
-                    Toast toastAlert = Toast.makeText(getContext(), "El campo nombre no puede estar vaci", Toast.LENGTH_SHORT);
-                    toastAlert.show();                }
+                    Toast toastAlert = Toast.makeText(getContext(), "El campo nombre no puede estar vacio", Toast.LENGTH_SHORT);
+                    toastAlert.show();
+                }
             }
         });
 
@@ -129,9 +130,9 @@ public class CreateCommunitieFragment  extends Fragment {
         String Url = "http://192.168.43.219:3000/community/new";
 
         GlobalVariables globales = GlobalVariables.getInstance();
-        final int idUser=globales.getIdUserSqlite();
+        idUserSqlite=globales.getIdUserSqlite();
 
-        final Cursor cursorUserToken = bd.searchUserToken(idUser);
+        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
@@ -161,13 +162,10 @@ public class CreateCommunitieFragment  extends Fragment {
                 }
 
                 bd.saveCommunity(1, true, 0, name, description, jsCommId);
-                bd.saveCommunityUser(jsCommId, idUser, "owner", false);
+                bd.saveCommunityUser(jsCommId, idUserSqlite, "owner", false);
 
                 //Poner en id de la comunidad creada en variable gobal
                 GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-
-                globales.setCommunityId(idUserSqlite);
-
                 globales.setCommunityId(jsCommId);
 
 

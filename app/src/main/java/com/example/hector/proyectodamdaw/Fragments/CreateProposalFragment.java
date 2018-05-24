@@ -16,9 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.GlobalVariables;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -46,6 +46,7 @@ public class CreateProposalFragment extends Fragment {
     String strPregunta;
     String userToken;
     String idComunidadActual;
+    int idUserSqlite;
     Comprobations comprobations;
     private AppDataSources bd;
 
@@ -135,9 +136,9 @@ public class CreateProposalFragment extends Fragment {
         String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/proposal";
 
         GlobalVariables globales = GlobalVariables.getInstance();
-        final int idUser=globales.getIdUserSqlite();
+        idUserSqlite=globales.getIdUserSqlite();
 
-        final Cursor cursorUserToken = bd.searchUserToken(idUser);
+        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.hector.proyectodamdaw.Content.Communitie;
+import com.example.hector.proyectodamdaw.Content.Post;
 
 /**
  * Created by Hector on 19/04/2018.
@@ -91,6 +92,12 @@ public class AppDataSources {
 
     public Cursor todasComunities() {
         String selectQuery = "SELECT * FROM Community";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
+    public Cursor todosPostCommunity(String idCommunity) {
+        String selectQuery = "SELECT * FROM Post WHERE CommunityId= '" + idCommunity + "'";
 
         return dbR.rawQuery(selectQuery, null);
     }
@@ -256,6 +263,14 @@ public class AppDataSources {
         communitie.setDescription(cursor.getString(3));
         communitie.setNumUsers(cursor.getInt(4));
         return communitie;
+    }
+
+    public static Post extraerPost(Cursor cursor){
+        Post post = new Post();
+        post.setTitle(cursor.getString(1));
+        post.setDescription(cursor.getString(2));
+        post.setContent(cursor.getString(3));
+        return post;
     }
 
 }

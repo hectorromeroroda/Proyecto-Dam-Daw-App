@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
-import com.example.hector.proyectodamdaw.GlobalVariables;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class LoginActivity extends AppCompatActivity
