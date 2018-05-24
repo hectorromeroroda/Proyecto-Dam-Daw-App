@@ -1,4 +1,4 @@
-package com.example.hector.proyectodamdaw;
+package com.example.hector.proyectodamdaw.Otros;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
