@@ -12,6 +12,10 @@
             android:id="@+id/nav_community_selector"
             android:icon="@drawable/community"
             android:title="Selector de Comunidad" />
+        <item
+            android:id="@+id/nav_invite_user"
+            android:icon="@drawable/community_selector"
+            android:title="Invitar usuario" />
     </group>
 
     <item android:title="Usuario">
