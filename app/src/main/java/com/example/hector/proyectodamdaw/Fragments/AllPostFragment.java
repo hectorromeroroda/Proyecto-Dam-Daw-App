@@ -77,6 +77,11 @@ public class AllPostFragment extends Fragment{
 
     }
 
+    public  void onStart(){
+        super.onStart();
+        RefreshCommuities();
+    }
+
     private void RefreshCommuities() {
 
         AsyncHttpClient client = new AsyncHttpClient();
