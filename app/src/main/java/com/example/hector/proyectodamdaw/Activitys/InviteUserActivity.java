@@ -1,15 +1,14 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,33 +16,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.widget.SearchView;
-import android.widget.Toast;
-
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
-import com.example.hector.proyectodamdaw.Fragments.CreateCommunitieFragment;
-import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
-import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
+import com.example.hector.proyectodamdaw.Fragments.CreatePostFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateProposalFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateVotacionFragment;
+import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
+import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
 import com.example.hector.proyectodamdaw.R;
-import com.example.hector.proyectodamdaw.Fragments.YourCommunitiesFragment;
 
-
-public class CommunitiesActivity extends AppCompatActivity
+public class InviteUserActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ViewPager viewPager;
-    private TabLayout tabs;
+    String userToken;
+    String idComunidadActual;
+    int idUserSqlite;
     private AppDataSources bd;
 
-    @SuppressLint("ResourceType")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_communities);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,40 +50,16 @@ public class CommunitiesActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
         navigationView.setCheckedItem(R.id.nav_my_community);
-
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-
         bd = new AppDataSources(this);
 
-        GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-        globales.setCommunityId("");
+        Fragment fragmentLogin = new CreatePostFragment();
+        loadFragment(fragmentLogin);
+    }
 
-        tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
-        tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
-        tabs.addTab(tabs.newTab().setText(R.string.tabCreateCommunitie));
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-
-        });
-
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
+    private void loadFragment(Fragment newFragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentCommunities, newFragment,newFragment.getClass().getName()).commit();
+        //.addToBackStack(null)    ---SIRVE PARA GUARDAR EL FRAGMEN EN LA PILA, PERO ESTE NO LO NECESITAMOS
 
     }
 
@@ -106,32 +77,8 @@ public class CommunitiesActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.communities, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.app_bar_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                //AQUI TIENEN QUE IR LAS BUSQUEDAS
-                Toast toastAlerta = Toast.makeText(getApplicationContext(), "Para ver que funciona communities activity", Toast.LENGTH_SHORT);
-                toastAlerta.show();
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                //AQUI TIENEN QUE IR LAS BUSQUEDAS
-
-                return false;
-            }
-        });
-
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -174,15 +121,6 @@ public class CommunitiesActivity extends AppCompatActivity
         }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
             startActivityForResult(intent,123);
-        }else if (id == R.id.nav_invite_user) {
-            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
-            String idComunidadActual=globales.getCommunityId();
-
-            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
-                Toast toastError = Toast.makeText(getApplicationContext(), "No puede invitar a un usuario si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
-                toastError.show();
-            }
-
         }
 
         item.setChecked(true);
@@ -190,44 +128,6 @@ public class CommunitiesActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
 
-class TabAdapter extends FragmentStatePagerAdapter {
 
-    //integer to count number of tabs
-    int tabCount;
-
-    //Constructor to the class
-    public TabAdapter(FragmentManager fm, int tabCount) {
-        super(fm);
-        //Initializing tab count
-        this.tabCount= tabCount;
-    }
-
-    //Overriding method getItem
-    @Override
-    public Fragment getItem(int position) {
-        //Returning the current tabs
-        Fragment fragment = null;
-        switch (position) {
-            case 0:
-                fragment = new YourCommunitiesFragment();
-                break;
-            case 1:
-                fragment = new OtherCommunitiesFragment();
-                break;
-            case 2:
-                fragment = new CreateCommunitieFragment();
-                break;
-            default:
-                return null;
-        }
-        return fragment;
-    }
-
-    //Overriden method getCount to get the number of tabs
-    @Override
-    public int getCount() {
-        return tabCount;
-    }
 }

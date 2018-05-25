@@ -3,7 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Configuración</string>
+    <string name="action_settisngs">Configuración</string>
     <string name="search_menu">Buscar</string>
 
     //LoginFragment---
@@ -123,4 +123,13 @@
     <string name="rdbProfilePublic">Perfil público</string>
     <string name="rdbProfilePrivate">Perfil privado</string>
     <string name="ToastRespuestaProfileStae">Cambios guardados con éxito</string>
+    <string name="title_activity_userinvited">Userinvited</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

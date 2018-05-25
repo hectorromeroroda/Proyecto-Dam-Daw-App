@@ -24,7 +24,7 @@
         <activity
             android:name=".Activitys.LoginActivity"
             android:label=" "
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activitys.CommunitiesActivity"
             android:label=" "
@@ -35,9 +35,7 @@
             android:label=" "
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Rows.RowVotacionInProgress" />
-        <activity android:name=".Rows.RowVotacionClosed" />
         <activity android:name=".Rows.RowProposalInProgress" />
-        <activity android:name=".Rows.RowProposalClosed" />
         <activity
             android:name=".Activitys.CreateContentActivity"
             android:label=" "
@@ -48,7 +46,13 @@
             android:name=".Activitys.EditProfileActivity"
             android:label=" "
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Rows.RowCommunitieInvited"></activity>
+        <activity android:name=".Rows.RowCommunitieInvited" />
+
+        <activity android:name=".Activitys.InviteUserActivity"
+            android:label=" "
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
     </application>
 
 </manifest>
