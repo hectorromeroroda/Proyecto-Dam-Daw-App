@@ -35,40 +35,73 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="91dp"
+                android:layout_height="115dp"
                 android:orientation="horizontal"
                 android:paddingLeft="25dp"
                 android:paddingRight="25dp"
                 android:paddingVertical="20dp">
 
-                <ImageButton
-                    android:id="@+id/imgbLoadImageCamera"
-                    android:layout_width="66dp"
-                    android:layout_height="48dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:backgroundTint="@color/Blanco"
-                    android:elevation="0dp"
-                    android:scaleType="fitCenter"
-                    android:scaleX="1"
-                    android:scaleY="1"
-                    app:srcCompat="@drawable/photo_camera" />
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/imgbLoadImageCamera"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="2"
+                        android:backgroundTint="@color/Blanco"
+                        android:elevation="1dp"
+                        android:scaleType="fitCenter"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        app:srcCompat="@drawable/photo_camera" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Abrir cámara"
+                        android:textAlignment="center"
+                        android:textColor="@color/Negro" />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <ImageButton
-                    android:id="@+id/imgbLoadImageEdit"
-                    android:layout_width="66dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/Blanco"
-                    android:elevation="1dp"
-                    android:scaleType="fitCenter"
-                    android:scaleX="1"
-                    android:scaleY="1"
-                    app:srcCompat="@drawable/picture" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/imgbLoadImageEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_weight="2"
+                        android:backgroundTint="@color/Blanco"
+                        android:elevation="1dp"
+                        android:scaleType="fitCenter"
+                        android:scaleX="1"
+                        android:scaleY="1"
+                        app:srcCompat="@drawable/picture" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Abrir galeria"
+                        android:textAlignment="center"
+                        android:textColor="@color/Negro" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -88,5 +121,6 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
