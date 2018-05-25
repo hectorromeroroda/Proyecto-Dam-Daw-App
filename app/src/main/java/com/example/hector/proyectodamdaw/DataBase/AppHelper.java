@@ -44,6 +44,7 @@ public class AppHelper extends SQLiteOpenHelper{
         String proposition =
                 "CREATE TABLE Proposition(_id INTEGER PRIMARY KEY," +
                         "propositionTitle VARCHAR(45)," +
+                        "propositionId VARCHAR(45)," +
                         "propositionDescription VARCHAR(100)," +
                         "propositionPregunta VARCHAR(500)," +
                         "propositionCommunityId INT," +
@@ -54,6 +55,7 @@ public class AppHelper extends SQLiteOpenHelper{
         String poll =
                 "CREATE TABLE Poll(_id INTEGER PRIMARY KEY," +
                         "PollTitle VARCHAR(45)," +
+                        "PollId VARCHAR(45)," +
                         "PollDescription VARCHAR(100)," +
                         "PollContenido VARCHAR(500)," +
                         "PollStartDate DATE," +
@@ -84,6 +86,7 @@ public class AppHelper extends SQLiteOpenHelper{
                         "postDescription VARCHAR(100)," +
                         "postContent VARCHAR(500)," +
                         "CommunityId INT," +
+                        "postId VARCHAR(45)," +
                         "FOREIGN KEY (CommunityId) REFERENCES Community(IdCommunity)" +
                         ")";
         sqLiteDatabase.execSQL(post);

@@ -133,7 +133,7 @@ public class CreateProposalFragment extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/proposal";
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/new/request";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         idUserSqlite=globales.getIdUserSqlite();

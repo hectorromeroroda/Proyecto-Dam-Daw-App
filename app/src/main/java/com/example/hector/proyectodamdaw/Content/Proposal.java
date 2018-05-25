@@ -6,8 +6,27 @@ package com.example.hector.proyectodamdaw.Content;
 
 public class Proposal {
 
-    public Proposal() {
-       // this.NombreInmersion = NombreInmersion;
+    private String Title;
+    private String Description;
 
+    public Proposal() {}
+
+    public Proposal(String title, String description) {
+        this.Title = title;
+        this.Description = Description;
+    }
+
+    public void setTitle(String title) {
+        this.Title = title;
+    }
+    public void setDescription(String description) {
+        this.Description = description;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+    public String getDescription() {
+        return Description;
     }
 }
