@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.Content.Post;
+import com.example.hector.proyectodamdaw.Content.Proposal;
 
 /**
  * Created by Hector on 19/04/2018.
@@ -78,6 +79,24 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery,null);
     }
 
+    public Cursor searchIdPost(String tituloPost) {
+
+        String selectQuery = " SELECT _id FROM Post WHERE postTitle= '" + tituloPost + "'";
+        return dbR.rawQuery(selectQuery,null);
+    }
+
+    public Cursor searchIdVotacion(String tituloVotacion) {
+
+        String selectQuery = " SELECT _id FROM Poll WHERE PollTitle= '" + tituloVotacion + "'";
+        return dbR.rawQuery(selectQuery,null);
+    }
+
+    public Cursor searchIdProposition(String tituloProposition) {
+
+        String selectQuery = " SELECT _id FROM Proposition WHERE propositionTitle= '" + tituloProposition + "'";
+        return dbR.rawQuery(selectQuery,null);
+    }
+
     public Cursor typeProfile(int idUser) {
         // Retorna el campo tipo de perfil publico/privado
         String selectQuery = " SELECT UserPublicProfile FROM User WHERE _id= '" + idUser + "'";
@@ -101,6 +120,13 @@ public class AppDataSources {
 
         return dbR.rawQuery(selectQuery, null);
     }
+
+    public Cursor todosProposalCommunity(String idCommunity) {
+        String selectQuery = "SELECT * FROM Proposition WHERE propositionCommunityId= '" + idCommunity + "'";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
     public Cursor todasComunitiesPertenece(int idUserSqlite) {
         String selectQuery = "SELECT * FROM Community WHERE IdCommunity IN (SELECT IdCommunity FROM CommunityUser WHERE IdUserSqlite= '" + idUserSqlite + "' AND UserInvited= 0)";
 
@@ -171,8 +197,16 @@ public class AppDataSources {
         values.put("propositionTitle", nombre);
         values.put("propositionDescription", descripcion);
         values.put("propositionPregunta", pregunta);
-        values.put("CommunityId", comunidadId);
+        values.put("propositionCommunityId", comunidadId);
         values.put("propositionYaVotada", yaVotada);
+        dbW.insert("Proposition",null,values);
+    }
+    public void saveProposal1(String nombre, String descripcion,String idPropuesta, String comunidadId) {
+        ContentValues values = new ContentValues();
+        values.put("propositionTitle", nombre);
+        values.put("propositionDescription", descripcion);
+        values.put("propositionId", idPropuesta);
+        values.put("propositionCommunityId", comunidadId);
         dbW.insert("Proposition",null,values);
     }
     public void savePost(String nombre, String descripcion,String contenido,  String comunidadId) {
@@ -181,6 +215,14 @@ public class AppDataSources {
         values.put("postDescription", descripcion);
         values.put("postContent", contenido);
         values.put("CommunityId", comunidadId);
+        dbW.insert("Post",null,values);
+    }
+    public void savePost1(String nombre, String descripcion, String comunidadId, String IdPost) {
+        ContentValues values = new ContentValues();
+        values.put("postTitle", nombre);
+        values.put("postDescription", descripcion);
+        values.put("CommunityId", comunidadId);
+        values.put("postId", IdPost);
         dbW.insert("Post",null,values);
     }
     public void savePoll(String titulo, String descripcion,String contenido, String fechaInicio, String fechaFinal,  String comunidadId, boolean yaVotada, String pregunta1,
@@ -211,6 +253,16 @@ public class AppDataSources {
         values.put("pollRespuesta5b", respuesta5b);
         dbW.insert("Poll",null,values);
     }
+    public void savePoll1(String titulo, String descripcion,  String comunidadId, String idPoll) {
+        ContentValues values = new ContentValues();
+        values.put("PollTitle", titulo);
+        values.put("PollDescription", descripcion);
+        values.put("PollCommunityId", comunidadId);
+        values.put("PollId", idPoll);
+
+
+        dbW.insert("Poll",null,values);
+    }
 
     public void saveEditTypeProfile(boolean profileState, int idUser) {
 
@@ -232,6 +284,24 @@ public class AppDataSources {
         values.put(USER_REMEMBER_ME, rememberMe);
 
         dbW.update(table_USER,values, USER_REMEMBER_ME + " = ?", new String[] { String.valueOf(state) });
+    }
+    public void updatePostId( String postId, String postTitle) {
+        ContentValues values = new ContentValues();
+        values.put("postId", postId);
+
+        dbW.update("Post",values, "postTitle" + " = ?", new String[] { String.valueOf(postTitle) });
+    }
+    public void updatePropositiontId( String propositiontId, String propositionTitle) {
+        ContentValues values = new ContentValues();
+        values.put("propositionId", propositiontId);
+
+        dbW.update("Proposition",values, "propositionTitle" + " = ?", new String[] { String.valueOf(propositionTitle) });
+    }
+    public void updatePolltId( String pollId, String pollTitle) {
+        ContentValues values = new ContentValues();
+        values.put("PollId", pollId);
+
+        dbW.update("Poll",values, "PollTitle" + " = ?", new String[] { String.valueOf(pollTitle) });
     }
 
     public void updateUserLogin(int stikies, boolean profileIsPublic, String email, int idUser) {
@@ -271,6 +341,13 @@ public class AppDataSources {
         post.setDescription(cursor.getString(2));
         post.setContent(cursor.getString(3));
         return post;
+    }
+
+    public static Proposal extraerProposal(Cursor cursor){
+        Proposal proposal = new Proposal();
+        proposal.setTitle(cursor.getString(1));
+        proposal.setDescription(cursor.getString(3));
+        return proposal;
     }
 
 }
