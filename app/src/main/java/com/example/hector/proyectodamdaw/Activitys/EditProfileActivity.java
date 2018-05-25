@@ -23,6 +23,7 @@ import com.example.hector.proyectodamdaw.Fragments.EditEmailProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditImageProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditPasswProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditTypeProfileFragment;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -221,6 +222,18 @@ public class EditProfileActivity extends AppCompatActivity
         }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
             startActivityForResult(intent,123);
+        }else if (id == R.id.nav_invite_user) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
+
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede invitar a un usuario si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }else{
+                Intent intent = new Intent(this, InviteUserActivity.class );
+                startActivityForResult(intent,123);
+            }
+
         }
 
         item.setChecked(true);
