@@ -140,6 +140,9 @@ public class CreateContentActivity extends AppCompatActivity
         }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
             startActivityForResult(intent,123);
+        }else if (id == R.id.nav_invite_user) {
+            Intent intent = new Intent(this, InviteUserActivity.class );
+            startActivityForResult(intent,123);
         }
 
         item.setChecked(true);
