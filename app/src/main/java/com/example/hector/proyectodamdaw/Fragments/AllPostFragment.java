@@ -60,6 +60,7 @@ public class AllPostFragment extends Fragment{
 
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
+        idUserSqlite=globales.getIdUserSqlite();
         
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllPostBD(getContext(),post,bd.todosPostCommunity(idComunidadActual));
@@ -75,6 +76,11 @@ public class AllPostFragment extends Fragment{
 
 
 
+    }
+
+    public  void onStart(){
+        super.onStart();
+        RefreshCommuities();
     }
 
     private void RefreshCommuities() {

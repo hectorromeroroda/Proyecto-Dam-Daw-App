@@ -67,8 +67,6 @@ public class AllProposalFragment extends Fragment{
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
 
-        RefreshCommuities();
-
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllProposalsBD(getContext(),proposal,bd.todosProposalCommunity(idComunidadActual));
         recyclerViewProposals.setAdapter(adaptadorBd);
@@ -83,6 +81,11 @@ public class AllProposalFragment extends Fragment{
 
 
 
+    }
+
+    public  void onStart(){
+        super.onStart();
+        RefreshCommuities();
     }
 
     private void RefreshCommuities() {

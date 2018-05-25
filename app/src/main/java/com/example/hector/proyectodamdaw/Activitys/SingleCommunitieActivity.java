@@ -267,9 +267,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
                 boolean yaExiste= false;
 
                 try {
-
-
-
                     JSONObject jsResponse= new JSONObject(strResponse);
 
                     jsContents = jsResponse.getJSONArray("contents");

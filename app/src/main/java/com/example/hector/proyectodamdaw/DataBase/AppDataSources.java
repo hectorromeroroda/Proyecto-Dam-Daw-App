@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.Content.Post;
 import com.example.hector.proyectodamdaw.Content.Proposal;
+import com.example.hector.proyectodamdaw.Content.Votacion;
 
 /**
  * Created by Hector on 19/04/2018.
@@ -123,6 +124,12 @@ public class AppDataSources {
 
     public Cursor todosProposalCommunity(String idCommunity) {
         String selectQuery = "SELECT * FROM Proposition WHERE propositionCommunityId= '" + idCommunity + "'";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
+    public Cursor todasVotacionesCommunity(String idCommunity) {
+        String selectQuery = "SELECT * FROM poll WHERE PollCommunityId= '" + idCommunity + "'";
 
         return dbR.rawQuery(selectQuery, null);
     }
@@ -348,6 +355,13 @@ public class AppDataSources {
         proposal.setTitle(cursor.getString(1));
         proposal.setDescription(cursor.getString(3));
         return proposal;
+    }
+
+    public static Votacion extraerVotacion(Cursor cursor){
+        Votacion votacion = new Votacion();
+        votacion.setTitle(cursor.getString(1));
+        votacion.setDescription(cursor.getString(3));
+        return votacion;
     }
 
 }
