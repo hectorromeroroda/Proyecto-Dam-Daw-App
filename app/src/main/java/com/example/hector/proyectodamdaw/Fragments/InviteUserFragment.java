@@ -197,7 +197,7 @@ public class InviteUserFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                
+
                 //Envia a SingleCommunityActivity al invitar al usuario
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
                 startActivity(intent);
