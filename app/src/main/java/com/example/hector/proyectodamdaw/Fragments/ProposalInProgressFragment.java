@@ -147,9 +147,10 @@ public class ProposalInProgressFragment extends Fragment{
                 try {
                     JSONObject jsResponse= new JSONObject(strResponse);
 
-                    respuestaTitulo=;
-                    respuestaDescripcion=;
-                    respuestaPregunta=;
+                    //POR AKI VOY-------------------------------------------------------------------------------------------------------------------------
+                    //respuestaTitulo=;
+                    //respuestaDescripcion=;
+                    //respuestaPregunta=;
 
                     //Guardar pregunta de la propuesta
                     bd.updateProposalPregunta(respuestaPregunta,idProposal);

@@ -82,8 +82,6 @@ public class SingleCommunitieActivity extends AppCompatActivity
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
 
-        RefreshContentCommuities();
-
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         TabAdapterSingle adapter = new TabAdapterSingle(getSupportFragmentManager(), tabs.getTabCount());
@@ -106,6 +104,13 @@ public class SingleCommunitieActivity extends AppCompatActivity
             }
 
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        RefreshContentCommuities();
     }
 
     @Override
