@@ -13,6 +13,8 @@ public class GlobalVariables extends Application{
     public   int idUserSqlite;
     public   boolean RefreshData = false;
     public  String communityId;
+    public  String proposalId;
+    public  String pollId;
 
 
     public  int getIdUserSqlite() {
@@ -37,6 +39,22 @@ public class GlobalVariables extends Application{
 
     public  void setCommunityId(String idCommunity) {
         communityId = idCommunity;
+    }
+
+    public  String getProposalId() {
+        return proposalId;
+    }
+
+    public  void setProposalId(String idProposal) {
+        proposalId = idProposal;
+    }
+
+    public  String getPollId() {
+        return pollId;
+    }
+
+    public  void setPollId(String idPoll) {
+        pollId = idPoll;
     }
 
     public static synchronized GlobalVariables getInstance(){
