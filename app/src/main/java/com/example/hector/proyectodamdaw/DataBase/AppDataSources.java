@@ -311,6 +311,13 @@ public class AppDataSources {
         dbW.update("Poll",values, "PollTitle" + " = ?", new String[] { String.valueOf(pollTitle) });
     }
 
+    public void updateProposalPregunta( String pregunta, String proposalId) {
+        ContentValues values = new ContentValues();
+        values.put("propositionPregunta", pregunta);
+
+        dbW.update("Proposition",values, "propositionId" + " = ?", new String[] { String.valueOf(proposalId) });
+    }
+
     public void updateUserLogin(int stikies, boolean profileIsPublic, String email, int idUser) {
 
         String UpdateQuery = "UPDATE User SET UserStikies = '" + stikies + "', UserPublicProfile= '" + profileIsPublic + "', UserEmail= '" + email + "' WHERE _id= " + idUser + "";

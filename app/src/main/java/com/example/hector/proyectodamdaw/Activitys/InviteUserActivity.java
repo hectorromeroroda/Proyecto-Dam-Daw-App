@@ -20,6 +20,7 @@ import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.CreatePostFragment;
 import com.example.hector.proyectodamdaw.Fragments.CreateProposalFragment;
 import com.example.hector.proyectodamdaw.Fragments.CreateVotacionFragment;
+import com.example.hector.proyectodamdaw.Fragments.InviteUserFragment;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
 import com.example.hector.proyectodamdaw.R;
@@ -52,8 +53,8 @@ public class InviteUserActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_my_community);
         bd = new AppDataSources(this);
 
-        Fragment fragmentLogin = new CreatePostFragment();
-        loadFragment(fragmentLogin);
+        Fragment fragmentUserInvite = new InviteUserFragment();
+        loadFragment(fragmentUserInvite);
     }
 
     private void loadFragment(Fragment newFragment) {

@@ -70,7 +70,7 @@
 
                 <TextView
                     android:id="@+id/txvQuestionProposal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView"
@@ -109,7 +109,8 @@
                         android:layout_weight="1"
                         android:buttonTint="@color/Negro"
                         android:text="@string/rdbAcceptProposal"
-                        android:textColor="@color/Negro" />
+                        android:textColor="@color/Negro"
+                        android:textSize="18sp" />
 
                     <RadioButton
                         android:id="@+id/rdbDiscardProposal"
@@ -118,7 +119,8 @@
                         android:layout_weight="1"
                         android:buttonTint="@color/Negro"
                         android:text="@string/rdbDiscardProposal"
-                        android:textColor="@color/Negro" />
+                        android:textColor="@color/Negro"
+                        android:textSize="18sp" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -130,14 +132,20 @@
                 android:paddingBottom="10dp">
 
                 <Button
-                    android:id="@+id/btnSendProposal"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btnSendResultProposal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/Blanco"
                     android:text="@string/btnSendProposal"
-                    android:textColor="@color/Negro" />
+                    android:textAlignment="center"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
+
             </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
