@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
@@ -25,7 +26,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 /**
  * Created by Hector on 25/05/2018.
@@ -38,6 +44,8 @@ public class InviteUserFragment extends Fragment {
     String nombreUsuarioInvitado;
     String userToken;
     String idComunidadActual;
+    String jsUserId;
+    String jsUserInvite;
     private AppDataSources bd;
     ProgressDialog Dialog;
     int idUserSqlite;
@@ -75,6 +83,17 @@ public class InviteUserFragment extends Fragment {
                     //MENSAJE CAMPO DEVE ESTAR LLENO
                 }else{
                     InviteUser(nombreUsuarioInvitado);
+                    if ( (jsUserId == null) || (jsUserId.equals(""))){
+
+                    }else{
+                        jsUserInvite=createJsonUserInvite(jsUserId,);
+                        try {
+                            inviteUserPost(jsUserInvite);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
             }
 
@@ -88,7 +107,7 @@ public class InviteUserFragment extends Fragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/invite";
+        String Url = "http://192.168.43.219:3000/profile/" + textoABuscar;
 
         Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
@@ -107,10 +126,26 @@ public class InviteUserFragment extends Fragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String strResponse = new String(responseBody);
 
-                //Envia a SingleCommunityActivity al crear la votacion
-                Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
-                startActivity(intent);
+                JSONArray jsResponse = new JSONArray();
+
+                try {
+                  jsResponse= new JSONArray(strResponse);
+                    for (int index = 0; index < jsResponse.length(); index++) {
+                        JSONObject jsobjUsuario = jsResponse.getJSONObject(index);
+                        jsUserId = jsobjUsuario.getString("_id");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if ( (jsUserId == null) || (jsUserId.equals(""))){
+                    Toast toastAlerta = Toast.makeText(getContext(), "No existe ningun usuario con ese nombre", Toast.LENGTH_LONG);
+                    toastAlerta.show();
+                }
+
                 Dialog.dismiss();
             }
 
@@ -120,6 +155,61 @@ public class InviteUserFragment extends Fragment {
                 String mensajeError = new String(error.getMessage().toString());
                 String mensaje = "No se ha podido enviar los datos  al servidor. " + mensajeError;
                 Toast toastAlerta = Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG);
+                toastAlerta.show();
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+
+        });
+
+    }
+
+    private String createJsonUserInvite(String idUsuario, String role) {
+        String strJsonLogin;
+
+        strJsonLogin=  ("{\"invited\": \"" + idUsuario + "\", \"role\": \"" + role +"\"}");
+        return strJsonLogin;
+    }
+
+    private void inviteUserPost(String datos) throws UnsupportedEncodingException {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(0, 10000);
+
+        StringEntity entity = new StringEntity(datos);
+        entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/invite";
+
+        client.post(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+                Dialog.setMessage("Verificando datos...");
+                Dialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                
+                //Envia a SingleCommunityActivity al invitar al usuario
+                Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
+                startActivity(intent);
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                String mensajeError = new String(error.getMessage().toString());
+                String badResponse = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
+                Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
                 toastAlerta.show();
                 Dialog.dismiss();
             }
