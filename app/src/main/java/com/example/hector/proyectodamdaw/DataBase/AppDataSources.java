@@ -147,7 +147,7 @@ public class AppDataSources {
     }
 
     public Cursor allOtherCommunities() {
-        String selectQuery = "SELECT * FROM Community WHERE IdCommunity NOT IN (SELECT IdCommunity FROM CommunityUser)";
+        String selectQuery = "SELECT DISTINCT  * FROM Community WHERE IdCommunity IN (SELECT IdCommunity FROM CommunityUser)";
 
         return dbR.rawQuery(selectQuery, null);
     }
@@ -314,6 +314,14 @@ public class AppDataSources {
     public void updateProposalPregunta( String pregunta, String proposalId) {
         ContentValues values = new ContentValues();
         values.put("propositionPregunta", pregunta);
+
+        dbW.update("Proposition",values, "propositionId" + " = ?", new String[] { String.valueOf(proposalId) });
+    }
+
+    public void updateProposalRespuesta( boolean respuesta, boolean yaVotada,String proposalId) {
+        ContentValues values = new ContentValues();
+        values.put("propositionRespuesta", respuesta);
+        values.put("propositionYaVotada", yaVotada);
 
         dbW.update("Proposition",values, "propositionId" + " = ?", new String[] { String.valueOf(proposalId) });
     }

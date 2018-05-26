@@ -47,6 +47,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
     ProgressDialog Dialog;
     String userToken;
     String idComunidadActual;
+    String idProposal="";
     int idUserSqlite;
 
 
@@ -81,6 +82,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
+        globales.setProposalId(idProposal);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 

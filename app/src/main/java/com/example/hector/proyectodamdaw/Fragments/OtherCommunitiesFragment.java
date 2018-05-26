@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Otros.AdaotadorAllOtherCommunitiesBD;
 import com.example.hector.proyectodamdaw.Otros.AdaptadorCommunitiesBD;
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
@@ -34,7 +35,7 @@ public class OtherCommunitiesFragment extends Fragment{
     protected RecyclerView.LayoutManager layoutManager;
     protected RecyclerView recyclerViewOtherCommunities;
     private Communitie communitie = new Communitie();
-    public AdaptadorCommunitiesBD adaptadorBd;
+    public AdaotadorAllOtherCommunitiesBD adaptadorBd;
     private AppDataSources bd;
     String userToken;
     ProgressDialog Dialog;
@@ -53,16 +54,16 @@ public class OtherCommunitiesFragment extends Fragment{
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
 
+        RefreshOtherCommunities();
+
         return view;
     }
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        //RefreshOtherCommunities();//ACTIVAR ESTO PARA ACTUALIZAR LAS COMUNIDADES----------------------------------------------------
-
         //ReciclerView de comunidades que ni pertenece ni esta invitado
-        adaptadorBd = new AdaptadorCommunitiesBD(getContext(),communitie,bd.allOtherCommunities());
+        adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities());
         recyclerViewOtherCommunities.setAdapter(adaptadorBd);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewOtherCommunities.setLayoutManager(layoutManager);
@@ -73,7 +74,7 @@ public class OtherCommunitiesFragment extends Fragment{
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿¿?¿";
+        String Url = "http://192.168.43.219:3000/community/featured";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         int idUser=globales.getIdUserSqlite();
