@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +47,12 @@ public class InviteUserFragment extends Fragment {
     String idComunidadActual;
     String jsUserId;
     String jsUserInvite;
+    String rolUsuario= "user";
     private AppDataSources bd;
     ProgressDialog Dialog;
+    RadioButton rdbEditor;
+    RadioButton rdbAdmin;
+    RadioButton rdbUser;
     int idUserSqlite;
 
     public InviteUserFragment() {
@@ -60,6 +65,10 @@ public class InviteUserFragment extends Fragment {
         View view = inflater.inflate(R.layout.invite_user_fragment, container, false);
         nombreusuarioinvitado = (EditText)view.findViewById(R.id.edtUserNameInvited);
         btnInvitarusuario = (Button) view.findViewById(R.id.btnInviteUserComunity);
+        rdbEditor=(RadioButton)view.findViewById(R.id.rdbEditor);
+        rdbAdmin=(RadioButton)view.findViewById(R.id.rdbAdmin);
+        rdbUser=(RadioButton)view.findViewById(R.id.rdbUser);
+        rdbUser.setChecked(true);
 
         bd = new AppDataSources(getContext());
         Dialog = new ProgressDialog(getContext());
@@ -82,18 +91,17 @@ public class InviteUserFragment extends Fragment {
                 if ( (nombreUsuarioInvitado == null) || (nombreUsuarioInvitado.equals(""))){
                     //MENSAJE CAMPO DEVE ESTAR LLENO
                 }else{
-                    InviteUser(nombreUsuarioInvitado);
-                    if ( (jsUserId == null) || (jsUserId.equals(""))){
-
+                    if (rdbAdmin.isChecked()==true){
+                        rolUsuario="admin";
                     }else{
-                        jsUserInvite=createJsonUserInvite(jsUserId,);
-                        try {
-                            inviteUserPost(jsUserInvite);
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
+                        if (rdbEditor.isChecked()==true){
+                            rolUsuario="editor";
                         }
-
                     }
+
+                    InviteUser(nombreUsuarioInvitado);
+
+
                 }
             }
 
@@ -144,6 +152,14 @@ public class InviteUserFragment extends Fragment {
                 if ( (jsUserId == null) || (jsUserId.equals(""))){
                     Toast toastAlerta = Toast.makeText(getContext(), "No existe ningun usuario con ese nombre", Toast.LENGTH_LONG);
                     toastAlerta.show();
+                }else{
+                    jsUserInvite=createJsonUserInvite(jsUserId,rolUsuario);
+
+                    try {
+                        inviteUserPost(jsUserInvite);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 Dialog.dismiss();
@@ -185,6 +201,12 @@ public class InviteUserFragment extends Fragment {
 
         String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/invite";
 
+        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
+        if (cursorUserToken.moveToFirst() != false){
+            userToken = cursorUserToken.getString(0);
+        }
+
+        client.addHeader("Authorization", "Bearer " + userToken);
         client.post(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
 
             @Override
