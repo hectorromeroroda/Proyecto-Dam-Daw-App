@@ -47,6 +47,7 @@ public class AppHelper extends SQLiteOpenHelper{
                         "propositionId VARCHAR(45)," +
                         "propositionDescription VARCHAR(100)," +
                         "propositionPregunta VARCHAR(500)," +
+                        "propositionRespuesta VARCHAR(45)," +
                         "propositionCommunityId INT," +
                         "propositionYaVotada BIT," +
                         "FOREIGN KEY (propositionCommunityId) REFERENCES Community(IdCommunity)" +
