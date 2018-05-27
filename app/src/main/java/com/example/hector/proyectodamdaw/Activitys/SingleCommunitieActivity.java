@@ -47,6 +47,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
     ProgressDialog Dialog;
     String userToken;
     String idComunidadActual;
+    String idProposal="";
     int idUserSqlite;
 
 
@@ -81,8 +82,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
-
-        RefreshContentCommuities();
+        globales.setProposalId(idProposal);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -106,6 +106,13 @@ public class SingleCommunitieActivity extends AppCompatActivity
             }
 
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        RefreshContentCommuities();
     }
 
     @Override
@@ -188,7 +195,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, CreateContentActivity.class );
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_invite_user) {
+        }else if (id == R.id.nav_invite_user) {
             Intent intent = new Intent(this, InviteUserActivity.class );
             startActivityForResult(intent,123);
         }
