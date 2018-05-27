@@ -39,11 +39,13 @@ public class CreateProposalFragment extends Fragment {
     ProgressDialog Dialog;
     EditText titulo;
     EditText  descripcion;
+    EditText  cuerpo;
     EditText  pregunta;
     Button btnEnviar;
     String strNombre;
     String strDescripcion;
     String strPregunta;
+    String strCuerpo;
     String userToken;
     String idComunidadActual;
     int idUserSqlite;
@@ -65,6 +67,7 @@ public class CreateProposalFragment extends Fragment {
 
         titulo = (EditText)view.findViewById(R.id.edtNameNewProposal);
         descripcion = (EditText)view.findViewById(R.id.edtDescriptionNewProposal);
+        cuerpo = (EditText)view.findViewById(R.id.edtCuerpoNewProposal);
         pregunta = (EditText)view.findViewById(R.id.edtPreguntaNewProposal);
         btnEnviar = (Button) view.findViewById(R.id.btnSendNewProposal);
 
@@ -90,11 +93,13 @@ public class CreateProposalFragment extends Fragment {
                 boolean nombreVacio;
                 boolean descripcionVacio;
                 boolean preguntaVacio;
+                boolean cuerpoVacio;
                 String JsonCreateProposal;
 
                 strNombre=titulo.getText().toString();
                 strDescripcion=descripcion.getText().toString();
                 strPregunta=pregunta.getText().toString();
+                strCuerpo=cuerpo.getText().toString();
 
                 nombreVacio =comprobations.checkEmptyFields(strNombre);
                 if (nombreVacio == false) {
@@ -102,13 +107,17 @@ public class CreateProposalFragment extends Fragment {
                     if (descripcionVacio == false) {
                         preguntaVacio =comprobations.checkEmptyFields(strPregunta);
                         if (preguntaVacio == false) {
-
-                            JsonCreateProposal= createJsonNewProposal(strNombre,strDescripcion,strPregunta);
-                            try {
-                                createProposalAsync(JsonCreateProposal);
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
+                            cuerpoVacio =comprobations.checkEmptyFields(strCuerpo);
+                            if (cuerpoVacio == false) {
+                                JsonCreateProposal= createJsonNewProposal(strNombre,strDescripcion,strPregunta,strCuerpo);
+                                try {
+                                    createProposalAsync(JsonCreateProposal);
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
                             }
+
+
                         }
                     }
                 }
@@ -117,10 +126,10 @@ public class CreateProposalFragment extends Fragment {
 
     }
 
-    private String createJsonNewProposal(String nombre, String descripcion, String pregunta) {
+    private String createJsonNewProposal(String nombre, String descripcion, String pregunta, String strCuerpo) {
         String strJsonNewProposal;
 
-        strJsonNewProposal=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + descripcion + "\", " +
+        strJsonNewProposal=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + strCuerpo + "\", " +
                 "\"data\": {\"option\": \"" + pregunta + "\"}}");
         return strJsonNewProposal;
     }
@@ -156,7 +165,7 @@ public class CreateProposalFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                bd.saveProposal(strNombre,strDescripcion,strPregunta,idComunidadActual,false);
+                bd.saveProposal(strNombre,strDescripcion,strPregunta,strCuerpo,idComunidadActual,false);
 
                 //Envia a SingleCommunityActivity al crear la propuesta
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

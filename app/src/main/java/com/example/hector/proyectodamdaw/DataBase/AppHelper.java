@@ -46,6 +46,7 @@ public class AppHelper extends SQLiteOpenHelper{
                         "propositionTitle VARCHAR(45)," +
                         "propositionId VARCHAR(45)," +
                         "propositionDescription VARCHAR(100)," +
+                        "propositionCuerpo VARCHAR(500)," +
                         "propositionPregunta VARCHAR(500)," +
                         "propositionRespuesta BIT," +
                         "propositionCommunityId INT," +
