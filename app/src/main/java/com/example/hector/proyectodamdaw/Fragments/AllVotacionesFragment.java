@@ -69,6 +69,8 @@ public class AllVotacionesFragment extends Fragment {
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
 
+        RefreshVotaciones();
+
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllVotacionesBD(getContext(),votacion,bd.todasVotacionesCommunity(idComunidadActual));
         recyclerViewVotaciones.setAdapter(adaptadorBd);
@@ -90,12 +92,7 @@ public class AllVotacionesFragment extends Fragment {
 
     }
 
-    public  void onStart(){
-        super.onStart();
-        RefreshCommuities();
-    }
-
-    private void RefreshCommuities() {
+    private void RefreshVotaciones() {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);

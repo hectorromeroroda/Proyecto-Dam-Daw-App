@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
+import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
 import com.example.hector.proyectodamdaw.Otros.AdaptadorCommunitiesBD;
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
@@ -22,6 +25,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.StringReader;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -85,6 +90,23 @@ public class YourCommunitiesFragment extends Fragment{
         recyclerViewYourInvitations.setAdapter(adaptadorBdInvited);
         layoutManagerInvited = new LinearLayoutManager(getContext());
         recyclerViewYourInvitations.setLayoutManager(layoutManagerInvited);
+
+        adaptadorBdPertenece.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int posicion = recyclerViewYourCommunities.getChildAdapterPosition(v);
+               Cursor prueba=adaptadorBdPertenece.getCursor();
+                String idComunidad = prueba.getString(1);
+
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                globales.setCommunityId(idComunidad);
+
+                //Envia a SingleCommunity
+                Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void RefreshCommuities() {
