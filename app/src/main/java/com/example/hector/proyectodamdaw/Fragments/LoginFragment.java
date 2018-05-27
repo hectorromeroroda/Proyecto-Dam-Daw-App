@@ -18,8 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
-import com.example.hector.proyectodamdaw.Comprobations;
+import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -187,7 +188,6 @@ public class LoginFragment extends Fragment{
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String responseContentError;
                 String jsToken;
                 String jsFirstName;
                 String jsLastName;
@@ -201,6 +201,7 @@ public class LoginFragment extends Fragment{
                 String jsCommName;
                 String jsCommDescription;
                 String jscommRole;
+                int idUserSqlite=0;
                 JSONArray jsInvited = new JSONArray();
                 JSONArray jsComunities = new JSONArray();
                 String strResponse = new String(responseBody);
@@ -216,66 +217,81 @@ public class LoginFragment extends Fragment{
                     jsLastName = jsResponse.getString("last_name");
                     jsEmail = jsResponse.getString("email");
                     jsProfilePublic = jsResponse.getString("profile_is_public");
-
-                    jsInvited = jsResponse.getJSONArray("invited");
-
-                    for (int index = 0; index < jsInvited.length(); index++) {
-                        JSONObject object = jsInvited.getJSONObject(index);
-
-
-                        JSONObject data= new JSONObject();
-                        data = object.getJSONObject("data");
-                        jsCommMemmbers=data.getString("members");
-                        jsCommPublic=data.getString("public");
-                        jsCommContents=data.getString("contents");
-                        jsCommId=data.getString("_id");
-                        jsCommName=data.getString("name");
-                        jsCommDescription=data.getString("description");
-
-                        Cursor cursorIdComminityExist = bd.searchIdCommunitie(jsCommId);
-                        if (cursorIdComminityExist.moveToFirst() != false){
-                            String id = cursorIdComminityExist.getString(0);
-                            bd.updateCommunityUserInvited(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription);
-
-                        }else {
-                            bd.saveCommunityUserinvited(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId, true);
-                        }
-                    }
-
-                    jsComunities = jsResponse.getJSONArray("communities");
-
-                    for (int index = 0; index < jsComunities.length(); index++) {
-                        JSONObject object = jsComunities.getJSONObject(index);
-                        jscommRole = object.getString("role");
-
-                        JSONObject data= new JSONObject();
-                        data = object.getJSONObject("data");
-                        jsCommMemmbers=data.getString("members");
-                        jsCommPublic=data.getString("public");
-                        jsCommContents=data.getString("contents");
-                        jsCommId=data.getString("_id");
-                        jsCommName=data.getString("name");
-                        jsCommDescription=data.getString("description");
-
-                        Cursor cursorIdComminityExist = bd.searchIdCommunitie(jsCommId);
-                        if (cursorIdComminityExist.moveToFirst() != false){
-                            String id = cursorIdComminityExist.getString(0);
-                           bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jscommRole);
-
-                        }else {
-                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jscommRole,jsCommId);
-                        }
-                    }
-
                     jsToken=jsResponse.getString("token");
 
-                    if (rememberMe.isChecked() == true) {
-                        bd.updateUserLoginTokenRememberMe(jsToken, true);
-                    } else {
-                        bd.updateUserLoginTokenRememberMe(jsToken, false);
+                    int intTrue = 1;
+                    int intFalse=0;
+                    //Actualiza datos del usuario
+                    Cursor  cursorIdUserSqlite= bd.userIdSqlite(jsEmail);
+                    if (cursorIdUserSqlite.moveToFirst() != false){
+                        idUserSqlite = cursorIdUserSqlite.getInt(0);
+                        if (rememberMe.isChecked() == true) {
+                            bd.updateUserLoginTokenRememberMe(jsToken, intTrue, idUserSqlite);
+                        } else {
+                            bd.updateUserLoginTokenRememberMe(jsToken, intFalse, idUserSqlite);
+                        }
+                        bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail, idUserSqlite);
+                    }else{
+                        if (rememberMe.isChecked() == true) {
+                            bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, 1);
+                        } else {
+                            bd.saveUserRegister(jsFirstName, jsLastName, jsEmail, Integer.parseInt(jsStikies), Boolean.valueOf(jsProfilePublic), jsToken, 0);
+                        }
+
+                        Cursor  cursorIdUserSqlite1= bd.userIdSqlite(jsEmail);
+                        if (cursorIdUserSqlite1.moveToFirst() != false) {
+                            idUserSqlite = cursorIdUserSqlite1.getInt(0);
+                        }
                     }
 
-                    bd.updateUserLogin(Integer.parseInt(jsStikies),  Boolean.valueOf(jsProfilePublic), jsEmail);
+                    //Datos sobre las comunidades a las que se esta invitado
+                    jsInvited = jsResponse.getJSONArray("invited");
+                    for (int index = 0; index < jsInvited.length(); index++) {
+                        JSONObject objectInvited = jsInvited.getJSONObject(index);
+
+                        jsCommMemmbers = objectInvited.getString("members");
+                        jsCommPublic = objectInvited.getString("public");
+                        jsCommContents = objectInvited.getString("posts");
+                        jsCommId = objectInvited.getString("id");
+                        jsCommName = objectInvited.getString("name");
+                        jsCommDescription = objectInvited.getString("description");
+                        jscommRole = objectInvited.getString("role");
+
+                        Cursor cursorIdComminityExist = bd.searchIdCommunitie(jsCommId);
+                        if (cursorIdComminityExist.moveToFirst() != false) {
+                            bd.updateCommunityUserInvited(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
+                        } else {
+                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
+                            bd.saveCommunityUser(jsCommId, idUserSqlite, jscommRole, true);
+                        }
+                    }
+                        //Datos sobre las comunidades a las que se pertenece
+                        jsComunities = jsResponse.getJSONArray("communities");
+                        for (int index1 = 0; index1 < jsComunities.length(); index1++) {
+                            JSONObject objectPertenece = jsComunities.getJSONObject(index1);
+
+                            jsCommMemmbers = objectPertenece.getString("members");
+                            jsCommPublic = objectPertenece.getString("public");
+                            jsCommContents = objectPertenece.getString("posts");
+                            jsCommId = objectPertenece.getString("id");
+                            jsCommName = objectPertenece.getString("name");
+                            jsCommDescription = objectPertenece.getString("description");
+                            jscommRole = objectPertenece.getString("role");
+
+                            Cursor cursorIdComminityExist1 = bd.searchIdCommunitie(jsCommId);
+                            if (cursorIdComminityExist1.moveToFirst() != false){
+                                bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
+                            }else {
+                                bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId);
+                                bd.saveCommunityUser(jsCommId,idUserSqlite,jscommRole,false);
+                            }
+
+                        }
+
+                    //Poner en id de usuario en variable gobal
+                    GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                    globales.setIdUserSqlite(idUserSqlite);
+
                     //Envia a AllComminities
                     Intent intent = new Intent(getContext(), CommunitiesActivity.class );
                     startActivity(intent);

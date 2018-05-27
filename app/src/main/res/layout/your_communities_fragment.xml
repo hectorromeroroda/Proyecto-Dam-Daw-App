@@ -41,6 +41,7 @@
                     android:layout_weight="1"
                     android:text="@string/txvInvitationCommunities"
                     android:textAlignment="center"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -54,7 +55,7 @@
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="2dip"
-                    android:background="#000000" />
+                    android:background="@color/AzulFuerte" />
 
             </LinearLayout>
 

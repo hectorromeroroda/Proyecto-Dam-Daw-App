@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,10 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.Fragments.CreateCommunitieFragment;
 import com.example.hector.proyectodamdaw.Fragments.OtherCommunitiesFragment;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 import com.example.hector.proyectodamdaw.Fragments.YourCommunitiesFragment;
 
@@ -29,7 +33,7 @@ public class CommunitiesActivity extends AppCompatActivity
 
     private ViewPager viewPager;
     private TabLayout tabs;
-
+    private AppDataSources bd;
 
     @SuppressLint("ResourceType")
     @Override
@@ -38,6 +42,7 @@ public class CommunitiesActivity extends AppCompatActivity
         setContentView(R.layout.activity_communities);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -49,17 +54,20 @@ public class CommunitiesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_gallery);
+        navigationView.setCheckedItem(R.id.nav_my_community);
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        bd = new AppDataSources(this);
+
+        GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+        globales.setCommunityId("");
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText(R.string.tabTusComunidades));
         tabs.addTab(tabs.newTab().setText(R.string.tabOtrasComunidades));
+        tabs.addTab(tabs.newTab().setText(R.string.tabCreateCommunitie));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-
-        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -79,7 +87,8 @@ public class CommunitiesActivity extends AppCompatActivity
 
         });
 
-
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);
 
     }
 
@@ -133,7 +142,15 @@ public class CommunitiesActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
+            //Accion al dar boton logout
+            int state = 1;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
+
+            Intent intent = new Intent(this, LoginActivity.class );
+            //Limpia la pila de activitys para llenarla empezando de 0
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             return true;
         }
 
@@ -146,20 +163,29 @@ public class CommunitiesActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_my_community) {
+            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
-        } else if (id == R.id.nav_slideshow) {
+            startActivityForResult(intent,123);
+        } else if (id == R.id.nav_community_selector) {
+            Intent intent = new Intent(this, CommunitiesActivity.class );
 
-        } else if (id == R.id.nav_manage) {
+            startActivityForResult(intent,123);
+        }else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(this, EditProfileActivity.class );
+            startActivityForResult(intent,123);
+        }else if (id == R.id.nav_invite_user) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede invitar a un usuario si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }
 
         }
 
+        item.setChecked(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -190,6 +216,11 @@ class TabAdapter extends FragmentStatePagerAdapter {
             case 1:
                 fragment = new OtherCommunitiesFragment();
                 break;
+            case 2:
+                fragment = new CreateCommunitieFragment();
+                break;
+            default:
+                return null;
         }
         return fragment;
     }
@@ -197,6 +228,6 @@ class TabAdapter extends FragmentStatePagerAdapter {
     //Overriden method getCount to get the number of tabs
     @Override
     public int getCount() {
-        return 2;
+        return tabCount;
     }
 }

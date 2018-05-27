@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/Blanco"
     tools:context="com.example.hector.proyectodamdaw.Rows.RowProposalInProgress">
 
     <LinearLayout
@@ -26,6 +27,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:text="TextView"
+                android:textColor="@color/Negro"
                 android:textSize="18sp" />
         </LinearLayout>
 
@@ -41,55 +43,9 @@
                 android:layout_weight="1"
                 android:paddingBottom="5dp"
                 android:text="TextView"
+                android:textColor="@color/Negro"
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/txvRowApoyoMinimo"
-                android:layout_width="149dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:text="@string/txvRowApoyoMinimo"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txvRowPorcentajeApoyoMinimo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingBottom="5dp"
-                android:text="TextView"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/txvRowApoyoActual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/txvRowApoyoActual"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/txvRowPorcentajeApoyoActual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textSize="18sp" />
-        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

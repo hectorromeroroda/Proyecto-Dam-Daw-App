@@ -1,5 +1,6 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -15,9 +16,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.hector.proyectodamdaw.Fragments.AllPostFragment;
-import com.example.hector.proyectodamdaw.Fragments.AllProposalFragment;
-import com.example.hector.proyectodamdaw.Fragments.AllVotacionesFragment;
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
+import com.example.hector.proyectodamdaw.Fragments.CreatePostFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateProposalFragment;
+import com.example.hector.proyectodamdaw.Fragments.CreateVotacionFragment;
 import com.example.hector.proyectodamdaw.R;
 
 public class CreateContentActivity extends AppCompatActivity
@@ -25,6 +27,7 @@ public class CreateContentActivity extends AppCompatActivity
 
     private ViewPager viewPager;
     private TabLayout tabs;
+    private AppDataSources bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +45,17 @@ public class CreateContentActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_share);
+        navigationView.setCheckedItem(R.id.nav_my_community);
 
-        tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText(R.string.tab1));
-        tabs.addTab(tabs.newTab().setText(R.string.tab2));
-        tabs.addTab(tabs.newTab().setText(R.string.tab3));
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+        bd = new AppDataSources(this);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
+        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.addTab(tabs.newTab().setText("Crear votacion"));
+        tabs.addTab(tabs.newTab().setText("Crear propuesta"));
+        tabs.addTab(tabs.newTab().setText("Crear post"));
+        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -72,6 +74,9 @@ public class CreateContentActivity extends AppCompatActivity
             }
 
         });
+
+        TabAdapterCreate adapter = new TabAdapterCreate(getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);
     }
 
 
@@ -103,7 +108,15 @@ public class CreateContentActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
+            //Accion al dar boton logout
+            int state = 1;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
+
+            Intent intent = new Intent(this, LoginActivity.class );
+            //Limpia la pila de activitys para llenarla empezando de 0
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             return true;
         }
 
@@ -116,20 +129,23 @@ public class CreateContentActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_my_community) {
+            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
-        } else if (id == R.id.nav_slideshow) {
+            startActivityForResult(intent,123);
+        } else if (id == R.id.nav_community_selector) {
+            Intent intent = new Intent(this, CommunitiesActivity.class );
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            startActivityForResult(intent,123);
+        }else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(this, EditProfileActivity.class );
+            startActivityForResult(intent,123);
+        }else if (id == R.id.nav_invite_user) {
+            Intent intent = new Intent(this, InviteUserActivity.class );
+            startActivityForResult(intent,123);
         }
 
+        item.setChecked(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -154,14 +170,16 @@ public class CreateContentActivity extends AppCompatActivity
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = new AllVotacionesFragment();
+                    fragment = new CreateVotacionFragment();
                     break;
                 case 1:
-                    fragment = new AllPostFragment();
+                    fragment = new CreateProposalFragment();
                     break;
                 case 2:
-                    fragment = new AllProposalFragment();
+                    fragment = new CreatePostFragment();
                     break;
+                default:
+                    return null;
             }
             return fragment;
         }
@@ -169,7 +187,7 @@ public class CreateContentActivity extends AppCompatActivity
         //Overriden method getCount to get the number of tabs
         @Override
         public int getCount() {
-            return 3;
+            return tabCount;
         }
     }
 }

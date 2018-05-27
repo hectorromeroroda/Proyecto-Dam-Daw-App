@@ -21,4 +21,8 @@
         <item name="android:windowBackground">@drawable/background_slash</item>
     </style>
 
+    <style name="labelColor">
+        <item name="android:textColor">@color/LilaFuerte</item>
+        <item name="android:background">@color/Blanco</item>
+    </style>
 </resources>

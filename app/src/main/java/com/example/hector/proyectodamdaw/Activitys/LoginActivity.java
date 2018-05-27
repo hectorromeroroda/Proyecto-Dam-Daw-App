@@ -16,13 +16,14 @@ import android.view.MenuItem;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class LoginActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppDataSources bd;
-    private boolean rememberMe=false;
+    private int idUserSqlite;
 
 
     @Override
@@ -41,38 +42,42 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_camera);
+        navigationView.setCheckedItem(R.id.nav_my_community);
 
         //Para buscar si esta marcado el rememberMe
         bd = new AppDataSources(this);
         Cursor cursorRememberMeState = bd.rememmberMeUserLogin();
 
         if (cursorRememberMeState.moveToFirst() != false){
-            rememberMe = Boolean.valueOf(cursorRememberMeState.getString(0));
+            idUserSqlite = cursorRememberMeState.getInt(0);
+
+            //Poner en id de usuario en variable gobal
+            GlobalVariables globales = GlobalVariables.getInstance();
+            globales.setIdUserSqlite(idUserSqlite);
+            globales.setRefreshData(true);
+
+            //Envia a AllComminities
+            Intent intent = new Intent(this, CommunitiesActivity.class );
+            startActivity(intent);
+        }else{
+            //Cambiar de fragment
+            Fragment fragmentLogin = new LoginFragment();
+            Fragment fragmentSingUp = new SingUpFragment();
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
+
+            if (currentFragment == null) {
+                //carga del primer fragment justo en la carga inicial de la app
+                loadFragment(fragmentLogin);
+            } else{
+                if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
+
+                }else{
+                    if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
+
+                    }
+                }
+            }
         }
-         if (rememberMe==true){
-             //Envia a AllComminities
-             Intent intent = new Intent(this, CommunitiesActivity.class );
-             startActivity(intent);
-         }else{
-             //Cambiar de fragment
-             Fragment fragmentLogin = new LoginFragment();
-             Fragment fragmentSingUp = new SingUpFragment();
-             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.contentLogin);
-
-             if (currentFragment == null) {
-                 //carga del primer fragment justo en la carga inicial de la app
-                 loadFragment(fragmentLogin);
-             } else{
-                 if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentLogin.getClass().getName())) {
-
-                 }else{
-                     if (currentFragment.getClass().getName().equalsIgnoreCase(fragmentSingUp.getClass().getName())) {
-
-                     }
-                 }
-             }
-         }
 
     }
 
@@ -108,11 +113,6 @@ public class LoginActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-
-            //AQUI ACCION HA HACER CUANDO SE DA AL BOTON LOGOUT
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -123,26 +123,17 @@ public class LoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-
-        } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(this, CommunitiesActivity.class );
-
-            startActivityForResult(intent,123);
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_my_community) {
             Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_manage) {
-            Intent intent = new Intent(this, CreateContentActivity.class );
+        } else if (id == R.id.nav_community_selector) {
+            Intent intent = new Intent(this, CommunitiesActivity.class );
 
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_share) {
+        }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
-
             startActivityForResult(intent,123);
-        } else if (id == R.id.nav_send) {
-
         }
 
         item.setChecked(true);

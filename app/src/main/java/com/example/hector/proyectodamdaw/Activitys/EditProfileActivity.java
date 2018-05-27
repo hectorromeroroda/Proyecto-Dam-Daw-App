@@ -1,5 +1,6 @@
 package com.example.hector.proyectodamdaw.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -17,14 +18,18 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.EditEmailProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditImageProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditPasswProfileFragment;
 import com.example.hector.proyectodamdaw.Fragments.EditTypeProfileFragment;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class EditProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AppDataSources bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +49,16 @@ public class EditProfileActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Para poner como seleccionado el item  que se quiera del navigationdrawer
-        navigationView.setCheckedItem(R.id.nav_camera);
+        navigationView.setCheckedItem(R.id.nav_my_community);
+
+        bd = new AppDataSources(this);
 
         Spinner spinnerEditProfile = (Spinner) findViewById(R.id.spnEditProfile);
         String[] items = {"Editar email", "Editar password", "Editar tipo de perfil", "Editar imagen de perfil"};
-        spinnerEditProfile.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items));
 
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item,items);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinnerEditProfile.setAdapter(spinnerArrayAdapter);
         spinnerEditProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -181,6 +190,15 @@ public class EditProfileActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
+            //Accion al dar boton logout
+            int state = 1;
+            int intFalse=0;
+            bd.updateUserRememberMe(intFalse,state);
+
+            Intent intent = new Intent(this, LoginActivity.class );
+            //Limpia la pila de activitys para llenarla empezando de 0
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             return true;
         }
 
@@ -193,20 +211,29 @@ public class EditProfileActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_my_community) {
+            Intent intent = new Intent(this, SingleCommunitieActivity.class );
 
-        } else if (id == R.id.nav_slideshow) {
+            startActivityForResult(intent,123);
+        } else if (id == R.id.nav_community_selector) {
+            Intent intent = new Intent(this, CommunitiesActivity.class );
 
-        } else if (id == R.id.nav_manage) {
+            startActivityForResult(intent,123);
+        }else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(this, EditProfileActivity.class );
+            startActivityForResult(intent,123);
+        }else if (id == R.id.nav_invite_user) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede invitar a un usuario si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }
 
         }
 
+        item.setChecked(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

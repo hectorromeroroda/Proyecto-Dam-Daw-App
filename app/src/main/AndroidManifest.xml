@@ -11,9 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/labelColor">
         <activity
-            android:name=".SplashActivity"
+            android:name=".Otros.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,32 +23,36 @@
         </activity>
         <activity
             android:name=".Activitys.LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:label=" "
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activitys.CommunitiesActivity"
-            android:label="@string/title_activity_communities"
+            android:label=" "
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Rows.RowMyCommunitie" />
         <activity
             android:name=".Activitys.SingleCommunitieActivity"
-            android:label="@string/title_activity_single_communitie"
+            android:label=" "
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Rows.RowVotacionInProgress" />
-        <activity android:name=".Rows.RowVotacionClosed" />
         <activity android:name=".Rows.RowProposalInProgress" />
-        <activity android:name=".Rows.RowProposalClosed" />
         <activity
             android:name=".Activitys.CreateContentActivity"
-            android:label="@string/title_activity_create_content"
+            android:label=" "
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Rows.RowOtherCommunitie" />
         <activity android:name=".Rows.RowPost" />
         <activity
             android:name=".Activitys.EditProfileActivity"
-            android:label="@string/title_activity_edit_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label=" "
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Rows.RowCommunitieInvited" />
+
+        <activity android:name=".Activitys.InviteUserActivity"
+            android:label=" "
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
     </application>
 
 </manifest>

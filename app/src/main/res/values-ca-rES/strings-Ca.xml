@@ -60,6 +60,7 @@
     <string name="tabPost">Post</string>
     <string name="tabPropuestas">Propostes</string>
     <string name="tabCalendario">Calendari</string>
+    <string name="tabCreateCommunitie">Crear una comunitat</string>
 
     //AllVotacionesUpFragment---
     <string name="rdbVotacionInProgress">En proces</string>
