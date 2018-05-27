@@ -110,12 +110,7 @@ public class ProposalInProgressFragment extends Fragment{
                     toastAlerta.show();
                 }else{
 
-                    jsRespuesta=createJsonResultProposition();
-                    try {
-                        sendResultProposal(jsRespuesta);
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+
 
                 }
             }

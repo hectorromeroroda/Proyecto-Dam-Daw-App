@@ -61,6 +61,8 @@ public class AllPostFragment extends Fragment{
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
+
+        RefresPost();
         
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllPostBD(getContext(),post,bd.todosPostCommunity(idComunidadActual));
@@ -78,17 +80,14 @@ public class AllPostFragment extends Fragment{
 
     }
 
-    public  void onStart(){
-        super.onStart();
-        RefreshCommuities();
-    }
 
-    private void RefreshCommuities() {
+
+    private void RefresPost() {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "posts";
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/posts";
 
         Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){

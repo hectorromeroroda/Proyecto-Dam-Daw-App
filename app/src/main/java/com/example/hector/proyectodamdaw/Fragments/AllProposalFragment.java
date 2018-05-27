@@ -85,15 +85,15 @@ public class AllProposalFragment extends Fragment{
 
     public  void onStart(){
         super.onStart();
-        RefreshCommuities();
+        RefreshProposal();
     }
 
-    private void RefreshCommuities() {
+    private void RefreshProposal() {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual;
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/posts";
 
         Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
