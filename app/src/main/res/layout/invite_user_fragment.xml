@@ -28,6 +28,7 @@
                     android:layout_weight="1"
                     android:text="Invitar usuario a la comunidad"
                     android:textAlignment="center"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -49,6 +50,7 @@
                     android:ems="10"
                     android:hint="Nombre de usuario"
                     android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -70,7 +72,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:buttonTint="@color/Negro"
                         android:text="Editor"
+                        android:textColor="@color/Negro"
                         android:textSize="18sp" />
 
                     <RadioButton
@@ -78,7 +82,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:buttonTint="@color/Negro"
                         android:text="Administrador"
+                        android:textColor="@color/Negro"
                         android:textSize="18sp" />
 
                     <RadioButton
@@ -86,7 +92,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:buttonTint="@color/Negro"
                         android:text="Usuario estandar"
+                        android:textColor="@color/Negro"
                         android:textSize="18sp" />
                 </RadioGroup>
             </LinearLayout>
