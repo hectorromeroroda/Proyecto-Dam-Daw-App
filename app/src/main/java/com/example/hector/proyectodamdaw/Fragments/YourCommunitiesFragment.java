@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
+import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
 import com.example.hector.proyectodamdaw.Otros.AdaptadorCommunitiesBD;
 import com.example.hector.proyectodamdaw.Content.Communitie;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
@@ -23,7 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import cz.msebera.android.httpclient.message.BasicHeader;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 
 /**
@@ -43,6 +52,7 @@ public class YourCommunitiesFragment extends Fragment{
     private AppDataSources bd;
     ProgressDialog Dialog;
     int idSqlite;
+    String idComunidadActual;
     String userToken;
 
     public YourCommunitiesFragment() {
@@ -69,6 +79,8 @@ public class YourCommunitiesFragment extends Fragment{
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         boolean refreshData=globales.getRefreshData();
         idSqlite=globales.getIdUserSqlite();
+        idComunidadActual=globales.getCommunityId();
+
 
         if (refreshData==true){
             RefreshCommuities();
@@ -85,6 +97,43 @@ public class YourCommunitiesFragment extends Fragment{
         recyclerViewYourInvitations.setAdapter(adaptadorBdInvited);
         layoutManagerInvited = new LinearLayoutManager(getContext());
         recyclerViewYourInvitations.setLayoutManager(layoutManagerInvited);
+
+        adaptadorBdInvited.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Cursor prueba=adaptadorBdInvited.getCursor();
+                String idComunidad = prueba.getString(1);
+
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                globales.setCommunityId(idComunidad);
+                idComunidadActual=idComunidad;
+
+
+                try {
+                    unirseComunidad();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        adaptadorBdPertenece.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Cursor prueba=adaptadorBdPertenece.getCursor();
+                String idComunidad = prueba.getString(1);
+
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                globales.setCommunityId(idComunidad);
+
+                //Envia a SingleCommunity
+                Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void RefreshCommuities() {
@@ -206,6 +255,62 @@ public class YourCommunitiesFragment extends Fragment{
                 String mensajeError = new String(error.getMessage().toString());
                 String valor = "No se ha podido recuperar los datos desde el servidor. " + mensajeError;
                 Toast toastAlerta = Toast.makeText(getContext(), valor, Toast.LENGTH_LONG);
+                toastAlerta.show();
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+
+        });
+
+    }
+
+    private void unirseComunidad() throws UnsupportedEncodingException {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setMaxRetriesAndTimeout(0, 10000);
+
+        //PODRIA HABER UN FALLO AKI, ALOMEJOR SE TIENE KE BORRAR YA KE EL NO KIERE RECIVIR NADA------------------------------
+        StringEntity entity = new StringEntity("");
+        entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+
+        String Url = "http://192.168.43.219:3000/community/"+ idComunidadActual +"/enter";
+
+        final Cursor cursorUserToken = bd.searchUserToken(idSqlite);
+        if (cursorUserToken.moveToFirst() != false){
+            userToken = cursorUserToken.getString(0);
+        }
+
+        client.addHeader("Authorization", "Bearer " + userToken);
+        client.post(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+                Dialog.setMessage("Estableciendo conexion...");
+                Dialog.show();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                bd.saveCommunityUser(idComunidadActual,idSqlite,"user",false);
+
+                //Envia a SingleCommunityActivity
+                Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );
+                startActivity(intent);
+                Dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                String mensajeError = new String(error.getMessage().toString());
+                String badResponse = "No se ha podido unir a la comunidad, ha habido un problema al conectar con el servidor" + mensajeError;
+                Toast toastAlerta = Toast.makeText(getContext(), badResponse, Toast.LENGTH_LONG);
                 toastAlerta.show();
                 Dialog.dismiss();
             }
