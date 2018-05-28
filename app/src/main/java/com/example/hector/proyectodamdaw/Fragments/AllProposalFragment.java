@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
+import com.example.hector.proyectodamdaw.Activitys.EditProfileActivity;
 import com.example.hector.proyectodamdaw.Content.Post;
 import com.example.hector.proyectodamdaw.Content.Proposal;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
@@ -25,6 +28,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -41,6 +46,7 @@ public class AllProposalFragment extends Fragment{
     String idComunidadActual;
     String userToken;
     int idUserSqlite;
+    String propositionId;
     private AppDataSources bd;
     public AdaptadorAllProposalsBD adaptadorBd;
     private Proposal proposal = new Proposal();
@@ -66,12 +72,33 @@ public class AllProposalFragment extends Fragment{
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
+        globales.setProposalId("");
 
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllProposalsBD(getContext(),proposal,bd.todosProposalCommunity(idComunidadActual));
         recyclerViewProposals.setAdapter(adaptadorBd);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewProposals.setLayoutManager(layoutManager);
+
+        adaptadorBd.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor prueba=adaptadorBd.getCursor();
+                String idComunidad = prueba.getString(7);
+                String proposalID = prueba.getString(2);
+                propositionId=proposalID;
+
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                globales.setCommunityId(idComunidad);
+                globales.setProposalId(propositionId);
+                idComunidadActual=idComunidad;
+
+                //Envia a EditUsuario
+                Intent intent = new Intent(getContext(), EditProfileActivity.class );
+                startActivity(intent);
+
+            }
+        });
 
         return view;
     }
@@ -172,5 +199,7 @@ public class AllProposalFragment extends Fragment{
         });
 
     }
+
+
 
 }
