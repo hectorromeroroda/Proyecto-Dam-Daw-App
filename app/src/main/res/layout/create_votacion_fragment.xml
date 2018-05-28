@@ -31,6 +31,7 @@
                     android:ems="10"
                     android:hint="Titulo"
                     android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -49,6 +50,7 @@
                     android:ems="10"
                     android:hint="Descripcion"
                     android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -59,15 +61,16 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtNewVotacionContenido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Contenido"
-                android:inputType="textPersonName"
-                android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/edtNewVotacionContenido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Contenido"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
         </LinearLayout>
 
             <LinearLayout
@@ -102,8 +105,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Escoja el numero de preguntas:"
-                    android:textSize="18sp" />
+                    android:text="Escoja el numero de preguntas: "
+                    android:clickable="true"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="Introduzca la fecha de finalizacion"
+                    android:inputType="date"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/spnNumeroPreguntas"
@@ -126,6 +135,7 @@
                     android:ems="10"
                     android:hint="1ª pregunta"
                     android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -144,6 +154,7 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
                 <EditText
@@ -154,6 +165,7 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
 
@@ -172,8 +184,9 @@
                     android:ems="10"
                     android:hint="2ª pregunta"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -191,8 +204,9 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edtNewVotacionRespuesta2b"
@@ -202,8 +216,9 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -221,8 +236,9 @@
                     android:ems="10"
                     android:hint="3ª pregunta"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -240,8 +256,9 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edtNewVotacionRespuesta3b"
@@ -251,8 +268,9 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -270,8 +288,9 @@
                     android:ems="10"
                     android:hint="4ª pregunta"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -289,8 +308,9 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
                     android:visibility="invisible" />
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edtNewVotacionRespuesta4b"
@@ -300,8 +320,9 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -319,8 +340,9 @@
                     android:ems="10"
                     android:hint="5ª pregunta"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -339,8 +361,9 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edtNewVotacionRespuesta5b"
@@ -350,8 +373,9 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:textColor="@color/Negro"
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
