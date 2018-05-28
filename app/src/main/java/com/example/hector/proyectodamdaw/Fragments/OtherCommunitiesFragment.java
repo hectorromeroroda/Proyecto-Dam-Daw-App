@@ -74,7 +74,11 @@ public class OtherCommunitiesFragment extends Fragment{
         idSqlite=globales.getIdUserSqlite();
         idComunidadActual=globales.getCommunityId();
 
-        RefreshOtherCommunities();
+        try {
+            RefreshOtherCommunities();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         //ReciclerView de comunidades que ni pertenece ni esta invitado
         adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities());
@@ -94,7 +98,7 @@ public class OtherCommunitiesFragment extends Fragment{
                 idComunidadActual=idComunidad;
 
                 try {
-                    unirseComunidad();
+                    unirseComunidad("");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -102,23 +106,19 @@ public class OtherCommunitiesFragment extends Fragment{
         });
     }
 
-    private void RefreshOtherCommunities() {
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setMaxRetriesAndTimeout(0, 10000);
+    private void RefreshOtherCommunities() throws UnsupportedEncodingException {
+        AsyncHttpClient client1 = new AsyncHttpClient();
+        client1.setMaxRetriesAndTimeout(0, 10000);
 
         String Url = "http://192.168.43.219:3000/community/featured";
 
-        GlobalVariables globales = GlobalVariables.getInstance();
-        int idUser=globales.getIdUserSqlite();
-
-        Cursor cursorUserToken = bd.searchUserToken(idUser);
+        Cursor cursorUserToken = bd.searchUserToken(idSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
 
-        client.addHeader("Authorization", "Bearer " + userToken);
-        client.get(getContext(), Url, new AsyncHttpResponseHandler() {
+        client1.addHeader("Authorization", "Bearer " + userToken);
+        client1.get(getContext(), Url, new AsyncHttpResponseHandler() {
 
             @Override
             public void onStart() {
@@ -190,13 +190,12 @@ public class OtherCommunitiesFragment extends Fragment{
 
     }
 
-    private void unirseComunidad() throws UnsupportedEncodingException {
+    private void unirseComunidad(String datos) throws UnsupportedEncodingException {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        //PODRIA HABER UN FALLO AKI, ALOMEJOR SE TIENE KE BORRAR YA KE EL NO KIERE RECIVIR NADA------------------------------
-        StringEntity entity = new StringEntity("");
+        StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
         String Url = "http://192.168.43.219:3000/community/"+ idComunidadActual +"/enter";
