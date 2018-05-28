@@ -137,31 +137,28 @@ public class OtherCommunitiesFragment extends Fragment{
                 String jsCommDescription;
                 String jscommRole;
                 int idUserSqlite=0;
-                JSONArray jsComunities = new JSONArray();
                 String strResponse = new String(responseBody);
 
                 try {
-
-                    JSONObject jsResponse= new JSONObject(strResponse);
+                    JSONArray jsComunities = new JSONArray(strResponse);
 
                     //Datos sobre las comunidades ke ni se pertenece ni se esta invitado
-                    jsComunities = jsResponse.getJSONArray("communities");
                     for (int index1 = 0; index1 < jsComunities.length(); index1++) {
                         JSONObject objectPertenece = jsComunities.getJSONObject(index1);
 
                         jsCommMemmbers = objectPertenece.getString("members");
-                        jsCommPublic = objectPertenece.getString("public");
+                        //jsCommPublic = objectPertenece.getString("public");
                         jsCommContents = objectPertenece.getString("posts");
-                        jsCommId = objectPertenece.getString("id");
+                        jsCommId = objectPertenece.getString("_id");
                         jsCommName = objectPertenece.getString("name");
                         jsCommDescription = objectPertenece.getString("description");
-                        jscommRole = objectPertenece.getString("role");
+
 
                         Cursor cursorIdComminityExist1 = bd.searchIdCommunitie(jsCommId);
                         if (cursorIdComminityExist1.moveToFirst() != false){
-                            bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
+                            bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
                         }else {
-                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId);
+                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId);
                         }
                     }
 

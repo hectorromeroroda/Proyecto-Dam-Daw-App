@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.CommunitiesActivity;
+import com.example.hector.proyectodamdaw.Otros.ClientAsync;
 import com.example.hector.proyectodamdaw.Otros.Comprobations;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
@@ -57,6 +58,7 @@ public class LoginFragment extends Fragment{
     private String jsonLogin;
     public static final int miniumLenghtPassw = 8;
     Comprobations comprobations;
+    ClientAsync clientAsync;
     private AppDataSources bd;
 
     public LoginFragment() {
@@ -168,6 +170,7 @@ public class LoginFragment extends Fragment{
     }
 
     private void loginUserAsync(String datos) throws UnsupportedEncodingException {
+
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
