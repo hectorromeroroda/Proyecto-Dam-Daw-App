@@ -9,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
@@ -76,6 +79,7 @@ public class CreateVotacionFragment extends Fragment {
     String strRespuesta5a;
     String strRespuesta5b;
     String idComunidadActual;
+    int numeroPreguntasSeleccionada;
     Comprobations comprobations;
     int idUserSqlite;
     private AppDataSources bd;
@@ -123,6 +127,111 @@ public class CreateVotacionFragment extends Fragment {
         bd = new AppDataSources(getContext());
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
+
+        Spinner spinnerEditProfile = (Spinner) view.findViewById(R.id.spnNumeroPreguntas);
+        String[] items = {"1 pregunta", "2 preguntas", "3 preguntas", "4 preguntas","5 preguntas"};
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item,items);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinnerEditProfile.setAdapter(spinnerArrayAdapter);
+        spinnerEditProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+
+                switch (pos) {
+                    case 0:
+
+                        Pregunta2.setVisibility(View.INVISIBLE);
+                        Respuesta2a.setVisibility(View.INVISIBLE);
+                        Respuesta2b.setVisibility(View.INVISIBLE);
+                        Pregunta3.setVisibility(View.INVISIBLE);
+                        Respuesta3a.setVisibility(View.INVISIBLE);
+                        Respuesta3b.setVisibility(View.INVISIBLE);
+                        Pregunta4.setVisibility(View.INVISIBLE);
+                        Respuesta4a.setVisibility(View.INVISIBLE);
+                        Respuesta4b.setVisibility(View.INVISIBLE);
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=1;
+                        break;
+                    case 1:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+
+                        Pregunta3.setVisibility(View.INVISIBLE);
+                        Respuesta3a.setVisibility(View.INVISIBLE);
+                        Respuesta3b.setVisibility(View.INVISIBLE);
+                        Pregunta4.setVisibility(View.INVISIBLE);
+                        Respuesta4a.setVisibility(View.INVISIBLE);
+                        Respuesta4b.setVisibility(View.INVISIBLE);
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=2;
+                        break;
+                    case 2:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+                        Pregunta3.setVisibility(View.VISIBLE);
+                        Respuesta3a.setVisibility(View.VISIBLE);
+                        Respuesta3b.setVisibility(View.VISIBLE);
+
+                        Pregunta4.setVisibility(View.INVISIBLE);
+                        Respuesta4a.setVisibility(View.INVISIBLE);
+                        Respuesta4b.setVisibility(View.INVISIBLE);
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=3;
+                        break;
+                    case 3:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+                        Pregunta3.setVisibility(View.VISIBLE);
+                        Respuesta3a.setVisibility(View.VISIBLE);
+                        Respuesta3b.setVisibility(View.VISIBLE);
+                        Pregunta4.setVisibility(View.VISIBLE);
+                        Respuesta4a.setVisibility(View.VISIBLE);
+                        Respuesta4b.setVisibility(View.VISIBLE);
+
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=4;
+                        break;
+                    case 4:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+                        Pregunta3.setVisibility(View.VISIBLE);
+                        Respuesta3a.setVisibility(View.VISIBLE);
+                        Respuesta3b.setVisibility(View.VISIBLE);
+                        Pregunta4.setVisibility(View.VISIBLE);
+                        Respuesta4a.setVisibility(View.VISIBLE);
+                        Respuesta4b.setVisibility(View.VISIBLE);
+                        Pregunta5.setVisibility(View.VISIBLE);
+                        Respuesta5a.setVisibility(View.VISIBLE);
+                        Respuesta5b.setVisibility(View.VISIBLE);
+                        numeroPreguntasSeleccionada=5;
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
+
+
+
 
         return  view;
     }
@@ -174,6 +283,27 @@ public class CreateVotacionFragment extends Fragment {
                 strPregunta5=Pregunta5.getText().toString();
                 strRespuesta5a=Respuesta5a.getText().toString();
                 strRespuesta5b=Respuesta5b.getText().toString();
+
+
+                if (numeroPreguntasSeleccionada==1){
+                    //AQUI SOLO 1 PREGUNTAS
+                }else{
+                    if (numeroPreguntasSeleccionada==2){
+                        //AQUI SOLO 2 PREGUNTAS
+                    }else{
+                        if (numeroPreguntasSeleccionada==3){
+                            //AQUI SOLO 3 PREGUNTAS
+                        }else{
+                            if (numeroPreguntasSeleccionada==4){
+                                //AQUI SOLO 4 PREGUNTAS
+                            }else {
+                                if (numeroPreguntasSeleccionada==5){
+                                    //AQUI SOLO 5 PREGUNTAS
+                                }
+                            }
+                        }
+                    }
+                }
 
                 nombreVacio =comprobations.checkEmptyFields(strNombre);
                 if (nombreVacio == false) {
