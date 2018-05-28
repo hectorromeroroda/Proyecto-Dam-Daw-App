@@ -1,6 +1,7 @@
 package com.example.hector.proyectodamdaw.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.hector.proyectodamdaw.Activitys.EditProfileActivity;
 import com.example.hector.proyectodamdaw.Content.Post;
 import com.example.hector.proyectodamdaw.Content.Votacion;
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
@@ -42,6 +44,7 @@ public class AllVotacionesFragment extends Fragment {
     String idComunidadActual;
     String userToken;
     int idUserSqlite;
+    String votacionId;
     private AppDataSources bd;
     public AdaptadorAllVotacionesBD adaptadorBd;
     private Votacion votacion = new Votacion();
@@ -68,6 +71,7 @@ public class AllVotacionesFragment extends Fragment {
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
+        globales.setPollId("");
 
         RefreshVotaciones();
 
@@ -76,6 +80,24 @@ public class AllVotacionesFragment extends Fragment {
         recyclerViewVotaciones.setAdapter(adaptadorBd);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewVotaciones.setLayoutManager(layoutManager);
+
+        adaptadorBd.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor prueba=adaptadorBd.getCursor();
+                String idComunidad = prueba.getString(7);
+                String pollId = prueba.getString(2);
+                votacionId=pollId;
+
+                GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+                globales.setCommunityId(idComunidad);
+                globales.setPollId(votacionId);
+                idComunidadActual=idComunidad;
+
+                //Envia a EditUsuario
+                Intent intent = new Intent(getContext(), EditProfileActivity.class );
+                startActivity(intent);            }
+        });
 
         return view;
     }

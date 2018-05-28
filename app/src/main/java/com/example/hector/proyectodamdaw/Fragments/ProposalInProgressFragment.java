@@ -98,10 +98,10 @@ public class ProposalInProgressFragment extends Fragment{
                 String jsRespuesta;
 
                 if (AcceptProposal.isChecked()== true){
-                    strRespuesta="Si";
+                    strRespuesta="true";
                 }else{
                     if (DiscardProposal.isChecked()== true) {
-                        strRespuesta = "No";
+                        strRespuesta = "false";
                     }
                 }
 
@@ -109,7 +109,12 @@ public class ProposalInProgressFragment extends Fragment{
                     Toast toastAlerta = Toast.makeText(getContext(), "Deve seleccionar una respuesta", Toast.LENGTH_LONG);
                     toastAlerta.show();
                 }else{
-
+                    jsRespuesta=createJsonResultProposition(Boolean.valueOf(strRespuesta));
+                    try {
+                        sendResultProposal(jsRespuesta);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
 
 
                 }
@@ -119,11 +124,10 @@ public class ProposalInProgressFragment extends Fragment{
 
     }
 
-    //FALTA MODIFICAR EL JSON, CRELO COMO SE NECESITE----------------------------------------------------------------------------------------------------------------------
-    private String createJsonResultProposition(String idUsuario, String role) {
+    private String createJsonResultProposition(boolean respuesta ) {
         String strJsonLogin;
 
-        strJsonLogin=  ("{\"invited\": \"" + idUsuario + "\", \"role\": \"" + role +"\"}");
+        strJsonLogin=  ("{\"inFaavor\": \"" + respuesta + "\"}");
         return strJsonLogin;
     }
 
