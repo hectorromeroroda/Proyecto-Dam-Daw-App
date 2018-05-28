@@ -107,7 +107,7 @@ public class OtherCommunitiesFragment extends Fragment{
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/community/featured";
+        String Url = "http://192.168.1.39:3000/community/featured";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         int idUser=globales.getIdUserSqlite();
@@ -199,7 +199,7 @@ public class OtherCommunitiesFragment extends Fragment{
         StringEntity entity = new StringEntity("");
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/community/"+ idComunidadActual +"/enter";
+        String Url = "http://192.168.1.39:3000/community/"+ idComunidadActual +"/enter";
 
         final Cursor cursorUserToken = bd.searchUserToken(idSqlite);
         if (cursorUserToken.moveToFirst() != false){

@@ -69,6 +69,7 @@
                     android:hint="Cuerpo"
                     android:inputType="textPersonName"
                     android:maxLines="2"
+                    android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
 

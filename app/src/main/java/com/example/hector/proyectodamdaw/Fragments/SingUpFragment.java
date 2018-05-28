@@ -199,7 +199,7 @@ public class SingUpFragment extends Fragment{
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/register";
+        String Url = "http://192.168.1.39:3000/register";
 
         client.post(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
 
