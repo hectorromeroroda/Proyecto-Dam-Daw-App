@@ -9,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.Activitys.SingleCommunitieActivity;
@@ -76,6 +79,7 @@ public class CreateVotacionFragment extends Fragment {
     String strRespuesta5a;
     String strRespuesta5b;
     String idComunidadActual;
+    int numeroPreguntasSeleccionada;
     Comprobations comprobations;
     int idUserSqlite;
     private AppDataSources bd;
@@ -124,6 +128,111 @@ public class CreateVotacionFragment extends Fragment {
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
 
+        Spinner spinnerEditProfile = (Spinner) view.findViewById(R.id.spnNumeroPreguntas);
+        String[] items = {"1 pregunta", "2 preguntas", "3 preguntas", "4 preguntas","5 preguntas"};
+
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item,items);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinnerEditProfile.setAdapter(spinnerArrayAdapter);
+        spinnerEditProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+
+                switch (pos) {
+                    case 0:
+
+                        Pregunta2.setVisibility(View.INVISIBLE);
+                        Respuesta2a.setVisibility(View.INVISIBLE);
+                        Respuesta2b.setVisibility(View.INVISIBLE);
+                        Pregunta3.setVisibility(View.INVISIBLE);
+                        Respuesta3a.setVisibility(View.INVISIBLE);
+                        Respuesta3b.setVisibility(View.INVISIBLE);
+                        Pregunta4.setVisibility(View.INVISIBLE);
+                        Respuesta4a.setVisibility(View.INVISIBLE);
+                        Respuesta4b.setVisibility(View.INVISIBLE);
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=1;
+                        break;
+                    case 1:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+
+                        Pregunta3.setVisibility(View.INVISIBLE);
+                        Respuesta3a.setVisibility(View.INVISIBLE);
+                        Respuesta3b.setVisibility(View.INVISIBLE);
+                        Pregunta4.setVisibility(View.INVISIBLE);
+                        Respuesta4a.setVisibility(View.INVISIBLE);
+                        Respuesta4b.setVisibility(View.INVISIBLE);
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=2;
+                        break;
+                    case 2:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+                        Pregunta3.setVisibility(View.VISIBLE);
+                        Respuesta3a.setVisibility(View.VISIBLE);
+                        Respuesta3b.setVisibility(View.VISIBLE);
+
+                        Pregunta4.setVisibility(View.INVISIBLE);
+                        Respuesta4a.setVisibility(View.INVISIBLE);
+                        Respuesta4b.setVisibility(View.INVISIBLE);
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=3;
+                        break;
+                    case 3:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+                        Pregunta3.setVisibility(View.VISIBLE);
+                        Respuesta3a.setVisibility(View.VISIBLE);
+                        Respuesta3b.setVisibility(View.VISIBLE);
+                        Pregunta4.setVisibility(View.VISIBLE);
+                        Respuesta4a.setVisibility(View.VISIBLE);
+                        Respuesta4b.setVisibility(View.VISIBLE);
+
+                        Pregunta5.setVisibility(View.INVISIBLE);
+                        Respuesta5a.setVisibility(View.INVISIBLE);
+                        Respuesta5b.setVisibility(View.INVISIBLE);
+                        numeroPreguntasSeleccionada=4;
+                        break;
+                    case 4:
+                        Pregunta2.setVisibility(View.VISIBLE);
+                        Respuesta2a.setVisibility(View.VISIBLE);
+                        Respuesta2b.setVisibility(View.VISIBLE);
+                        Pregunta3.setVisibility(View.VISIBLE);
+                        Respuesta3a.setVisibility(View.VISIBLE);
+                        Respuesta3b.setVisibility(View.VISIBLE);
+                        Pregunta4.setVisibility(View.VISIBLE);
+                        Respuesta4a.setVisibility(View.VISIBLE);
+                        Respuesta4b.setVisibility(View.VISIBLE);
+                        Pregunta5.setVisibility(View.VISIBLE);
+                        Respuesta5a.setVisibility(View.VISIBLE);
+                        Respuesta5b.setVisibility(View.VISIBLE);
+                        numeroPreguntasSeleccionada=5;
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
+
+
+
+
         return  view;
     }
 
@@ -153,7 +262,7 @@ public class CreateVotacionFragment extends Fragment {
                 boolean respuesta5aVacia;
                 boolean respuesta5bVacia;
                 boolean fechaFinalizacionVacia;
-                String jsonNewVotacion;
+                String jsonNewVotacion="";
 
                 strNombre=titulo.getText().toString();
                 strDescripcion=descripcion.getText().toString();
@@ -175,136 +284,43 @@ public class CreateVotacionFragment extends Fragment {
                 strRespuesta5a=Respuesta5a.getText().toString();
                 strRespuesta5b=Respuesta5b.getText().toString();
 
-                nombreVacio =comprobations.checkEmptyFields(strNombre);
-                if (nombreVacio == false) {
-                    descripcionVacio =comprobations.checkEmptyFields(strDescripcion);
-                    if (descripcionVacio == false) {
-                        contenidoVacio =comprobations.checkEmptyFields(strContenido);
-                        if (contenidoVacio == false) {
-                            pregunta1Vacia =comprobations.checkEmptyFields(strPregunta1);
-                            if (pregunta1Vacia == false) {
-                                respuesta1aVacia =comprobations.checkEmptyFields(strRespuesta1a);
-                                if (respuesta1aVacia == false) {
-                                    respuesta1bVacia =comprobations.checkEmptyFields(strRespuesta1b);
-                                    if (respuesta1bVacia == false) {
-                                        pregunta2Vacia =comprobations.checkEmptyFields(strPregunta2);
-                                        if (pregunta2Vacia == false) {
-                                            respuesta2aVacia =comprobations.checkEmptyFields(strRespuesta2a);
-                                            if (respuesta2aVacia == false) {
-                                                respuesta2bVacia =comprobations.checkEmptyFields(strRespuesta2b);
-                                                if (respuesta2bVacia == false) {
-                                                    pregunta3Vacia =comprobations.checkEmptyFields(strPregunta3);
-                                                    if (pregunta3Vacia == false) {
-                                                        respuesta3aVacia =comprobations.checkEmptyFields(strRespuesta3a);
-                                                        if (respuesta3aVacia == false) {
-                                                            respuesta3bVacia =comprobations.checkEmptyFields(strRespuesta3b);
-                                                            if (respuesta3bVacia == false){
-                                                                pregunta4Vacia =comprobations.checkEmptyFields(strPregunta4);
-                                                                if (pregunta4Vacia == false) {
-                                                                    respuesta4aVacia =comprobations.checkEmptyFields(strRespuesta4a);
-                                                                    if (respuesta4aVacia == false) {
-                                                                        respuesta4bVacia =comprobations.checkEmptyFields(strRespuesta4b);
-                                                                        if (respuesta4bVacia == false){
-                                                                            pregunta5Vacia =comprobations.checkEmptyFields(strPregunta5);
-                                                                            if (pregunta5Vacia == false) {
-                                                                                respuesta5aVacia =comprobations.checkEmptyFields(strRespuesta5a);
-                                                                                if (respuesta5aVacia == false) {
-                                                                                    respuesta5bVacia =comprobations.checkEmptyFields(strRespuesta5b);
-                                                                                    if (respuesta5bVacia == false){
-                                                                                        fechaFinalizacionVacia =comprobations.checkEmptyFields(strFechaFinalizacion);
-                                                                                        if (fechaFinalizacionVacia == false){
-                                                                                            jsonNewVotacion=createJsonNewVotacion(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
-                                                                                                    strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b,strPregunta5,strRespuesta5a,strRespuesta5b);
-
-                                                                                            try {
-                                                                                                createVotaciontAsync(jsonNewVotacion);
-                                                                                            } catch (UnsupportedEncodingException e) {
-                                                                                                e.printStackTrace();
-                                                                                            }
-                                                                                        }else{
-                                                                                            Toast toastAlert = Toast.makeText(getContext(),  "El campo Fecha finalizacion es obligatiorio", Toast.LENGTH_SHORT);
-                                                                                            toastAlert.show();
-                                                                                        }
-                                                                                    }else{
-                                                                                        Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 2 de la pregunta 5 es obligatiorio", Toast.LENGTH_SHORT);
-                                                                                        toastAlert.show();
-                                                                                    }
-                                                                                }else{
-                                                                                    Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 1 de la pregunta 5 es obligatiorio", Toast.LENGTH_SHORT);
-                                                                                    toastAlert.show();
-                                                                                }
-                                                                            }else{
-                                                                                Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 5 es obligatiorio", Toast.LENGTH_SHORT);
-                                                                                toastAlert.show();
-                                                                            }
-                                                                        }else{
-                                                                            Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 2 de la pregunta 4bes obligatiorio", Toast.LENGTH_SHORT);
-                                                                            toastAlert.show();
-                                                                        }
-                                                                    }else{
-                                                                        Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 1 de la pregunta 4 es obligatiorio", Toast.LENGTH_SHORT);
-                                                                        toastAlert.show();
-                                                                    }
-                                                                }else{
-                                                                    Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 4 es obligatiorio", Toast.LENGTH_SHORT);
-                                                                    toastAlert.show();
-                                                                }
-                                                            }else{
-                                                                Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 2 de la pregunta 3 es obligatiorio", Toast.LENGTH_SHORT);
-                                                                toastAlert.show();
-                                                            }
-                                                        }else{
-                                                            Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 1 de la pregunta 3 es obligatiorio", Toast.LENGTH_SHORT);
-                                                            toastAlert.show();
-                                                        }
-                                                    }else{
-                                                        Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 3 es obligatiorio", Toast.LENGTH_SHORT);
-                                                        toastAlert.show();
-                                                    }
-                                                }else{
-                                                    Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 2 de la pregunta 2 es obligatiorio", Toast.LENGTH_SHORT);
-                                                    toastAlert.show();
-                                                }
-                                            }else{
-                                                Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 1 de la pregunta 2 es obligatiorio", Toast.LENGTH_SHORT);
-                                                toastAlert.show();
-                                            }
-                                        }else{
-                                            Toast toastAlert = Toast.makeText(getContext(),  "El campo pregunta 2 de la pregunta 1 es obligatiorio", Toast.LENGTH_SHORT);
-                                            toastAlert.show();
-                                        }
-                                    }else{
-                                        Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 2 de la pregunta 1 es obligatiorio", Toast.LENGTH_SHORT);
-                                        toastAlert.show();
-                                    }
-                                }else{
-                                    Toast toastAlert = Toast.makeText(getContext(),  "El campo Respuesta 1 de la pregunta 1 es obligatiorio", Toast.LENGTH_SHORT);
-                                    toastAlert.show();
-                                }
-                            }else{
-                                Toast toastAlert = Toast.makeText(getContext(),  "El campo pregunta 1 es obligatiorio", Toast.LENGTH_SHORT);
-                                toastAlert.show();
-                            }
-                        }else{
-                            Toast toastAlert = Toast.makeText(getContext(),  "El campo contenido es obligatiorio", Toast.LENGTH_SHORT);
-                            toastAlert.show();
-                        }
-                    }else{
-                        Toast toastAlert = Toast.makeText(getContext(),  "El campo descripcion es obligatiorio", Toast.LENGTH_SHORT);
-                        toastAlert.show();
-                    }
+                if (numeroPreguntasSeleccionada==1){
+                    jsonNewVotacion= createJsonNewVotacion1Preguntas(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b);
                 }else{
-                    Toast toastAlert = Toast.makeText(getContext(),  "El campo titulo es obligatiorio", Toast.LENGTH_SHORT);
-                    toastAlert.show();
+                    if (numeroPreguntasSeleccionada==2){
+                        jsonNewVotacion= createJsonNewVotacion2Preguntas(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                                strRespuesta2b);
+                    }else{
+                        if (numeroPreguntasSeleccionada==3){
+                            jsonNewVotacion= createJsonNewVotacion3Preguntas(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                                    strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b);
+                        }else{
+                            if (numeroPreguntasSeleccionada==4){
+                                jsonNewVotacion= createJsonNewVotacion4Preguntas(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                                        strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b);
+                            }else {
+                                if (numeroPreguntasSeleccionada==5){
+                                    jsonNewVotacion= createJsonNewVotacion5Preguntas(strNombre,strDescripcion,strContenido,strPregunta1,strRespuesta1a,strRespuesta1b,strPregunta2,strRespuesta2a,
+                                            strRespuesta2b,strPregunta3,strRespuesta3a,strRespuesta3b,strPregunta4,strRespuesta4a,strRespuesta4b,strPregunta5,strRespuesta5a,strRespuesta5b);
+                                }
+                            }
+                        }
+                    }
                 }
-            }
+
+                try {
+                    createVotaciontAsync(jsonNewVotacion);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                }
 
         });
 
     }
 
-    private String createJsonNewVotacion(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
-    String tituloPregunta3, String respuesta3a, String respuesta3b, String tituloPregunta4, String respuesta4a, String respuesta4b, String tituloPregunta5, String respuesta5a, String respuesta5b) {
+    private String createJsonNewVotacion5Preguntas(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
+                                                   String tituloPregunta3, String respuesta3a, String respuesta3b, String tituloPregunta4, String respuesta4a, String respuesta4b, String tituloPregunta5, String respuesta5a, String respuesta5b) {
         String strJsonNewVotacion;
 
         strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
@@ -314,6 +330,50 @@ public class CreateVotacionFragment extends Fragment {
                 "{\"title\": \"" + tituloPregunta3 + "\", \"options\": [{\"value\": \"" + respuesta3a + "\"},{\"value\": \"" + respuesta3b + "\"}]}," +
                 "{\"title\": \"" + tituloPregunta4 + "\", \"options\": [{\"value\": \"" + respuesta4a + "\"},{\"value\": \"" + respuesta4b + "\"}]}," +
                 "{\"title\": \"" + tituloPregunta5 + "\", \"options\": [{\"value\": \"" + respuesta5a + "\"},{\"value\": \"" + respuesta5b + "\"}]}]}");
+        return strJsonNewVotacion;
+    }
+
+    private String createJsonNewVotacion4Preguntas(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
+                                                   String tituloPregunta3, String respuesta3a, String respuesta3b, String tituloPregunta4, String respuesta4a, String respuesta4b) {
+        String strJsonNewVotacion;
+
+        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
+                " \"data\":[" +
+                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": \"" + respuesta1b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta2 + "\", \"options\": [{\"value\": \"" + respuesta2a + "\"},{\"value\": \"" + respuesta2b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta3 + "\", \"options\": [{\"value\": \"" + respuesta3a + "\"},{\"value\": \"" + respuesta3b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta4 + "\", \"options\": [{\"value\": \"" + respuesta4a + "\"},{\"value\": \"" + respuesta4b + "\"}]}]}");
+        return strJsonNewVotacion;
+    }
+
+    private String createJsonNewVotacion3Preguntas(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b,
+                                                   String tituloPregunta3, String respuesta3a, String respuesta3b) {
+        String strJsonNewVotacion;
+
+        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
+                " \"data\":[" +
+                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": \"" + respuesta1b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta2 + "\", \"options\": [{\"value\": \"" + respuesta2a + "\"},{\"value\": \"" + respuesta2b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta3 + "\", \"options\": [{\"value\": \"" + respuesta3a + "\"},{\"value\": \"" + respuesta3b + "\"}]}]}");
+        return strJsonNewVotacion;
+    }
+
+    private String createJsonNewVotacion2Preguntas(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b, String tituloPregunta2, String respuesta2a, String respuesta2b) {
+        String strJsonNewVotacion;
+
+        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
+                " \"data\":[" +
+                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": \"" + respuesta1b + "\"}]}," +
+                "{\"title\": \"" + tituloPregunta2 + "\", \"options\": [{\"value\": \"" + respuesta2a + "\"},{\"value\": \"" + respuesta2b + "\"}]}]}");
+        return strJsonNewVotacion;
+    }
+
+    private String createJsonNewVotacion1Preguntas(String nombre, String descripcion, String cuerpo, String tituloPregunta1, String respuesta1a, String respuesta1b) {
+        String strJsonNewVotacion;
+
+        strJsonNewVotacion=  ("{\"title\": \"" + nombre + "\", \"description\": \"" + descripcion + "\", \"body\": \"" + cuerpo + "\"," +
+                " \"data\":[" +
+                "{\"title\": \"" + tituloPregunta1 + "\", \"options\": [{\"value\": \"" + respuesta1a + "\"},{\"value\": \"" + respuesta1b + "\"}]}]}");
         return strJsonNewVotacion;
     }
 
