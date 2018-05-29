@@ -63,6 +63,12 @@ public class OtherCommunitiesFragment extends Fragment{
         Dialog = new ProgressDialog(getContext());
         Dialog.setCancelable(false);
 
+        try {
+            RefreshOtherCommunities();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
@@ -73,12 +79,6 @@ public class OtherCommunitiesFragment extends Fragment{
         boolean refreshData=globales.getRefreshData();
         idSqlite=globales.getIdUserSqlite();
         idComunidadActual=globales.getCommunityId();
-
-        try {
-            RefreshOtherCommunities();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
         //ReciclerView de comunidades que ni pertenece ni esta invitado
         adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities1());
@@ -110,7 +110,7 @@ public class OtherCommunitiesFragment extends Fragment{
         AsyncHttpClient client1 = new AsyncHttpClient();
         client1.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.1.39:3000/community/featured";
+        String Url = "http://192.168.43.219:3000/community/featured";
 
         Cursor cursorUserToken = bd.searchUserToken(idSqlite);
         if (cursorUserToken.moveToFirst() != false){
@@ -195,7 +195,7 @@ public class OtherCommunitiesFragment extends Fragment{
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.1.39:3000/community/"+ idComunidadActual +"/enter";
+        String Url = "http://192.168.43.219:3000/community/"+ idComunidadActual +"/enter";
 
         final Cursor cursorUserToken = bd.searchUserToken(idSqlite);
         if (cursorUserToken.moveToFirst() != false){

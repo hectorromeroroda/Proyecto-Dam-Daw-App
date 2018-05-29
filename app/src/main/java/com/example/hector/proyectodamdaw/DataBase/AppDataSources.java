@@ -153,7 +153,7 @@ public class AppDataSources {
     }
 
     public Cursor allOtherCommunities1() {
-        String selectQuery = "SELECT * FROM Community WHERE NoInvitadoNoPertenece= 'true'";
+        String selectQuery = "SELECT * FROM Community WHERE NoInvitadoNoPertenece= 1";
 
         return dbR.rawQuery(selectQuery, null);
     }
