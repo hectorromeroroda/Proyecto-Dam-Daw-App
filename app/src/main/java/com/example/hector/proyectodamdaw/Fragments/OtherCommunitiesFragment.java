@@ -81,7 +81,7 @@ public class OtherCommunitiesFragment extends Fragment{
         }
 
         //ReciclerView de comunidades que ni pertenece ni esta invitado
-        adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities());
+        adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities1());
         recyclerViewOtherCommunities.setAdapter(adaptadorBd);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewOtherCommunities.setLayoutManager(layoutManager);
@@ -156,9 +156,9 @@ public class OtherCommunitiesFragment extends Fragment{
 
                         Cursor cursorIdComminityExist1 = bd.searchIdCommunitie(jsCommId);
                         if (cursorIdComminityExist1.moveToFirst() != false){
-                            bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
+                            bd.updateCommunity1(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId,true);
                         }else {
-                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId);
+                            bd.saveCommunity1(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId,true);
                         }
                     }
 
@@ -216,6 +216,7 @@ public class OtherCommunitiesFragment extends Fragment{
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 bd.saveCommunityUser(idComunidadActual,idSqlite,"user",false);
+                bd.updateCommunity3(false,idComunidadActual);
 
                 //Envia a SingleCommunityActivity
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

@@ -152,6 +152,12 @@ public class AppDataSources {
         return dbR.rawQuery(selectQuery, null);
     }
 
+    public Cursor allOtherCommunities1() {
+        String selectQuery = "SELECT * FROM Community WHERE NoInvitadoNoPertenece= 'true'";
+
+        return dbR.rawQuery(selectQuery, null);
+    }
+
     // FUNCIONES DE MANIPULACION DE DATOS-----------------------------------------------------------------------------------------------------------------------
     public void saveUserRegister( String firstName, String lastName, String userEmail, int userStikies, Boolean userPublicProfile, String userToken, int rememberMe) {
         // Guardar los datos del registro del usuario
@@ -177,6 +183,17 @@ public class AppDataSources {
         dbW.insert(table_COMM,null,values);
     }
 
+    public void saveCommunity1(int numMembers, boolean isPublic, int numContents, String name, String description, String communityId, boolean noPerteneceNoInvitado) {
+        ContentValues values = new ContentValues();
+        values.put(COMMUNITY_ID, communityId);
+        values.put(COMMUNITY_MEMBERS, numMembers);
+        values.put(COMMUNITY_PUBLIC, isPublic);
+        values.put(COMMUNITY_CONTENTS, numContents);
+        values.put(COMMUNITY_NAME, name);
+        values.put(COMMUNITY_DESCRIPTION, description);
+        values.put("NoInvitadoNoPertenece", noPerteneceNoInvitado);
+        dbW.insert(table_COMM,null,values);
+    }
     public void saveCommunityUser(String communityId, int userId, String userRole, boolean userInvited) {
         ContentValues values = new ContentValues();
         values.put(COMMUNITY_ID, communityId);
@@ -186,6 +203,7 @@ public class AppDataSources {
 
         dbW.insert(table_COMMUNITY_USER,null,values);
     }
+
 
     public void saveCommunityUserinvited(int numMembers, boolean isPublic, int numContents, String name, String description, String id, boolean UserInvited) {
         ContentValues values = new ContentValues();
@@ -198,6 +216,8 @@ public class AppDataSources {
         values.put(COMMUNITY_USER_INVITED, UserInvited);
         dbW.insert(table_COMM,null,values);
     }
+
+
 
     public void saveProposal(String nombre, String descripcion,String pregunta, String cuerpo,String comunidadId, boolean yaVotada) {
         ContentValues values = new ContentValues();
@@ -293,6 +313,8 @@ public class AppDataSources {
 
         dbW.update(table_USER,values, USER_REMEMBER_ME + " = ?", new String[] { String.valueOf(state) });
     }
+
+
     public void updatePostId( String postId, String postTitle) {
         ContentValues values = new ContentValues();
         values.put("postId", postId);
@@ -339,6 +361,21 @@ public class AppDataSources {
 
         String UpdateQuery = "UPDATE Community SET NumUsers = '" + numMembers + "', IsPublic= '" + isPublic + "'"+ ", NumContent= '"
                 + numContents + "'"+ ", Name= '" + name + "'"+ ", Description= '" + description + "' WHERE IdCommunity= '" + idCommunity + "'";
+
+        dbW.rawQuery(UpdateQuery,null);
+    }
+
+    public void updateCommunity1(int numMembers, boolean isPublic, int numContents, String name, String description, String idCommunity, boolean noPerteneceNoinvited) {
+
+        String UpdateQuery = "UPDATE Community SET NumUsers = '" + numMembers + "', IsPublic= '" + isPublic + "'"+ ", NumContent= '"
+                + numContents + "'"+ ", Name= '" + name + "'"+ ", Description= '" + description + "'"+ ", NoInvitadoNoPertenece= '" + noPerteneceNoinvited +"' WHERE IdCommunity= '" + idCommunity + "'";
+
+        dbW.rawQuery(UpdateQuery,null);
+    }
+
+    public void updateCommunity3(  boolean noPerteneceNoinvited,String idCommunity) {
+
+        String UpdateQuery = "UPDATE Community SET NoInvitadoNoPertenece = '" + noPerteneceNoinvited + "' WHERE IdCommunity= '" + idCommunity + "'";
 
         dbW.rawQuery(UpdateQuery,null);
     }
