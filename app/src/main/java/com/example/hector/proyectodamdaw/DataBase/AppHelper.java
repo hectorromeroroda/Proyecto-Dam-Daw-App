@@ -23,10 +23,11 @@ public class AppHelper extends SQLiteOpenHelper{
      /*COMENTAR DB CACHE FALTA DE TABLAS*/
         String comunity =
                 "CREATE TABLE Community (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "IdCommunity VARCHAR(45) UNIQUE NOT NULL," +
+                        "IdCommunity VARCHAR(45) NOT NULL," +
                         "Name VARCHAR(45)NOT NULL," +
                         "Description VARCHAR(300) NOT NULL," +
                         "NumUsers INT," +
+                        "NoInvitadoNoPertenece BIT," +
                         "NumContent INT," +
                         "IsPublic BIT," +
                         "MediaId)";
