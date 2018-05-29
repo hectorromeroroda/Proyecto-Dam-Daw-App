@@ -139,7 +139,7 @@ public class CreatePostFragment extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.1.39:3000/community/"+ idComunidadActual +"/content/new/post";
+        String Url = "http://192.168.43.219:3000/community/"+ idComunidadActual +"/content/new/post";
 
         final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){
