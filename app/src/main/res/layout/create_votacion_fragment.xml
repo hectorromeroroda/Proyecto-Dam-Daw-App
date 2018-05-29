@@ -74,17 +74,38 @@
         </LinearLayout>
 
             <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtFechaFinalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Fecha finalizacion"
+                android:inputType="textPersonName"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/edtFechaFinalizacion"
-                    android:layout_width="wrap_content"
+
+                <TextView
+                    android:id="@+id/txvPedirNumeroPreguntas"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Escoja el numero de preguntas: "
                     android:clickable="true"
                     android:ems="10"
                     android:focusable="false"
@@ -93,6 +114,11 @@
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
+                <Spinner
+                    android:id="@+id/spnNumeroPreguntas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,6 +184,7 @@
                     android:ems="10"
                     android:hint="2ª pregunta"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -177,6 +204,7 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
@@ -188,6 +216,7 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -207,6 +236,7 @@
                     android:ems="10"
                     android:hint="3ª pregunta"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -226,6 +256,7 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
@@ -237,6 +268,7 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -256,6 +288,7 @@
                     android:ems="10"
                     android:hint="4ª pregunta"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -275,6 +308,7 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
+                    android:visibility="invisible" />
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
@@ -286,6 +320,7 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -305,6 +340,7 @@
                     android:ems="10"
                     android:hint="5ª pregunta"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -314,7 +350,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="visible">
 
                 <EditText
                     android:id="@+id/edtNewVotacionRespuesta5a"
@@ -324,6 +361,7 @@
                     android:ems="10"
                     android:hint="Respuesta 1"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
 
@@ -335,6 +373,7 @@
                     android:ems="10"
                     android:hint="Respuesta 2"
                     android:inputType="textPersonName"
+                    android:visibility="invisible"
                     android:textColor="@color/Negro"
                     android:textSize="20sp" />
             </LinearLayout>

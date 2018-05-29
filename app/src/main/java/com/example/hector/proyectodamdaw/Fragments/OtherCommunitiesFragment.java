@@ -74,10 +74,14 @@ public class OtherCommunitiesFragment extends Fragment{
         idSqlite=globales.getIdUserSqlite();
         idComunidadActual=globales.getCommunityId();
 
-        RefreshOtherCommunities();
+        try {
+            RefreshOtherCommunities();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         //ReciclerView de comunidades que ni pertenece ni esta invitado
-        adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities());
+        adaptadorBd = new AdaotadorAllOtherCommunitiesBD(getContext(),communitie,bd.allOtherCommunities1());
         recyclerViewOtherCommunities.setAdapter(adaptadorBd);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerViewOtherCommunities.setLayoutManager(layoutManager);
@@ -94,7 +98,7 @@ public class OtherCommunitiesFragment extends Fragment{
                 idComunidadActual=idComunidad;
 
                 try {
-                    unirseComunidad();
+                    unirseComunidad("");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -102,23 +106,19 @@ public class OtherCommunitiesFragment extends Fragment{
         });
     }
 
-    private void RefreshOtherCommunities() {
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setMaxRetriesAndTimeout(0, 10000);
+    private void RefreshOtherCommunities() throws UnsupportedEncodingException {
+        AsyncHttpClient client1 = new AsyncHttpClient();
+        client1.setMaxRetriesAndTimeout(0, 10000);
 
         String Url = "http://192.168.1.39:3000/community/featured";
 
-        GlobalVariables globales = GlobalVariables.getInstance();
-        int idUser=globales.getIdUserSqlite();
-
-        Cursor cursorUserToken = bd.searchUserToken(idUser);
+        Cursor cursorUserToken = bd.searchUserToken(idSqlite);
         if (cursorUserToken.moveToFirst() != false){
             userToken = cursorUserToken.getString(0);
         }
 
-        client.addHeader("Authorization", "Bearer " + userToken);
-        client.get(getContext(), Url, new AsyncHttpResponseHandler() {
+        client1.addHeader("Authorization", "Bearer " + userToken);
+        client1.get(getContext(), Url, new AsyncHttpResponseHandler() {
 
             @Override
             public void onStart() {
@@ -137,31 +137,28 @@ public class OtherCommunitiesFragment extends Fragment{
                 String jsCommDescription;
                 String jscommRole;
                 int idUserSqlite=0;
-                JSONArray jsComunities = new JSONArray();
                 String strResponse = new String(responseBody);
 
                 try {
-
-                    JSONObject jsResponse= new JSONObject(strResponse);
+                    JSONArray jsComunities = new JSONArray(strResponse);
 
                     //Datos sobre las comunidades ke ni se pertenece ni se esta invitado
-                    jsComunities = jsResponse.getJSONArray("communities");
                     for (int index1 = 0; index1 < jsComunities.length(); index1++) {
                         JSONObject objectPertenece = jsComunities.getJSONObject(index1);
 
                         jsCommMemmbers = objectPertenece.getString("members");
-                        jsCommPublic = objectPertenece.getString("public");
+                        //jsCommPublic = objectPertenece.getString("public");
                         jsCommContents = objectPertenece.getString("posts");
-                        jsCommId = objectPertenece.getString("id");
+                        jsCommId = objectPertenece.getString("_id");
                         jsCommName = objectPertenece.getString("name");
                         jsCommDescription = objectPertenece.getString("description");
-                        jscommRole = objectPertenece.getString("role");
+
 
                         Cursor cursorIdComminityExist1 = bd.searchIdCommunitie(jsCommId);
                         if (cursorIdComminityExist1.moveToFirst() != false){
-                            bd.updateCommunity(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId);
+                            bd.updateCommunity1(Integer.parseInt(jsCommMemmbers), Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription, jsCommId,true);
                         }else {
-                            bd.saveCommunity(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(jsCommPublic), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId);
+                            bd.saveCommunity1(Integer.parseInt(jsCommMemmbers),Boolean.valueOf(true), Integer.parseInt(jsCommContents), jsCommName, jsCommDescription,jsCommId,true);
                         }
                     }
 
@@ -190,13 +187,12 @@ public class OtherCommunitiesFragment extends Fragment{
 
     }
 
-    private void unirseComunidad() throws UnsupportedEncodingException {
+    private void unirseComunidad(String datos) throws UnsupportedEncodingException {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        //PODRIA HABER UN FALLO AKI, ALOMEJOR SE TIENE KE BORRAR YA KE EL NO KIERE RECIVIR NADA------------------------------
-        StringEntity entity = new StringEntity("");
+        StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
         String Url = "http://192.168.1.39:3000/community/"+ idComunidadActual +"/enter";
@@ -220,6 +216,7 @@ public class OtherCommunitiesFragment extends Fragment{
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 bd.saveCommunityUser(idComunidadActual,idSqlite,"user",false);
+                bd.updateCommunity3(false,idComunidadActual);
 
                 //Envia a SingleCommunityActivity
                 Intent intent = new Intent(getContext(), SingleCommunitieActivity.class );

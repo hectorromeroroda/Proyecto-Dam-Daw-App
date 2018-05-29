@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.hector.proyectodamdaw.DataBase.AppDataSources;
 import com.example.hector.proyectodamdaw.Fragments.CreatePostFragment;
@@ -23,6 +24,7 @@ import com.example.hector.proyectodamdaw.Fragments.CreateVotacionFragment;
 import com.example.hector.proyectodamdaw.Fragments.InviteUserFragment;
 import com.example.hector.proyectodamdaw.Fragments.LoginFragment;
 import com.example.hector.proyectodamdaw.Fragments.SingUpFragment;
+import com.example.hector.proyectodamdaw.Otros.GlobalVariables;
 import com.example.hector.proyectodamdaw.R;
 
 public class InviteUserActivity extends AppCompatActivity
@@ -122,6 +124,28 @@ public class InviteUserActivity extends AppCompatActivity
         }else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, EditProfileActivity.class );
             startActivityForResult(intent,123);
+        }else if (id == R.id.nav_create_content) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
+
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede crear contenido si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }else{
+                Intent intent = new Intent(this, InviteUserActivity.class );
+                startActivityForResult(intent,123);
+            }
+        }else if (id == R.id.nav_create_content) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
+
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede crear contenido si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }else{
+                Intent intent = new Intent(this, CreateContentActivity.class );
+                startActivityForResult(intent,123);
+            }
         }
 
         item.setChecked(true);

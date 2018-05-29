@@ -96,6 +96,10 @@ public class InviteUserFragment extends Fragment {
                     }else{
                         if (rdbEditor.isChecked()==true){
                             rolUsuario="editor";
+                        }else{
+                            if (rdbUser.isChecked()==true){
+                                rolUsuario="user";
+                            }
                         }
                     }
 

@@ -83,9 +83,9 @@ public class ProposalInProgressFragment extends Fragment{
         EnvioIdProposicion();
 
         //Carga la informacion recivida en los textView
-        NameProposal.setText(respuestaTitulo);
-        CuerpoProposal.setText(respuestaCuerpo);
-        QuestionProposal.setText(respuestaPregunta);
+        NameProposal.setText("sdf");
+        CuerpoProposal.setText("sdfsf");
+        QuestionProposal.setText("sdfsf");
 
         return view;
     }
@@ -93,7 +93,7 @@ public class ProposalInProgressFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        AcceptProposal.setOnClickListener(new View.OnClickListener() {
+        sendProposal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String jsRespuesta;
 
@@ -133,8 +133,8 @@ public class ProposalInProgressFragment extends Fragment{
 
     private void EnvioIdProposicion() {
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setMaxRetriesAndTimeout(0, 10000);
+        AsyncHttpClient client2 = new AsyncHttpClient();
+        client2.setMaxRetriesAndTimeout(0, 10000);
 
         String Url = "http://192.168.1.39:3000/community/" + idComunidadActual + "/content/" + idProposal;
 
@@ -143,8 +143,8 @@ public class ProposalInProgressFragment extends Fragment{
             userToken = cursorUserToken.getString(0);
         }
 
-        client.addHeader("Authorization", "Bearer " + userToken);
-        client.get(getContext(), Url, new AsyncHttpResponseHandler() {
+        client2.addHeader("Authorization", "Bearer " + userToken);
+        client2.get(getContext(), Url, new AsyncHttpResponseHandler() {
 
             @Override
             public void onStart() {
@@ -164,16 +164,17 @@ public class ProposalInProgressFragment extends Fragment{
                     JSONObject jsResponse= new JSONObject(strResponse);
                     JSONObject data= new JSONObject();
 
-                    data = jsResponse.getJSONObject("data");
-                    jsPregunta=data.getString("option");
+                    //data = jsResponse.getJSONObject("data");
+                    //jsPregunta=data.getString("option");
                     jsTitulo=jsResponse.getString("title");
                     jsCuerpo=jsResponse.getString("body");
                     respuestaTitulo=jsTitulo;
                     respuestaCuerpo =jsCuerpo;
-                    respuestaPregunta=jsPregunta;
+                    //AQUI SE DEVERIA CAMBIAR------------------------------------------------------------------------------
+                    respuestaPregunta="sdfs";
 
                     //Guardar pregunta de la propuesta
-                    bd.updateProposalPregunta(respuestaPregunta,idProposal);
+                    bd.updateProposalPregunta(respuestaPregunta,idProposal,respuestaCuerpo);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
