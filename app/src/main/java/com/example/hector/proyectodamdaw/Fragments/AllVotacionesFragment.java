@@ -45,6 +45,8 @@ public class AllVotacionesFragment extends Fragment {
     String userToken;
     int idUserSqlite;
     String votacionId;
+    String idProposal="";
+    String idPoll="";
     private AppDataSources bd;
     public AdaptadorAllVotacionesBD adaptadorBd;
     private Votacion votacion = new Votacion();
@@ -71,9 +73,10 @@ public class AllVotacionesFragment extends Fragment {
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
-        globales.setPollId("");
+        globales.setProposalId(idProposal);
+        globales.setPollId(idPoll);
 
-        RefreshVotaciones();
+        //RefreshVotaciones();
 
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllVotacionesBD(getContext(),votacion,bd.todasVotacionesCommunity(idComunidadActual));
@@ -104,6 +107,8 @@ public class AllVotacionesFragment extends Fragment {
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
+        RefreshVotaciones();
 
         if (rdbInProgress.isChecked()==true) {
             //código accion radiobuton

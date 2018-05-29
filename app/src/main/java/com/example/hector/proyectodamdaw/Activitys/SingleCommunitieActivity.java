@@ -48,6 +48,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
     String userToken;
     String idComunidadActual;
     String idProposal="";
+    String idPoll="";
     int idUserSqlite;
 
 
@@ -83,6 +84,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
         globales.setProposalId(idProposal);
+        globales.setPollId(idPoll);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
@@ -198,6 +200,17 @@ public class SingleCommunitieActivity extends AppCompatActivity
         }else if (id == R.id.nav_invite_user) {
             Intent intent = new Intent(this, InviteUserActivity.class );
             startActivityForResult(intent,123);
+        }else if (id == R.id.nav_create_content) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
+
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede crear contenido si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }else{
+                Intent intent = new Intent(this, CreateContentActivity.class );
+                startActivityForResult(intent,123);
+            }
         }
 
         item.setChecked(true);

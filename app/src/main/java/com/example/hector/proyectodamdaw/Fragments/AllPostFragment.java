@@ -25,6 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 import cz.msebera.android.httpclient.Header;
 
 
@@ -74,13 +76,14 @@ public class AllPostFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
+        RefresPost();
 
 
     }
 
     public  void onStart(){
         super.onStart();
-        RefresPost();
+        //RefresPost();
     }
 
 

@@ -16,15 +16,14 @@
             android:id="@+id/nav_invite_user"
             android:icon="@drawable/invitation"
             android:title="Invitar usuario" />
+        <item
+            android:id="@+id/nav_create_content"
+            android:icon="@drawable/avatar"
+            android:title="Crear contenido" />
     </group>
 
     <item android:title="Usuario">
-        <menu>
-            <item
-                android:id="@+id/nav_profile"
-                android:icon="@drawable/avatar"
-                android:title="Perfil" />
-        </menu>
+        <menu></menu>
     </item>
 
 </menu>

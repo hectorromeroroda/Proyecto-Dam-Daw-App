@@ -181,8 +181,22 @@ public class CommunitiesActivity extends AppCompatActivity
             if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
                 Toast toastError = Toast.makeText(getApplicationContext(), "No puede invitar a un usuario si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
                 toastError.show();
+            }else{
+                Intent intent = new Intent(this, InviteUserActivity.class );
+                startActivityForResult(intent,123);
             }
 
+        }else if (id == R.id.nav_create_content) {
+            GlobalVariables globales = GlobalVariables.getInstance().getInstance();
+            String idComunidadActual=globales.getCommunityId();
+
+            if ( (idComunidadActual == null) || (idComunidadActual.equals(""))){
+                Toast toastError = Toast.makeText(getApplicationContext(), "No puede crear contenido si no esta dentro de una comunidad", Toast.LENGTH_SHORT);
+                toastError.show();
+            }else{
+                Intent intent = new Intent(this, CreateContentActivity.class );
+                startActivityForResult(intent,123);
+            }
         }
 
         item.setChecked(true);

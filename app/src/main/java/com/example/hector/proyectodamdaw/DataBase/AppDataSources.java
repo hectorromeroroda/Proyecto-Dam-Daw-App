@@ -312,9 +312,10 @@ public class AppDataSources {
         dbW.update("Poll",values, "PollTitle" + " = ?", new String[] { String.valueOf(pollTitle) });
     }
 
-    public void updateProposalPregunta( String pregunta, String proposalId) {
+    public void updateProposalPregunta( String pregunta, String proposalId, String cuerpo) {
         ContentValues values = new ContentValues();
         values.put("propositionPregunta", pregunta);
+        values.put("propositionCuerpo", cuerpo);
 
         dbW.update("Proposition",values, "propositionId" + " = ?", new String[] { String.valueOf(proposalId) });
     }

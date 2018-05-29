@@ -47,6 +47,8 @@ public class AllProposalFragment extends Fragment{
     String userToken;
     int idUserSqlite;
     String propositionId;
+    String idProposal="";
+    String idPoll="";
     private AppDataSources bd;
     public AdaptadorAllProposalsBD adaptadorBd;
     private Proposal proposal = new Proposal();
@@ -72,7 +74,8 @@ public class AllProposalFragment extends Fragment{
         GlobalVariables globales = GlobalVariables.getInstance().getInstance();
         idComunidadActual=globales.getCommunityId();
         idUserSqlite=globales.getIdUserSqlite();
-        globales.setProposalId("");
+        globales.setProposalId(idProposal);
+        globales.setPollId(idPoll);
 
         //ReciclerView de comunidades a las que pertenece
         adaptadorBd = new AdaptadorAllProposalsBD(getContext(),proposal,bd.todosProposalCommunity(idComunidadActual));
@@ -106,13 +109,13 @@ public class AllProposalFragment extends Fragment{
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-
+        RefreshProposal();
 
     }
 
     public  void onStart(){
         super.onStart();
-        RefreshProposal();
+        //RefreshProposal();
     }
 
     private void RefreshProposal() {
