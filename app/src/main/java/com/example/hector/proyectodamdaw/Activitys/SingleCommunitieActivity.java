@@ -262,7 +262,7 @@ public class SingleCommunitieActivity extends AppCompatActivity
         AsyncHttpClient client = new AsyncHttpClient();
         client.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual;
+        String Url = "https://domo-200915.appspot.com/community/" + idComunidadActual;
 
         Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
         if (cursorUserToken.moveToFirst() != false){

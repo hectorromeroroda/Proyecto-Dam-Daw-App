@@ -106,7 +106,7 @@ public class EditTypeProfileFragment extends Fragment{
 
             try {
 
-                URL url = new URL("http://192.168.1.39:3000/profile");
+                URL url = new URL("https://domo-200915.appspot.com/profile");
                 //http://192.168.56.1:3000/profile
                 //https://domo-200915.appspot.com/profile
 

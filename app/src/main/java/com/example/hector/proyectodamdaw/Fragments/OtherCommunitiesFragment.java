@@ -110,7 +110,7 @@ public class OtherCommunitiesFragment extends Fragment{
         AsyncHttpClient client1 = new AsyncHttpClient();
         client1.setMaxRetriesAndTimeout(0, 10000);
 
-        String Url = "http://192.168.43.219:3000/community/featured";
+        String Url = "https://domo-200915.appspot.com/community/featured";
 
         Cursor cursorUserToken = bd.searchUserToken(idSqlite);
         if (cursorUserToken.moveToFirst() != false){

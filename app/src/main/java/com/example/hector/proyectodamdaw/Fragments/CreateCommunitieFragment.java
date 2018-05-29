@@ -127,7 +127,7 @@ public class CreateCommunitieFragment  extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/community/new";
+        String Url = "https://domo-200915.appspot.com/community/new";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         idUserSqlite=globales.getIdUserSqlite();
