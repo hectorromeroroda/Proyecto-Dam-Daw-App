@@ -47,6 +47,9 @@
     <string name="toastRepeatPasswEmpty">Debe completar el campo Confirmación Password</string>
     <string name="toastPasswSame">Los passwords no coinciden</string>
     <string name="toastRegisterOk">Registro realizado con éxito</string>
+    <string name="camposObligatorios">Todos los campos son obligatorios</string>
+    <string name="registro">Completa el registro</string>
+    <string name="iniciaSesion">Inicia sesion en Domo \n o registrate</string>
 
     /CommunitiesActivity---
     <string name="tabTusComunidades">Tus comunidades</string>
