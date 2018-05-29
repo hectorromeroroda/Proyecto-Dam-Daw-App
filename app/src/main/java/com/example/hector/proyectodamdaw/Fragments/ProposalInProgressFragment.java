@@ -52,6 +52,7 @@ public class ProposalInProgressFragment extends Fragment{
     String respuestaCuerpo;
     String  respuestaPregunta;
     String strRespuesta="";
+    boolean booRespuesta;
 
 
     public ProposalInProgressFragment() {
@@ -82,16 +83,13 @@ public class ProposalInProgressFragment extends Fragment{
         //Envia id propuesta para recuperar la informacion de esta
         EnvioIdProposicion();
 
-        //Carga la informacion recivida en los textView
-        NameProposal.setText("sdf");
-        CuerpoProposal.setText("sdfsf");
-        QuestionProposal.setText("sdfsf");
-
         return view;
     }
 
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+
+
 
         sendProposal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -99,9 +97,11 @@ public class ProposalInProgressFragment extends Fragment{
 
                 if (AcceptProposal.isChecked()== true){
                     strRespuesta="true";
+                    booRespuesta=true;
                 }else{
                     if (DiscardProposal.isChecked()== true) {
                         strRespuesta = "false";
+                        booRespuesta=false;
                     }
                 }
 
@@ -109,7 +109,7 @@ public class ProposalInProgressFragment extends Fragment{
                     Toast toastAlerta = Toast.makeText(getContext(), "Deve seleccionar una respuesta", Toast.LENGTH_LONG);
                     toastAlerta.show();
                 }else{
-                    jsRespuesta=createJsonResultProposition(Boolean.valueOf(strRespuesta));
+                    jsRespuesta=createJsonResultProposition(booRespuesta);
                     try {
                         sendResultProposal(jsRespuesta);
                     } catch (UnsupportedEncodingException e) {
@@ -127,7 +127,7 @@ public class ProposalInProgressFragment extends Fragment{
     private String createJsonResultProposition(boolean respuesta ) {
         String strJsonLogin;
 
-        strJsonLogin=  ("{\"inFaavor\": \"" + respuesta + "\"}");
+        strJsonLogin=  ("{\"inFavor\": " + respuesta + "}");
         return strJsonLogin;
     }
 
@@ -164,14 +164,18 @@ public class ProposalInProgressFragment extends Fragment{
                     JSONObject jsResponse= new JSONObject(strResponse);
                     JSONObject data= new JSONObject();
 
-                    //data = jsResponse.getJSONObject("data");
-                    //jsPregunta=data.getString("option");
+                    data = jsResponse.getJSONObject("data");
+                    jsPregunta=data.getString("option");
                     jsTitulo=jsResponse.getString("title");
                     jsCuerpo=jsResponse.getString("body");
                     respuestaTitulo=jsTitulo;
                     respuestaCuerpo =jsCuerpo;
-                    //AQUI SE DEVERIA CAMBIAR------------------------------------------------------------------------------
-                    respuestaPregunta="sdfs";
+                    respuestaPregunta=jsPregunta;
+
+                    //Carga la informacion recivida en los textView
+                    NameProposal.setText(respuestaTitulo);
+                    CuerpoProposal.setText(respuestaCuerpo);
+                    QuestionProposal.setText(respuestaPregunta);
 
                     //Guardar pregunta de la propuesta
                     bd.updateProposalPregunta(respuestaPregunta,idProposal,respuestaCuerpo);
@@ -209,12 +213,7 @@ public class ProposalInProgressFragment extends Fragment{
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/" + idProposal;
-
-        final Cursor cursorUserToken = bd.searchUserToken(idUserSqlite);
-        if (cursorUserToken.moveToFirst() != false){
-            userToken = cursorUserToken.getString(0);
-        }
+        String Url = "http://192.168.43.219:3000/community/" + idComunidadActual + "/content/" + idProposal + "/vote";
 
         client.addHeader("Authorization", "Bearer " + userToken);
         client.put(getContext(), Url, entity , "application/json",new AsyncHttpResponseHandler() {
