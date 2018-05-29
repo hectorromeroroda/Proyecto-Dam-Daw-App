@@ -142,7 +142,7 @@ public class CreateProposalFragment extends Fragment {
         StringEntity entity = new StringEntity(datos);
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        String Url = "http://192.168.43.219/community/" + idComunidadActual + "/content/new/request";
+        String Url = "https://domo-200915.appspot.com/community/" + idComunidadActual + "/content/new/request";
 
         GlobalVariables globales = GlobalVariables.getInstance();
         idUserSqlite=globales.getIdUserSqlite();
